@@ -1,4 +1,4 @@
-package ie.ucd.engAC;
+package src.ie.ucd.engAC;
 
 public class Main {
 
