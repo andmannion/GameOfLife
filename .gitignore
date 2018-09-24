@@ -1,5 +1,7 @@
 # IDE specific files
 .idea/
+.classpath
+.project
 *.iml
 
 # Compiled class file
