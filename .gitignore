@@ -3,6 +3,7 @@
 #.classpath
 #.project
 #*.iml
+/.idea/workspace.xml
 
 # Compiled class file
 *.class
