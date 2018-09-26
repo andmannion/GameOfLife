@@ -4,28 +4,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import ie.ucd.engAC.UIScreens.SplashScreen;
+
 public class LifeGame extends JFrame implements WindowListener{
 
-    private JTextField game_title;
+    private JTextField gameTitle;
+    private SplashScreen splashScreen;
 
     public LifeGame() {
         super("Life: The Game");
         constructUI();
         addWindowListener(this);
+        setLocationRelativeTo(null);
         pack();
         setResizable(false);
         setVisible(true);
     } // end of Main (constructor)
 
     private void constructUI(){
-        //Container container = getContentPane();
-        JPanel main_menu = new JPanel();
-        BoxLayout main_menu_manager = new BoxLayout(main_menu,BoxLayout.X_AXIS);
-        main_menu.setLayout(main_menu_manager);
-
-        game_title = new JTextField("Life: The Game");
-        game_title.setEditable(false);
-        main_menu.add(game_title);
+        Container container = getContentPane();
+        splashScreen = new SplashScreen(this);
+        container.add(splashScreen);
+        JPanel mainMenu = new JPanel();
+        BoxLayout mainMenuManager = new BoxLayout(mainMenu,BoxLayout.X_AXIS);
+        mainMenu.setLayout(mainMenuManager);
     } // end of constructUI
     @Override
     public void windowActivated(WindowEvent window_event) {}
