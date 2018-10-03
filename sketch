@@ -1,0 +1,23 @@
+game class - container for all the different items that need to be drawn
+each game object that need to be draw lies in here
+each object will draw itself
+objects:
+    players
+    UI
+    decks?
+    board
+contains the game logic, probably as a sub class
+contains a queue which has each of the events added by the UI
+runs in a while loop w/ sample flow:
+    gameupdate:
+        do  items in queue
+        sets any potential flags
+    gamedraw:
+        loops through list of items & calls their draw function to load into buffer
+        may alter based on flags set
+    gamerender:
+        switches buffered image onto the screen
+    @end of while loop
+JFrame/JPanel (need to find out which, probably panel as only drawing this when in game) is passed to the objects in their constructors so they know where they are to draw themselves
+Need to invent a coord system, or is it provided?
+
