@@ -21,14 +21,26 @@ public class LifeGame extends JFrame implements WindowListener{
         setVisible(true);
     } // end of Main (constructor)
 
+    public void run(){
+
+    }
+
     private void constructUI(){
         Container container = getContentPane();
         splashScreen = new SplashScreen(this);
         container.add(splashScreen);
+
         JPanel mainMenu = new JPanel();
         BoxLayout mainMenuManager = new BoxLayout(mainMenu,BoxLayout.X_AXIS);
         mainMenu.setLayout(mainMenuManager);
+        JButton button = new JButton("123");
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainMenu.add(button);
+
+        container.removeAll();
+        container.add(mainMenu);
     } // end of constructUI
+
     @Override
     public void windowActivated(WindowEvent window_event) {}
     @Override
