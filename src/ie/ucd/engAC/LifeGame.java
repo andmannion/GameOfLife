@@ -8,8 +8,11 @@ import ie.ucd.engAC.UIScreens.SplashScreen;
 
 public class LifeGame extends JFrame implements WindowListener{
 
+    private int PANWIDTH = 640;
+    private int PANHEIGHT = 480;
     private JTextField gameTitle;
     private SplashScreen splashScreen;
+    private Dimension dimensions;
 
     public LifeGame() {
         super("Life: The Game");
@@ -31,6 +34,9 @@ public class LifeGame extends JFrame implements WindowListener{
         container.add(splashScreen);
 
         JPanel mainMenu = new JPanel();
+        dimensions = new Dimension(PANWIDTH,PANHEIGHT);
+        mainMenu.setPreferredSize(dimensions);
+
         BoxLayout mainMenuManager = new BoxLayout(mainMenu,BoxLayout.X_AXIS);
         mainMenu.setLayout(mainMenuManager);
         JButton button = new JButton("123");
