@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.buttons.NewGameButton;
 import ie.ucd.engAC.UIScreens.SplashScreen;
+import ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
 
 public class LifeGame extends JFrame implements WindowListener{
 
@@ -13,6 +16,7 @@ public class LifeGame extends JFrame implements WindowListener{
     private JTextField gameTitle;
     private SplashScreen splashScreen;
     private Dimension dimensions;
+    private MainMenu mainMenu;
 
     public LifeGame() {
         super("Life: The Game");
@@ -26,23 +30,15 @@ public class LifeGame extends JFrame implements WindowListener{
 
     public void run(){
 
-    }
+    } // end of run
 
     private void constructUI(){
         Container container = getContentPane();
         splashScreen = new SplashScreen(this);
         container.add(splashScreen);
 
-        JPanel mainMenu = new JPanel();
-        dimensions = new Dimension(PANWIDTH,PANHEIGHT);
-        mainMenu.setPreferredSize(dimensions);
-
-        BoxLayout mainMenuManager = new BoxLayout(mainMenu,BoxLayout.X_AXIS);
-        mainMenu.setLayout(mainMenuManager);
-        JButton button = new JButton("123");
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainMenu.add(button);
-
+        mainMenu = new MainMenu(this);
+        
         container.removeAll();
         container.add(mainMenu);
     } // end of constructUI

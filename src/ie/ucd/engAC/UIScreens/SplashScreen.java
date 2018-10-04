@@ -20,6 +20,7 @@ public class SplashScreen extends JPanel {
     private Dimension sizePreferences = new Dimension(PANWIDTH,PANHEIGHT);
 
     public SplashScreen(LifeGame lifeGame){
+        super();
         lifeGameParent = lifeGame;
 
         setBackground(Color.gray);
