@@ -1,9 +1,10 @@
-package ie.ucd.engAC.LifeGameLogic.Cards;
+package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class PayTheBankConfigHandler implements CardConfigHandler {
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+
+public class PayTheBankConfigHandler implements ActionCardConfigHandler {
 	public PayTheBankConfigHandler() { // TODO: Should take as input some config parameter		
 	}
 	

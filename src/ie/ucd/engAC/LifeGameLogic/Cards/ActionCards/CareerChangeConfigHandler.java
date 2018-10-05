@@ -1,8 +1,10 @@
-package ie.ucd.engAC.LifeGameLogic.Cards;
+package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
 
-public class CareerChangeConfigHandler implements CardConfigHandler {
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+
+public class CareerChangeConfigHandler implements ActionCardConfigHandler {
 	public CareerChangeConfigHandler() { // Should take as input some config parameter
 	}
 

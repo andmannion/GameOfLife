@@ -19,8 +19,7 @@ public abstract class CardDeck {
 		cards.addLast(card);
 	}
 
-	@SuppressWarnings("unused")
-	private void Shuffle() {
+	public void Shuffle() {
 		for (int i = 0; i < 52; i++) {
 			int card = (int) (Math.random() * (52 - i));
 			cards.addLast(cards.remove(card));

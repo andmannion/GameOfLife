@@ -1,9 +1,9 @@
 package ie.ucd.engAC.LifeGameLogic;
 
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCardDeck;
 import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
-import ie.ucd.engAC.LifeGameLogic.Cards.CareerCardDeck;
-import ie.ucd.engAC.LifeGameLogic.Cards.HouseCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.CareerCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.HouseCards.HouseCardDeck;
 
 public class Bank {
 	
@@ -21,9 +21,13 @@ public class Bank {
 	private void InitialiseDecks() {
 		// Initialise decks of different types
 		actionCardDeck = new ActionCardDeck();
+		actionCardDeck.Shuffle();
 		
 		//houseCardDeck = new HouseCardDeck();
+		//houseCardDeck.Shuffle();
 		//careerCardDeck = new CareerCardDeck();
-		//collegeCareerDeck = new CollegeCareerCardDeck();
+		//careerCardDeck.Shuffle();
+		//collegeCareerCardDeck = new CollegeCareerCardDeck();
+		//collegeCareerCardDeck.Shuffle();
 	}
 }
