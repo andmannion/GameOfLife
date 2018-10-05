@@ -1,5 +1,5 @@
 package LifeGameLogic;
 
 public abstract class Card {
-	// Common functionality between HouseCards, ActionCards, etc. should go here
+	// Common functionality between HouseCards, ActionCards, etc (if any). should go here
 }

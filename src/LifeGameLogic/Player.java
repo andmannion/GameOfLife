@@ -15,9 +15,10 @@ public class Player {
 
 	// Current loans
 
-	// Action cards held
+	// Action cards held by this player
+	private List<ActionCard> actionCards;
 
-	// House cards held
+	// House cards held by this player
 	private List<HouseCard> houseCards;
 
 	// Marital status
