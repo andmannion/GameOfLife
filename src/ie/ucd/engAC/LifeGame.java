@@ -3,11 +3,13 @@ package ie.ucd.engAC;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import ie.ucd.engAC.UIScreens.MainMenu;
-import ie.ucd.engAC.UIScreens.buttons.NewGameButton;
 import ie.ucd.engAC.UIScreens.SplashScreen;
-import ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
+import ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
+import ie.ucd.engAC.LifeGameLogic.*;
 
 public class LifeGame extends JFrame implements WindowListener{
 
@@ -18,6 +20,9 @@ public class LifeGame extends JFrame implements WindowListener{
     private Dimension dimensions;
     private MainMenu mainMenu;
     private Container container;
+    private List<Player> PlayerObjects;
+    private Bank bank;
+
 
     public LifeGame() {
         super("Life: The Game");
@@ -45,8 +50,13 @@ public class LifeGame extends JFrame implements WindowListener{
     } // end of constructUI
 
     public void initialiseGame(int numPlayers){
-        System.out.println("text");
-
+        System.out.println("Initialising game.");
+        PlayerObjects = new ArrayList<Player>();
+        bank = new Bank();
+        for(int i = 0;i<numPlayers;i++){
+            Player player = new Player(i);
+            PlayerObjects.add(player);
+        }
         //...
         //make list & call constructors for players
         //initialise "bank" etc

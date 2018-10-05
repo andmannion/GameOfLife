@@ -26,14 +26,18 @@ public class Player {
 
 	// Marital status
 	private MaritalStatus maritalStatus;
+
+	private PlayerColour playerColour;
 	
 	public MaritalStatus getMaritalStatus() 
 	{
 		return this.maritalStatus;
 	}
 
-	public Player() {
-		this.maritalStatus = MaritalStatus.Single;
+	public Player(int playerNumber) {
+        this.playerColour.fromInt(playerNumber);
+        this.maritalStatus = MaritalStatus.Single;
+        System.out.println("test");
 	}
 }
 
