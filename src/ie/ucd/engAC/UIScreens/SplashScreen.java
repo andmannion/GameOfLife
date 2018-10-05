@@ -16,13 +16,9 @@ public class SplashScreen extends JPanel {
 
     private BufferedImage splashImage;
 
-    private LifeGame lifeGameParent;
-    private Dimension sizePreferences = new Dimension(PANWIDTH,PANHEIGHT);
-
-    public SplashScreen(LifeGame lifeGame){
+    public SplashScreen(){
         super();
-        lifeGameParent = lifeGame;
-
+        Dimension sizePreferences = new Dimension(PANWIDTH,PANHEIGHT);
         setBackground(Color.gray);
         setPreferredSize(sizePreferences);
         setFocusable(true);

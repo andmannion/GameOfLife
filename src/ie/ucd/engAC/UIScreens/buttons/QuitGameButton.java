@@ -10,12 +10,12 @@ public class QuitGameButton extends JButton implements ActionListener {
     private JFrame parentFrame;
     private int numClicks;
 
-    public QuitGameButton(JPanel mainMenu,JFrame lifeGameFrame){
+    public QuitGameButton(JPanel jPanel,JFrame jFrame,GridBagConstraints gridBagConstraints){
         super("Quit");
-        parentFrame = lifeGameFrame;
+        parentFrame = jFrame;
         super.setAlignmentX(Component.CENTER_ALIGNMENT);
         super.addActionListener(this);
-        mainMenu.add(this);
+        jPanel.add(this,gridBagConstraints);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
