@@ -1,4 +1,4 @@
-package ie.ucd.engAC.LifeGameLogic;
+package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
 public enum HouseType {
 	Ranch,
