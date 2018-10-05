@@ -34,7 +34,7 @@ public class LifeGame extends JFrame implements WindowListener{
 
     private void constructUI(){
         Container container = getContentPane();
-        splashScreen = new SplashScreen(this);
+        splashScreen = new SplashScreen();
         container.add(splashScreen);
 
         mainMenu = new MainMenu(this);

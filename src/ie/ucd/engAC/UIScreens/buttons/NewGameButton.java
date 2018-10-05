@@ -8,11 +8,11 @@ public class NewGameButton extends JButton implements ActionListener {
 
     private int numClicks;
 
-    public NewGameButton(JPanel mainMenu){
+    public NewGameButton(JPanel jPanel,GridBagConstraints gridBagConstraints){
         super("New Game");
         super.setAlignmentX(Component.CENTER_ALIGNMENT);
         super.addActionListener(this);
-        mainMenu.add(this);
+        jPanel.add(this,gridBagConstraints);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
