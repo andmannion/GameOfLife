@@ -1,0 +1,9 @@
+run() only called when board is active
+board only has to be drawn once?
+get board info into "memory" before the game JPanel is made visible
+each loop call update in a thread which activates the dequeing etc
+lock user out of HUD unless they are required to use it
+after a while, a la that lad, draw the new stuff.
+if specified game update function has not yet returned then draw the old state
+buttons need to queue events, but deactivate themselves somehow when they do for a certain period of time
+this time depends on the function carried out by the button :/
