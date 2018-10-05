@@ -1,6 +1,5 @@
 package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
-import ie.ucd.engAC.LifeGameLogic.HouseType;
 import ie.ucd.engAC.LifeGameLogic.Cards.Card;
 
 public class HouseCard extends Card{
@@ -13,6 +12,7 @@ public class HouseCard extends Card{
 					 int purchasePrice,
 					 int spinForSalePriceOddNum,
 					 int spinForSalePriceEvenNum) {
+		
 		this.houseType = houseType;
 		this.purchasePrice = purchasePrice;
 		this.spinForSalePriceOddNum = spinForSalePriceOddNum;

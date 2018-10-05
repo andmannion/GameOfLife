@@ -20,8 +20,10 @@ public abstract class CardDeck {
 	}
 
 	public void Shuffle() {
-		for (int i = 0; i < 52; i++) {
-			int card = (int) (Math.random() * (52 - i));
+		int deckSize = cards.size();
+		
+		for (int i = 0; i < deckSize; i++) {
+			int card = (int) (Math.random() * (deckSize - i));
 			cards.addLast(cards.remove(card));
 		}
 	}
