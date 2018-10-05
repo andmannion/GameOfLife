@@ -2,6 +2,9 @@ package ie.ucd.engAC.LifeGameLogic;
 
 import java.util.List;
 
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCard;
+import ie.ucd.engAC.LifeGameLogic.Cards.HouseCard;
+
 public class Player {
 	// Reference to the Bank object? Dependency injection?
 

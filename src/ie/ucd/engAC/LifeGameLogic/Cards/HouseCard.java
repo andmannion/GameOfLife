@@ -1,4 +1,6 @@
-package ie.ucd.engAC.LifeGameLogic;
+package ie.ucd.engAC.LifeGameLogic.Cards;
+
+import ie.ucd.engAC.LifeGameLogic.HouseType;
 
 public class HouseCard extends Card{
 	private HouseType houseType;
