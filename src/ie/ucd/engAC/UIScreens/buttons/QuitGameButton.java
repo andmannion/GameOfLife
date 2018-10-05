@@ -1,25 +1,19 @@
 package ie.ucd.engAC.UIScreens.buttons;
 
+import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class QuitGameButton extends JButton implements ActionListener {
+public class QuitGameButton extends JButton{
 
-    private JFrame parentFrame;
-    private int numClicks;
-
-    public QuitGameButton(JPanel jPanel,JFrame jFrame,GridBagConstraints gridBagConstraints){
+    public QuitGameButton(MainMenuButtonPanel mainMenuButtonPanel, MainMenu mainMenu, GridBagConstraints gridBagConstraints){
         super("Quit");
-        parentFrame = jFrame;
         super.setAlignmentX(Component.CENTER_ALIGNMENT);
-        super.addActionListener(this);
-        jPanel.add(this,gridBagConstraints);
+        super.addActionListener(mainMenu);
+        mainMenu.add(this,gridBagConstraints);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        parentFrame.dispose();
-    }
-
 }

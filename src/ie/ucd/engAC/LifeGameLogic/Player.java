@@ -1,4 +1,4 @@
-package LifeGameLogic;
+package ie.ucd.engAC.LifeGameLogic;
 
 import java.util.List;
 

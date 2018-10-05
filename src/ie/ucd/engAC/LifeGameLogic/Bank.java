@@ -1,6 +1,4 @@
-package LifeGameLogic;
-
-import java.util.HashMap;
+package ie.ucd.engAC.LifeGameLogic;
 
 public class Bank {
 //	private CardDeck actionCardDeck = new CardDeck();

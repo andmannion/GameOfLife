@@ -17,6 +17,7 @@ public class LifeGame extends JFrame implements WindowListener{
     private SplashScreen splashScreen;
     private Dimension dimensions;
     private MainMenu mainMenu;
+    private Container container;
 
     public LifeGame() {
         super("Life: The Game");
@@ -33,7 +34,7 @@ public class LifeGame extends JFrame implements WindowListener{
     } // end of run
 
     private void constructUI(){
-        Container container = getContentPane();
+        container = getContentPane();
         splashScreen = new SplashScreen();
         container.add(splashScreen);
 
@@ -42,6 +43,19 @@ public class LifeGame extends JFrame implements WindowListener{
         container.removeAll();
         container.add(mainMenu);
     } // end of constructUI
+
+    public void initialiseGame(int numPlayers){
+        System.out.println("text");
+
+        //...
+        //make list & call constructors for players
+        //initialise "bank" etc
+        //remove menu and call run function
+        //
+    }
+
+    private void drawBoard(){}
+    private void drawHUD(){}
 
     @Override
     public void windowActivated(WindowEvent window_event) {}
