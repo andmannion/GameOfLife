@@ -33,12 +33,11 @@ public class GameHUD{
         career = player.getCareerCard();
         loans = player.getCurrentLoans();
         money = player.getCurrentMoney();
-
     }
     synchronized public void draw(Graphics graphics){ //synch adds safety
         updateFields();
         try{
-            graphics.fillRect(rectangle.x, rectangle.y,rectangle.width,rectangle.height);
+            graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);

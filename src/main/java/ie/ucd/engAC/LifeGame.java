@@ -56,6 +56,7 @@ public class LifeGame extends JFrame implements WindowListener{
         playPanel = new PlayPanel(this,numPlayers); //TODO remove "this" if possible
         container.add(playPanel);
         mainMenu.setVisible(false);
+        playPanel.setVisible(true);
         playPanel.beginGame();
     } //end of intialiseGame
 
@@ -69,7 +70,9 @@ public class LifeGame extends JFrame implements WindowListener{
     @Override
     public void windowIconified(WindowEvent window_event) {}
     @Override
-    public void windowClosing(WindowEvent window_event) {}
+    public void windowClosing(WindowEvent window_event) {
+        playPanel.closeGame();
+    }
     @Override
     public void windowClosed(WindowEvent window_event) {}
     @Override
