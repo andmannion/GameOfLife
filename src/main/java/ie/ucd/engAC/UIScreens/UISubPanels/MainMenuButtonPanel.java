@@ -1,16 +1,15 @@
-package main.java.ie.ucd.engAC.UIScreens.UISubPanels;
+package ie.ucd.engAC.UIScreens.UISubPanels;
 
-import main.java.ie.ucd.engAC.LifeGame;
-import main.java.ie.ucd.engAC.UIScreens.MainMenu;
-import main.java.ie.ucd.engAC.UIScreens.buttons.*;
-
+import ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.buttons.*;
 import javax.swing.*;
 import java.awt.*;
 
 public class MainMenuButtonPanel extends JPanel{
 
-    private NewGameButton newGameButton;
-    private QuitGameButton quitGameButton;
+    private JButton newGameButton;
+    private JButton quitGameButton;
     private JButton playButton;
     private JComboBox jCombo;
 
@@ -20,26 +19,44 @@ public class MainMenuButtonPanel extends JPanel{
         newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         newGameButtonConstraints.gridx = 1;
         newGameButtonConstraints.gridy = 0;
-        //newGameButtonConstraints.anchor = GridBagConstraints.NORTH;
-        newGameButton = new NewGameButton(this,mainMenu,newGameButtonConstraints);
+        //newGameButton = new NewGameButton(this,mainMenu,newGameButtonConstraints);
+        newGameButton = new JButton("New Game");
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        newGameButton.addActionListener(mainMenu);
+        add(newGameButton,newGameButtonConstraints);
 
         GridBagConstraints quitGameButtonConstraints = new GridBagConstraints();
         quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         quitGameButtonConstraints.gridx = 1;
         quitGameButtonConstraints.gridy = 2;
         //quitGameButtonConstraints.anchor = GridBagConstraints.SOUTH;
-        quitGameButton = new QuitGameButton(this,mainMenu,quitGameButtonConstraints);
+        quitGameButton = new JButton("Quit");
+        quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quitGameButton.addActionListener(mainMenu);
+        add(quitGameButton,quitGameButtonConstraints);
+
 
         GridBagConstraints playButtonConstraints = new GridBagConstraints();
         playButtonConstraints.gridx = 1;
         playButtonConstraints.gridy = 0;
-        playButton = new PlayButton(this,mainMenu,playButtonConstraints);
+        playButton = new JButton("Play");
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playButton.setVisible(false);
+        playButton.addActionListener(mainMenu);
+        add(playButton,playButtonConstraints);
 
         GridBagConstraints jComboConstraints = new GridBagConstraints();
         jComboConstraints.fill = GridBagConstraints.HORIZONTAL;
         jComboConstraints.gridx = 1;
         jComboConstraints.gridy = 2;
-        jCombo = new NumPlayerChoice(this,mainMenu,jComboConstraints);
+        String[] numPlayersList = { "2", "3", "4"};
+        jCombo = new JComboBox(numPlayersList);
+        jCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jCombo.addActionListener(mainMenu);
+        jCombo.setSelectedIndex(0);
+        jCombo.addActionListener(mainMenu);
+        jCombo.setVisible(false);
+        add(jCombo,jComboConstraints);
 
     }
     public void setVisibilityMainScreen(boolean bool){

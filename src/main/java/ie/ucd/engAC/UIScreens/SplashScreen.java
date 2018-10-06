@@ -1,6 +1,6 @@
-package main.java.ie.ucd.engAC.UIScreens;
+package ie.ucd.engAC.UIScreens;
 
-import main.java.ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.LifeGame;
 
 import javax.swing.*;
 import javax.imageio.ImageIO;

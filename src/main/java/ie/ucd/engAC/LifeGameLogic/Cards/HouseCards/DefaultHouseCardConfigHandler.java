@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
+package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
 import java.util.ArrayList;
 import java.util.Arrays;

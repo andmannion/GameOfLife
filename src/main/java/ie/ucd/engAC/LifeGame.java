@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC;
+package ie.ucd.engAC;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,10 +6,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.ie.ucd.engAC.UIScreens.*;
-import main.java.ie.ucd.engAC.UIScreens.SplashScreen;
-import main.java.ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
-import main.java.ie.ucd.engAC.LifeGameLogic.*;
+import ie.ucd.engAC.UIScreens.*;
+import ie.ucd.engAC.UIScreens.SplashScreen;
+import ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
+import ie.ucd.engAC.LifeGameLogic.*;
 
 public class LifeGame extends JFrame implements WindowListener{
 
@@ -33,6 +33,7 @@ public class LifeGame extends JFrame implements WindowListener{
         setSize(dimensions);
         setResizable(false);
         setVisible(true);
+        setIgnoreRepaint(true);
     } // end of Main (constructor)
 
     public void run(){
@@ -53,14 +54,13 @@ public class LifeGame extends JFrame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-
-        playPanel = new PlayPanel(this,numPlayers); //TODO remove this if possible
+        playPanel = new PlayPanel(this,numPlayers); //TODO remove "this" if possible
         container.add(playPanel);
         mainMenu.setVisible(false);
+        playPanel.setVisible(true);
+        playPanel.beginGame();
     } //end of intialiseGame
 
-    private void drawBoard(){}
-    private void drawHUD(){}
 
     @Override
     public void windowActivated(WindowEvent window_event) {}
@@ -71,7 +71,15 @@ public class LifeGame extends JFrame implements WindowListener{
     @Override
     public void windowIconified(WindowEvent window_event) {}
     @Override
-    public void windowClosing(WindowEvent window_event) {}
+    public void windowClosing(WindowEvent window_event) {
+        try {
+            playPanel.closeGame();
+        }
+        catch (Exception e){
+            //Is it even worth returning this?
+        }
+        dispose();
+    }
     @Override
     public void windowClosed(WindowEvent window_event) {}
     @Override

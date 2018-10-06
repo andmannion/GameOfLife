@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.UIScreens.UISubPanels;
+package ie.ucd.engAC.UIScreens.UISubPanels;
 
 import java.util.List;
 import javax.swing.*;

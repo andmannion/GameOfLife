@@ -1,13 +1,13 @@
-package main.java.ie.ucd.engAC.LifeGameLogic;
+package ie.ucd.engAC.LifeGameLogic;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.HouseCards.HouseCardDeck;
-//import main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.CareerCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.HouseCards.HouseCardDeck;
+//import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.CareerCardDeck;
 
 public class Bank {
 

@@ -1,7 +1,7 @@
-package main.java.ie.ucd.engAC.UIScreens.buttons;
+package ie.ucd.engAC.UIScreens.buttons;
 
-import main.java.ie.ucd.engAC.UIScreens.MainMenu;
-import main.java.ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
+import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
 
 import javax.swing.*;
 import java.awt.*;

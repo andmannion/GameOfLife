@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.PlayerLogic;
+package ie.ucd.engAC.LifeGameLogic.PlayerLogic;
 
 public enum PlayerColour {
     pink(0),

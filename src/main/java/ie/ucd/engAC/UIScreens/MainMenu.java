@@ -1,10 +1,10 @@
-package main.java.ie.ucd.engAC.UIScreens;
+package ie.ucd.engAC.UIScreens;
 
-import main.java.ie.ucd.engAC.LifeGame;
-import main.java.ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
-import main.java.ie.ucd.engAC.UIScreens.buttons.NewGameButton;
-import main.java.ie.ucd.engAC.UIScreens.buttons.PlayButton;
-import main.java.ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
+import ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
+import ie.ucd.engAC.UIScreens.buttons.NewGameButton;
+import ie.ucd.engAC.UIScreens.buttons.PlayButton;
+import ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,22 +46,24 @@ public class MainMenu extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof NewGameButton){
-            newGame();
-        }
-        else if (e.getSource() instanceof QuitGameButton){
-            lifeGameParent.dispose();
+        JComponent source = (JComponent) e.getSource(); //TODO this better
+        if (source instanceof JButton){
+            JButton buttonSource = (JButton)source;
+            if (buttonSource.getText().equals("New Game")){//TODO make switch
+                newGame();
+            }
+            else if(buttonSource.getText().equals("Quit")){
+                lifeGameParent.dispose();
+            }
+            else if(buttonSource.getText().equals("Play")){
+                lifeGameParent.initialiseGame(numPlayers);
+            }
         }
         else if (e.getSource() instanceof JComboBox){
             JComboBox cb = (JComboBox)e.getSource();
             numPlayers = cb.getSelectedIndex()+2;
         }
-        else if (e.getSource() instanceof PlayButton) {
-            buttonArea.setVisibilityNumPlayers(false);
-            lifeGameParent.initialiseGame(numPlayers);
-        }
         else
             System.out.println(e.getSource());
-
     }
 }

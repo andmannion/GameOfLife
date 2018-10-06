@@ -1,6 +1,6 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
+package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
 
 public class HouseCardDeck extends CardDeck {
 	private final String configString;
