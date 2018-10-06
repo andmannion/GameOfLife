@@ -25,8 +25,10 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private GameBoard gameBoard;
     private int numPlayers;
     private Graphics graphics;
+    private Image tempImage;
     private int currentPlayer;
     private boolean running;
+    private Thread thread;
 
 
     public PlayPanel(LifeGame lifeGame, int numPlayers){
@@ -47,8 +49,15 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         random = new Random((randomSeed + System.nanoTime()));
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this);
-
-        //TODO
+        if (tempImage == null){
+            tempImage = createImage(PANWIDTH, PANHEIGHT);
+            if (tempImage == null) {
+                System.out.println("image null");
+                return;
+            }
+            else
+                graphics = tempImage.getGraphics();
+        }
     }
 
     private int spinTheWheel(){
@@ -60,6 +69,24 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private void renderPanel(){
         gameHUD.draw(graphics);
     }
+    private void loadPanel(){
+        Graphics g;
+        try {
+            g = graphics;
+        }
+        catch (Exception e){
+            System.out.println("loadPanel() in PlayPanel failed");
+        }
+    }
+    public void beginGame() //TODO redo this as my own
+    // initialise and start the thread
+    {
+        if (thread == null || !running) {
+            thread = new Thread(this);
+            System.out.println("Starting thread");
+            thread.start();
+        }
+    } // end of startGame()
     public Player getCurrentPlayer(){
         return playerList.get(currentPlayer);
     }
@@ -71,6 +98,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
         while(running) {
             renderPanel();
+            loadPanel();
         }
     }
     @Override
