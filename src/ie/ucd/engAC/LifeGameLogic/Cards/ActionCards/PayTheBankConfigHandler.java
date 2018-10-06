@@ -11,8 +11,8 @@ public class PayTheBankConfigHandler implements ActionCardConfigHandler {
 	public ArrayList<ActionCard> InitialiseCardSubGroup() {
 		ArrayList<ActionCard> myPayTheBankActionCards = new ArrayList<ActionCard>();
 
-		for(int i=0;i<6;i++) {
-			for(int j=0;j<3;j++) {
+		for(int i=1;i<6;i++) {
+			for(int j=0;j<4;j++) {
 				myPayTheBankActionCards.add(new PayTheBankActionCard(i*10000));
 			}
 		}

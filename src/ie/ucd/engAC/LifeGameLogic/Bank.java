@@ -21,7 +21,7 @@ public class Bank {
 	private void InitialiseDecks() {
 		// Initialise decks of different types
 		actionCardDeck = new ActionCardDeck();
-		actionCardDeck.Shuffle();
+		actionCardDeck.shuffle();
 		
 		//houseCardDeck = new HouseCardDeck();
 		//houseCardDeck.Shuffle();
