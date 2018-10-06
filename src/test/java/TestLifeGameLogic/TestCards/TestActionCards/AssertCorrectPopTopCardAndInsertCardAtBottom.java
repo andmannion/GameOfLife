@@ -1,11 +1,11 @@
-package test.TestLifeGameLogic.TestCards.TestActionCards;
+package TestLifeGameLogic.TestCards.TestActionCards;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCard;
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCard;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
 
 
 class AssertCorrectPopTopCardAndInsertCardAtBottom {

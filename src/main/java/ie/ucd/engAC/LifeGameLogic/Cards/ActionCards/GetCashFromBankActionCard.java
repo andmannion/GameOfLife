@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
+package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 public class GetCashFromBankActionCard extends ActionCard {
 	private int amountToPay;

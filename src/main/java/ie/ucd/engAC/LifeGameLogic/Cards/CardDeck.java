@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards;
+package ie.ucd.engAC.LifeGameLogic.Cards;
 
 import java.util.LinkedList;
 

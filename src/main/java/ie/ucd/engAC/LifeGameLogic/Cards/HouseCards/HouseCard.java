@@ -1,6 +1,6 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
+package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.Card;
+import ie.ucd.engAC.LifeGameLogic.Cards.Card;
 
 public class HouseCard extends Card{
 	private final HouseType houseType;				// Values are final as their value should not change after having been initialised to some value

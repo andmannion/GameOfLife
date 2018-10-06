@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC;
+package ie.ucd.engAC;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,10 +6,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.ie.ucd.engAC.UIScreens.*;
-import main.java.ie.ucd.engAC.UIScreens.SplashScreen;
-import main.java.ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
-import main.java.ie.ucd.engAC.LifeGameLogic.*;
+import ie.ucd.engAC.UIScreens.*;
+import ie.ucd.engAC.UIScreens.SplashScreen;
+import ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
+import ie.ucd.engAC.LifeGameLogic.*;
 
 public class LifeGame extends JFrame implements WindowListener{
 

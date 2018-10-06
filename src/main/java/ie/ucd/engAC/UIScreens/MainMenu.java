@@ -1,10 +1,10 @@
-package main.java.ie.ucd.engAC.UIScreens;
+package ie.ucd.engAC.UIScreens;
 
-import main.java.ie.ucd.engAC.LifeGame;
-import main.java.ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
-import main.java.ie.ucd.engAC.UIScreens.buttons.NewGameButton;
-import main.java.ie.ucd.engAC.UIScreens.buttons.PlayButton;
-import main.java.ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
+import ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.UIScreens.UISubPanels.MainMenuButtonPanel;
+import ie.ucd.engAC.UIScreens.buttons.NewGameButton;
+import ie.ucd.engAC.UIScreens.buttons.PlayButton;
+import ie.ucd.engAC.UIScreens.buttons.QuitGameButton;
 
 import javax.swing.*;
 import java.awt.*;

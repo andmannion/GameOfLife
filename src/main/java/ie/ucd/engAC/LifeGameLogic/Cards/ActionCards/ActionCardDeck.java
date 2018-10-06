@@ -1,9 +1,9 @@
-package main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
+package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
 
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
-import main.java.ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
 
 public class ActionCardDeck extends CardDeck {
 	public ActionCardDeck() {

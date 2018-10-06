@@ -1,9 +1,8 @@
-package main.java.ie.ucd.engAC.UIScreens.UISubPanels;
+package ie.ucd.engAC.UIScreens.UISubPanels;
 
-<<<<<<< HEAD:src/main/java/ie/ucd/engAC/UIScreens/UISubPanels/MainMenuButtonPanel.java
-import main.java.ie.ucd.engAC.LifeGame;
-import main.java.ie.ucd.engAC.UIScreens.MainMenu;
-import main.java.ie.ucd.engAC.UIScreens.buttons.*;
+import ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.buttons.*;
 import javax.swing.*;
 import java.awt.*;
 

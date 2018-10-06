@@ -1,4 +1,4 @@
-package main.java.ie.ucd.engAC.UIScreens.UISubPanels;
+package ie.ucd.engAC.UIScreens.UISubPanels;
 
 import ie.ucd.engAC.LifeGameLogic.PlayerLogic.Player;
 import ie.ucd.engAC.UIScreens.PlayPanel;

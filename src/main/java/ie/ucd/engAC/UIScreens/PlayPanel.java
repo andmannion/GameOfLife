@@ -1,10 +1,10 @@
-package main.java.ie.ucd.engAC.UIScreens;
+package ie.ucd.engAC.UIScreens;
 
-import main.java.ie.ucd.engAC.LifeGame;
-import main.java.ie.ucd.engAC.LifeGameLogic.Bank;
-import main.java.ie.ucd.engAC.LifeGameLogic.PlayerLogic.Player;
-import main.java.ie.ucd.engAC.UIScreens.UISubPanels.GameBoard;
-import main.java.ie.ucd.engAC.UIScreens.UISubPanels.GameHUD;
+import ie.ucd.engAC.LifeGame;
+import ie.ucd.engAC.LifeGameLogic.Bank;
+import ie.ucd.engAC.LifeGameLogic.PlayerLogic.Player;
+import ie.ucd.engAC.UIScreens.UISubPanels.GameBoard;
+import ie.ucd.engAC.UIScreens.UISubPanels.GameHUD;
 
 import javax.swing.*;
 import java.awt.*;
