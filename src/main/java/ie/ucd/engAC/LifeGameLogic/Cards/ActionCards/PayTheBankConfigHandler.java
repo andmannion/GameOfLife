@@ -2,13 +2,13 @@ package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
 
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardConfigHandler;
 
-public class PayTheBankConfigHandler implements ActionCardConfigHandler {
+public class PayTheBankConfigHandler implements CardConfigHandler<ActionCard> {
 	public PayTheBankConfigHandler() { // TODO: Should take as input some config parameter		
 	}
 	
-	public ArrayList<ActionCard> InitialiseCardSubGroup() {
+	public ArrayList<ActionCard> initialiseCards() {
 		ArrayList<ActionCard> myPayTheBankActionCards = new ArrayList<ActionCard>();
 
 		for(int i=1;i<6;i++) {

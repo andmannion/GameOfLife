@@ -2,13 +2,13 @@ package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
 
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardConfigHandler;
 
-public class CareerChangeConfigHandler implements ActionCardConfigHandler {
+public class CareerChangeConfigHandler implements CardConfigHandler<ActionCard> {
 	public CareerChangeConfigHandler() { // Should take as input some config parameter
 	}
 
-	public ArrayList<ActionCard> InitialiseCardSubGroup() {
+	public ArrayList<ActionCard> initialiseCards() {
 		int numToInitialise = 5;
 		ArrayList<ActionCard> myCareerChangeActionCards = new ArrayList<ActionCard>();
 

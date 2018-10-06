@@ -1,5 +1,6 @@
 package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
+import ie.ucd.engAC.LifeGameLogic.Cards.CardConfigHandler;
 import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
 
 public class HouseCardDeck extends CardDeck {
@@ -14,7 +15,7 @@ public class HouseCardDeck extends CardDeck {
 	}
 	
 	private void initialiseCards() {
-		HouseCardConfigHandler houseCardConfigHandler = new DefaultHouseCardConfigHandler(configString);
+		CardConfigHandler<HouseCard> houseCardConfigHandler = new DefaultHouseCardConfigHandler(configString);
 		
 		houseCardConfigHandler.initialiseCards();
 	}

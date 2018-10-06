@@ -2,7 +2,7 @@ package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
 import java.util.ArrayList;
 
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardConfigHandler;
+import ie.ucd.engAC.LifeGameLogic.Cards.CardConfigHandler;
 import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
 
 public class ActionCardDeck extends CardDeck {
@@ -23,15 +23,15 @@ public class ActionCardDeck extends CardDeck {
 
 	private void InitialiseSubGroups() {
 		// Must initialise each subgroup of the action card.
-		ArrayList<ActionCardConfigHandler> myCardConfigHandlers = new ArrayList<ActionCardConfigHandler>();
+		ArrayList<CardConfigHandler<ActionCard>> myActionCardConfigHandlers = new ArrayList<CardConfigHandler<ActionCard>>();
 
-		myCardConfigHandlers.add(new CareerChangeConfigHandler());
-		myCardConfigHandlers.add(new PlayersPayConfigHandler());
-		myCardConfigHandlers.add(new PayTheBankConfigHandler());
-		myCardConfigHandlers.add(new GetCashFromBankConfigHandler());
+		myActionCardConfigHandlers.add(new CareerChangeConfigHandler());
+		myActionCardConfigHandlers.add(new PlayersPayConfigHandler());
+		myActionCardConfigHandlers.add(new PayTheBankConfigHandler());
+		myActionCardConfigHandlers.add(new GetCashFromBankConfigHandler());
 
-		for (ActionCardConfigHandler cardConfigHandler : myCardConfigHandlers) {
-			cards.addAll(cardConfigHandler.InitialiseCardSubGroup());
+		for (CardConfigHandler<ActionCard> actionCardConfigHandler : myActionCardConfigHandlers) {
+			cards.addAll(actionCardConfigHandler.initialiseCards());
 		}
 	}
 }

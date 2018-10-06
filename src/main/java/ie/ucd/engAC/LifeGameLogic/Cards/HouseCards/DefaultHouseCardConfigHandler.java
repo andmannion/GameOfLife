@@ -5,7 +5,9 @@ import java.util.Arrays;
 
 import com.google.gson.Gson;
 
-public class DefaultHouseCardConfigHandler implements HouseCardConfigHandler {
+import ie.ucd.engAC.LifeGameLogic.Cards.CardConfigHandler;
+
+public class DefaultHouseCardConfigHandler implements CardConfigHandler<HouseCard> {
 	private String jsonString;
 	
 	public DefaultHouseCardConfigHandler(String jsonString) {
