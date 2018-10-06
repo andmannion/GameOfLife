@@ -24,6 +24,8 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private GameHUD gameHUD;
     private GameBoard gameBoard;
     private int numPlayers;
+    private Graphics graphics;
+    private int currentPlayer;
 
 
     public PlayPanel(LifeGame lifeGame, int numPlayers){
@@ -43,7 +45,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         }
         random = new Random((randomSeed + System.nanoTime()));
         gameBoard = new GameBoard();
-        gameHUD = new GameHUD();
+        gameHUD = new GameHUD(this);
 
         //TODO
     }
@@ -52,6 +54,13 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         int temp = random.nextInt(9)+1;
         System.out.println(temp);
         return temp;
+    }
+
+    private void renderPanel(){
+        gameHUD.draw(graphics);
+    }
+    public Player getCurrentPlayer(){
+        return playerList.get(currentPlayer);
     }
 
     @Override

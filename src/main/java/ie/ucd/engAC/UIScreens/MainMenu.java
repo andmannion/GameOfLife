@@ -58,7 +58,6 @@ public class MainMenu extends JPanel implements ActionListener {
             else if(buttonSource.getText().equals("Play")){
                 lifeGameParent.initialiseGame(numPlayers);
             }
-
         }
         else if (e.getSource() instanceof JComboBox){
             JComboBox cb = (JComboBox)e.getSource();
@@ -66,6 +65,5 @@ public class MainMenu extends JPanel implements ActionListener {
         }
         else
             System.out.println(e.getSource());
-
     }
 }

@@ -11,12 +11,23 @@ public class Player {
 	// Marker of how far along the board the player is
 
 	// Number of people in the car
+    public int getNumDependants(){
+        return 0;
+    }
 
 	// Current career card
+    public String getCareerCard(){//TODO make this actual
+        return "None";
+        }
 
 	// Current amount of money
-
+    public int getCurrentMoney(){
+        return 0;
+    }
 	// Current loans
+    public int getCurrentLoans(){
+        return 0;
+    }
 
 	// Action cards held by this player
 	private List<ActionCard> actionCards;
