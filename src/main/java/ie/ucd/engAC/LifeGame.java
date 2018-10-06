@@ -20,8 +20,6 @@ public class LifeGame extends JFrame implements WindowListener{
     private Dimension dimensions;
     private MainMenu mainMenu;
     private Container container;
-    private ArrayList<Player> playerObjects;
-    private Bank bank;
     private PlayPanel playPanel;
 
 
@@ -55,17 +53,11 @@ public class LifeGame extends JFrame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        playerObjects = new ArrayList<Player>();
-        bank = new Bank();
-        for(int i = 0;i<numPlayers;i++){
-            Player player = new Player(i);
-            playerObjects.add(player);
-        }
-        playPanel = new PlayPanel(this,playerObjects,bank); //TODO remove this if possible
+
+        playPanel = new PlayPanel(this,numPlayers); //TODO remove this if possible
         container.add(playPanel);
         mainMenu.setVisible(false);
-        //
-    }
+    } //end of intialiseGame
 
     private void drawBoard(){}
     private void drawHUD(){}
