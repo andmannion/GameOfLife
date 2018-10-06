@@ -37,6 +37,7 @@ public class GameHUD{
     synchronized public void draw(Graphics graphics){ //synch adds safety
         updateFields();
         try{
+            graphics.setColor(Color.darkGray);
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
         }
         catch (Exception e){

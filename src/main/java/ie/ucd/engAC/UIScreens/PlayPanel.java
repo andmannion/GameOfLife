@@ -36,9 +36,9 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     //objects for rendering process
     private Graphics graphics;
-    private Image tempImage;
+    private Image backBuffer;
     private boolean running;
-    private Thread thread;
+    private Thread renderingThread;
 
 
     public PlayPanel(LifeGame lifeGame, int numPlayers){
@@ -50,7 +50,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         add(textField);
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
-        playerList = new ArrayList<Player>();
+        playerList = new ArrayList<>();
         bank = new Bank();
         for(int i = 0;i<numPlayers;i++){
             Player player = new Player(i);
@@ -66,12 +66,10 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         System.out.println("Stopped rendering");
     }
 
-    public void beginGame(){//TODO redo this as my own
-        if (thread == null || !running) {
-            thread = new Thread(this);
-            System.out.println("Starting thread");
-            thread.start();
-        }
+    public void beginGame(){
+        renderingThread = new Thread(this);
+        System.out.println("Starting renderingThread");
+        renderingThread.start();
     } // end of startGame()
 
     public Player getCurrentPlayer(){
@@ -88,37 +86,38 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     public void run() {
         running = true;
         while(running) {
+            //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
+            //attempting to use active rendering & double buffering
             renderPanel();
-            loadPanel();
+            paintPanel();
         }
     }
 
-    private void renderPanel(){ //TODO redo this
-        if (tempImage == null){
-            tempImage = createImage(PANWIDTH, PANHEIGHT);
-            if (tempImage == null) {
+    private void renderPanel(){
+        if (backBuffer == null){ //cannot do this in constructor, must do it here each time
+            backBuffer = createImage(PANWIDTH, PANHEIGHT);
+            if (backBuffer == null) { //if create image somehow failed
                 System.out.println("image null");
                 return;
             }
             else
-                graphics = tempImage.getGraphics();
+                graphics = backBuffer.getGraphics();
         }
         graphics.setColor(Color.lightGray);
         graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
 
-        graphics.setColor(Color.green);
         gameHUD.draw(graphics);
     }
 
-    private void loadPanel(){ //TODO redo this as my own
-        Graphics g;
+    private void paintPanel(){
+        Graphics tempGraphics;
         try {
-            g = this.getGraphics();
-            if ((g != null) && (tempImage != null)) {
-                g.drawImage(tempImage, 0, 0, null);
+            tempGraphics = this.getGraphics(); //initialise
+            //if initialised & backBuffer exits draw new image
+            if ((tempGraphics != null) && (backBuffer != null)) {
+                //TODO do we require an observer?
+                tempGraphics.drawImage(backBuffer, 0, 0,null);
             }
-
-            g.dispose();
         }
         catch (Exception e){
             System.out.println("loadPanel() in PlayPanel failed");

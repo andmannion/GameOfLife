@@ -33,6 +33,7 @@ public class LifeGame extends JFrame implements WindowListener{
         setSize(dimensions);
         setResizable(false);
         setVisible(true);
+        setIgnoreRepaint(true);
     } // end of Main (constructor)
 
     public void run(){
@@ -71,7 +72,13 @@ public class LifeGame extends JFrame implements WindowListener{
     public void windowIconified(WindowEvent window_event) {}
     @Override
     public void windowClosing(WindowEvent window_event) {
-        playPanel.closeGame();
+        try {
+            playPanel.closeGame();
+        }
+        catch (Exception e){
+            //Is it even worth returning this?
+        }
+        dispose();
     }
     @Override
     public void windowClosed(WindowEvent window_event) {}
