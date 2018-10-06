@@ -27,7 +27,7 @@ public class Bank {
 		actionCardDeck = new ActionCardDeck();
 		actionCardDeck.shuffle();
 
-		String houseCardConfigFileLocation = "C:\\Users\\Andrew Mannion\\Google Drive\\Stage 5\\Software Engineering\\Project\\HouseCardConfig.json";
+		String houseCardConfigFileLocation = ".\\HouseCardConfig.json";
 		
 		byte[] encoded = new byte[0];
 		

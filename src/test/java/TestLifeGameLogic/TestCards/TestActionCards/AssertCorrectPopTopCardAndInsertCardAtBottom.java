@@ -1,4 +1,4 @@
-package test.TestLifeGameLogic.TestCards.TestActionCards;
+package TestLifeGameLogic.TestCards.TestActionCards;
 
 import static org.junit.jupiter.api.Assertions.*;
 
