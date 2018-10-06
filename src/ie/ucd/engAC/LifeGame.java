@@ -6,30 +6,33 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.ucd.engAC.UIScreens.MainMenu;
+import ie.ucd.engAC.UIScreens.*;
 import ie.ucd.engAC.UIScreens.SplashScreen;
 import ie.ucd.engAC.LifeGameLogic.PlayerLogic.*;
 import ie.ucd.engAC.LifeGameLogic.*;
 
 public class LifeGame extends JFrame implements WindowListener{
 
-    private int PANWIDTH = 640;
-    private int PANHEIGHT = 480;
+    private int PANWIDTH = 1280;
+    private int PANHEIGHT = 720;
     private JTextField gameTitle;
     private SplashScreen splashScreen;
     private Dimension dimensions;
     private MainMenu mainMenu;
     private Container container;
-    private List<Player> PlayerObjects;
+    private ArrayList<Player> playerObjects;
     private Bank bank;
+    private PlayPanel playPanel;
 
 
     public LifeGame() {
         super("Life: The Game");
+        dimensions = new Dimension(PANWIDTH,PANHEIGHT);
         constructUI();
         addWindowListener(this);
         setLocationRelativeTo(null);
         pack();
+        setSize(dimensions);
         setResizable(false);
         setVisible(true);
     } // end of Main (constructor)
@@ -44,23 +47,23 @@ public class LifeGame extends JFrame implements WindowListener{
         container.add(splashScreen);
 
         mainMenu = new MainMenu(this);
-        
+
         container.removeAll();
         container.add(mainMenu);
+
     } // end of constructUI
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        PlayerObjects = new ArrayList<Player>();
+        playerObjects = new ArrayList<Player>();
         bank = new Bank();
         for(int i = 0;i<numPlayers;i++){
             Player player = new Player(i);
-            PlayerObjects.add(player);
+            playerObjects.add(player);
         }
-        //...
-        //make list & call constructors for players
-        //initialise "bank" etc
-        //remove menu and call run function
+        playPanel = new PlayPanel(this,playerObjects,bank); //TODO remove this if possible
+        container.add(playPanel);
+        mainMenu.setVisible(false);
         //
     }
 

@@ -37,7 +37,7 @@ public class Player {
 	public Player(int playerNumber) {
         //this.playerColour.fromInt(playerNumber);
         this.maritalStatus = MaritalStatus.Single;
-        System.out.println("test");
+        System.out.println("Player.java, player constructor terminating");
 	}
 }
 
