@@ -26,6 +26,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private int numPlayers;
     private Graphics graphics;
     private int currentPlayer;
+    private boolean running;
 
 
     public PlayPanel(LifeGame lifeGame, int numPlayers){
@@ -66,6 +67,11 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     @Override
     public void run() {
         //TODO
+        running = true;
+
+        while(running) {
+            renderPanel();
+        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
