@@ -28,6 +28,7 @@ public class ActionCardDeck extends CardDeck {
 		myCardConfigHandlers.add(new CareerChangeConfigHandler());
 		myCardConfigHandlers.add(new PlayersPayConfigHandler());
 		myCardConfigHandlers.add(new PayTheBankConfigHandler());
+		myCardConfigHandlers.add(new GetCashFromBankConfigHandler());
 
 		for (ActionCardConfigHandler cardConfigHandler : myCardConfigHandlers) {
 			cards.addAll(cardConfigHandler.InitialiseCardSubGroup());

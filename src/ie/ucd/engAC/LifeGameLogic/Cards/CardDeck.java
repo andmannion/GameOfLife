@@ -11,15 +11,15 @@ public abstract class CardDeck {
 		cards = new LinkedList<Card>();
 	}
 
-	public Card PopTopCard() {
+	public Card popTopCard() {
 		return cards.pop();
 	}
 
-	public void AddCardToBottom(Card card) {
+	public void addCardToBottom(Card card) {
 		cards.addLast(card);
 	}
 
-	public void Shuffle() {
+	public void shuffle() {
 		int deckSize = cards.size();
 		
 		for (int i = 0; i < deckSize; i++) {
@@ -28,7 +28,7 @@ public abstract class CardDeck {
 		}
 	}
 
-	public int GetRemainingCards() {
+	public int getRemainingCards() {
 		return cards.size();
 	}
 }
