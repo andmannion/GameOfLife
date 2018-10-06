@@ -29,6 +29,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private int currentPlayer;
     private boolean running;
     private Thread thread;
+    //TODO thread terminator on exit
 
 
     public PlayPanel(LifeGame lifeGame, int numPlayers){
@@ -49,15 +50,6 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         random = new Random((randomSeed + System.nanoTime()));
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this);
-        if (tempImage == null){
-            tempImage = createImage(PANWIDTH, PANHEIGHT);
-            if (tempImage == null) {
-                System.out.println("image null");
-                return;
-            }
-            else
-                graphics = tempImage.getGraphics();
-        }
     }
 
     private int spinTheWheel(){
@@ -67,20 +59,34 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     }
 
     private void renderPanel(){
+        if (tempImage == null){
+            tempImage = createImage(PANWIDTH, PANHEIGHT);
+            if (tempImage == null) {
+                System.out.println("image null");
+                return;
+            }
+            else
+                graphics = tempImage.getGraphics();
+        }
+        graphics.setColor(Color.white);
+        graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
+
+        graphics.setColor(Color.green);
         gameHUD.draw(graphics);
     }
-    private void loadPanel(){
+    private void loadPanel(){ //TODO redo this as my own
         Graphics g;
         try {
-            g = graphics;
+            g = this.getGraphics();
+            if ((g != null) && (tempImage != null))
+                g.drawImage(tempImage, 0, 0, null);
+            g.dispose();
         }
         catch (Exception e){
             System.out.println("loadPanel() in PlayPanel failed");
         }
     }
-    public void beginGame() //TODO redo this as my own
-    // initialise and start the thread
-    {
+    public void beginGame(){//TODO redo this as my own
         if (thread == null || !running) {
             thread = new Thread(this);
             System.out.println("Starting thread");

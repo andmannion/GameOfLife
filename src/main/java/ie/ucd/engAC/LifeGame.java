@@ -56,7 +56,7 @@ public class LifeGame extends JFrame implements WindowListener{
         playPanel = new PlayPanel(this,numPlayers); //TODO remove "this" if possible
         container.add(playPanel);
         mainMenu.setVisible(false);
-        //playPanel.beginGame();
+        playPanel.beginGame();
     } //end of intialiseGame
 
 

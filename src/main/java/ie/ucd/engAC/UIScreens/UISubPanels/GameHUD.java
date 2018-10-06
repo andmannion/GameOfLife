@@ -38,7 +38,7 @@ public class GameHUD{
     synchronized public void draw(Graphics graphics){ //synch adds safety
         updateFields();
         try{
-            graphics.fillRect(50,50,50,50);//rectangle.x, rectangle.y,rectangle.width,rectangle.height);
+            graphics.fillRect(rectangle.x, rectangle.y,rectangle.width,rectangle.height);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);
