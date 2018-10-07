@@ -6,15 +6,16 @@ import java.nio.file.Paths;
 
 import ie.ucd.engAC.LifeGameLogic.Cards.CardDeck;
 import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.CareerCardDeck;
+import ie.ucd.engAC.LifeGameLogic.Cards.CollegeCareerCards.CollegeCareerCardDeck;
 import ie.ucd.engAC.LifeGameLogic.Cards.HouseCards.HouseCardDeck;
-//import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.CareerCardDeck;
 
 public class Bank {
 
 	private ActionCardDeck actionCardDeck;
 	private HouseCardDeck houseCardDeck;
-	//private CareerCardDeck careerCardDeck;
-	//private CardDeck collegeCareerCardDeck;
+	private CareerCardDeck careerCardDeck;
+	private CollegeCareerCardDeck collegeCareerCardDeck;
 
 	// Pull in the action card deck config from the config file.
 	// Where should this config be stored, what format should it be in?
@@ -27,24 +28,33 @@ public class Bank {
 		actionCardDeck = new ActionCardDeck();
 		actionCardDeck.shuffle();
 
-		String houseCardConfigFileLocation = "src/main/resources/HouseCardConfig.json";
+		String houseCardDeckConfigFileLocation = "src/main/resources/HouseCardConfig.json";
+		String careerCardDeckConfigFileLocation = "src/main/resources/CareerCardConfig.json";
+		String collegeCareerCardDeckConfigFileLocation = "src/main/resources/CollegeCareerCardConfig.json";
 		
-		byte[] encoded = new byte[0];
+		byte[] encodedHouseCardDeckConfigContent = new byte[0];
+		byte[] encodedCareerCardDeckConfigContent = new byte[0];
+		byte[] encodedCollegeCareerCardDeckConfigContent = new byte[0];
 		
 		try {
-			encoded = Files.readAllBytes(Paths.get(houseCardConfigFileLocation));
+			encodedHouseCardDeckConfigContent = Files.readAllBytes(Paths.get(houseCardDeckConfigFileLocation));
+			encodedCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(careerCardDeckConfigFileLocation));
+			encodedCollegeCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(collegeCareerCardDeckConfigFileLocation));
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 
 		Charset charset = Charset.defaultCharset();
-		String configString = new String(encoded, charset);
+		
+		String houseCardDeckConfigString = new String(encodedHouseCardDeckConfigContent, charset);
+		String careerCardDeckConfigString = new String(encodedCareerCardDeckConfigContent, charset);
+		String collegeCareerCardDeckConfigString = new String(encodedCollegeCareerCardDeckConfigContent, charset);
 
-		houseCardDeck = new HouseCardDeck(configString);
+		houseCardDeck = new HouseCardDeck(houseCardDeckConfigString);
 		houseCardDeck.shuffle();
-		// careerCardDeck = new CareerCardDeck();
-		// careerCardDeck.Shuffle();
-		// collegeCareerCardDeck = new CollegeCareerCardDeck();
-		// collegeCareerCardDeck.Shuffle();
+		careerCardDeck = new CareerCardDeck(careerCardDeckConfigString);
+		careerCardDeck.shuffle();
+		collegeCareerCardDeck = new CollegeCareerCardDeck(collegeCareerCardDeckConfigString);
+		collegeCareerCardDeck.shuffle();
 	}
 }

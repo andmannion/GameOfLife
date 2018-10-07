@@ -8,7 +8,7 @@ public class GetCashFromBankActionCard extends ActionCard {
 	}
 
 	public GetCashFromBankActionCard(int amountToPay) {
-		actionCardType = ActionCardType.GetCashFromBank;
+		actionCardType = ActionCardTypes.GetCashFromBank;
 		this.amountToPay = amountToPay;
 	}
 }

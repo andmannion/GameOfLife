@@ -1,6 +1,6 @@
 package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 
-public enum ActionCardType {
+public enum ActionCardTypes {
 	CareerChange,
 	PlayersPay,
 	PayTheBank,

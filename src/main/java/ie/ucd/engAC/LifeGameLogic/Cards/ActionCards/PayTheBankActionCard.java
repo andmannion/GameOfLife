@@ -8,7 +8,7 @@ public class PayTheBankActionCard extends ActionCard {
 	}
 	
 	public PayTheBankActionCard(int value) {
-		actionCardType = ActionCardType.PayTheBank;
+		actionCardType = ActionCardTypes.PayTheBank;
 		this.value = value;
 	}
 }

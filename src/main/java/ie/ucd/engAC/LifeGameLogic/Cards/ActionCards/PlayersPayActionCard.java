@@ -8,7 +8,7 @@ public class PlayersPayActionCard extends ActionCard {
 	}
 	
 	public PlayersPayActionCard(int amountToPay) {
-		actionCardType = ActionCardType.PlayersPay;
+		actionCardType = ActionCardTypes.PlayersPay;
 		this.amountToPay = amountToPay;
 	}
 }

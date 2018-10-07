@@ -1,0 +1,48 @@
+	[{
+	 "careerType": "Doctor",
+	 "salary": "130000",
+	 "bonusNumber": "10",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "Lawyer",
+	 "salary": "120000",
+	 "bonusNumber": "9",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "VideoGameDesigner",
+	 "salary": "110000",
+	 "bonusNumber": "8",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "Vet",
+	 "salary": "100000",
+	 "bonusNumber": "7",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "Teacher",
+	 "salary": "100000",
+	 "bonusNumber": "6",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "Scientist",
+	 "salary": "100000",
+	 "bonusNumber": "9",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "SecretAgent",
+	 "salary": "100000",
+	 "bonusNumber": "8",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "careerType": "FashionDesigner",
+	 "salary": "80000",
+	 "bonusNumber": "7",
+	 "bonusPaymentAmount": "20000"
+	}]

@@ -3,9 +3,9 @@ package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 import ie.ucd.engAC.LifeGameLogic.Cards.Card;
 
 public class HouseCard extends Card{
-	private final HouseType houseType;				// Values are final as their value should not change after having been initialised to some value
+	private final HouseTypes houseType;				// Values are final as their value should not change after having been initialised to some value
 	
-	public HouseType getHouseType() {
+	public HouseTypes getHouseType() {
 		return houseType;
 	}
 	
@@ -27,7 +27,7 @@ public class HouseCard extends Card{
 		return spinForSalePriceEvenNum;
 	}
 	
-	public HouseCard(HouseType houseType,
+	public HouseCard(HouseTypes houseType,
 					 int purchasePrice,
 					 int spinForSalePriceOddNum,
 					 int spinForSalePriceEvenNum) {

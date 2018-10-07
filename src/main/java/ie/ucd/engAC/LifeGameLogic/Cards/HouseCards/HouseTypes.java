@@ -1,6 +1,6 @@
 package ie.ucd.engAC.LifeGameLogic.Cards.HouseCards;
 
-public enum HouseType {
+public enum HouseTypes {
 	Ranch,
 	CityPenthouse,
 	IslandHolidayHome,

@@ -3,9 +3,9 @@ package ie.ucd.engAC.LifeGameLogic.Cards.ActionCards;
 import ie.ucd.engAC.LifeGameLogic.Cards.Card;
 
 public abstract class ActionCard extends Card{
-	protected ActionCardType actionCardType;
+	protected ActionCardTypes actionCardType;
 	
-	public ActionCardType getActionCardType() {
+	public ActionCardTypes getActionCardType() {
 		return actionCardType;
 	}
 }

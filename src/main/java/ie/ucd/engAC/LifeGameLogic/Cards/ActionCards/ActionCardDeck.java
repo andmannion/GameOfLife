@@ -9,7 +9,7 @@ public class ActionCardDeck extends CardDeck {
 	public ActionCardDeck() {
 		super();
 
-		InitialiseSubGroups();
+		initialiseSubGroups();
 		/*
 		 * For each subtype of action card, must initialise a list of them with the
 		 * correct size. Each subtype card must contain the values as laid out in the
@@ -21,7 +21,7 @@ public class ActionCardDeck extends CardDeck {
 		 */
 	}
 
-	private void InitialiseSubGroups() {
+	private void initialiseSubGroups() {
 		// Must initialise each subgroup of the action card.
 		ArrayList<CardConfigHandler<ActionCard>> myActionCardConfigHandlers = new ArrayList<CardConfigHandler<ActionCard>>();
 
