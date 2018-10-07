@@ -1,7 +1,20 @@
-[
-	{"tileType": "forkTile", 
-	 "vertex": "a",
-	 "neighbours": ["b", "c"]
-	 },
-	{},
-]
+{
+	"vertices": [{
+			"id": "a"
+		},
+		{
+			"id": "b"
+		},
+		{
+			"id": "c"
+		}
+	],
+	"edges": [{
+		"source": "a",
+		"target": "b"
+	},
+	{
+		"source": "a",
+		"target": "c"
+	}]
+}

@@ -18,8 +18,12 @@ public class UDAGraph<V>{
 		}
 		
 		// Map each vertex to a list of adjacent vertices
-		private HashMap<V, ArrayList<Edge<V>>> neighbours = new HashMap<V, ArrayList<Edge<V>>>();
+		private HashMap<V, ArrayList<Edge<V>>> neighbours;
 
+		public UDAGraph() {
+			neighbours = new HashMap<V, ArrayList<Edge<V>>>();
+		}
+		
 		public void add (V vertex) {
 			if(neighbours.containsKey(vertex)) {
 				return;

@@ -57,6 +57,9 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             playerList.add(player);
         }
         random = new Random((randomSeed + System.nanoTime()));
+        
+        ie.ucd.engAC.LifeGameLogic.GameBoard.GameBoard logicGameBoard = new ie.ucd.engAC.LifeGameLogic.GameBoard.GameBoard("src/main/resources/GameBoard/GameBoardConfig.json");
+                
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
     }
