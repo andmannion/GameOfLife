@@ -1,12 +1,27 @@
 {
 	"vertices": [{
-			"id": "a"
+			"id": "a",
+			"gameBoardTile": {
+				"gameBoardTileType": "Start"				
+			}
 		},
 		{
-			"id": "b"
+			"id": "b",
+			"gameBoardTile": {
+				"gameBoardTileType": "Action"				
+			}
 		},
 		{
-			"id": "c"
+			"id": "c",
+			"gameBoardTile": {
+				"gameBoardTileType": "Action"				
+			}
+		},
+		{
+			"id": "d",
+			"gameBoardTile": {
+				"gameBoardTileType": "Payday"				
+			}
 		}
 	],
 	"edges": [{
@@ -16,5 +31,9 @@
 	{
 		"source": "a",
 		"target": "c"
+	},
+	{
+		"source": "b",
+		"target": "d"
 	}]
 }
