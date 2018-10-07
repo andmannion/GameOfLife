@@ -1,0 +1,7 @@
+[
+	{"tileType": "forkTile", 
+	 "vertex": "a",
+	 "neighbours": ["b", "c"]
+	 },
+	{},
+]

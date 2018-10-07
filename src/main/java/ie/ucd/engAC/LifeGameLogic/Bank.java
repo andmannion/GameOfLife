@@ -25,12 +25,14 @@ public class Bank {
 
 	private void InitialiseDecks() {
 		// Initialise decks of different types
+		// TODO: ActionCardDeck requires config reading functionality implementation
+		
 		actionCardDeck = new ActionCardDeck();
 		actionCardDeck.shuffle();
 
-		String houseCardDeckConfigFileLocation = "src/main/resources/HouseCardConfig.json";
-		String careerCardDeckConfigFileLocation = "src/main/resources/CareerCardConfig.json";
-		String collegeCareerCardDeckConfigFileLocation = "src/main/resources/CollegeCareerCardConfig.json";
+		String houseCardDeckConfigFileLocation = "src/main/resources/CardDecks/HouseCardConfig.json";
+		String careerCardDeckConfigFileLocation = "src/main/resources/CardDecks/CareerCardConfig.json";
+		String collegeCareerCardDeckConfigFileLocation = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
 		
 		byte[] encodedHouseCardDeckConfigContent = new byte[0];
 		byte[] encodedCareerCardDeckConfigContent = new byte[0];
