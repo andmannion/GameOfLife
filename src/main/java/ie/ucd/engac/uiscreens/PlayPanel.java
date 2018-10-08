@@ -54,7 +54,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             playerList.add(player);
         }
 
-       //LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/GameBoard/GameBoardConfig.json");
+       LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
                
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
