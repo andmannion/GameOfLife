@@ -1,16 +1,27 @@
 package ie.ucd.engac.lifegamelogic.PlayerLogic;
 
-import java.util.List;
+import java.util.ArrayList;
 
+<<<<<<< HEAD:src/main/java/ie/ucd/engac/lifegamelogic/PlayerLogic/Player.java
 import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
+import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
+
 
 public class Player {
+    public ArrayList<ActionCard> getActionCards() {
+        return actionCards;
+    }
+
     // Action cards held by this player
-    private List<ActionCard> actionCards;
+    private ArrayList<ActionCard> actionCards;
+
+    public ArrayList<HouseCard> getHouseCards() {
+        return houseCards;
+    }
 
     // House cards held by this player
-    private List<HouseCard> houseCards;
+    private ArrayList<HouseCard> houseCards;
 
     // Marital status
     private MaritalStatus maritalStatus;
@@ -21,11 +32,15 @@ public class Player {
 
     //private PlayerColour playerColour;
     private int playerNumber;
+    private CareerCard careerCard;
 
     public Player(int playerNumber) {
         //this.playerColour.fromInt(playerNumber);
         this.maritalStatus = MaritalStatus.Single;
         this.playerNumber = playerNumber;
+        actionCards = new ArrayList<>();
+        houseCards = new ArrayList<>();
+        careerCard = null;
         System.out.println("Player.java, player constructor terminating");
     }
 
@@ -40,8 +55,8 @@ public class Player {
     }
 
 	// Current career card
-    public String getCareerCard(){//TODO make this actual
-        return "None";
+    public CareerCard getCareerCard(){//TODO make this actual
+        return null;
         }
 
 	// Current amount of money

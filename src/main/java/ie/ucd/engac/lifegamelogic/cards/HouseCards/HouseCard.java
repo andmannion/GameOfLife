@@ -37,4 +37,12 @@ public class HouseCard extends Card{
 		this.spinForSalePriceOddNum = spinForSalePriceOddNum;
 		this.spinForSalePriceEvenNum = spinForSalePriceEvenNum;
 	}
+
+    public String convertDrawableString(){
+        String string = new String();
+        string.concat("Type: " + houseType.toString());
+        string.concat(" Cost: " + purchasePrice);
+        string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum);
+        return string;
+    }
 }

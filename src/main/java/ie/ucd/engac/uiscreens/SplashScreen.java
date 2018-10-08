@@ -22,7 +22,7 @@ public class SplashScreen extends JPanel {
         setFocusable(true);
         requestFocus();
         try {
-            splashImage = ImageIO.read(new File("./src/main/java/ie/ucd/engac/uiscreens/kermit.jpg"));
+            splashImage = ImageIO.read(new File("./src/resources/kermit.jpg"));
         } catch (IOException exception) {
             System.out.println("Ex. in SplashScreen" + exception);
         }

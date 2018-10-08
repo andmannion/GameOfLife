@@ -35,7 +35,7 @@ public class MainMenu extends JPanel implements ActionListener {
         add(buttonArea,buttonAreaConstraints);
 
     }
-    public void newGame(){
+    private void newGame(){
         buttonArea.setVisibilityMainScreen(false);
         buttonArea.setVisibilityNumPlayers(true);
      }

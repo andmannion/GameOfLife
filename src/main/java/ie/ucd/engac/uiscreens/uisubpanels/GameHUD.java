@@ -1,5 +1,7 @@
 package ie.ucd.engac.uiscreens.uisubpanels;
 
+import ie.ucd.engac.lifegamelogic.CareerCards.CareerCard;
+import ie.ucd.engac.lifegamelogic.Cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.PlayerLogic.Player;
 import ie.ucd.engac.uiscreens.PlayPanel;
 
@@ -13,21 +15,23 @@ public class GameHUD {
     private int playerNumber;
     private String martialStatus;
     private int numDependants;
-    private String career; //TODO make this a CareerCard
+    private CareerCard career; //TODO make this a CareerCard
+    private ArrayList<HouseCard> houses;
     private int loans;
     private int money;
+    private int actionCards;
     private Rectangle rectangle;
     private ArrayList<JTextArea> textAreas;
 
-    private final int BOXSTARTX = 0;
-    private final int BOXSTARTY = 504;
-    private final int BOXLENX = 1280;
-    private final int BOXLENY = 216;
+    private static final int BOXSTARTX = 0;
+    private static final int BOXSTARTY = 504;
+    private static final int BOXLENX = 1280;
+    private static final int BOXLENY = 216;
 
-    private final int STR1X = 0;
-    private final int STR1Y = 520;
-    private final int STR1LX = 100;
-    private final int STR1LY = 30;
+    private static final int STR1X = 0;
+    private static final int STR1Y = 520;
+    private static final int STR1LX = 100;
+    private static final int STR1LY = 30;
 
     public GameHUD(PlayPanel playPanel){
         this.playPanel = playPanel;
@@ -39,15 +43,22 @@ public class GameHUD {
         martialStatus = player.getMaritalStatus().toString();
         numDependants = player.getNumDependants();
         career = player.getCareerCard();
+        houses = player.getHouseCards();
         loans = player.getCurrentLoans();
         money = player.getCurrentMoney();
+        actionCards = player.getActionCards().size();
         textAreas = new ArrayList<>();
         for(int i=0;i<6;i++){
             textAreas.add(new JTextArea("test"));
         }
     }
     synchronized public void draw(Graphics graphics){ //synch adds safety
-        updateFields();
+        if (true) {
+            updateFields();
+        }
+        else{
+
+        }
         try{
             graphics.setColor(Color.darkGray);
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
@@ -56,7 +67,7 @@ public class GameHUD {
             graphics.drawString(formatBankBal(),    STR1X,STR1Y+1*STR1LY);
             graphics.drawString(formatNumLoans(),   STR1X,STR1Y+2*STR1LY);
             graphics.drawString(formatCareerCard(), STR1X,STR1Y+3*STR1LY);
-            graphics.drawString(formatHouseCard(),  STR1X,STR1Y+4*STR1LY);
+            graphics.drawString("housecard",  STR1X,STR1Y+4*STR1LY);
             graphics.drawString(formatDependants(), STR1X,STR1Y+5*STR1LY);
         }
         catch (Exception e){
@@ -69,9 +80,18 @@ public class GameHUD {
         //display maritial
     }
     //display house
-    private String formatHouseCard(){
-        return "TODO";
+    private String drawHouseCard(){
+        if (houses.size() == 0){
+            return "House Cards: No house cards.";
+        }
+        else{
+            for(HouseCard house:houses){
+                house.convertDrawableString();
+            }
+            return "House Cards: ...";
+        }
     }
+
     private String formatCareerCard(){
         return "TODO";
     }

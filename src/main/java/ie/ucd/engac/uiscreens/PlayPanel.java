@@ -16,7 +16,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
-    private static long randomSeed = 7777777777777777L;
+    private static final long randomSeed = 7777777777777777L;
 
     //rng for spinner
     private Random random;
@@ -96,13 +96,14 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             renderPanel();
             paintPanel();
             long timeAfter = System.nanoTime();
+            //TODO needs protection against negative times
             int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
             try{
                 Thread.sleep(sleepTime);
             }
             catch (Exception sleepException){
                 //TODO what goes here?
-                System.out.println(sleepException);
+                System.out.println("Sleep ex." + sleepException);
             }
         }
     }
