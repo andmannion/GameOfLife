@@ -18,7 +18,8 @@ public class GameHUD {
     private int bankBalance;
 
     private CareerCard career;
-    private String martialStatus;
+    private int martialStatus;
+    private String familyString;
     private ArrayList<HouseCard> houses;
 
 
@@ -44,11 +45,16 @@ public class GameHUD {
     private void updateFields(){
         Player player = this.playPanel.getCurrentPlayer();
         playerNumber = player.getPlayerNumber();
-        martialStatus = player.getMaritalStatus().toString();
+        martialStatus = player.getMaritalStatus().toInt();
         numDependants = player.getNumDependants();
+        if (martialStatus == 1){
+            familyString = martialStatus + "spouse and " + numDependants + "children";
+        }
+        else familyString = "No spouse " + numDependants + "children";
+
         career = player.getCareerCard();
         houses = player.getHouseCards();
-        //loans = player.getNumLoans(); // TODO: Number of loans of each player should be obtained through the Bank object
+        loans = 0; // TODO: Number of loans of each player should be obtained through the Bank object
         bankBalance = player.getCurrentMoney();
         actionCards = player.getActionCards().size();
 
@@ -69,16 +75,11 @@ public class GameHUD {
             drawNumLoans(graphics,STR1X,STR1Y+2*STR1LY);
             drawCareerCard(graphics,STR1X,STR1Y+3*STR1LY);
             drawHouseCards(graphics,STR1X, STR1Y+4*STR1LY);
-            graphics.drawString(formatDependants(), STR1X,STR1Y+5*STR1LY);
+            drawDependants(graphics, STR1X,STR1Y+5*STR1LY);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);
         }
-
-        //display career
-        //display num loans
-        //display $
-        //display maritial
     }
     //display house
     private void drawHouseCards(Graphics graphics,int xpos, int ypos){
@@ -86,7 +87,7 @@ public class GameHUD {
             graphics.drawString("House Cards: No house cards.",xpos,ypos);
         }
         else{
-            String string;
+            String string; //TODO test that this obeys boundaries (it wont)
             int i = 0;
             for(HouseCard house:houses){
                 string = house.convertDrawableString();
@@ -108,11 +109,11 @@ public class GameHUD {
     private void drawNumLoans(Graphics graphics, int xpos, int ypos){
         graphics.drawString("Number of Loans: " + loans, xpos, ypos);
     }
-    private String drawBankBal(Graphics graphics, int xpos, int ypos){
+    private void drawBankBal(Graphics graphics, int xpos, int ypos){
         graphics.drawString("Bank Balance: " + bankBalance, xpos, ypos);
     }
-    private String formatDependants(){
-        return "TODO";
+    private void drawDependants(Graphics graphics, int xpos, int ypos){
+        graphics.drawString("Number of Dependants: " + familyString, xpos,ypos);
     }
 }
 

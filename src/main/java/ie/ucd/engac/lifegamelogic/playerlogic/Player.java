@@ -11,7 +11,7 @@ import ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards.CollegeCareerCard;
 public class Player {
 
     private int playerNumber;
-    private int numDependants;
+    private int numDependants;//this doesnt include partner
     private int currentMoney;
 
 	private ArrayList<ActionCard> actionCards;
