@@ -8,11 +8,9 @@ import ie.ucd.engac.uiscreens.*;
 
 public class LifeGame implements WindowListener{
 
-    private int PANWIDTH = 1280;
-    private int PANHEIGHT = 720;
+    private static final int PANWIDTH = 1280;
+    private static final int PANHEIGHT = 720;
     private JFrame jFrame;
-    private JTextField gameTitle;
-    private Dimension dimensions;
     private MainMenu mainMenu;
     private Container container;
     private PlayPanel playPanel;
@@ -20,10 +18,9 @@ public class LifeGame implements WindowListener{
 
     LifeGame() {
         jFrame = new JFrame("Life: The Game");
-        dimensions = new Dimension(PANWIDTH,PANHEIGHT);
+        Dimension dimensions = new Dimension(PANWIDTH,PANHEIGHT);
         constructUI();
         jFrame.addWindowListener(this);
-        //setLocationRelativeTo(null);
         jFrame.pack();
         jFrame.setSize(dimensions);
         jFrame.setResizable(false);
@@ -43,18 +40,18 @@ public class LifeGame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        playPanel = new PlayPanel(this,numPlayers); //TODO remove "this" if possible
+        playPanel = new PlayPanel(this,numPlayers);
         container.add(playPanel);
         mainMenu.setVisible(false);
         playPanel.setVisible(true);
         playPanel.beginGame();
-    } //end of intialiseGame
+    } //end of initialiseGame
 
     public void dispose(){
         jFrame.dispose();
         System.exit(0);
-        //TODO quit the lifegame function;
     }
+
     @Override
     public void windowActivated(WindowEvent window_event) {}
     @Override

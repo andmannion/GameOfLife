@@ -11,11 +11,13 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends JPanel implements ActionListener {
 
-    private LifeGame lifeGameParent;
-    private MainMenuButtonPanel buttonArea;
-    private int numPlayers = 2;
     private static final int PANWIDTH = 640;
     private static final int PANHEIGHT = 480;
+
+    private LifeGame lifeGameParent;
+    private MainMenuButtonPanel buttonArea;
+    
+    private int numPlayers = 2;
 
     public MainMenu(LifeGame lifeGame){
         super();
