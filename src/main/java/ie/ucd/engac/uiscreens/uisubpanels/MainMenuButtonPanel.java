@@ -18,7 +18,6 @@ public class MainMenuButtonPanel extends JPanel{
         newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         newGameButtonConstraints.gridx = 1;
         newGameButtonConstraints.gridy = 0;
-        //newGameButton = new NewGameButton(this,mainMenu,newGameButtonConstraints);
         newGameButton = new JButton("New Game");
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.addActionListener(mainMenu);
@@ -28,7 +27,6 @@ public class MainMenuButtonPanel extends JPanel{
         quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         quitGameButtonConstraints.gridx = 1;
         quitGameButtonConstraints.gridy = 2;
-        //quitGameButtonConstraints.anchor = GridBagConstraints.SOUTH;
         quitGameButton = new JButton("Quit");
         quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         quitGameButton.addActionListener(mainMenu);
@@ -67,5 +65,4 @@ public class MainMenuButtonPanel extends JPanel{
         jCombo.setVisible(bool);
         playButton.setVisible(bool);
     }
-
 }

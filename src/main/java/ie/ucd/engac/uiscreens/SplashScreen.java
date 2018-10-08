@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class SplashScreen extends JPanel {
+    //TODO Just delete this
 
     private static final int PANWIDTH = 640;
     private static final int PANHEIGHT = 480;

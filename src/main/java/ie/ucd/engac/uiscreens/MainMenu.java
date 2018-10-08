@@ -16,7 +16,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
     private LifeGame lifeGameParent;
     private MainMenuButtonPanel buttonArea;
-    
+
     private int numPlayers = 2;
 
     public MainMenu(LifeGame lifeGame){
