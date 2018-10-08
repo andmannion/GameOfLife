@@ -11,18 +11,20 @@ import java.util.ArrayList;
 
 public class GameHUD {
     //TODO check that all printout requirements are met
-    private ArrayList fields;
-    private PlayPanel playPanel;
     private int playerNumber;
-    private String martialStatus;
     private int numDependants;
-    private CareerCard career;
-    private ArrayList<HouseCard> houses;
-    private int loans;
-    private int money;
     private int actionCards;
+    private int loans;
+    private int bankBalance;
+
+    private CareerCard career;
+    private int martialStatus;
+    private String familyString;
+    private ArrayList<HouseCard> houses;
+
+
+    private PlayPanel playPanel;
     private Rectangle rectangle;
-    private ArrayList<JTextArea> textAreas;
 
     private static final int BOXSTARTX = 0;
     private static final int BOXSTARTY = 504;
@@ -43,17 +45,19 @@ public class GameHUD {
     private void updateFields(){
         Player player = this.playPanel.getCurrentPlayer();
         playerNumber = player.getPlayerNumber();
-        martialStatus = player.getMaritalStatus().toString();
+        martialStatus = player.getMaritalStatus().toInt();
         numDependants = player.getNumDependants();
+        if (martialStatus == 1){
+            familyString = martialStatus + "spouse and " + numDependants + " children";
+        }
+        else familyString = "No spouse and " + numDependants + " children";
+
         career = player.getCareerCard();
         houses = player.getHouseCards();
-        //loans = player.getNumLoans(); // TODO: Number of loans of each player should be obtained through the Bank object
-        money = player.getCurrentMoney();
+        loans = 0; // TODO: Number of loans of each player should be obtained through the Bank object
+        bankBalance = player.getCurrentMoney();
         actionCards = player.getActionCards().size();
-        textAreas = new ArrayList<>();
-        for(int i=0;i<6;i++){
-            textAreas.add(new JTextArea("test"));
-        }
+
     }
     synchronized public void draw(Graphics graphics){ //synch adds safety
         if (true) {
@@ -67,20 +71,15 @@ public class GameHUD {
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
             graphics.setColor(Color.black);
             graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", STR1X, STR1Y);
-            graphics.drawString(formatBankBal(),    STR1X,STR1Y+1*STR1LY);
+            drawBankBal(graphics, STR1X,STR1Y+1*STR1LY);
             drawNumLoans(graphics,STR1X,STR1Y+2*STR1LY);
             drawCareerCard(graphics,STR1X,STR1Y+3*STR1LY);
             drawHouseCards(graphics,STR1X, STR1Y+4*STR1LY);
-            graphics.drawString(formatDependants(), STR1X,STR1Y+5*STR1LY);
+            drawDependants(graphics, STR1X,STR1Y+5*STR1LY);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);
         }
-
-        //display career
-        //display num loans
-        //display $
-        //display maritial
     }
     //display house
     private void drawHouseCards(Graphics graphics,int xpos, int ypos){
@@ -88,7 +87,7 @@ public class GameHUD {
             graphics.drawString("House Cards: No house cards.",xpos,ypos);
         }
         else{
-            String string;
+            String string; //TODO test that this obeys boundaries (it wont)
             int i = 0;
             for(HouseCard house:houses){
                 string = house.convertDrawableString();
@@ -110,11 +109,11 @@ public class GameHUD {
     private void drawNumLoans(Graphics graphics, int xpos, int ypos){
         graphics.drawString("Number of Loans: " + loans, xpos, ypos);
     }
-    private String formatBankBal(){
-        return "TODO";
+    private void drawBankBal(Graphics graphics, int xpos, int ypos){
+        graphics.drawString("Bank Balance: " + bankBalance, xpos, ypos);
     }
-    private String formatDependants(){
-        return "TODO";
+    private void drawDependants(Graphics graphics, int xpos, int ypos){
+        graphics.drawString("Number of Dependants: " + familyString, xpos,ypos);
     }
 }
 

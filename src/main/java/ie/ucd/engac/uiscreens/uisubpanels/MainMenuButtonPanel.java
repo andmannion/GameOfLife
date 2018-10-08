@@ -12,13 +12,12 @@ public class MainMenuButtonPanel extends JPanel{
     private JButton playButton;
     private JComboBox jCombo;
 
-    public MainMenuButtonPanel(MainMenu mainMenu,JFrame jFrame){
+    public MainMenuButtonPanel(MainMenu mainMenu){
         super(new GridBagLayout());
         GridBagConstraints newGameButtonConstraints = new GridBagConstraints();
         newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         newGameButtonConstraints.gridx = 1;
         newGameButtonConstraints.gridy = 0;
-        //newGameButton = new NewGameButton(this,mainMenu,newGameButtonConstraints);
         newGameButton = new JButton("New Game");
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.addActionListener(mainMenu);
@@ -28,7 +27,6 @@ public class MainMenuButtonPanel extends JPanel{
         quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         quitGameButtonConstraints.gridx = 1;
         quitGameButtonConstraints.gridy = 2;
-        //quitGameButtonConstraints.anchor = GridBagConstraints.SOUTH;
         quitGameButton = new JButton("Quit");
         quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         quitGameButton.addActionListener(mainMenu);
@@ -56,15 +54,15 @@ public class MainMenuButtonPanel extends JPanel{
         jCombo.addActionListener(mainMenu);
         jCombo.setVisible(false);
         add(jCombo,jComboConstraints);
-
     }
+
     public void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
         quitGameButton.setVisible(bool);
     }
+
     public void setVisibilityNumPlayers(boolean bool){
         jCombo.setVisible(bool);
         playButton.setVisible(bool);
     }
-
 }

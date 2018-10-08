@@ -9,25 +9,20 @@ import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards.CollegeCareerCard;
 
 public class Player {
-	// Action cards held by this player
-	private ArrayList<ActionCard> actionCards;
 
-	// House cards held by this player
+    private int playerNumber;
+    private int numDependants;//this doesnt include partner
+    private int currentMoney;
+
+	private ArrayList<ActionCard> actionCards;
 	private ArrayList<HouseCard> houseCards;
 
 	private CareerCard careerCard;
 	private CollegeCareerCard collegeCareerCard;
 
-	// Marital status
 	private MaritalStatus maritalStatus;
 
 	private PlayerColour playerColour;
-
-	private int playerNumber;
-
-	private int numDependants;
-
-	private int currentMoney;
 
 	private BoardLocation currentBoardLocation;
 
@@ -41,7 +36,7 @@ public class Player {
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
 		numDependants = 0;
-		currentMoney = 0;
+		currentMoney = 200000;
 	}
 
 	public BoardLocation getCurrentLocation() {
