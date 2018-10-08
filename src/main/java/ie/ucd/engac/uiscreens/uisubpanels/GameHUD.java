@@ -11,18 +11,19 @@ import java.util.ArrayList;
 
 public class GameHUD {
     //TODO check that all printout requirements are met
-    private ArrayList fields;
-    private PlayPanel playPanel;
     private int playerNumber;
-    private String martialStatus;
     private int numDependants;
-    private CareerCard career;
-    private ArrayList<HouseCard> houses;
-    private int loans;
-    private int money;
     private int actionCards;
+    private int loans;
+    private int bankBalance;
+
+    private CareerCard career;
+    private String martialStatus;
+    private ArrayList<HouseCard> houses;
+
+
+    private PlayPanel playPanel;
     private Rectangle rectangle;
-    private ArrayList<JTextArea> textAreas;
 
     private static final int BOXSTARTX = 0;
     private static final int BOXSTARTY = 504;
@@ -48,12 +49,9 @@ public class GameHUD {
         career = player.getCareerCard();
         houses = player.getHouseCards();
         //loans = player.getNumLoans(); // TODO: Number of loans of each player should be obtained through the Bank object
-        money = player.getCurrentMoney();
+        bankBalance = player.getCurrentMoney();
         actionCards = player.getActionCards().size();
-        textAreas = new ArrayList<>();
-        for(int i=0;i<6;i++){
-            textAreas.add(new JTextArea("test"));
-        }
+
     }
     synchronized public void draw(Graphics graphics){ //synch adds safety
         if (true) {
@@ -67,7 +65,7 @@ public class GameHUD {
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
             graphics.setColor(Color.black);
             graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", STR1X, STR1Y);
-            graphics.drawString(formatBankBal(),    STR1X,STR1Y+1*STR1LY);
+            drawBankBal(graphics, STR1X,STR1Y+1*STR1LY);
             drawNumLoans(graphics,STR1X,STR1Y+2*STR1LY);
             drawCareerCard(graphics,STR1X,STR1Y+3*STR1LY);
             drawHouseCards(graphics,STR1X, STR1Y+4*STR1LY);
@@ -110,8 +108,8 @@ public class GameHUD {
     private void drawNumLoans(Graphics graphics, int xpos, int ypos){
         graphics.drawString("Number of Loans: " + loans, xpos, ypos);
     }
-    private String formatBankBal(){
-        return "TODO";
+    private String drawBankBal(Graphics graphics, int xpos, int ypos){
+        graphics.drawString("Bank Balance: " + bankBalance, xpos, ypos);
     }
     private String formatDependants(){
         return "TODO";
