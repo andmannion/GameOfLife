@@ -54,7 +54,7 @@ public class LogicGameBoard {
 		Charset charset = Charset.defaultCharset();
 		String boardLayoutConfigString = new String(encodedBoardLayoutConfigContent, charset);
 		
-		initialiseParser(jsonBoardLayout);
+		initialiseParser(boardLayoutConfigString);
 		
 		initialiseConnectivity(boardLayoutConfigString);	
 		
