@@ -10,12 +10,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameHUD {
+    //TODO check that all printout requirements are met
     private ArrayList fields;
     private PlayPanel playPanel;
     private int playerNumber;
     private String martialStatus;
     private int numDependants;
-    private CareerCard career; //TODO make this a CareerCard
+    private CareerCard career;
     private ArrayList<HouseCard> houses;
     private int loans;
     private int money;
@@ -33,6 +34,8 @@ public class GameHUD {
     private static final int STR1LX = 100;
     private static final int STR1LY = 30;
 
+    private static final int HOUSETEXTSKIP = 15;
+
     public GameHUD(PlayPanel playPanel){
         this.playPanel = playPanel;
         rectangle = new Rectangle(BOXSTARTX,BOXSTARTY,BOXLENX,BOXLENY);
@@ -44,7 +47,7 @@ public class GameHUD {
         numDependants = player.getNumDependants();
         career = player.getCareerCard();
         houses = player.getHouseCards();
-        loans = player.getCurrentLoans();
+        loans = player.getNumLoans();
         money = player.getCurrentMoney();
         actionCards = player.getActionCards().size();
         textAreas = new ArrayList<>();
@@ -63,11 +66,11 @@ public class GameHUD {
             graphics.setColor(Color.darkGray);
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
             graphics.setColor(Color.black);
-            graphics.drawString("Player: " + playerNumber, STR1X, STR1Y);
+            graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", STR1X, STR1Y);
             graphics.drawString(formatBankBal(),    STR1X,STR1Y+1*STR1LY);
-            graphics.drawString(formatNumLoans(),   STR1X,STR1Y+2*STR1LY);
-            graphics.drawString(formatCareerCard(), STR1X,STR1Y+3*STR1LY);
-            graphics.drawString("housecard",  STR1X,STR1Y+4*STR1LY);
+            drawNumLoans(graphics,STR1X,STR1Y+2*STR1LY);
+            drawCareerCard(graphics,STR1X,STR1Y+3*STR1LY);
+            drawHouseCards(graphics,STR1X, STR1Y+4*STR1LY);
             graphics.drawString(formatDependants(), STR1X,STR1Y+5*STR1LY);
         }
         catch (Exception e){
@@ -80,23 +83,32 @@ public class GameHUD {
         //display maritial
     }
     //display house
-    private String drawHouseCard(){
+    private void drawHouseCards(Graphics graphics,int xpos, int ypos){
         if (houses.size() == 0){
-            return "House Cards: No house cards.";
+            graphics.drawString("House Cards: No house cards.",xpos,ypos);
         }
         else{
+            String string;
+            int i = 0;
             for(HouseCard house:houses){
-                house.convertDrawableString();
+                string = house.convertDrawableString();
+                graphics.drawString(string,xpos,ypos+i++*HOUSETEXTSKIP);
             }
-            return "House Cards: ...";
         }
     }
-
-    private String formatCareerCard(){
-        return "TODO";
+    //display career
+    private void drawCareerCard(Graphics graphics,int xpos, int ypos){
+        if (career == null){
+            graphics.drawString("Career Card: No career card.",xpos,ypos);
+        }
+        else{
+            String string;
+            string = career.convertDrawableString();
+            graphics.drawString(string,xpos,ypos);
+        }
     }
-    private String formatNumLoans(){
-        return "TODO";
+    private void drawNumLoans(Graphics graphics, int xpos, int ypos){
+        graphics.drawString("Number of Loans: " + loans, xpos, ypos);
     }
     private String formatBankBal(){
         return "TODO";

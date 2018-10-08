@@ -36,4 +36,12 @@ public class CareerCard extends Card {
 		this.bonusNumber = bonusNumber;
 		this.bonusPaymentAmount = bonusPaymentAmount;
 	}
+	public String convertDrawableString(){
+		String string = "";
+		string.concat("Type: " + careerType.toString());
+		string.concat(" Salary: " + salary);
+		string.concat(" Bonus payout: " + bonusPaymentAmount);
+		string.concat(" Bonus number: " + bonusNumber);
+		return string;
+	}
 }

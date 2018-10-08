@@ -9,30 +9,16 @@ import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 
 
 public class Player {
-    public ArrayList<ActionCard> getActionCards() {
-        return actionCards;
-    }
-
-    // Action cards held by this player
+       // Action cards held by this player
     private ArrayList<ActionCard> actionCards;
-
-    public ArrayList<HouseCard> getHouseCards() {
-        return houseCards;
-    }
-
     // House cards held by this player
     private ArrayList<HouseCard> houseCards;
-
     // Marital status
     private MaritalStatus maritalStatus;
-
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-
     //private PlayerColour playerColour;
     private int playerNumber;
     private CareerCard careerCard;
+    private int numLoans;
 
     public Player(int playerNumber) {
         //this.playerColour.fromInt(playerNumber);
@@ -41,6 +27,7 @@ public class Player {
         actionCards = new ArrayList<>();
         houseCards = new ArrayList<>();
         careerCard = null;
+        numLoans = 0;
         System.out.println("Player.java, player constructor terminating");
     }
 
@@ -63,16 +50,21 @@ public class Player {
     public int getCurrentMoney(){
         return 0;
     }
-	// Current loans
-    public int getCurrentLoans(){
-        return 0;
+    public int getNumLoans(){
+        return numLoans;
     }
-
-
-	
+    public ArrayList<ActionCard> getActionCards() {
+        return actionCards;
+    }
+    public ArrayList<HouseCard> getHouseCards() {
+        return houseCards;
+    }
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
 	public MaritalStatus getMaritalStatus() 
 	{
-		return this.maritalStatus;
+		return maritalStatus;
 	}
 
 

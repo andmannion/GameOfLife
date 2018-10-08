@@ -39,7 +39,7 @@ public class HouseCard extends Card{
 	}
 
     public String convertDrawableString(){
-        String string = new String();
+        String string = "";
         string.concat("Type: " + houseType.toString());
         string.concat(" Cost: " + purchasePrice);
         string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum);

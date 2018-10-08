@@ -1,9 +1,11 @@
 package ie.ucd.engac.uiscreens;
 
 import ie.ucd.engac.LifeGame;
+<<<<<<< HEAD
 import ie.ucd.engac.lifegamelogic.Bank;
 import ie.ucd.engac.lifegamelogic.PlayerLogic.Player;
-import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
+import ie.ucd.engac.lifegamelogic.LogicGameBoard.LogicGameBoard;
+mport ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
 import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
 
 import javax.swing.*;
@@ -16,10 +18,6 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
-    private static final long randomSeed = 7777777777777777L;
-
-    //rng for spinner
-    private Random random;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -57,9 +55,14 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             Player player = new Player(i);
             playerList.add(player);
         }
+<<<<<<< HEAD
         random = new Random((randomSeed + System.nanoTime()));
         
         //LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/GameBoard/GameBoardConfig.json");
+=======
+
+        LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
+>>>>>>> LogicGameBoard, gameHUD revised
                 
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
@@ -78,12 +81,6 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     public Player getCurrentPlayer(){
         return playerList.get(currentPlayer);
-    }
-
-    private int spinTheWheel(){
-        int temp = random.nextInt(9)+1;
-        System.out.println(temp);
-        return temp;
     }
 
     @Override
