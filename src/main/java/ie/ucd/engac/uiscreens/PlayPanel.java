@@ -1,11 +1,10 @@
 package ie.ucd.engac.uiscreens;
 
 import ie.ucd.engac.LifeGame;
-<<<<<<< HEAD
 import ie.ucd.engac.lifegamelogic.Bank;
-import ie.ucd.engac.lifegamelogic.PlayerLogic.Player;
-import ie.ucd.engac.lifegamelogic.LogicGameBoard.LogicGameBoard;
-mport ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.lifegamelogic.logicgameboard.LogicGameBoard;
+import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
 import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
 
 import javax.swing.*;
@@ -55,15 +54,10 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             Player player = new Player(i);
             playerList.add(player);
         }
-<<<<<<< HEAD
-        random = new Random((randomSeed + System.nanoTime()));
-        
-        //LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/GameBoard/GameBoardConfig.json");
-=======
 
+        //LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/logicgameboard/GameBoardConfig.json");
         LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
->>>>>>> LogicGameBoard, gameHUD revised
-                
+
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
     }

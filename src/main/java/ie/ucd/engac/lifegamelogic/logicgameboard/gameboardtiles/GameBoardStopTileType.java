@@ -1,4 +1,4 @@
-package ie.ucd.engac.LifeGameLogic.LogicGameBoard.GameBoardTiles;
+package ie.ucd.engac.lifegamelogic.logicgameboard.gameboardtiles;
 
 public enum GameBoardStopTileType {
 	Graduation,

@@ -1,8 +1,8 @@
 package ie.ucd.engac.uiscreens.uisubpanels;
 
-import ie.ucd.engac.lifegamelogic.CareerCards.CareerCard;
-import ie.ucd.engac.lifegamelogic.Cards.HouseCards.HouseCard;
-import ie.ucd.engac.lifegamelogic.PlayerLogic.Player;
+import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
+import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.uiscreens.PlayPanel;
 
 import javax.swing.*;

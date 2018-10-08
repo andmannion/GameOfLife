@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.GameBoard.GameBoardTiles;
+package ie.ucd.engac.lifegamelogic.logicgameboard.gameboardtiles;
 
 public enum GameBoardTileType {
 	Start,

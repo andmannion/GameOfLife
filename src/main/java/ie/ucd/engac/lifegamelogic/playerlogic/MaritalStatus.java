@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.PlayerLogic;
+package ie.ucd.engac.lifegamelogic.playerlogic;
 
 public enum MaritalStatus {
 	Single,

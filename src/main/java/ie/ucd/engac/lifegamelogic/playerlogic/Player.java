@@ -1,8 +1,7 @@
-package ie.ucd.engac.lifegamelogic.PlayerLogic;
+package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD:src/main/java/ie/ucd/engac/lifegamelogic/PlayerLogic/Player.java
 import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;

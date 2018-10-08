@@ -1,10 +1,10 @@
-package ie.ucd.engac.lifegamelogic.GameBoard;
+package ie.ucd.engac.customdatastructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UDAGraph<V>{
-	// GameBoard is a graph of BoardTiles, canonical form
+	// logicgameboard is a graph of BoardTiles, canonical form
 		public static class Edge<V>{
 			private V vertex;
 			
