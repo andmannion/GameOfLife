@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCard;
-import ie.ucd.engAC.LifeGameLogic.Cards.ActionCards.ActionCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCard;
+import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCardDeck;
 
 
 class AssertCorrectPopTopCardAndInsertCardAtBottom {
