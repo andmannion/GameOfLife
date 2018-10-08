@@ -12,14 +12,13 @@ public class LifeGame extends JFrame implements WindowListener{
     private int PANWIDTH = 1280;
     private int PANHEIGHT = 720;
     private JTextField gameTitle;
-    private SplashScreen splashScreen; 
     private Dimension dimensions;
     private MainMenu mainMenu;
     private Container container;
     private PlayPanel playPanel;
 
 
-    public LifeGame() {
+    LifeGame() {
         super("Life: The Game");
         dimensions = new Dimension(PANWIDTH,PANHEIGHT);
         constructUI();
@@ -32,14 +31,8 @@ public class LifeGame extends JFrame implements WindowListener{
         setIgnoreRepaint(true);
     } // end of Main (constructor)
 
-    public void run(){
-
-    } // end of run
-
     private void constructUI(){
         container = getContentPane();
-        splashScreen = new SplashScreen();
-        container.add(splashScreen);
 
         mainMenu = new MainMenu(this);
 

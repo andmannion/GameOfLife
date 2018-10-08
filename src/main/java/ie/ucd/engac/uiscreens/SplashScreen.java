@@ -24,7 +24,7 @@ public class SplashScreen extends JPanel {
         try {
             splashImage = ImageIO.read(new File("./src/main/java/ie/ucd/engac/uiscreens/kermit.jpg"));
         } catch (IOException exception) {
-            System.out.println(exception);
+            System.out.println("Ex. in SplashScreen" + exception);
         }
         JLabel pictureLabel = new JLabel(new ImageIcon(splashImage));
         add(pictureLabel);

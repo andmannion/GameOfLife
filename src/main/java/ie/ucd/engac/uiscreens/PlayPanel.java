@@ -35,6 +35,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private GameBoard gameBoard;
 
     //objects for rendering process
+    private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
     private boolean running;
@@ -91,9 +92,18 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         while(running) {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
-
+            long timeBefore = System.nanoTime();
             renderPanel();
             paintPanel();
+            long timeAfter = System.nanoTime();
+            int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
+            try{
+                Thread.sleep(sleepTime);
+            }
+            catch (Exception sleepException){
+                //TODO what goes here?
+                System.out.println(sleepException);
+            }
         }
     }
 
