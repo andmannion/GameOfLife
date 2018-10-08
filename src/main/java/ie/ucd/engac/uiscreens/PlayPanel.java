@@ -10,16 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
-    private static long randomSeed = 7777777777777777L;
-
-    //rng for spinner
-    private Random random;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -56,8 +51,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             Player player = new Player(i);
             playerList.add(player);
         }
-        random = new Random((randomSeed + System.nanoTime()));
-        
+
         //LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/GameBoard/GameBoardConfig.json");
                 
         gameBoard = new GameBoard();
@@ -77,12 +71,6 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     public Player getCurrentPlayer(){
         return playerList.get(currentPlayer);
-    }
-
-    private int spinTheWheel(){
-        int temp = random.nextInt(9)+1;
-        System.out.println(temp);
-        return temp;
     }
 
     @Override
