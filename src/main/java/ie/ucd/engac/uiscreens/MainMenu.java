@@ -31,7 +31,7 @@ public class MainMenu extends JPanel implements ActionListener {
         GridBagConstraints buttonAreaConstraints = new GridBagConstraints();
         buttonAreaConstraints.gridx = 1;
         buttonAreaConstraints.gridy = 1;
-        buttonArea = new MainMenuButtonPanel(this,lifeGameParent);
+        buttonArea = new MainMenuButtonPanel(this);
         add(buttonArea,buttonAreaConstraints);
 
     }
@@ -40,25 +40,20 @@ public class MainMenu extends JPanel implements ActionListener {
         buttonArea.setVisibilityNumPlayers(true);
      }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         JComponent source = (JComponent) e.getSource(); //TODO this better
         if (source instanceof JButton){
             JButton buttonSource = (JButton)source;
-            if (buttonSource.getText().equals("New Game")){//TODO make switch
-                newGame();
-            }
-            else if(buttonSource.getText().equals("Quit")){
-                lifeGameParent.dispose();
-            }
-            else if(buttonSource.getText().equals("Play")){
-                lifeGameParent.initialiseGame(numPlayers);
+            switch (buttonSource.getText()){
+                case "New Game": newGame(); break;
+                case "Quit":     lifeGameParent.dispose(); break;
+                case "Play":     lifeGameParent.initialiseGame(numPlayers);
             }
         }
         else if (e.getSource() instanceof JComboBox){
-            JComboBox cb = (JComboBox)e.getSource();
-            numPlayers = cb.getSelectedIndex()+2;
+            JComboBox comboBox = (JComboBox)e.getSource();
+            numPlayers = comboBox.getSelectedIndex()+2;
         }
         else
             System.out.println(e.getSource());

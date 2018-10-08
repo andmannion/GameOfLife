@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 import ie.ucd.engac.uiscreens.*;
-import ie.ucd.engac.uiscreens.SplashScreen;
 
-public class LifeGame extends JFrame implements WindowListener{
+public class LifeGame implements WindowListener{
 
     private int PANWIDTH = 1280;
     private int PANHEIGHT = 720;
+    private JFrame jFrame;
     private JTextField gameTitle;
     private Dimension dimensions;
     private MainMenu mainMenu;
@@ -19,20 +19,20 @@ public class LifeGame extends JFrame implements WindowListener{
 
 
     LifeGame() {
-        super("Life: The Game");
+        jFrame = new JFrame("Life: The Game");
         dimensions = new Dimension(PANWIDTH,PANHEIGHT);
         constructUI();
-        addWindowListener(this);
+        jFrame.addWindowListener(this);
         //setLocationRelativeTo(null);
-        pack();
-        setSize(dimensions);
-        setResizable(false);
-        setVisible(true);
-        setIgnoreRepaint(true);
+        jFrame.pack();
+        jFrame.setSize(dimensions);
+        jFrame.setResizable(false);
+        jFrame.setVisible(true);
+        jFrame.setIgnoreRepaint(true);
     } // end of Main (constructor)
 
     private void constructUI(){
-        container = getContentPane();
+        container = jFrame.getContentPane();
 
         mainMenu = new MainMenu(this);
 
@@ -50,7 +50,11 @@ public class LifeGame extends JFrame implements WindowListener{
         playPanel.beginGame();
     } //end of intialiseGame
 
-
+    public void dispose(){
+        jFrame.dispose();
+        System.exit(0);
+        //TODO quit the lifegame function;
+    }
     @Override
     public void windowActivated(WindowEvent window_event) {}
     @Override

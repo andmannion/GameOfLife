@@ -12,7 +12,7 @@ public class MainMenuButtonPanel extends JPanel{
     private JButton playButton;
     private JComboBox jCombo;
 
-    public MainMenuButtonPanel(MainMenu mainMenu,JFrame jFrame){
+    public MainMenuButtonPanel(MainMenu mainMenu){
         super(new GridBagLayout());
         GridBagConstraints newGameButtonConstraints = new GridBagConstraints();
         newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -56,12 +56,13 @@ public class MainMenuButtonPanel extends JPanel{
         jCombo.addActionListener(mainMenu);
         jCombo.setVisible(false);
         add(jCombo,jComboConstraints);
-
     }
+
     public void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
         quitGameButton.setVisible(bool);
     }
+
     public void setVisibilityNumPlayers(boolean bool){
         jCombo.setVisible(bool);
         playButton.setVisible(bool);
