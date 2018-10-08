@@ -47,6 +47,10 @@ public class Player {
 	public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
 	}
+	
+	public void setCurrentLocation(BoardLocation boardLocation) {
+		currentBoardLocation = boardLocation;
+	}
 
 	// Number of people in the car
 	public int getNumDependants() {
@@ -89,6 +93,14 @@ public class Player {
 
 	public int getPlayerNumber() {
 		return playerNumber;
+	}
+	
+	public void setMaritalStatus(MaritalStatus maritalStatus) {
+		// This method assumes you can only be married to one person at a time...
+		if(this.maritalStatus == MaritalStatus.Single && maritalStatus == MaritalStatus.Married) {
+			this.maritalStatus = maritalStatus;
+			addDependants(1); // Spouse is classed as a dependant
+		}
 	}
 
 	public MaritalStatus getMaritalStatus() {
