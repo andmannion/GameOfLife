@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic;
+package ie.ucd.engac.lifegamelogic.banklogic;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,14 +15,17 @@ public class Bank {
 	private HouseCardDeck houseCardDeck;
 	private CareerCardDeck careerCardDeck;
 	private CollegeCareerCardDeck collegeCareerCardDeck;
+	
+	private BankLoanBook bankLoanBook;
 
 	// Pull in the action card deck config from the config file.
 	// Where should this config be stored, what format should it be in?
 	public Bank() {
-		InitialiseDecks();
+		initialiseCardDecks();
+		initialiseLoanBook();
 	}
 
-	private void InitialiseDecks() {
+	private void initialiseCardDecks() {
 		// Initialise decks of different types
 		// TODO: ActionCardDeck requires config reading functionality implementation
 		
@@ -57,5 +60,9 @@ public class Bank {
 		careerCardDeck.shuffle();
 		collegeCareerCardDeck = new CollegeCareerCardDeck(collegeCareerCardDeckConfigString);
 		collegeCareerCardDeck.shuffle();
+	}
+	
+	private void initialiseLoanBook() {
+		bankLoanBook = new BankLoanBook();
 	}
 }

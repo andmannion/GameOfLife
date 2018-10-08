@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.logicgameboard;
+package ie.ucd.engac.lifegamelogic.gameboardlogic;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -8,8 +8,8 @@ import java.util.HashMap;
 import com.google.gson.*;
 
 import ie.ucd.engac.customdatastructures.UDAGraph;
-import ie.ucd.engac.lifegamelogic.logicgameboard.gameboardtiles.*;
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.*;
 
 public class LogicGameBoard {
 	private UDAGraph<String> boardGraph;

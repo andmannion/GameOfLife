@@ -1,9 +1,9 @@
 package ie.ucd.engac.uiscreens;
 
 import ie.ucd.engac.LifeGame;
-import ie.ucd.engac.lifegamelogic.Bank;
+import ie.ucd.engac.lifegamelogic.banklogic.Bank;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.logicgameboard.LogicGameBoard;
 import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
 import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
 
