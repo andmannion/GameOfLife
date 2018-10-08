@@ -62,4 +62,8 @@ public class Bank {
 	private void initialiseLoanBook() {
 		bankLoanBook = new BankLoanBook();
 	}
+	
+	public int getNumLoans(int playerID) {
+		return bankLoanBook.getOutstandingBankLoans(playerID).size();
+	}
 }
