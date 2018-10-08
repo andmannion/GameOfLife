@@ -1,26 +1,208 @@
 {
-	"vertices": [{
+	"vertices": [
+		{
 			"id": "a",
 			"gameBoardTile": {
-				"gameBoardTileType": "Start"				
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Start"
 			}
 		},
 		{
 			"id": "b",
 			"gameBoardTile": {
-				"gameBoardTileType": "Action"				
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
 			}
-		},
+		},		
 		{
 			"id": "c",
 			"gameBoardTile": {
-				"gameBoardTileType": "Action"				
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Payday"
 			}
-		},
+		},		
 		{
 			"id": "d",
 			"gameBoardTile": {
-				"gameBoardTileType": "Payday"				
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},		
+		{
+			"id": "e",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "f",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "g",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "h",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "i",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "j",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "k",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "l",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "m",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "n",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "o",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "p",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardStopTile",
+				"gameBoardTileType": "Stop",
+				"gameBoardStopTileType": "Graduation"
+			}
+		},
+		{
+			"id": "q",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "r",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "s",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "f",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "t",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "u",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Payday"
+			}
+		},
+		{
+			"id": "v",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Holiday"
+			}
+		},
+		{
+			"id": "w",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "SpinToWin"
+			}
+		},
+		{
+			"id": "x",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "y",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "z",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Payday"
+			}
+		},
+		{
+			"id": "aa",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardContinueTile",
+				"gameBoardTileType": "Action"
+			}
+		},
+		{
+			"id": "ab",
+			"gameBoardTile": {
+				"tileMovementType": "GameBoardStopTile",				
+				"gameBoardTileType": "Stop",
+				"gameBoardStopTileType": "GetMarried"
 			}
 		}
 	],
@@ -30,10 +212,111 @@
 	},
 	{
 		"source": "a",
-		"target": "c"
+		"target": "f"
 	},
 	{
 		"source": "b",
+		"target": "c"
+	},
+	{
+		"source": "c",
 		"target": "d"
-	}]
+	},
+	{
+		"source": "d",
+		"target": "e"
+	},
+	{
+		"source": "f",
+		"target": "g"
+	},
+	{
+		"source": "g",
+		"target": "h"
+	},
+	{
+		"source": "h",
+		"target": "i"
+	},
+	{
+		"source": "i",
+		"target": "j"
+	},
+	{
+		"source": "j",
+		"target": "k"
+	},
+	{
+		"source": "k",
+		"target": "l"
+	},
+	{
+		"source": "l",
+		"target": "m"
+	},
+	{
+		"source": "m",
+		"target": "n"
+	},
+	{
+		"source": "n",
+		"target": "o"
+	},
+	{
+		"source": "o",
+		"target": "p"
+	},
+	{
+		"source": "p",
+		"target": "q"
+	},
+	{
+		"source": "q",
+		"target": "r"
+	},
+	{
+		"source": "r",
+		"target": "s"
+	},
+	{
+		"source": "s",
+		"target": "t"
+	},
+	{
+		"source": "e",
+		"target": "t"
+	},
+	{
+		"source": "t",
+		"target": "u"
+	},
+	{
+		"source": "u",
+		"target": "v"
+	},
+	{
+		"source": "v",
+		"target": "w"
+	},
+	{
+		"source": "w",
+		"target": "x"
+	},
+	{
+		"source": "x",
+		"target": "y"
+	},
+	{
+		"source": "y",
+		"target": "z"
+	},
+	{
+		"source": "z",
+		"target": "aa"
+	},
+	{
+		"source": "aa",
+		"target": "ab"
+	}
+	]
 }

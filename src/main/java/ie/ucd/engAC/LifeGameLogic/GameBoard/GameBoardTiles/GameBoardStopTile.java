@@ -8,7 +8,7 @@ public class GameBoardStopTile extends GameBoardTile {
 	}
 	
 	public GameBoardStopTile(GameBoardStopTileType gameBoardStopTileType) {
-		gameBoardTileType = GameBoardTileType.Stop;
+		gameBoardTileType = GameBoardTileTypes.Stop;
 		this.gameBoardStopTileType = gameBoardStopTileType;
 	}
 }

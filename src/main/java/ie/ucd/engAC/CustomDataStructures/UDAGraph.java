@@ -1,4 +1,4 @@
-package ie.ucd.engAC.LifeGameLogic.GameBoard;
+package ie.ucd.engAC.CustomDataStructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.*;
+
+import ie.ucd.engAC.CustomDataStructures.UDAGraph;
 import ie.ucd.engAC.LifeGameLogic.GameBoard.GameBoardTiles.*;
+import ie.ucd.engAC.gsonExtender.RuntimeTypeAdapterFactory;
 
 public class GameBoard {
 	private UDAGraph<String> boardGraph;
@@ -45,23 +48,19 @@ public class GameBoard {
 			String sourceVertex = ((JsonObject) edgeAsJsonObj).get("source").getAsString();
 			String targetVertex = ((JsonObject) edgeAsJsonObj).get("target").getAsString();
 			
-			//System.out.println("source: " + sourceVertex);
-			//System.out.println("target: " + targetVertex);
-			
 			boardGraph.add(sourceVertex, targetVertex);			
 		}
 		
-		//System.out.println("Number of edges in graph: " + boardGraph.getNumberOfEdges());
-		
-		//for(String targetEdge : boardGraph.outboundNeighbours("a")) {
-		//	System.out.println("a has an outgoing edge to " + targetEdge);
-		//}
-		
 		JsonArray verticesAsJsonArray = obj.getAsJsonArray("vertices");
 		
-		// Identify the id of the vertex. Then, initialise
-		// a GameBoardTile using the second nested JsonObject in each "vertex" JsonObject		
-		Gson gson = new Gson();
+		RuntimeTypeAdapterFactory<GameBoardTile> tileAdapterFactory = RuntimeTypeAdapterFactory.of(GameBoardTile.class, "tileMovementType");																						;
+		
+		tileAdapterFactory.registerSubtype(GameBoardContinueTile.class);
+		tileAdapterFactory.registerSubtype(GameBoardStopTile.class);
+		
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapterFactory(tileAdapterFactory)
+				.create();
 		
 		for(JsonElement vertexAsJsonObj : verticesAsJsonArray) {
 			String id = ((JsonObject) vertexAsJsonObj).get("id").getAsString();
@@ -71,9 +70,5 @@ public class GameBoard {
 			
 			idToGameBoardTileMap.put(id, gameBoardTile);
 		}
-		
-		//for(Map.Entry<String, GameBoardTile> entry : idToGameBoardTileMap.entrySet()) {
-		//	System.out.println("Vertex with ID " + entry.getKey() + " has gameBoardTile with subtype " + entry.getValue().getGameBoardTileType());
-		//}
 	}
 }

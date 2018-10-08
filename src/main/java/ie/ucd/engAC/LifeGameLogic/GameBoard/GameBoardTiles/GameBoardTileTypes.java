@@ -1,6 +1,6 @@
 package ie.ucd.engAC.LifeGameLogic.GameBoard.GameBoardTiles;
 
-public enum GameBoardTileType {
+public enum GameBoardTileTypes {
 	Start,
 	Payday,
 	Action,
