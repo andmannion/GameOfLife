@@ -47,7 +47,7 @@ public class GameHUD {
         numDependants = player.getNumDependants();
         career = player.getCareerCard();
         houses = player.getHouseCards();
-        loans = player.getNumLoans();
+        //loans = player.getNumLoans(); // TODO: Number of loans of each player should be obtained through the Bank object
         money = player.getCurrentMoney();
         actionCards = player.getActionCards().size();
         textAreas = new ArrayList<>();

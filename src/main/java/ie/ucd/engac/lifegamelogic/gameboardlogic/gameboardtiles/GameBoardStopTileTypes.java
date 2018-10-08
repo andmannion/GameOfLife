@@ -1,6 +1,6 @@
 package ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles;
 
-public enum GameBoardStopTileType {
+public enum GameBoardStopTileTypes {
 	Graduation,
 	GetMarried,
 	NightSchool,

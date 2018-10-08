@@ -1,9 +1,9 @@
 package ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles;
 
 public abstract class GameBoardTile {
-	protected GameBoardTileType gameBoardTileType;
+	protected GameBoardTileTypes gameBoardTileType;
 	
-	public GameBoardTileType getGameBoardTileType() {
+	public GameBoardTileTypes getGameBoardTileType() {
 		return gameBoardTileType;
 	}
 }

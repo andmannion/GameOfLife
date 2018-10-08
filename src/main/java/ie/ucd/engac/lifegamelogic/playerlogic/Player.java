@@ -4,69 +4,98 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
-
+import ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards.CollegeCareerCard;
 
 public class Player {
-       // Action cards held by this player
-    private ArrayList<ActionCard> actionCards;
-    // House cards held by this player
-    private ArrayList<HouseCard> houseCards;
-    // Marital status
-    private MaritalStatus maritalStatus;
-    //private PlayerColour playerColour;
-    private int playerNumber;
-    private CareerCard careerCard;
-    private int numLoans;
+	// Action cards held by this player
+	private ArrayList<ActionCard> actionCards;
 
-    public Player(int playerNumber) {
-        //this.playerColour.fromInt(playerNumber);
-        this.maritalStatus = MaritalStatus.Single;
-        this.playerNumber = playerNumber;
-        actionCards = new ArrayList<>();
-        houseCards = new ArrayList<>();
-        careerCard = null;
-        numLoans = 0;
-        System.out.println("Player.java, player constructor terminating");
-    }
+	// House cards held by this player
+	private ArrayList<HouseCard> houseCards;
 
+	private CareerCard careerCard;
+	private CollegeCareerCard collegeCareerCard;
 
-    // Reference to the Bank object? Dependency injection?
+	// Marital status
+	private MaritalStatus maritalStatus;
 
-	// Marker of how far along the board the player is
+	private PlayerColour playerColour;
 
-	// Number of people in the car
-    public int getNumDependants(){
-        return 0;
-    }
+	private int playerNumber;
 
-	// Current career card
-    public CareerCard getCareerCard(){//TODO make this actual
-        return null;
-        }
+	private int numDependants;
 
-	// Current amount of money
-    public int getCurrentMoney(){
-        return 0;
-    }
-    public int getNumLoans(){
-        return numLoans;
-    }
-    public ArrayList<ActionCard> getActionCards() {
-        return actionCards;
-    }
-    public ArrayList<HouseCard> getHouseCards() {
-        return houseCards;
-    }
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-	public MaritalStatus getMaritalStatus() 
-	{
-		return maritalStatus;
+	private int currentMoney;
+
+	private BoardLocation currentBoardLocation;
+
+	public Player(int playerNumber) {
+		actionCards = new ArrayList<>();
+		houseCards = new ArrayList<>();
+		careerCard = null;
+		collegeCareerCard = null;
+
+		maritalStatus = MaritalStatus.Single;
+		this.playerColour = PlayerColour.fromInt(playerNumber);
+		this.playerNumber = playerNumber;
+		numDependants = 0;
+		currentMoney = 0;
 	}
 
+	public BoardLocation getCurrentLocation() {
+		return currentBoardLocation;
+	}
 
+	// Number of people in the car
+	public int getNumDependants() {
+		return numDependants;
+	}
+
+	public void addDependants(int numNewDependants) {
+		numDependants += numNewDependants;
+	}
+
+	// Current career card
+	public CareerCard getCareerCard() {
+		return careerCard;
+	}
+
+	public void setCareerCard(CareerCard careerCard) {
+		this.careerCard = careerCard;
+	}
+
+	public CollegeCareerCard getCollegeCareerCard() {
+		return collegeCareerCard;
+	}
+
+	public void setCollegeCareerCard(CollegeCareerCard collegeCareerCard) {
+		this.collegeCareerCard = collegeCareerCard;
+	}
+
+	// Current amount of money
+	public int getCurrentMoney() {
+		return currentMoney;
+	}
+
+	public ArrayList<ActionCard> getActionCards() {
+		return actionCards;
+	}
+
+	public ArrayList<HouseCard> getHouseCards() {
+		return houseCards;
+	}
+
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	public MaritalStatus getMaritalStatus() {
+		return maritalStatus;
+	}
+	
+	public PlayerColour getPlayerColour() {
+		return playerColour;
+	}
 }
-
-

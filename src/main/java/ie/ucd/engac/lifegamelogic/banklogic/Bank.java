@@ -18,15 +18,12 @@ public class Bank {
 	
 	private BankLoanBook bankLoanBook;
 
-	// Pull in the action card deck config from the config file.
-	// Where should this config be stored, what format should it be in?
 	public Bank() {
 		initialiseCardDecks();
 		initialiseLoanBook();
 	}
 
 	private void initialiseCardDecks() {
-		// Initialise decks of different types
 		// TODO: ActionCardDeck requires config reading functionality implementation
 		
 		actionCardDeck = new ActionCardDeck();
@@ -45,7 +42,7 @@ public class Bank {
 			encodedCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(careerCardDeckConfigFileLocation));
 			encodedCollegeCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(collegeCareerCardDeckConfigFileLocation));
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			System.out.println("Exception in Bank.initialiseCardDecks() : \n" + e.toString());
 		}
 
 		Charset charset = Charset.defaultCharset();

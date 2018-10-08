@@ -1,14 +1,14 @@
 package ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles;
 
 public class GameBoardStopTile extends GameBoardTile {
-	private GameBoardStopTileType gameBoardStopTileType; 
+	private GameBoardStopTileTypes gameBoardStopTileType; 
 	
-	public GameBoardStopTileType getGameBoardStopTileType() {
+	public GameBoardStopTileTypes getGameBoardStopTileType() {
 		return gameBoardStopTileType;
 	}
 	
-	public GameBoardStopTile(GameBoardStopTileType gameBoardStopTileType) {
-		gameBoardTileType = GameBoardTileType.Stop;
+	public GameBoardStopTile(GameBoardStopTileTypes gameBoardStopTileType) {
+		gameBoardTileType = GameBoardTileTypes.Stop;
 		this.gameBoardStopTileType = gameBoardStopTileType;
 	}
 }
