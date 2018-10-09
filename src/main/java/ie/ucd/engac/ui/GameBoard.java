@@ -1,4 +1,4 @@
-package ie.ucd.engac.uiscreens.uisubpanels;
+package ie.ucd.engac.ui;
 
 import javax.swing.*;
 

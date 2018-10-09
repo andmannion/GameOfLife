@@ -1,24 +1,23 @@
-package ie.ucd.engac.uiscreens;
+package ie.ucd.engac.ui;
 
 import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
-import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class PlayPanel extends JPanel implements Runnable,ActionListener {
+public class GameEngine implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
+    //TODO move these two into "Logic"
     private ArrayList<Player> playerList;
     private Bank bank;
 
@@ -31,6 +30,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private GameBoard gameBoard;
 
     //objects for rendering process
+    private JPanel renderTarget;
     private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
@@ -38,13 +38,8 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private Thread renderingThread;
 
 
-    public PlayPanel(LifeGame lifeGame, int numPlayers){
-        super();
-        setVisible(false);
-        setBackground(Color.white);
-        setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
-        JTextField textField = new JTextField("PlayPanel");
-        add(textField);
+    public GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
+        this.renderTarget = jPanel;
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
         playerList = new ArrayList<>();
@@ -82,10 +77,11 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
             long timeBefore = System.nanoTime();
+            //logic.updateGame(queue);
             renderPanel();
             paintPanel();
             long timeAfter = System.nanoTime();
-            //TODO needs protection against negative times
+            //TODO needs protection against negative times - skip next render cycle?
             int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
             try{
                 Thread.sleep(sleepTime);
@@ -99,7 +95,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
 
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
-            backBuffer = createImage(PANWIDTH, PANHEIGHT);
+            backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
             if (backBuffer == null) { //if create image somehow failed
                 System.out.println("image null");
                 return;
@@ -116,7 +112,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private void paintPanel(){
         Graphics tempGraphics;
         try {
-            tempGraphics = this.getGraphics(); //initialise
+            tempGraphics = renderTarget.getGraphics(); //initialise
             //if initialised & backBuffer exits draw new image
             if ((tempGraphics != null) && (backBuffer != null)) {
                 //TODO do we require an observer?
@@ -124,7 +120,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             }
         }
         catch (Exception e){
-            System.out.println("loadPanel() in PlayPanel failed");
+            System.out.println("loadPanel() in GameEngine failed");
         }
     }
 

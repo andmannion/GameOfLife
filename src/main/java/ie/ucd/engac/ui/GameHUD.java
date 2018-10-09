@@ -1,11 +1,9 @@
-package ie.ucd.engac.uiscreens.uisubpanels;
+package ie.ucd.engac.ui;
 
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.uiscreens.PlayPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ public class GameHUD {
     private ArrayList<HouseCard> houses;
 
 
-    private PlayPanel playPanel;
+    private GameEngine gameEngine;
     private Rectangle rectangle;
 
     private static final int BOXSTARTX = 0;
@@ -38,12 +36,12 @@ public class GameHUD {
 
     private static final int HOUSETEXTSKIP = 15;
 
-    public GameHUD(PlayPanel playPanel){
-        this.playPanel = playPanel;
+    public GameHUD(GameEngine gameEngine){
+        this.gameEngine = gameEngine;
         rectangle = new Rectangle(BOXSTARTX,BOXSTARTY,BOXLENX,BOXLENY);
     }
     private void updateFields(){
-        Player player = this.playPanel.getCurrentPlayer();
+        Player player = gameEngine.getCurrentPlayer();
         playerNumber = player.getPlayerNumber();
         martialStatus = player.getMaritalStatus().toInt();
         numDependants = player.getNumDependants();
