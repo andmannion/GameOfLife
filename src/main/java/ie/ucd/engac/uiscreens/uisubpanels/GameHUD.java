@@ -48,9 +48,9 @@ public class GameHUD {
         martialStatus = player.getMaritalStatus().toInt();
         numDependants = player.getNumDependants();
         if (martialStatus == 1){
-            familyString = martialStatus + "spouse and " + numDependants + " children";
+            familyString = martialStatus + "spouse and " + (numDependants -1 )+ " children";
         }
-        else familyString = "No spouse and " + numDependants + " children";
+        else familyString = "No dependants";
 
         career = player.getCareerCard();
         houses = player.getHouseCards();
