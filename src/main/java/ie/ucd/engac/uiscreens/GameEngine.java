@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameEngine extends JPanel implements Runnable,ActionListener {
+public class GameEngine implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
@@ -31,6 +31,7 @@ public class GameEngine extends JPanel implements Runnable,ActionListener {
     private GameBoard gameBoard;
 
     //objects for rendering process
+    private JPanel playPanel;
     private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
@@ -39,12 +40,12 @@ public class GameEngine extends JPanel implements Runnable,ActionListener {
 
 
     public GameEngine(LifeGame lifeGame, int numPlayers){
-        super();
-        setVisible(false);
-        setBackground(Color.white);
-        setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
-        JTextField textField = new JTextField("GameEngine");
-        add(textField);
+        playPanel = new JPanel();
+        playPanel.setVisible(false);
+        playPanel.setBackground(Color.white);
+        playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
+        JTextField textField = new JTextField("Error: Rendering error");
+        playPanel.add(textField);
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
         playerList = new ArrayList<>();
@@ -58,6 +59,10 @@ public class GameEngine extends JPanel implements Runnable,ActionListener {
                
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
+    }
+
+    public JPanel getJPanel(){
+        return playPanel;
     }
 
     public void closeGame(){

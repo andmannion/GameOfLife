@@ -41,7 +41,7 @@ public class LifeGame implements WindowListener{
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
         gameEngine = new GameEngine(this,numPlayers);
-        container.add(gameEngine);
+        container.add(gameEngine.getJPanel());
         mainMenu.setVisible(false);
         gameEngine.setVisible(true);
         gameEngine.beginGame();
