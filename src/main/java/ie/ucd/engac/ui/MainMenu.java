@@ -14,7 +14,11 @@ public class MainMenu extends JPanel implements ActionListener {
     private static final int PANHEIGHT = 480;
 
     private LifeGame lifeGameParent;
-    private MainMenuButtonPanel buttonArea;
+
+    private JButton newGameButton;
+    private JButton quitGameButton;
+    private JButton playButton;
+    private JComboBox jCombo;
 
     private int numPlayers = 2;
 
@@ -32,13 +36,65 @@ public class MainMenu extends JPanel implements ActionListener {
         GridBagConstraints buttonAreaConstraints = new GridBagConstraints();
         buttonAreaConstraints.gridx = 1;
         buttonAreaConstraints.gridy = 1;
-        buttonArea = new MainMenuButtonPanel(this);
-        add(buttonArea,buttonAreaConstraints);
+        constructButtonArea();
     }
+
+    private void constructButtonArea(){
+        GridBagConstraints newGameButtonConstraints = new GridBagConstraints();
+        newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
+        newGameButtonConstraints.gridx = 1;
+        newGameButtonConstraints.gridy = 0;
+        newGameButton = new JButton("New Game");
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        newGameButton.addActionListener(this);
+        add(newGameButton,newGameButtonConstraints);
+
+        GridBagConstraints quitGameButtonConstraints = new GridBagConstraints();
+        quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
+        quitGameButtonConstraints.gridx = 1;
+        quitGameButtonConstraints.gridy = 2;
+        quitGameButton = new JButton("Quit");
+        quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quitGameButton.addActionListener(this);
+        add(quitGameButton,quitGameButtonConstraints);
+
+
+        GridBagConstraints playButtonConstraints = new GridBagConstraints();
+        playButtonConstraints.gridx = 1;
+        playButtonConstraints.gridy = 0;
+        playButton = new JButton("Play");
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playButton.setVisible(false);
+        playButton.addActionListener(this);
+        add(playButton,playButtonConstraints);
+
+        GridBagConstraints jComboConstraints = new GridBagConstraints();
+        jComboConstraints.fill = GridBagConstraints.HORIZONTAL;
+        jComboConstraints.gridx = 1;
+        jComboConstraints.gridy = 2;
+        String[] numPlayersList = { "2", "3", "4"};
+        jCombo = new JComboBox(numPlayersList);
+        jCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jCombo.addActionListener(this);
+        jCombo.setSelectedIndex(0);
+        jCombo.setVisible(false);
+        add(jCombo,jComboConstraints);
+    }
+
     private void newGame(){
-        buttonArea.setVisibilityMainScreen(false);
-        buttonArea.setVisibilityNumPlayers(true);
+        setVisibilityMainScreen(false);
+        setVisibilityNumPlayers(true);
      }
+    //todo do these need to exist?
+    private void setVisibilityMainScreen(boolean bool){
+        newGameButton.setVisible(bool);
+        quitGameButton.setVisible(bool);
+    }
+
+    private void setVisibilityNumPlayers(boolean bool){
+        jCombo.setVisible(bool);
+        playButton.setVisible(bool);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
