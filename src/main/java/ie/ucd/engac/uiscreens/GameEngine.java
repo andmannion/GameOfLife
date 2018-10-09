@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class PlayPanel extends JPanel implements Runnable,ActionListener {
+public class GameEngine extends JPanel implements Runnable,ActionListener {
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
@@ -38,12 +38,12 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private Thread renderingThread;
 
 
-    public PlayPanel(LifeGame lifeGame, int numPlayers){
+    public GameEngine(LifeGame lifeGame, int numPlayers){
         super();
         setVisible(false);
         setBackground(Color.white);
         setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
-        JTextField textField = new JTextField("PlayPanel");
+        JTextField textField = new JTextField("GameEngine");
         add(textField);
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
@@ -82,10 +82,11 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
             long timeBefore = System.nanoTime();
+            //logic.updateGame(queue);
             renderPanel();
             paintPanel();
             long timeAfter = System.nanoTime();
-            //TODO needs protection against negative times
+            //TODO needs protection against negative times - skip next render cycle?
             int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
             try{
                 Thread.sleep(sleepTime);
@@ -124,7 +125,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             }
         }
         catch (Exception e){
-            System.out.println("loadPanel() in PlayPanel failed");
+            System.out.println("loadPanel() in GameEngine failed");
         }
     }
 

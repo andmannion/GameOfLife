@@ -13,7 +13,7 @@ public class LifeGame implements WindowListener{
     private JFrame jFrame;
     private MainMenu mainMenu;
     private Container container;
-    private PlayPanel playPanel;
+    private GameEngine gameEngine;
 
 
     LifeGame() {
@@ -40,11 +40,11 @@ public class LifeGame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        playPanel = new PlayPanel(this,numPlayers);
-        container.add(playPanel);
+        gameEngine = new GameEngine(this,numPlayers);
+        container.add(gameEngine);
         mainMenu.setVisible(false);
-        playPanel.setVisible(true);
-        playPanel.beginGame();
+        gameEngine.setVisible(true);
+        gameEngine.beginGame();
     } //end of initialiseGame
 
     public void dispose(){
@@ -63,7 +63,7 @@ public class LifeGame implements WindowListener{
     @Override
     public void windowClosing(WindowEvent window_event) {
         try {
-            playPanel.closeGame();
+            gameEngine.closeGame();
         }
         catch (Exception e){
             //Is it even worth returning this?
