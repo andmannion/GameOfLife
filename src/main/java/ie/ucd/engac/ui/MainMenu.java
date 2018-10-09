@@ -1,7 +1,6 @@
-package ie.ucd.engac.uiscreens;
+package ie.ucd.engac.ui;
 
 import ie.ucd.engac.LifeGame;
-import ie.ucd.engac.uiscreens.uisubpanels.MainMenuButtonPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +34,6 @@ public class MainMenu extends JPanel implements ActionListener {
         buttonAreaConstraints.gridy = 1;
         buttonArea = new MainMenuButtonPanel(this);
         add(buttonArea,buttonAreaConstraints);
-
     }
     private void newGame(){
         buttonArea.setVisibilityMainScreen(false);

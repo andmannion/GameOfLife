@@ -1,9 +1,8 @@
-package ie.ucd.engac.uiscreens.uisubpanels;
+package ie.ucd.engac.ui;
 
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.uiscreens.GameEngine;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class GameHUD {
         rectangle = new Rectangle(BOXSTARTX,BOXSTARTY,BOXLENX,BOXLENY);
     }
     private void updateFields(){
-        Player player = this.gameEngine.getCurrentPlayer();
+        Player player = gameEngine.getCurrentPlayer();
         playerNumber = player.getPlayerNumber();
         martialStatus = player.getMaritalStatus().toInt();
         numDependants = player.getNumDependants();

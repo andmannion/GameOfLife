@@ -1,6 +1,4 @@
-package ie.ucd.engac.uiscreens.uisubpanels;
-
-import ie.ucd.engac.uiscreens.MainMenu;
+package ie.ucd.engac.ui;
 
 import javax.swing.*;
 import java.awt.*;

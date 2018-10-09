@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import ie.ucd.engac.uiscreens.*;
+import ie.ucd.engac.ui.*;
 
 public class LifeGame implements WindowListener{
 
     private static final int PANWIDTH = 1280;
     private static final int PANHEIGHT = 720;
     private JFrame jFrame;
+    private JPanel playPanel;
     private MainMenu mainMenu;
     private Container container;
     private GameEngine gameEngine;
@@ -40,10 +41,17 @@ public class LifeGame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        gameEngine = new GameEngine(this,numPlayers);
-        container.add(gameEngine.getJPanel());
+        playPanel = new JPanel();
+        playPanel.setVisible(false);
+        playPanel.setBackground(Color.white);
+        playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
+        JTextField textField = new JTextField("Error: Rendering error");
+        playPanel.add(textField);
+        container.add(playPanel);
+
+        gameEngine = new GameEngine(this,playPanel,numPlayers);
         mainMenu.setVisible(false);
-        gameEngine.setVisible(true);
+        playPanel.setVisible(true);
         gameEngine.beginGame();
     } //end of initialiseGame
 

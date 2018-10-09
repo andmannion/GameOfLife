@@ -1,11 +1,9 @@
-package ie.ucd.engac.uiscreens;
+package ie.ucd.engac.ui;
 
 import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
-import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +17,7 @@ public class GameEngine implements Runnable,ActionListener {
 
     //objects relating to life game
     private LifeGame lifeGameParent;
+    //TODO move these two into "Logic"
     private ArrayList<Player> playerList;
     private Bank bank;
 
@@ -31,7 +30,7 @@ public class GameEngine implements Runnable,ActionListener {
     private GameBoard gameBoard;
 
     //objects for rendering process
-    private JPanel playPanel;
+    private JPanel renderTarget;
     private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
@@ -39,13 +38,8 @@ public class GameEngine implements Runnable,ActionListener {
     private Thread renderingThread;
 
 
-    public GameEngine(LifeGame lifeGame, int numPlayers){
-        playPanel = new JPanel();
-        playPanel.setVisible(false);
-        playPanel.setBackground(Color.white);
-        playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
-        JTextField textField = new JTextField("Error: Rendering error");
-        playPanel.add(textField);
+    public GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
+        this.renderTarget = jPanel;
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
         playerList = new ArrayList<>();
@@ -59,10 +53,6 @@ public class GameEngine implements Runnable,ActionListener {
                
         gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
-    }
-
-    public JPanel getJPanel(){
-        return playPanel;
     }
 
     public void closeGame(){
@@ -105,7 +95,7 @@ public class GameEngine implements Runnable,ActionListener {
 
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
-            backBuffer = createImage(PANWIDTH, PANHEIGHT);
+            backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
             if (backBuffer == null) { //if create image somehow failed
                 System.out.println("image null");
                 return;
@@ -122,7 +112,7 @@ public class GameEngine implements Runnable,ActionListener {
     private void paintPanel(){
         Graphics tempGraphics;
         try {
-            tempGraphics = this.getGraphics(); //initialise
+            tempGraphics = renderTarget.getGraphics(); //initialise
             //if initialised & backBuffer exits draw new image
             if ((tempGraphics != null) && (backBuffer != null)) {
                 //TODO do we require an observer?
