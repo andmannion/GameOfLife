@@ -43,9 +43,13 @@ public class Player {
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
 		numDependants = 0;
+<<<<<<< Updated upstream
+		currentMoney = 0;
+=======
 		currentMoney = 200000;
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
+>>>>>>> Stashed changes
 	}
 
 	public BoardLocation getCurrentLocation() {

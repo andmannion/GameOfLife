@@ -3,6 +3,7 @@ package ie.ucd.engac.lifegamelogic.gameboardlogic;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.*;
@@ -30,6 +31,27 @@ public class LogicGameBoard {
 		return spinningWheel.spinTheWheel();
 	}
 	
+	public ArrayList<BoardLocation> getOutboundNeighbours(BoardLocation boardLocation) {
+		ArrayList<BoardLocation> outboundLocations = new ArrayList<BoardLocation>();
+		
+		for(String locationID : boardGraph.outboundNeighbours(boardLocation.getLocation())) {
+			outboundLocations.add(new BoardLocation(locationID));
+		}
+		
+		return outboundLocations;
+	}
+
+	// Need to be able to get a tile from an id
+	public GameBoardTile getGameBoardTileFromID(BoardLocation boardLocation) {
+		String id = boardLocation.getLocation();
+		
+		if(idToGameBoardTileMap.containsKey(id)) {
+			return idToGameBoardTileMap.get(id);
+		}
+		
+		return null;
+	}
+
 	private void initialiseParser(String jsonBoardLayout) {
 		JsonParser parser = new JsonParser();
 		overallObject = null;
