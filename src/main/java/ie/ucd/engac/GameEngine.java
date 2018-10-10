@@ -1,9 +1,12 @@
-package ie.ucd.engac.ui;
+package ie.ucd.engac;
 
 import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.ui.GameBoard;
+import ie.ucd.engac.ui.GameHUD;
+import ie.ucd.engac.ui.GameUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,15 +29,16 @@ public class GameEngine implements Runnable,ActionListener {
     private int currentPlayer;
 
     //objects that need to be drawn
-    private GameHUD gameHUD;
+    private GameHUD gameHUD; //TODO completely move to GameUI
     private GameBoard gameBoard;
+    private GameUI gameUI;
 
     //objects for rendering process
     private JPanel renderTarget;
     private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
-    private boolean running;
+    private volatile boolean running;
     private Thread renderingThread;
 
 
@@ -49,9 +53,9 @@ public class GameEngine implements Runnable,ActionListener {
             playerList.add(player);
         }
 
-       LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
-               
-        gameBoard = new GameBoard();
+        LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
+        gameUI = new GameUI(graphics,this);
+        gameBoard = new GameBoard(graphics);
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
     }
 
@@ -77,7 +81,8 @@ public class GameEngine implements Runnable,ActionListener {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
             long timeBefore = System.nanoTime();
-            //logic.updateGame(queue);
+            //
+            //updateStuff();
             renderPanel();
             paintPanel();
             long timeAfter = System.nanoTime();
@@ -88,7 +93,7 @@ public class GameEngine implements Runnable,ActionListener {
             }
             catch (Exception sleepException){
                 //TODO what goes here?
-                System.out.println("Sleep ex." + sleepException);
+                System.out.println("GameEngine sleep ex." + sleepException);
             }
         }
     }
@@ -97,7 +102,7 @@ public class GameEngine implements Runnable,ActionListener {
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
             backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
             if (backBuffer == null) { //if create image somehow failed
-                System.out.println("image null");
+                System.out.println("image null");//TODO delete
                 return;
             }
             else

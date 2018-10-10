@@ -1,5 +1,6 @@
 package ie.ucd.engac.ui;
 
+import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -7,7 +8,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameHUD {
+public class GameHUD implements Drawable {
     //TODO check that all printout requirements are met
     private int playerNumber;
     private int numDependants;
@@ -36,7 +37,7 @@ public class GameHUD {
 
     private static final int HOUSETEXTSKIP = 15;
 
-    public GameHUD(GameEngine gameEngine){
+    public GameHUD(GameEngine gameEngine){// TODO remove this gameengine referece
         this.gameEngine = gameEngine;
         rectangle = new Rectangle(BOXSTARTX,BOXSTARTY,BOXLENX,BOXLENY);
     }
