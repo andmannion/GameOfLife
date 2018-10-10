@@ -4,7 +4,6 @@ import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-
 import java.awt.*;
 import java.util.ArrayList;
 

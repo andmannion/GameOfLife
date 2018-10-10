@@ -54,8 +54,8 @@ public class GameEngine implements Runnable,ActionListener {
         }
 
         LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
-        gameUI = new GameUI(graphics,this);
-        gameBoard = new GameBoard(graphics);
+        gameUI = new GameUI(this);
+        gameBoard = new GameBoard();
         gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
     }
 
@@ -111,7 +111,7 @@ public class GameEngine implements Runnable,ActionListener {
         graphics.setColor(Color.lightGray);
         graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
 
-        gameHUD.draw(graphics);
+        gameUI.draw(graphics);
     }
 
     private void paintPanel(){
