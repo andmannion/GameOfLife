@@ -11,11 +11,23 @@ public class GameUI implements ActionListener,Drawable {
     private GameEngine gameEngine;
     private GameBoard gameBoard;
     private GameHUD gameHUD;
-    private Graphics drawTarget;
+    private GameInput gameInput;
+    private int panelHeight;
+    private int panelWidth;
 
     public GameUI(GameEngine gameEngine){
-        gameBoard = new GameBoard();
-        gameHUD = new GameHUD(gameEngine);
+        panelHeight = gameEngine.getPanelHeight();
+        panelWidth = gameEngine.getPanelWidth();
+        gameBoard = new GameBoard(this);
+        gameHUD = new GameHUD(gameEngine,this);
+    }
+
+    int getPanelHeight() {
+        return panelHeight;
+    }
+
+    int getPanelWidth() {
+        return panelWidth;
     }
 
 

@@ -1,11 +1,8 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.ui.GameBoard;
-import ie.ucd.engac.ui.GameHUD;
 import ie.ucd.engac.ui.GameUI;
 
 import javax.swing.*;
@@ -29,8 +26,6 @@ public class GameEngine implements Runnable,ActionListener {
     private int currentPlayer;
 
     //objects that need to be drawn
-    private GameHUD gameHUD; //TODO completely move to GameUI
-    private GameBoard gameBoard;
     private GameUI gameUI;
 
     //objects for rendering process
@@ -55,8 +50,6 @@ public class GameEngine implements Runnable,ActionListener {
 
         LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
         gameUI = new GameUI(this);
-        gameBoard = new GameBoard();
-        gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
     }
 
     public void closeGame(){
@@ -73,6 +66,15 @@ public class GameEngine implements Runnable,ActionListener {
     public Player getCurrentPlayer(){
         return playerList.get(currentPlayer);
     }
+
+    public int getPanelHeight() {
+        return PANHEIGHT;
+    }
+
+    public int getPanelWidth() {
+        return PANWIDTH;
+    }
+
 
     @Override
     public void run() {
@@ -132,6 +134,6 @@ public class GameEngine implements Runnable,ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO
+        //TODO move this down to UI level
     }
 }

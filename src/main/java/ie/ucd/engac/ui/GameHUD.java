@@ -24,21 +24,38 @@ public class GameHUD implements Drawable {
     private GameEngine gameEngine;
     private Rectangle rectangle;
 
-    private static final int BOXSTARTX = 0;
-    private static final int BOXSTARTY = 504;
-    private static final int BOXLENX = 1280;
-    private static final int BOXLENY = 216;
+    private int panelHeight;
+    private int panelWidth;
 
-    private static final int STR1X = 0;
-    private static final int STR1Y = 520;
-    private static final int STR1LX = 100;
-    private static final int STR1LY = 30;
+    private int boxStartX;
+    private int boxStartY;// = 504;
+    private int boxLengthX;// = 1280;
+    private int boxLengthY;// = 216;
 
-    private static final int HOUSETEXTSKIP = 15;
+    private int firstStringX;// = 0;
+    private int firstStringY;// = 520;
+    private int stringLengthX;// = 100;
+    private int stringLengthY;// = 30;
 
-    public GameHUD(GameEngine gameEngine){// TODO remove this gameengine referece
+    private int HOUSETEXTSKIP = 15;
+
+    public GameHUD(GameEngine gameEngine,GameUI gameUI){//TODO remove gameEngine reference
         this.gameEngine = gameEngine;
-        rectangle = new Rectangle(BOXSTARTX,BOXSTARTY,BOXLENX,BOXLENY);
+
+        panelHeight = gameUI.getPanelHeight();
+        panelWidth = gameUI.getPanelWidth();
+
+        boxStartY = Math.round(((0.7f)*panelHeight));
+        boxLengthY = panelHeight-boxStartY;
+        boxStartX = 0;
+        boxLengthX = panelWidth;
+
+        firstStringX = 0;
+        firstStringY = boxStartY+Math.round(0.08f*boxLengthY);
+        stringLengthX = Math.round(0.1f*boxLengthX);
+        stringLengthY = Math.round(0.125f*boxLengthY);
+
+        rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
     }
     private void updateFields(){
         Player player = gameEngine.getCurrentPlayer();
@@ -68,12 +85,12 @@ public class GameHUD implements Drawable {
             graphics.setColor(Color.darkGray);
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
             graphics.setColor(Color.black);
-            graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", STR1X, STR1Y);
-            drawBankBal(graphics, STR1X,STR1Y+1*STR1LY);
-            drawNumLoans(graphics,STR1X,STR1Y+2*STR1LY);
-            drawCareerCard(graphics,STR1X,STR1Y+3*STR1LY);
-            drawHouseCards(graphics,STR1X, STR1Y+4*STR1LY);
-            drawDependants(graphics, STR1X,STR1Y+5*STR1LY);
+            graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", firstStringX, firstStringY);
+            drawBankBal(graphics, firstStringX, firstStringY +1* stringLengthY);
+            drawNumLoans(graphics, firstStringX, firstStringY +2* stringLengthY);
+            drawCareerCard(graphics, firstStringX, firstStringY +3* stringLengthY);
+            drawHouseCards(graphics, firstStringX, firstStringY +4* stringLengthY);
+            drawDependants(graphics, firstStringX, firstStringY +5* stringLengthY);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);
