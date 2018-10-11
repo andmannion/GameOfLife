@@ -2,6 +2,7 @@ package ie.ucd.engac.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GameInput implements Drawable {
     //TODO scalable buttons
@@ -27,19 +28,22 @@ public class GameInput implements Drawable {
     private JButton chooseLeftCardButton;
     private JButton chooseRightCardButton;
 
+    private ActionListener actionListener;
+
     private JPanel renderTarget;
 
     GameInput(GameUI gameUI,JPanel renderTarget){
         this.renderTarget = renderTarget;
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
+        actionListener = gameUI.getGameActionListener();
 
         spinButton = new JButton("Spin The Wheel");
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
         int spinY = panelHeight-SPIN_HEIGHT-2*SPIN_BORDER;
         spinButton.setBounds(spinX,spinY,SPIN_WIDTH,SPIN_HEIGHT);
         spinButton.setVisible(true);
-        spinButton.addActionListener(gameUI);
+        spinButton.addActionListener(actionListener);
         renderTarget.add(spinButton);
 
         quitButton = new JButton("Quit Game");
@@ -47,7 +51,7 @@ public class GameInput implements Drawable {
         int quitY = QUIT_BORDER;
         quitButton.setBounds(quitX,quitY,QUIT_WIDTH,QUIT_HEIGHT);
         quitButton.setVisible(true);
-        quitButton.addActionListener(gameUI);
+        quitButton.addActionListener(actionListener);
         renderTarget.add(quitButton);
 
         chooseLeftCardButton = new JButton("Choose Left Card");
@@ -55,7 +59,7 @@ public class GameInput implements Drawable {
         int cLeftY = CARD_CHOICE_Y_POS;
         chooseLeftCardButton.setBounds(cLeftX,cLeftY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
         chooseLeftCardButton.setVisible(true);
-        chooseLeftCardButton.addActionListener(gameUI);
+        chooseLeftCardButton.addActionListener(actionListener);
         renderTarget.add(chooseLeftCardButton);
 
         chooseRightCardButton = new JButton("Choose Right Card");
@@ -63,7 +67,7 @@ public class GameInput implements Drawable {
         int cRighY = CARD_CHOICE_Y_POS;
         chooseRightCardButton.setBounds(cRightX,cRighY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
         chooseRightCardButton.setVisible(true);
-        chooseRightCardButton.addActionListener(gameUI);
+        chooseRightCardButton.addActionListener(actionListener);
         renderTarget.add(chooseRightCardButton);
 
     }

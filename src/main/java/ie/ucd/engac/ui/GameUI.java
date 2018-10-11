@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameUI implements ActionListener,Drawable {
+public class GameUI implements Drawable {
 
     private GameEngine gameEngine;
     private GameBoard gameBoard;
@@ -16,11 +16,13 @@ public class GameUI implements ActionListener,Drawable {
     private GameInput gameInput;
     private int panelHeight;
     private int panelWidth;
+
     private GameActionListener gameActionListener;
 
     public GameUI(GameEngine gameEngine, JPanel renderTarget){
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
+        gameActionListener = new GameActionListener();
         gameBoard = new GameBoard(this);
         gameHUD = new GameHUD(gameEngine,this);
         gameInput = new GameInput(this,renderTarget);
@@ -34,6 +36,7 @@ public class GameUI implements ActionListener,Drawable {
         return panelWidth;
     }
 
+    public GameActionListener getGameActionListener() { return gameActionListener; }
 
     @Override
     public void draw(Graphics graphics){
@@ -42,16 +45,12 @@ public class GameUI implements ActionListener,Drawable {
         gameInput.draw(graphics);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO
-    }
-
     private class GameActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            switch(e.getSource()){
-                
+            System.out.println(e.getActionCommand());
+            switch(e.getActionCommand()){
+
             }
 
         }
