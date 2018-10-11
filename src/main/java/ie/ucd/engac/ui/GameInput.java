@@ -79,7 +79,8 @@ public class GameInput implements Drawable {
             spinButton.setVisible(false);
             chooseLeftCardButton.setVisible(true);
             chooseRightCardButton.setVisible(true);
-
+        }
+        else if (true){ //some other screen
 
         }
         renderTarget.paintComponents(graphics);
