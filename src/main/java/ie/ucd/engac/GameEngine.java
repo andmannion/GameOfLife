@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameEngine implements Runnable,ActionListener {
+public class GameEngine implements Runnable {
 
     private static final int PANWIDTH = 1280; //TODO what is the best way to
     private static final int PANHEIGHT = 720; //TODO manage the window size?
@@ -80,26 +80,44 @@ public class GameEngine implements Runnable,ActionListener {
     @Override
     public void run() {
         running = true;
+
+        long timeBefore;
+        long timeAfter;
+        long leftOverFrameTime = 0L;
+        int remainingFrameTime;
+        int excessFrameTime;
+
         while(running) {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
-            long timeBefore = System.nanoTime();
-            //
+            timeBefore = System.nanoTime();
+
             //updateStuff();
             renderPanel();
             paintPanel();
-            long timeAfter = System.nanoTime();
-            //TODO needs protection against negative times - skip next render cycle?
-            int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
-            try{
-                Thread.sleep(sleepTime);
+
+            timeAfter = System.nanoTime();
+
+            remainingFrameTime = FRAMETIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
+
+            if (remainingFrameTime > 0) {
+                try {
+                    Thread.sleep(remainingFrameTime);
+                } catch (InterruptedException sleepCutShort) {
+                    //Not needed for a single thread, if we implement a 2nd need to catch this
+                    leftOverFrameTime = remainingFrameTime - (System.nanoTime() - timeAfter);
+                }
             }
-            catch (Exception sleepException){
-                //TODO what goes here?
-                System.out.println("GameEngine sleep ex." + sleepException);
+            else {
+                excessFrameTime = -remainingFrameTime;
+                while (excessFrameTime > FRAMETIME){
+                    //updateStuff();
+                    excessFrameTime -= FRAMETIME;
+                }
             }
-        }
-    }
+
+        } //end of while(running)
+    } //end of run()
 
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
@@ -130,11 +148,5 @@ public class GameEngine implements Runnable,ActionListener {
         catch (Exception e){
             System.out.println("loadPanel() in GameEngine failed");
         }
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO move this down to UI level
     }
 }

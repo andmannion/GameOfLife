@@ -16,6 +16,7 @@ public class GameUI implements ActionListener,Drawable {
     private GameInput gameInput;
     private int panelHeight;
     private int panelWidth;
+    private GameActionListener gameActionListener;
 
     public GameUI(GameEngine gameEngine, JPanel renderTarget){
         panelHeight = gameEngine.getPanelHeight();
@@ -44,5 +45,15 @@ public class GameUI implements ActionListener,Drawable {
     @Override
     public void actionPerformed(ActionEvent e) {
         //TODO
+    }
+
+    private class GameActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch(e.getSource()){
+                
+            }
+
+        }
     }
 }
