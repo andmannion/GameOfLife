@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class GameEngine implements Runnable,ActionListener {
 
-    private static final int PANWIDTH = 1280;
-    private static final int PANHEIGHT = 720;
+    private static final int PANWIDTH = 1280; //TODO what is the best way to
+    private static final int PANHEIGHT = 720; //TODO manage the window size?
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -35,6 +35,7 @@ public class GameEngine implements Runnable,ActionListener {
     private Image backBuffer;
     private volatile boolean running;
     private Thread renderingThread;
+    //TODO should I be using synchronized methods?
 
 
     public GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
@@ -49,7 +50,7 @@ public class GameEngine implements Runnable,ActionListener {
         }
 
         LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
-        gameUI = new GameUI(this);
+        gameUI = new GameUI(this,renderTarget);
     }
 
     public void closeGame(){

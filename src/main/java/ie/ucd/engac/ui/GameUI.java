@@ -2,6 +2,8 @@ package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.ui.Drawable;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,11 +17,12 @@ public class GameUI implements ActionListener,Drawable {
     private int panelHeight;
     private int panelWidth;
 
-    public GameUI(GameEngine gameEngine){
+    public GameUI(GameEngine gameEngine, JPanel renderTarget){
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
         gameBoard = new GameBoard(this);
         gameHUD = new GameHUD(gameEngine,this);
+        gameInput = new GameInput(this,renderTarget);
     }
 
     int getPanelHeight() {
@@ -35,6 +38,7 @@ public class GameUI implements ActionListener,Drawable {
     public void draw(Graphics graphics){
         gameHUD.draw(graphics);
         gameBoard.draw(graphics);
+        gameInput.draw(graphics);
     }
 
     @Override

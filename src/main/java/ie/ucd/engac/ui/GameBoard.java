@@ -11,7 +11,7 @@ public class GameBoard implements Drawable {
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
     }
-    
+
     @Override
     public void draw(Graphics graphics){
         //TODO

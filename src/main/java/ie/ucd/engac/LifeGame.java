@@ -45,6 +45,7 @@ public class LifeGame implements WindowListener{
         playPanel.setVisible(false);
         playPanel.setBackground(Color.white);
         playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
+        playPanel.setLayout(null);
         JTextField textField = new JTextField("Error: Rendering error");
         playPanel.add(textField);
         container.add(playPanel);

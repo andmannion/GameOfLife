@@ -74,7 +74,7 @@ public class GameHUD implements Drawable {
         actionCards = player.getActionCards().size();
 
     }
-    synchronized public void draw(Graphics graphics){ //synch adds safety
+    public void draw(Graphics graphics){ //synch adds safety
         if (true) {
             updateFields();
         }
