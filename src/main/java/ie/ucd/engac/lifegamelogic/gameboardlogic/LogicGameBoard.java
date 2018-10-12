@@ -1,14 +1,12 @@
 package ie.ucd.engac.lifegamelogic.gameboardlogic;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.*;
 
 import ie.ucd.engac.customdatastructures.UDAGraph;
+import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
 import ie.ucd.engac.lifegamelogic.WheelSpin;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.*;
@@ -17,14 +15,17 @@ public class LogicGameBoard {
 	private UDAGraph<String> boardGraph;
 	private HashMap<String, GameBoardTile> idToGameBoardTileMap;
 	private WheelSpin spinningWheel;
-	private JsonObject overallObject;
+	private String jsonBoardConfigFileLocation;
+	private String jsonBoardConfigFileContent;
+	private JsonElement overallJSONElement;
 
-	public LogicGameBoard(String jsonBoardLayout) {
+	public LogicGameBoard(String jsonBoardConfigFileLocation) {
+		this.jsonBoardConfigFileLocation = jsonBoardConfigFileLocation;
 		boardGraph = new UDAGraph<String>();
 		idToGameBoardTileMap = new HashMap<String, GameBoardTile>();
 		spinningWheel = new WheelSpin();
 		
-		initialiseBoard(jsonBoardLayout);
+		initialiseBoard();
 	}
 
 	public int spinTheWheel() {
@@ -52,39 +53,30 @@ public class LogicGameBoard {
 		return null;
 	}
 
-	private void initialiseParser(String jsonBoardLayout) {
+	private void initialiseParser() {
 		JsonParser parser = new JsonParser();
-		overallObject = null;
+		overallJSONElement = null;
 
 		try {
-			overallObject = (JsonObject) parser.parse(jsonBoardLayout);
+			overallJSONElement = (JsonElement) parser.parse(jsonBoardConfigFileContent);
 		} catch (Exception e) {
-			System.out.println("Exception in LogicGameBoard....initialiseParser(): \n" + e.toString());
+			System.out.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
 	}
 
-	private void initialiseBoard(String jsonBoardLayout) {
-		byte[] encodedBoardLayoutConfigContent = new byte[0];
-
-		try {
-			encodedBoardLayoutConfigContent = Files.readAllBytes(Paths.get(jsonBoardLayout));
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-
-		Charset charset = Charset.defaultCharset();
-		String boardLayoutConfigString = new String(encodedBoardLayoutConfigContent, charset);
+	private void initialiseBoard() {
+		jsonBoardConfigFileContent = FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
 		
-		initialiseParser(boardLayoutConfigString);
+		initialiseParser();
 		
-		initialiseConnectivity(boardLayoutConfigString);	
+		initialiseConnectivity();	
 		
-		initialiseTiles(boardLayoutConfigString);
+		initialiseTiles();
 	}
 
-	private void initialiseTiles(String jsonBoardLayout) {
-		JsonArray verticesAsJsonArray = overallObject.getAsJsonArray("vertices");
+	private void initialiseTiles() {
+		JsonArray verticesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("vertices");
 		
 		RuntimeTypeAdapterFactory<GameBoardTile> tileAdapterFactory = RuntimeTypeAdapterFactory.of(GameBoardTile.class,	"tileMovementType");
 
@@ -103,8 +95,8 @@ public class LogicGameBoard {
 		}
 	}
 	
-	private void initialiseConnectivity(String jsonBoardLayout) {
-		JsonArray edgesAsJsonArray = overallObject.getAsJsonArray("edges");
+	private void initialiseConnectivity() {
+		JsonArray edgesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("edges");
 
 		for (JsonElement edgeAsJsonObj : edgesAsJsonArray) {
 			String sourceVertex = ((JsonObject) edgeAsJsonObj).get("source").getAsString();

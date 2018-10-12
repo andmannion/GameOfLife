@@ -37,19 +37,19 @@ public class GameLogic implements MessageReciever<LifeGameMessage> {
 
 	@Override
 	public LifeGameMessage receiveMessage(LifeGameMessage receivedMessage) {
-		// Deals with transitions of overall game state only
-		switch (currentTurnState) {
-		case AwaitSpin:
-			handleAwaitSpin(receivedMessage);			
-			handleMoving();
-			handleAwaitUserInput();
-			break;
-		case AwaitUserInput:
-			handleAwaitUserInput(receivedMessage);
-			break;
-		default:
-			break;
-		}
+//		// Deals with transitions of overall game state only
+//		switch (currentTurnState) {
+//		case AwaitSpin:
+//			handleAwaitSpin(receivedMessage);			
+//			handleMoving();
+//			handleAwaitUserInput();
+//			break;
+//		case AwaitUserInput:
+//			handleAwaitUserInput(receivedMessage);
+//			break;
+//		default:
+//			break;
+//		}
 
 		return null;
 	}
@@ -169,6 +169,8 @@ public class GameLogic implements MessageReciever<LifeGameMessage> {
 
 			movesRemaining--;
 		} while (movesRemaining > 0 && !stopConditionEncountered);
+		
+		return TurnAction.TileAction;
 	}
 
 	private TurnAction processTileAction(Player currentPlayer, GameBoardTile gameBoardTile) {

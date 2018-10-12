@@ -4,17 +4,20 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.CareerCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 
 public class Bank {
+	private final String HOUSE_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/HouseCardConfig.json";
+	private final String CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CareerCardConfig.json";
+	private final String COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
 
 	private ActionCardDeck actionCardDeck;
 	private HouseCardDeck houseCardDeck;
-	private CareerCardDeck careerCardDeck;
-	private CollegeCareerCardDeck collegeCareerCardDeck;
+	private OccupationCardDeck careerCardDeck;
+	private OccupationCardDeck collegeCareerCardDeck;
 	private int totalMoneyExtracted;
 	
 	private BankLoanBook bankLoanBook;
@@ -25,38 +28,20 @@ public class Bank {
 	}	
 
 	private void initialiseCardDecks() {
-		// TODO: ActionCardDeck requires config reading functionality implementation
+		// TODO: ActionCardDeck requires config reading functionality implementation?
 		
 		actionCardDeck = new ActionCardDeck();
-		actionCardDeck.shuffle();
-
-		String houseCardDeckConfigFileLocation = "src/main/resources/CardDecks/HouseCardConfig.json";
-		String careerCardDeckConfigFileLocation = "src/main/resources/CardDecks/CareerCardConfig.json";
-		String collegeCareerCardDeckConfigFileLocation = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
+		actionCardDeck.shuffle();	
 		
-		byte[] encodedHouseCardDeckConfigContent = new byte[0];
-		byte[] encodedCareerCardDeckConfigContent = new byte[0];
-		byte[] encodedCollegeCareerCardDeckConfigContent = new byte[0];
-		
-		try {
-			encodedHouseCardDeckConfigContent = Files.readAllBytes(Paths.get(houseCardDeckConfigFileLocation));
-			encodedCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(careerCardDeckConfigFileLocation));
-			encodedCollegeCareerCardDeckConfigContent = Files.readAllBytes(Paths.get(collegeCareerCardDeckConfigFileLocation));
-		} catch (Exception e) {
-			System.out.println("Exception in Bank.initialiseCardDecks() : \n" + e.toString());
-		}
-
-		Charset charset = Charset.defaultCharset();
-		
-		String houseCardDeckConfigString = new String(encodedHouseCardDeckConfigContent, charset);
-		String careerCardDeckConfigString = new String(encodedCareerCardDeckConfigContent, charset);
-		String collegeCareerCardDeckConfigString = new String(encodedCollegeCareerCardDeckConfigContent, charset);
+		String houseCardDeckConfigString = FileUtilities.GetEntireContentsAsString(HOUSE_CARD_DECK_CONFIG_FILE_LOCATION);
+		String careerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(CAREER_CARD_DECK_CONFIG_FILE_LOCATION);
+		String collegeCareerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION);
 
 		houseCardDeck = new HouseCardDeck(houseCardDeckConfigString);
 		houseCardDeck.shuffle();
-		careerCardDeck = new CareerCardDeck(careerCardDeckConfigString);
+		careerCardDeck = new OccupationCardDeck(careerCardDeckConfigString);
 		careerCardDeck.shuffle();
-		collegeCareerCardDeck = new CollegeCareerCardDeck(collegeCareerCardDeckConfigString);
+		collegeCareerCardDeck = new OccupationCardDeck(collegeCareerCardDeckConfigString);
 		collegeCareerCardDeck.shuffle();
 	}
 	

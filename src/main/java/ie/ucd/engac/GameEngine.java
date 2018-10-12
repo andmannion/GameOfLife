@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameEngine implements Runnable {
-
+	private final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json"; 
     private static final int PANWIDTH = 1280; //TODO what is the best way to
     private static final int PANHEIGHT = 720; //TODO manage the window size?
 
@@ -36,9 +36,12 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-        LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
+
+        LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         gameLogic = new GameLogic(logicGameBoard, numPlayers);
         gameUI = new GameUI(this,renderTarget); //TODO ad
+    
+
     }
 
     public void quitGame(){

@@ -4,6 +4,7 @@
 .project
 *.iml
 /.idea/workspace.xml
+*.orig
 
 # Compiled class file
 *.class
