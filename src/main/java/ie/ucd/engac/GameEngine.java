@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GameEngine implements Runnable {
-
+	private final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json"; 
     private static final int PANWIDTH = 1280; //TODO what is the best way to
     private static final int PANHEIGHT = 720; //TODO manage the window size?
 
@@ -49,7 +49,7 @@ public class GameEngine implements Runnable {
             playerList.add(player);
         }
 
-        LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
+        LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         gameUI = new GameUI(this,renderTarget);
     }
 
