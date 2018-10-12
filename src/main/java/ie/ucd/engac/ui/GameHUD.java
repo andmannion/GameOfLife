@@ -1,8 +1,8 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
-import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class GameHUD implements Drawable {
     private int loans;
     private int bankBalance;
 
-    private CareerCard career;
+    private OccupationCard occupation;
     private int martialStatus;
     private String familyString;
     private ArrayList<HouseCard> houses;
@@ -67,7 +67,7 @@ public class GameHUD implements Drawable {
         }
         else familyString = "No dependants";
 
-        career = player.getCareerCard();
+        occupation = player.getOccupationCard();
         houses = player.getHouseCards();
         loans = 0; // TODO: Number of loans of each player should be obtained through the Bank object
         bankBalance = player.getCurrentMoney();
@@ -110,14 +110,14 @@ public class GameHUD implements Drawable {
             }
         }
     }
-    //display career
+    //display occupation
     private void drawCareerCard(Graphics graphics,int xpos, int ypos){
-        if (career == null){
-            graphics.drawString("Career Card: No career card.",xpos,ypos);
+        if (occupation == null){
+            graphics.drawString("Career Card: No occupation card.",xpos,ypos);
         }
         else{
             String string;
-            string = career.convertDrawableString();
+            string = occupation.convertDrawableString();
             graphics.drawString(string,xpos,ypos);
         }
     }
