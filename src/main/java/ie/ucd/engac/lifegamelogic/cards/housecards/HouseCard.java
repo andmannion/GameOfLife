@@ -42,7 +42,7 @@ public class HouseCard extends Card{
         String string = "";
         string.concat("Type: " + houseType.toString());
         string.concat(" Cost: " + purchasePrice);
-        string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum);
+        string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
         return string;
     }
 }
