@@ -1,0 +1,63 @@
+package ie.ucd.engac.lifegamelogic.gamestatehandling;
+
+import java.util.ArrayList;
+
+import ie.ucd.engac.lifegamelogic.banklogic.Bank;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.MessageReciever;
+
+// This holds all the elements; players, bank, etc.
+public class GameLogic {
+	private final String GAME_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
+
+	private Bank bank;
+	private ArrayList<Player> players;
+	private LogicGameBoard gameBoard;
+	private int currentPlayerIndex;
+	
+	private GameState currentState;
+	
+	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {		
+		this.gameBoard = gameBoard;
+		bank = new Bank();		
+		initialisePlayers(numPlayers);
+		
+		
+	}
+	
+	public void handleInput(UserInput userInput) {
+		// Startup
+		if(currentState == null) {
+			currentState = new WaitingForInteractionState();
+			currentState.enter(this);
+		}		
+		
+		GameState nextGameState = currentState.handleInput(this, userInput);
+		
+		if(nextGameState != null) {
+			currentState = nextGameState;
+			currentState.enter(this);
+		}
+		
+		// Need to send a response message to the user
+	}	
+	
+	protected Player getCurrentPlayer() {
+		return players.get(currentPlayerIndex);
+	}
+	
+	protected void setNextPlayerToCurrent() {
+		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+	}
+
+	private void initialisePlayers(int numPlayers) {
+		players = new ArrayList<>();
+
+		for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
+			players.add(new Player(playerIndex));
+		}
+	}
+}

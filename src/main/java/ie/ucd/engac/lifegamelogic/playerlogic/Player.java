@@ -10,16 +10,17 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 public class Player {
 
     private int playerNumber;
-    private int numDependants;//this doesnt include partner
+    private int numDependants; // This doesn't include partner
     private int currentMoney;
 
 	private ArrayList<ActionCard> actionCards;
 	private ArrayList<HouseCard> houseCards;
 
 	private OccupationCard occupationCard;
-
+	private CareerPath careerPathTaken;
+	
 	private MaritalStatus maritalStatus;
-
+	
 	private PlayerColour playerColour;
 
 	private BoardLocation currentBoardLocation;
@@ -30,6 +31,7 @@ public class Player {
 		actionCards = new ArrayList<>();
 		houseCards = new ArrayList<>();
 		occupationCard = null;
+		careerPathTaken = null;
 
 		maritalStatus = MaritalStatus.Single;
 		this.playerColour = PlayerColour.fromInt(playerNumber);
@@ -67,6 +69,14 @@ public class Player {
 		this.occupationCard = occupationCard;
 	}
 
+	public CareerPath getCareerPath() {
+		return careerPathTaken;
+	}
+	
+	public void setCareerPath(CareerPath careerPath) {
+		careerPathTaken = careerPath;
+	}
+	
 	// Current amount of money
 	public int getCurrentMoney() {
 		return currentMoney;
