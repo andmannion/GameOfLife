@@ -99,7 +99,7 @@ public class GameEngine implements Runnable {
             timeAfter = System.nanoTime();
 
             remainingFrameTime = FRAMETIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
-
+            leftOverFrameTime = 0L;
             if (remainingFrameTime > 0) {
                 try {
                     Thread.sleep(remainingFrameTime);
