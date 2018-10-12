@@ -1,31 +1,30 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.messaging.ShadowPlayer;
+
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GameHUD implements Drawable {
     //TODO check that all printout requirements are met
-    private int playerNumber;
-    private int numDependants;
-    private int actionCards;
-    private int loans;
-    private int bankBalance;
+    //add #actioncards
 
-    private OccupationCard occupation;
-    private int martialStatus;
-    private String familyString;
-    private ArrayList<HouseCard> houses;
-
+    private ShadowPlayer sPlayer;
 
     private GameEngine gameEngine;
     private Rectangle rectangle;
 
-    private int panelHeight;
-    private int panelWidth;
+    private final static int PLAYER_LOC = 0;
+    private final static int BANK_LOC   = 1;
+    private final static int LOANS_LOC  = 2;
+    private final static int DEPEND_LOC = 3;
+    private final static int CAREER_LOC = 4;
+    private final static int HOUSE_LOC  = 5;
+    private final static int ACTION_LOC = 6;
+
+
+    private final int panelHeight;
+    private final int panelWidth;
 
     private int boxStartX;
     private int boxStartY;// = 504;
@@ -39,7 +38,7 @@ public class GameHUD implements Drawable {
 
     private int HOUSETEXTSKIP = 15;
 
-    public GameHUD(GameEngine gameEngine,GameUI gameUI){//TODO remove gameEngine reference
+    GameHUD(GameEngine gameEngine,GameUI gameUI){//TODO remove gameEngine reference
         this.gameEngine = gameEngine;
 
         panelHeight = gameUI.getPanelHeight();
@@ -57,78 +56,28 @@ public class GameHUD implements Drawable {
 
         rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
     }
-    private void updateFields(){
-        Player player = gameEngine.getCurrentPlayer();
-        playerNumber = player.getPlayerNumber();
-        martialStatus = player.getMaritalStatus().toInt();
-        numDependants = player.getNumDependants();
-        if (martialStatus == 1){
-            familyString = martialStatus + "spouse and " + (numDependants -1 )+ " children";
-        }
-        else familyString = "No dependants";
 
-        occupation = player.getOccupationCard();
-        houses = player.getHouseCards();
-        loans = 0; // TODO: Number of loans of each player should be obtained through the Bank object
-        bankBalance = player.getCurrentMoney();
-        actionCards = player.getActionCards().size();
-
+    private void updateFields(ShadowPlayer shadowPlayer){
+        this.sPlayer = shadowPlayer;
     }
-    public void draw(Graphics graphics){ //synch adds safety
-        if (true) {
-            updateFields();
-        }
-        else{
-
-        }
+    public void draw(Graphics graphics){
         try{
             graphics.setColor(Color.darkGray);
             graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
             graphics.setColor(Color.black);
-            graphics.drawString("Player: " + playerNumber + 1 + " Colour: ", firstStringX, firstStringY);
-            drawBankBal(graphics, firstStringX, firstStringY +1* stringLengthY);
-            drawNumLoans(graphics, firstStringX, firstStringY +2* stringLengthY);
-            drawCareerCard(graphics, firstStringX, firstStringY +3* stringLengthY);
-            drawHouseCards(graphics, firstStringX, firstStringY +4* stringLengthY);
-            drawDependants(graphics, firstStringX, firstStringY +5* stringLengthY);
+            graphics.drawString("Player: " + sPlayer.playerNumToString() + " Colour: " + sPlayer.playerColourToString(),
+                                                                                        firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+            graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
+            graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
+            graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
+            //TODO house cards need to respect border & wrap around?
+            graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
+            graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
+            graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
         }
         catch (Exception e){
             System.out.println("Exception in GameHUD.draw() " + e);
         }
-    }
-    //display house
-    private void drawHouseCards(Graphics graphics,int xpos, int ypos){
-        if (houses.size() == 0){
-            graphics.drawString("House Cards: No house cards.",xpos,ypos);
-        }
-        else{
-            String string; //TODO test that this obeys boundaries (it wont)
-            int i = 0;
-            for(HouseCard house:houses){
-                string = house.convertDrawableString();
-                graphics.drawString(string,xpos,ypos+i++*HOUSETEXTSKIP);
-            }
-        }
-    }
-    //display occupation
-    private void drawCareerCard(Graphics graphics,int xpos, int ypos){
-        if (occupation == null){
-            graphics.drawString("Career Card: No occupation card.",xpos,ypos);
-        }
-        else{
-            String string;
-            string = occupation.convertDrawableString();
-            graphics.drawString(string,xpos,ypos);
-        }
-    }
-    private void drawNumLoans(Graphics graphics, int xpos, int ypos){
-        graphics.drawString("Number of Loans: " + loans, xpos, ypos);
-    }
-    private void drawBankBal(Graphics graphics, int xpos, int ypos){
-        graphics.drawString("Bank Balance: " + bankBalance, xpos, ypos);
-    }
-    private void drawDependants(Graphics graphics, int xpos, int ypos){
-        graphics.drawString("Number of Dependants: " + familyString, xpos,ypos);
     }
 }
 
