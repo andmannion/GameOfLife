@@ -2,11 +2,10 @@ package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import java.util.ArrayList;
 
-import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCard;
-import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.cards.CareerCards.CareerCard;
-import ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards.CollegeCareerCard;
 
 public class Player {
 	// Action cards held by this player
@@ -15,8 +14,7 @@ public class Player {
 	// House cards held by this player
 	private ArrayList<HouseCard> houseCards;
 
-	private CareerCard careerCard;
-	private CollegeCareerCard collegeCareerCard;
+	private OccupationCard occupationCard;
 
 	// Marital status
 	private MaritalStatus maritalStatus;
@@ -36,8 +34,7 @@ public class Player {
 	public Player(int playerNumber) {
 		actionCards = new ArrayList<>();
 		houseCards = new ArrayList<>();
-		careerCard = null;
-		collegeCareerCard = null;
+		occupationCard = null;
 
 		maritalStatus = MaritalStatus.Single;
 		this.playerColour = PlayerColour.fromInt(playerNumber);
@@ -51,6 +48,10 @@ public class Player {
 	public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
 	}
+	
+	public void setCurrentLocation(BoardLocation boardLocation) {
+		currentBoardLocation = boardLocation;
+	}
 
 	// Number of people in the car
 	public int getNumDependants() {
@@ -62,25 +63,28 @@ public class Player {
 	}
 
 	// Current career card
-	public CareerCard getCareerCard() {
-		return careerCard;
+	public OccupationCard getOccupationCard() {
+		return occupationCard;
 	}
 
-	public void setCareerCard(CareerCard careerCard) {
-		this.careerCard = careerCard;
-	}
-
-	public CollegeCareerCard getCollegeCareerCard() {
-		return collegeCareerCard;
-	}
-
-	public void setCollegeCareerCard(CollegeCareerCard collegeCareerCard) {
-		this.collegeCareerCard = collegeCareerCard;
+	public void setOccupationCard(OccupationCard occupationCard) {
+		this.occupationCard = occupationCard;
 	}
 
 	// Current amount of money
 	public int getCurrentMoney() {
 		return currentMoney;
+	}
+	
+	public void addToBalance(int amountToAdd) {
+		currentMoney += amountToAdd;
+	}
+	
+	/* TODO: Should return type be boolean to signal if a loan is required, as the amount to be subtracted would
+	* send the balance negative?
+	*/
+	public void subtractFromBalance(int amountToSubtract) {
+		currentMoney -= amountToSubtract;
 	}
 
 	public ArrayList<ActionCard> getActionCards() {

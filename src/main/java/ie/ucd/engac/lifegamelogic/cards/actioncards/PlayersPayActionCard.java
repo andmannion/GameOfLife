@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.ActionCards;
+package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
 public class PlayersPayActionCard extends ActionCard {
 	private int amountToPay;

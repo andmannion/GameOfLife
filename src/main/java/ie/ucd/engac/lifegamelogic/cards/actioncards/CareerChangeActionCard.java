@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.ActionCards;
+package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
 public class CareerChangeActionCard extends ActionCard {		
 	public CareerChangeActionCard() {

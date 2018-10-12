@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.ActionCards;
+package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 

@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards;
+package ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards;
 
 import java.util.ArrayList;
 import java.util.Arrays;

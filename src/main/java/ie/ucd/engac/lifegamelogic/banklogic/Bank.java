@@ -4,10 +4,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import ie.ucd.engac.lifegamelogic.cards.ActionCards.ActionCardDeck;
-import ie.ucd.engac.lifegamelogic.cards.ActionCards.CareerCardDeck;
-import ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards.CollegeCareerCardDeck;
-import ie.ucd.engac.lifegamelogic.cards.HouseCards.HouseCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.CareerCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCardDeck;
 
 public class Bank {
 
@@ -15,13 +15,14 @@ public class Bank {
 	private HouseCardDeck houseCardDeck;
 	private CareerCardDeck careerCardDeck;
 	private CollegeCareerCardDeck collegeCareerCardDeck;
+	private int totalMoneyExtracted;
 	
 	private BankLoanBook bankLoanBook;
 
 	public Bank() {
 		initialiseCardDecks();
 		initialiseLoanBook();
-	}
+	}	
 
 	private void initialiseCardDecks() {
 		// TODO: ActionCardDeck requires config reading functionality implementation
@@ -65,5 +66,17 @@ public class Bank {
 	
 	public int getNumLoans(int playerID) {
 		return bankLoanBook.getOutstandingBankLoans(playerID).size();
+	}
+
+	public int getTotalMoneyExtracted() {
+		return totalMoneyExtracted;
+	}
+	
+	public void extractMoney(int amountToExtract) {
+		setTotalMoneyExtracted(getTotalMoneyExtracted() + amountToExtract);
+	}
+
+	public void setTotalMoneyExtracted(int totalMoneyExtracted) {
+		this.totalMoneyExtracted = totalMoneyExtracted;
 	}
 }

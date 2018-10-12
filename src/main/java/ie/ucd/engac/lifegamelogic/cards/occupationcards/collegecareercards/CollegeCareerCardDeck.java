@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.CollegeCareerCards;
+package ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards;
 
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;

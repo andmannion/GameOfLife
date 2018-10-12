@@ -1,14 +1,15 @@
-package ie.ucd.engac.lifegamelogic.cards.CareerCards;
+package ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards;
+
+import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 
-public class CareerCardDeck extends CardDeck {
+public class CareerCardDeck extends OccupationCardDeck {
 	private String configString;
 	
 	public CareerCardDeck(String configString) {
-		super();
-
 		this.configString = configString;
 		
 		initialiseCards();
@@ -16,7 +17,7 @@ public class CareerCardDeck extends CardDeck {
 
 	private void initialiseCards() {
 		CardConfigHandler<CareerCard> careerCardConfigHandler = new DefaultCareerCardConfigHandler(configString);
-
-		careerCardConfigHandler.initialiseCards();
+		ArrayList<CareerCard> careerCards = careerCardConfigHandler.initialiseCards();
+		cards.addAll(careerCards);		
 	}
 }

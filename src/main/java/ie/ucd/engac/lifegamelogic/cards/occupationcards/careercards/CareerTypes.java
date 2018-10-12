@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.cards.CareerCards;
+package ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards;
 
 public enum CareerTypes {
 	Actor,
