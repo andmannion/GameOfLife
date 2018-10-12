@@ -4,35 +4,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import ie.ucd.engac.uiscreens.*;
-import ie.ucd.engac.uiscreens.SplashScreen;
+import ie.ucd.engac.ui.*;
 
-public class LifeGame extends JFrame implements WindowListener{
+public class LifeGame implements WindowListener{
 
-    private int PANWIDTH = 1280;
-    private int PANHEIGHT = 720;
-    private JTextField gameTitle;
-    private Dimension dimensions;
+    private static final int PANWIDTH = 1280;
+    private static final int PANHEIGHT = 720;
+    private JFrame jFrame;
+    private JPanel playPanel;
     private MainMenu mainMenu;
     private Container container;
-    private PlayPanel playPanel;
+    private GameEngine gameEngine;
 
 
     LifeGame() {
-        super("Life: The Game");
-        dimensions = new Dimension(PANWIDTH,PANHEIGHT);
+        jFrame = new JFrame("Life: The Game");
+        Dimension dimensions = new Dimension(PANWIDTH,PANHEIGHT);
         constructUI();
-        addWindowListener(this);
-        //setLocationRelativeTo(null);
-        pack();
-        setSize(dimensions);
-        setResizable(false);
-        setVisible(true);
-        setIgnoreRepaint(true);
+        jFrame.addWindowListener(this);
+        jFrame.pack();
+        jFrame.setSize(dimensions);
+        jFrame.setResizable(false);
+        jFrame.setVisible(true);
+        jFrame.setIgnoreRepaint(true);
     } // end of Main (constructor)
 
     private void constructUI(){
-        container = getContentPane();
+        container = jFrame.getContentPane();
 
         mainMenu = new MainMenu(this);
 
@@ -43,13 +41,31 @@ public class LifeGame extends JFrame implements WindowListener{
 
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
-        playPanel = new PlayPanel(this,numPlayers); //TODO remove "this" if possible
+        playPanel = new JPanel();
+        playPanel.setVisible(false);
+        playPanel.setBackground(Color.white);
+        playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
+        playPanel.setLayout(null);
+        JTextField textField = new JTextField("Error: Rendering error");
+        playPanel.add(textField);
         container.add(playPanel);
+
+        gameEngine = new GameEngine(this,playPanel,numPlayers);
         mainMenu.setVisible(false);
         playPanel.setVisible(true);
-        playPanel.beginGame();
-    } //end of intialiseGame
+        gameEngine.beginGame();
+    } //end of initialiseGame
 
+    public void returnToMainMenu(){
+        playPanel.setVisible(false);
+        mainMenu.returnToMainMenu();
+        mainMenu.setVisible(true);
+    }
+
+    public void dispose(){
+        jFrame.dispose();
+        System.exit(0);
+    }
 
     @Override
     public void windowActivated(WindowEvent window_event) {}
@@ -62,7 +78,7 @@ public class LifeGame extends JFrame implements WindowListener{
     @Override
     public void windowClosing(WindowEvent window_event) {
         try {
-            playPanel.closeGame();
+            gameEngine.quitGame();
         }
         catch (Exception e){
             //Is it even worth returning this?

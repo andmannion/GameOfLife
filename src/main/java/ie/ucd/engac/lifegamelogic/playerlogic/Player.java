@@ -8,24 +8,19 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 
 public class Player {
-	// Action cards held by this player
-	private ArrayList<ActionCard> actionCards;
 
-	// House cards held by this player
+    private int playerNumber;
+    private int numDependants;//this doesnt include partner
+    private int currentMoney;
+
+	private ArrayList<ActionCard> actionCards;
 	private ArrayList<HouseCard> houseCards;
 
 	private OccupationCard occupationCard;
 
-	// Marital status
 	private MaritalStatus maritalStatus;
 
 	private PlayerColour playerColour;
-
-	private int playerNumber;
-
-	private int numDependants;
-
-	private int currentMoney;
 
 	private BoardLocation currentBoardLocation;
 	private BoardLocation pendingBoardForkChoice;	
@@ -41,9 +36,10 @@ public class Player {
 		this.playerNumber = playerNumber;
 		numDependants = 0;
 		currentMoney = 200000;
+
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
-	}
+}
 
 	public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
@@ -97,6 +93,14 @@ public class Player {
 
 	public int getPlayerNumber() {
 		return playerNumber;
+	}
+	
+	public void setMaritalStatus(MaritalStatus maritalStatus) {
+		// This method assumes you can only be married to one person at a time...
+		if(this.maritalStatus == MaritalStatus.Single && maritalStatus == MaritalStatus.Married) {
+			this.maritalStatus = maritalStatus;
+			addDependants(1); // Spouse is classed as a dependant
+		}
 	}
 
 	public MaritalStatus getMaritalStatus() {

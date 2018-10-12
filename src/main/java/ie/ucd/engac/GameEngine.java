@@ -1,24 +1,23 @@
-package ie.ucd.engac.uiscreens;
+package ie.ucd.engac;
 
-import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.uiscreens.uisubpanels.GameBoard;
-import ie.ucd.engac.uiscreens.uisubpanels.GameHUD;
+import ie.ucd.engac.ui.GameUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class PlayPanel extends JPanel implements Runnable,ActionListener {
+public class GameEngine implements Runnable {
 
-    private static final int PANWIDTH = 1280;
-    private static final int PANHEIGHT = 720;
+    private static final int PANWIDTH = 1280; //TODO what is the best way to
+    private static final int PANHEIGHT = 720; //TODO manage the window size?
 
     //objects relating to life game
     private LifeGame lifeGameParent;
+    //TODO move these two into "Logic"
     private ArrayList<Player> playerList;
     private Bank bank;
 
@@ -27,24 +26,20 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
     private int currentPlayer;
 
     //objects that need to be drawn
-    private GameHUD gameHUD;
-    private GameBoard gameBoard;
+    private GameUI gameUI;
 
     //objects for rendering process
+    private JPanel renderTarget;
     private final int FRAMETIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
-    private boolean running;
+    private volatile boolean running;
     private Thread renderingThread;
+    //TODO should I be using synchronized methods?
 
 
-    public PlayPanel(LifeGame lifeGame, int numPlayers){
-        super();
-        setVisible(false);
-        setBackground(Color.white);
-        setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
-        JTextField textField = new JTextField("PlayPanel");
-        add(textField);
+    public GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
+        this.renderTarget = jPanel;
         this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
         playerList = new ArrayList<>();
@@ -54,15 +49,14 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             playerList.add(player);
         }
 
-       LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
-               
-        gameBoard = new GameBoard();
-        gameHUD = new GameHUD(this); //need to pass the panel to get the playerinfo
+        LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
+        gameUI = new GameUI(this,renderTarget);
     }
 
-    public void closeGame(){
+    public void quitGame(){
         running = false;
         System.out.println("Stopped rendering");
+        lifeGameParent.returnToMainMenu();
     }
 
     public void beginGame(){
@@ -75,33 +69,62 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         return playerList.get(currentPlayer);
     }
 
+    public int getPanelHeight() {
+        return PANHEIGHT;
+    }
+
+    public int getPanelWidth() {
+        return PANWIDTH;
+    }
+
+
     @Override
     public void run() {
         running = true;
+
+        long timeBefore;
+        long timeAfter;
+        long leftOverFrameTime = 0L;
+        int remainingFrameTime;
+        int excessFrameTime;
+
         while(running) {
             //https://docs.oracle.com/javase/tutorial/extra/fullscreen/rendering.html
             //attempting to use active rendering & double buffering
-            long timeBefore = System.nanoTime();
+            timeBefore = System.nanoTime();
+
+            //updateStuff();
             renderPanel();
             paintPanel();
-            long timeAfter = System.nanoTime();
-            //TODO needs protection against negative times
-            int sleepTime = FRAMETIME - (int) ((timeBefore-timeAfter)/1000000L);
-            try{
-                Thread.sleep(sleepTime);
+
+            timeAfter = System.nanoTime();
+
+            remainingFrameTime = FRAMETIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
+            leftOverFrameTime = 0L;
+            if (remainingFrameTime > 0) {
+                try {
+                    Thread.sleep(remainingFrameTime);
+                } catch (InterruptedException sleepCutShort) {
+                    //Not needed for a single thread, if we implement a 2nd need to catch this
+                    leftOverFrameTime = remainingFrameTime - (System.nanoTime() - timeAfter);
+                }
             }
-            catch (Exception sleepException){
-                //TODO what goes here?
-                System.out.println("Sleep ex." + sleepException);
+            else {
+                excessFrameTime = -remainingFrameTime;
+                while (excessFrameTime > FRAMETIME){
+                    //updateStuff();
+                    excessFrameTime -= FRAMETIME;
+                }
             }
-        }
-    }
+
+        } //end of while(running)
+    } //end of run()
 
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
-            backBuffer = createImage(PANWIDTH, PANHEIGHT);
+            backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
             if (backBuffer == null) { //if create image somehow failed
-                System.out.println("image null");
+                System.out.println("image null");//TODO delete
                 return;
             }
             else
@@ -110,13 +133,13 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
         graphics.setColor(Color.lightGray);
         graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
 
-        gameHUD.draw(graphics);
+        gameUI.draw(graphics);
     }
 
     private void paintPanel(){
         Graphics tempGraphics;
         try {
-            tempGraphics = this.getGraphics(); //initialise
+            tempGraphics = renderTarget.getGraphics(); //initialise
             //if initialised & backBuffer exits draw new image
             if ((tempGraphics != null) && (backBuffer != null)) {
                 //TODO do we require an observer?
@@ -124,13 +147,7 @@ public class PlayPanel extends JPanel implements Runnable,ActionListener {
             }
         }
         catch (Exception e){
-            System.out.println("loadPanel() in PlayPanel failed");
+            System.out.println("loadPanel() in GameEngine failed");
         }
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO
     }
 }
