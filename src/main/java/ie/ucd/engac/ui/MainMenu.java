@@ -45,6 +45,7 @@ public class MainMenu extends JPanel implements ActionListener {
         newGameButtonConstraints.gridx = 1;
         newGameButtonConstraints.gridy = 0;
         newGameButton = new JButton("New Game");
+        newGameButton.setActionCommand("New Game");
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.addActionListener(this);
         add(newGameButton,newGameButtonConstraints);
@@ -53,7 +54,8 @@ public class MainMenu extends JPanel implements ActionListener {
         quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         quitGameButtonConstraints.gridx = 1;
         quitGameButtonConstraints.gridy = 2;
-        quitGameButton = new JButton("Quit");
+        quitGameButton = new JButton("Exit");
+        quitGameButton.setActionCommand("Exit");
         quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         quitGameButton.addActionListener(this);
         add(quitGameButton,quitGameButtonConstraints);
@@ -63,6 +65,7 @@ public class MainMenu extends JPanel implements ActionListener {
         playButtonConstraints.gridx = 1;
         playButtonConstraints.gridy = 0;
         playButton = new JButton("Play");
+        playButton.setActionCommand("Play");
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         playButton.setVisible(false);
         playButton.addActionListener(this);
@@ -84,7 +87,12 @@ public class MainMenu extends JPanel implements ActionListener {
     private void newGame(){
         setVisibilityMainScreen(false);
         setVisibilityNumPlayers(true);
-     }
+    }
+    public void returnToMainMenu(){
+        setVisibilityMainScreen(true);
+        setVisibilityNumPlayers(false);
+    }
+
     //todo do these need to exist?
     private void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
@@ -100,10 +108,9 @@ public class MainMenu extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JComponent source = (JComponent) e.getSource(); //TODO this better
         if (source instanceof JButton){
-            JButton buttonSource = (JButton)source;
-            switch (buttonSource.getText()){
+            switch (((JButton) source).getActionCommand()){
                 case "New Game": newGame(); break;
-                case "Quit":     lifeGameParent.dispose(); break;
+                case "Exit":     lifeGameParent.dispose(); break;
                 case "Play":     lifeGameParent.initialiseGame(numPlayers);
             }
         }

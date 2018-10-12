@@ -56,6 +56,12 @@ public class LifeGame implements WindowListener{
         gameEngine.beginGame();
     } //end of initialiseGame
 
+    public void returnToMainMenu(){
+        playPanel.setVisible(false);
+        mainMenu.returnToMainMenu();
+        mainMenu.setVisible(true);
+    }
+
     public void dispose(){
         jFrame.dispose();
         System.exit(0);
@@ -72,7 +78,7 @@ public class LifeGame implements WindowListener{
     @Override
     public void windowClosing(WindowEvent window_event) {
         try {
-            gameEngine.closeGame();
+            gameEngine.quitGame();
         }
         catch (Exception e){
             //Is it even worth returning this?

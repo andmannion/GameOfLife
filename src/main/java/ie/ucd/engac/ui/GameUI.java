@@ -1,7 +1,6 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.ui.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +19,7 @@ public class GameUI implements Drawable {
     private GameActionListener gameActionListener;
 
     public GameUI(GameEngine gameEngine, JPanel renderTarget){
+        this.gameEngine = gameEngine;
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
         gameActionListener = new GameActionListener();
@@ -48,8 +48,8 @@ public class GameUI implements Drawable {
     private class GameActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand());
             switch(e.getActionCommand()){
+                case "Quit Game": gameEngine.quitGame();
 
             }
 

@@ -53,9 +53,10 @@ public class GameEngine implements Runnable {
         gameUI = new GameUI(this,renderTarget);
     }
 
-    public void closeGame(){
+    public void quitGame(){
         running = false;
         System.out.println("Stopped rendering");
+        lifeGameParent.returnToMainMenu();
     }
 
     public void beginGame(){

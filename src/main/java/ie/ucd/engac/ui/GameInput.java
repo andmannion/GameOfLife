@@ -41,6 +41,7 @@ public class GameInput implements Drawable {
         spinButton = new JButton("Spin The Wheel");
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
         int spinY = panelHeight-SPIN_HEIGHT-2*SPIN_BORDER;
+        spinButton.setActionCommand("Spin The Wheel");
         spinButton.setBounds(spinX,spinY,SPIN_WIDTH,SPIN_HEIGHT);
         spinButton.setVisible(true);
         spinButton.addActionListener(actionListener);
@@ -49,6 +50,7 @@ public class GameInput implements Drawable {
         quitButton = new JButton("Quit Game");
         int quitX = panelWidth-QUIT_WIDTH-QUIT_BORDER;
         int quitY = QUIT_BORDER;
+        quitButton.setActionCommand("Quit Game");
         quitButton.setBounds(quitX,quitY,QUIT_WIDTH,QUIT_HEIGHT);
         quitButton.setVisible(true);
         quitButton.addActionListener(actionListener);
@@ -57,6 +59,7 @@ public class GameInput implements Drawable {
         chooseLeftCardButton = new JButton("Choose Left Card");
         int cLeftX = CARD_CHOICE_LHS_GAP;
         int cLeftY = CARD_CHOICE_Y_POS;
+        chooseLeftCardButton.setActionCommand("Choose Left Card");
         chooseLeftCardButton.setBounds(cLeftX,cLeftY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
         chooseLeftCardButton.setVisible(true);
         chooseLeftCardButton.addActionListener(actionListener);
@@ -65,6 +68,7 @@ public class GameInput implements Drawable {
         chooseRightCardButton = new JButton("Choose Right Card");
         int cRightX = CARD_CHOICE_LHS_GAP+CARD_CHOICE_WIDTH+CARD_CHOICE_INTER_GAP;
         int cRighY = CARD_CHOICE_Y_POS;
+        chooseRightCardButton.setActionCommand("Choose Right Card");
         chooseRightCardButton.setBounds(cRightX,cRighY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
         chooseRightCardButton.setVisible(true);
         chooseRightCardButton.addActionListener(actionListener);
