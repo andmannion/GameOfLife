@@ -1,14 +1,11 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.banklogic.Bank;
+import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
-import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.ui.GameUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
 
 public class GameEngine implements Runnable {
 
@@ -17,20 +14,16 @@ public class GameEngine implements Runnable {
 
     //objects relating to life game
     private LifeGame lifeGameParent;
-    //TODO move these two into "Logic"
-    private ArrayList<Player> playerList;
-    private Bank bank;
-
-    //tracking of the player that requires drawing
-    private int numPlayers;
-    private int currentPlayer;
 
     //objects that need to be drawn
     private GameUI gameUI;
 
+    //game logic
+    private GameLogic gameLogic;
+
     //objects for rendering process
     private JPanel renderTarget;
-    private final int FRAMETIME = 1/30;
+    private static final int FRAME_TIME = 1/30;
     private Graphics graphics;
     private Image backBuffer;
     private volatile boolean running;
@@ -38,19 +31,14 @@ public class GameEngine implements Runnable {
     //TODO should I be using synchronized methods?
 
 
-    public GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
+    GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
+        //TODO redo this constructor
         this.renderTarget = jPanel;
-        this.numPlayers = numPlayers;
         lifeGameParent = lifeGame;
-        playerList = new ArrayList<>();
-        bank = new Bank();
-        for(int i = 0;i<numPlayers;i++){
-            Player player = new Player(i);
-            playerList.add(player);
-        }
 
         LogicGameBoard logicGameBoard = new LogicGameBoard("src/main/resources/LogicGameBoard/GameBoardConfig.json");
-        gameUI = new GameUI(this,renderTarget);
+        gameLogic = new GameLogic(logicGameBoard, numPlayers);
+        gameUI = new GameUI(this,renderTarget); //TODO ad
     }
 
     public void quitGame(){
@@ -59,15 +47,11 @@ public class GameEngine implements Runnable {
         lifeGameParent.returnToMainMenu();
     }
 
-    public void beginGame(){
+    void beginGame(){
         renderingThread = new Thread(this);
         System.out.println("Starting renderingThread");
         renderingThread.start();
     } // end of startGame()
-
-    public Player getCurrentPlayer(){
-        return playerList.get(currentPlayer);
-    }
 
     public int getPanelHeight() {
         return PANHEIGHT;
@@ -99,7 +83,7 @@ public class GameEngine implements Runnable {
 
             timeAfter = System.nanoTime();
 
-            remainingFrameTime = FRAMETIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
+            remainingFrameTime = FRAME_TIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
             leftOverFrameTime = 0L;
             if (remainingFrameTime > 0) {
                 try {
@@ -111,9 +95,9 @@ public class GameEngine implements Runnable {
             }
             else {
                 excessFrameTime = -remainingFrameTime;
-                while (excessFrameTime > FRAMETIME){
+                while (excessFrameTime > FRAME_TIME){
                     //updateStuff();
-                    excessFrameTime -= FRAMETIME;
+                    excessFrameTime -= FRAME_TIME;
                 }
             }
 

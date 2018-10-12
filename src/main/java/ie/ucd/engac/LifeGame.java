@@ -56,7 +56,7 @@ public class LifeGame implements WindowListener{
         gameEngine.beginGame();
     } //end of initialiseGame
 
-    public void returnToMainMenu(){
+    void returnToMainMenu(){
         playPanel.setVisible(false);
         mainMenu.returnToMainMenu();
         mainMenu.setVisible(true);
