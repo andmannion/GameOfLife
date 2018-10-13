@@ -50,15 +50,15 @@ public class GameEngine implements Runnable {
 
     public void quitGame(){
         running = false;
-        System.out.println("Stopped rendering");
+        System.out.println("Stopped rendering"); //TODO remove
         lifeGameParent.returnToMainMenu();
     }
 
     void beginGame(){
         renderingThread = new Thread(this);
-        System.out.println("Starting renderingThread");
+        System.out.println("Starting renderingThread"); //TODO remove
         renderingThread.start();
-    } // end of startGame()
+    } // end of beginGame()
 
     public int getPanelHeight() {
         return PANHEIGHT;
@@ -84,7 +84,7 @@ public class GameEngine implements Runnable {
             //attempting to use active rendering & double buffering
             timeBefore = System.nanoTime();
 
-            //updateStuff();
+            gameUI.updateCurrentUIScreen();
             renderPanel();
             paintPanel();
 

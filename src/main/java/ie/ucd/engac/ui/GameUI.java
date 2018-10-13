@@ -15,7 +15,6 @@ public class GameUI implements Drawable {
 
     private MessagingInterface<LifeGameMessage> messagingInterface;
     private LifeGameMessage lastResponse;
-    private DecisionRequestMessage pendingDecision;
     private GameEngine gameEngine;
     private GameBoard gameBoard;
     private GameHUD gameHUD;
@@ -24,6 +23,9 @@ public class GameUI implements Drawable {
 
     private UIState uiState;
     private int currentPlayer;
+
+    private boolean wasStateUpdatedD = false; //init with different values
+    private boolean wasStateUpdatedQ = false;
 
     private int panelHeight;
     private int panelWidth;
@@ -45,43 +47,64 @@ public class GameUI implements Drawable {
         gameInput = new GameInput(this,renderTarget);
         gameCardChoice = new GameCardChoice(this);
 
-        if(true) { //TODO edge detect the flag here
-            setCurrentUIScreen();
-        }
+        //updateCurrentUIScreen();
     }
 
-    private void setCurrentUIScreen(){
+    public void updateCurrentUIScreen(){
         System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
-        switch (lastResponse.getLifeGameMessageType()){
-            case StartupMessage:
-                break;
-            case SpinRequest:
-                uiState = WaitingForSpin;
 
-                break;
-            case OptionDecisionRequest:
-                uiState = CardChoice;
-                pendingDecision = (DecisionRequestMessage) lastResponse;
-                currentPlayer = pendingDecision.getRelatedPlayer();
-                gameCardChoice.setChoices(pendingDecision.getChoices());
-                gameInput.setEnableCardChoice(true);
-                break;
-            case OptionDecisionResponse:
-                break;
-            default:
-                uiState = UIState.Init;
+        boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
+        boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
+
+        wasStateUpdatedQ = wasStateUpdatedD;
+
+        if (risingEdgeDetected || fallingEdgeDetected) {
+
+            switch (lastResponse.getLifeGameMessageType()) {
+                case StartupMessage:
+                    break;
+                case SpinRequest:
+                    uiState = WaitingForSpin;
+                    break;
+                case OptionDecisionRequest:
+                    uiState = CardChoice;
+                    DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
+                    currentPlayer = pendingDecision.getRelatedPlayer();
+                    gameCardChoice.setChoices(pendingDecision.getChoices());
+                    gameInput.setEnableCardChoice(true);
+                    gameInput.setEnableCardChoice(true);
+                    break;
+                case OptionDecisionResponse:
+                    break;
+                default:
+                    uiState = UIState.Init;
+            }
         }
     }
 
-    UIState getUIState(){ return uiState; }
+    private void invertWasStateUpdatedD(){
+        wasStateUpdatedD = !wasStateUpdatedD;
+    }
+
+    UIState getUIState(){
+        return uiState;
+    }
 
     private void sendStartupMessage(){
+        invertWasStateUpdatedD();
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
     private void sendDecisionResponseMessage(int choice){
+        invertWasStateUpdatedD();
         LifeGameMessage message = new DecisionResponseMessage(choice);
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+    }
+
+    private void sendSpinResponseMessage(){
+        invertWasStateUpdatedD();
+        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
@@ -107,6 +130,7 @@ public class GameUI implements Drawable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            wasStateUpdatedD = !wasStateUpdatedD;
             switch(e.getActionCommand()){
                 case "Quit Game":
                     gameEngine.quitGame();
@@ -121,10 +145,8 @@ public class GameUI implements Drawable {
                     break;
                 case "Spin The Wheel":
                     gameInput.setEnableSpinButton(false);
-                    lastResponse = messagingInterface.sendMessageAcceptResponse(new DecisionResponseMessage(1));
-
+                    sendSpinResponseMessage();
             }
-
         }
     }
 }
