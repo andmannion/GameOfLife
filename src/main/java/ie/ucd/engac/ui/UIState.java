@@ -1,6 +1,7 @@
 package ie.ucd.engac.ui;
 
-public enum GameState {
+public enum UIState {
+    Init,
     WaitingForSpin,
     PostSpin,
     CardChoice, //3 variants
