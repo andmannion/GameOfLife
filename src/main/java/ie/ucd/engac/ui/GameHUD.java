@@ -1,6 +1,7 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
 import java.awt.*;
@@ -39,6 +40,9 @@ public class GameHUD implements Drawable {
     private int HOUSETEXTSKIP = 15;
 
     GameHUD(GameEngine gameEngine,GameUI gameUI){//TODO remove gameEngine reference
+        Player player = new Player(1);//TODO remove this line!!!
+        ShadowPlayer shadowPlayer = new ShadowPlayer(player);//TODO remove this line!!!
+        updateFields(shadowPlayer);//TODO remove this line!!!
         this.gameEngine = gameEngine;
 
         panelHeight = gameUI.getPanelHeight();

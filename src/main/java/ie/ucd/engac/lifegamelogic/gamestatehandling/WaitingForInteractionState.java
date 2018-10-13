@@ -14,6 +14,7 @@ public class WaitingForInteractionState implements GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// Nothing to be done here
+
 	}
 	
 	@Override

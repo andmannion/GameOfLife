@@ -3,6 +3,7 @@ package ie.ucd.engac.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import ie.ucd.engac.ui.*;
 
 public class GameInput implements Drawable {
     //TODO scalable buttons
@@ -32,7 +33,10 @@ public class GameInput implements Drawable {
 
     private JPanel renderTarget;
 
+    private GameUI gameUIParent;
+
     GameInput(GameUI gameUI,JPanel renderTarget){
+        this.gameUIParent = gameUI;
         this.renderTarget = renderTarget;
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
@@ -75,22 +79,45 @@ public class GameInput implements Drawable {
         renderTarget.add(chooseRightCardButton);
 
     }
+
+    void setEnableCardChoice(boolean bool){
+        chooseLeftCardButton.setEnabled(bool);
+        chooseRightCardButton.setEnabled(bool);
+    }
+
     @Override
     public void draw(Graphics graphics){
-        if(true){ //in normal play screen
-            quitButton.setVisible(true);
-            spinButton.setVisible(true);
-            chooseLeftCardButton.setVisible(false);
-            chooseRightCardButton.setVisible(false);
+        switch(gameUIParent.getUIState()){
+            case Init:
+                break;
+            case WaitingForSpin:
+                break;
+            case PostSpin:
+                break;
+            case CardChoice://in normal play screen
+                quitButton.setVisible(true);
+                spinButton.setVisible(false);
+                chooseLeftCardButton.setVisible(true);
+                chooseRightCardButton.setVisible(true);
+                break;
+            case Spin2WinPicking:
+                break;
+            case Spin2WinRolling:
+                break;
+            case BabyAcquisition:
+                break;
+            case Wedding:
+                break;
         }
-        else if (true){ //card selection screen
+        /*
+        if (true){ //card selection screen
             spinButton.setVisible(false);
             chooseLeftCardButton.setVisible(true);
             chooseRightCardButton.setVisible(true);
         }
         else if (true){ //some other screen
 
-        }
+        }*/
         renderTarget.paintComponents(graphics);
     }
 }

@@ -44,7 +44,7 @@ public class GameEngine implements Runnable {
         MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);        
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<LifeGameMessage>(messageRecieverAndResponder);
         
-        gameUI = new GameUI(this,renderTarget); 
+        gameUI = new GameUI(this,renderTarget,messagingInterface);
         /* TODO: Please add a messagingInterface parameter to the constructor of this GameUI object
         *		 i.e. gameUI = new GameUI(this, renderTarget, messagingInterface);
     	*/
