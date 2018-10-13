@@ -1,24 +1,15 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import ie.ucd.engac.lifegamelogic.TurnAction;
-import ie.ucd.engac.lifegamelogic.TurnState;
-import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.MessageReciever;
+import ie.ucd.engac.messaging.MessageReceiverAndResponder;
 
-public class GameLogicInterface implements MessageReciever<LifeGameMessage> {
+public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameMessage> {
 	private GameLogic gameLogic;
 	
 	public GameLogicInterface(LogicGameBoard gameBoard, int numPlayers) {
@@ -26,15 +17,12 @@ public class GameLogicInterface implements MessageReciever<LifeGameMessage> {
 	}
 
 	@Override
-	public LifeGameMessage receiveMessage() {
-		gameLogic.handleInput(new UserInput(LifeGameMessageTypes.SpinRequest));
+	public LifeGameMessage receiveMessage(LifeGameMessage lifeGameMessage) {
+		LifeGameMessage gameLogicResponse = gameLogic.handleInput(lifeGameMessage);
 		
-		return null;
+		return gameLogicResponse;
 	}
 	
-	public void respondToMessage(LifeGameMessage lifeGameMessage) {
-		
-	}
 	
 	   /* What types of user input could I be awaiting?
 		* - Initial path selection choice

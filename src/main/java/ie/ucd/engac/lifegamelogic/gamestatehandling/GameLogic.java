@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -17,6 +18,7 @@ public class GameLogic {
 	private ArrayList<Player> players;
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
+	private LifeGameMessage currentLifeGameMessageResponse;
 	
 	private GameState currentState;
 	
@@ -28,14 +30,14 @@ public class GameLogic {
 		
 	}
 	
-	public void handleInput(UserInput userInput) {
+	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		// Startup
 		if(currentState == null) {
 			currentState = new WaitingForInteractionState();
 			currentState.enter(this);
 		}		
 		
-		GameState nextGameState = currentState.handleInput(this, userInput);
+		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
 		if(nextGameState != null) {
 			currentState = nextGameState;
@@ -43,6 +45,9 @@ public class GameLogic {
 		}
 		
 		// Need to send a response message to the user
+		// When there are no pending transitions, must send the current
+		// LifeGameMessage as stored in the GameLogic object.
+		return getLifeGameMessageResponse();
 	}	
 	
 	protected Player getCurrentPlayer() {
@@ -51,6 +56,10 @@ public class GameLogic {
 	
 	protected void setNextPlayerToCurrent() {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+	}
+	
+	private LifeGameMessage getLifeGameMessageResponse() {
+		return currentLifeGameMessageResponse;
 	}
 
 	private void initialisePlayers(int numPlayers) {

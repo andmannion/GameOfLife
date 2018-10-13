@@ -1,7 +1,10 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogicInterface;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.MessageReceiverAndResponder;
+import ie.ucd.engac.messaging.MessagingInterface;
 import ie.ucd.engac.ui.GameUI;
 
 import javax.swing.*;
@@ -19,7 +22,7 @@ public class GameEngine implements Runnable {
     private GameUI gameUI;
 
     //game logic
-    private GameLogic gameLogic;
+    //private GameLogic gameLogic;
 
     //objects for rendering process
     private JPanel renderTarget;
@@ -38,9 +41,14 @@ public class GameEngine implements Runnable {
 
 
         LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
-        gameLogic = new GameLogic(logicGameBoard, numPlayers);
-        gameUI = new GameUI(this,renderTarget); //TODO ad
-    
+        
+        MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);        
+        MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<LifeGameMessage>(messageRecieverAndResponder);
+        
+        gameUI = new GameUI(this,renderTarget); 
+        /* TODO: Please add a messagingInterface parameter to the constructor of this GameUI object
+        *		 i.e. gameUI = new GameUI(this, renderTarget, messagingInterface);
+    	*/
 
     }
 

@@ -1,11 +1,16 @@
 package ie.ucd.engac.messaging;
 
+// TODO: Probably make this an abstract class
 public class LifeGameMessage {
-	private LifeGameMessageTypes messageType;
+	private LifeGameMessageTypes lifeGameMessageType;
 	//private ArrayList<GameCommand> commandsToUI;
 	//private ArrayList<GameUpdate> updates;
 	
-	public LifeGameMessageTypes getMessageType() {
-		return messageType;
+	public LifeGameMessage(LifeGameMessageTypes lifeGameMessageType) {
+		this.lifeGameMessageType = lifeGameMessageType;
+	}
+	
+	public LifeGameMessageTypes getLifeGameMessageType() {
+		return lifeGameMessageType;
 	}
 }
