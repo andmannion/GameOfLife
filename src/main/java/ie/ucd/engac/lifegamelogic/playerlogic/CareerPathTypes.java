@@ -1,6 +1,6 @@
 package ie.ucd.engac.lifegamelogic.playerlogic;
 
-public enum CareerPath {
+public enum CareerPathTypes {
 	StandardCareer,
 	CollegeCareer	
 }
