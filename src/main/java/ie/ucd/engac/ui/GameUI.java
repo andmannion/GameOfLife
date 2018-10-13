@@ -64,6 +64,7 @@ public class GameUI implements Drawable {
                 pendingDecision = (DecisionRequestMessage) lastResponse;
                 currentPlayer = pendingDecision.getRelatedPlayer();
                 gameCardChoice.setChoices(pendingDecision.getChoices());
+                gameInput.setEnableCardChoice(true);
                 break;
             case OptionDecisionResponse:
                 break;
@@ -79,7 +80,7 @@ public class GameUI implements Drawable {
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
-    private void sendActionMessage(LifeGameMessageTypes messageType){
+    private void sendDecisionResponseMessage(LifeGameMessageTypes messageType){
         LifeGameMessage message = new LifeGameMessage(messageType);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
@@ -110,7 +111,12 @@ public class GameUI implements Drawable {
                     gameEngine.quitGame();
                     break;
                 case "Choose Left Card":
-                    sendActionMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    gameInput.setEnableCardChoice(false);
+                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    break;
+                case "Choose Right Card":
+                    gameInput.setEnableCardChoice(false);
+                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
                     break;
 
 

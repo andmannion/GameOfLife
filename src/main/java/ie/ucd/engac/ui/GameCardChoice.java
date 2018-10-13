@@ -16,12 +16,10 @@ public class GameCardChoice  implements Drawable {
 
     GameCardChoice(GameUI gameUI){
         this.gameUI = gameUI;
-
     }
 
     void setChoices(ArrayList<Chooseable> choices){
         this.choices = choices;
-        System.out.println(this.choices.get(0).displayChoiceDetails());
     }
 
     @Override

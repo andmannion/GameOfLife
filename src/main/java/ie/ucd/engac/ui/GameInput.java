@@ -79,6 +79,12 @@ public class GameInput implements Drawable {
         renderTarget.add(chooseRightCardButton);
 
     }
+
+    void setEnableCardChoice(boolean bool){
+        chooseLeftCardButton.setEnabled(bool);
+        chooseRightCardButton.setEnabled(bool);
+    }
+
     @Override
     public void draw(Graphics graphics){
         switch(gameUIParent.getUIState()){
