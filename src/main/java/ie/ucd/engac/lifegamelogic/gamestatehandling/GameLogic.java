@@ -23,6 +23,7 @@ public class GameLogic {
 	
 	// Queue of expected responses
 	private Queue<LifeGameMessage> expectedResponses;
+	private Queue<LifeGameMessage> replyMessagesSent;
 	
 	private GameState currentState;
 	
@@ -30,6 +31,7 @@ public class GameLogic {
 		this.gameBoard = gameBoard;
 		bank = new Bank();
 		expectedResponses = new LinkedList<LifeGameMessage>();
+		replyMessagesSent = new LinkedList<LifeGameMessage>();
 		initialisePlayers(numPlayers);
 	}
 	
@@ -63,6 +65,10 @@ public class GameLogic {
 	
 	protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
 		currentLifeGameMessageResponse = lifeGameMessage;
+		
+		// Store the reply sent so that we can be aware of the context the resulting reply should be 
+		// interpreted in
+		replyMessagesSent.add(lifeGameMessage);
 	}
 
 	protected void addExpectedResponse(LifeGameMessage lifeGameMessage) {
