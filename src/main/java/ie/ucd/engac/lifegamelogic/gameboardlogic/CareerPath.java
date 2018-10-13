@@ -12,8 +12,8 @@ public class CareerPath implements Chooseable {
 	
 	@Override
 	public String displayChoiceDetails() {
-		return "Career Path\n" + 
-				occupationType.toString();
+		return "Career Path Selection:\n" + 
+				"Option: " + occupationType.toString();
 	}
 
 }
