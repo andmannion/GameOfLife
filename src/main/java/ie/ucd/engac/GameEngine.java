@@ -11,7 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameEngine implements Runnable {
-	private final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json"; 
+
+	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
     private static final int PANWIDTH = 1280; //TODO what is the best way to
     private static final int PANHEIGHT = 720; //TODO manage the window size?
 
@@ -35,20 +36,16 @@ public class GameEngine implements Runnable {
 
 
     GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
-        //TODO redo this constructor
+        //TODO redo this constructor - am I done?
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
         LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         
-        MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);        
-        MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<LifeGameMessage>(messageRecieverAndResponder);
+        MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
+        MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageRecieverAndResponder);
         
         gameUI = new GameUI(this,renderTarget,messagingInterface);
-        /* TODO: Please add a messagingInterface parameter to the constructor of this GameUI object
-        *		 i.e. gameUI = new GameUI(this, renderTarget, messagingInterface);
-    	*/
-
     }
 
     public void quitGame(){

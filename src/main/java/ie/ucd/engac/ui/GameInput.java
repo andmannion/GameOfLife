@@ -80,6 +80,9 @@ public class GameInput implements Drawable {
 
     }
 
+    void setEnableSpinButton(boolean bool){
+        spinButton.setEnabled(bool);
+    }
     void setEnableCardChoice(boolean bool){
         chooseLeftCardButton.setEnabled(bool);
         chooseRightCardButton.setEnabled(bool);
@@ -91,6 +94,7 @@ public class GameInput implements Drawable {
             case Init:
                 break;
             case WaitingForSpin:
+                spinButton.setVisible(true);
                 break;
             case PostSpin:
                 break;

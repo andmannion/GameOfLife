@@ -8,5 +8,5 @@ public enum UIState {
     Spin2WinPicking,
     Spin2WinRolling,
     BabyAcquisition,
-    Wedding; //babies and wedding may need two states
+    Wedding //babies and wedding may need two states
 }

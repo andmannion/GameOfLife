@@ -7,14 +7,14 @@ public class GameBoard implements Drawable {
     private int panelHeight;
     private int panelWidth;
 
-    public GameBoard(GameUI gameUI){
+    GameBoard(GameUI gameUI){
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
     }
 
     @Override
     public void draw(Graphics graphics){
-        //TODO
+        //TODO board draw method
     }
 }
 

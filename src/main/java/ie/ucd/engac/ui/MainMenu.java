@@ -93,7 +93,7 @@ public class MainMenu extends JPanel implements ActionListener {
         setVisibilityNumPlayers(false);
     }
 
-    //todo do these need to exist?
+    //todo do I need these visibility functions to exist?
     private void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
         quitGameButton.setVisible(bool);
@@ -106,7 +106,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JComponent source = (JComponent) e.getSource(); //TODO this better
+        JComponent source = (JComponent) e.getSource(); //TODO this actionlistener better
         if (source instanceof JButton){
             switch (((JButton) source).getActionCommand()){
                 case "New Game": newGame(); break;

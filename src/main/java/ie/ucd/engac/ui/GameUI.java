@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static ie.ucd.engac.ui.UIState.CardChoice;
+import static ie.ucd.engac.ui.UIState.WaitingForSpin;
 
 public class GameUI implements Drawable {
 
@@ -40,21 +41,23 @@ public class GameUI implements Drawable {
 
         gameActionListener = new GameActionListener();
         gameBoard = new GameBoard(this);
-        gameHUD = new GameHUD(gameEngine,this);
+        gameHUD = new GameHUD(this);
         gameInput = new GameInput(this,renderTarget);
         gameCardChoice = new GameCardChoice(this);
 
-        if(true) { //edge detect the flag here
+        if(true) { //TODO edge detect the flag here
             setCurrentUIScreen();
         }
     }
 
     private void setCurrentUIScreen(){
-        //System.out.println(lastResponse.getLifeGameMessageType().toString()); //TODO remove this
+        System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
         switch (lastResponse.getLifeGameMessageType()){
             case StartupMessage:
                 break;
             case SpinRequest:
+                uiState = WaitingForSpin;
+
                 break;
             case OptionDecisionRequest:
                 uiState = CardChoice;
@@ -77,8 +80,8 @@ public class GameUI implements Drawable {
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
-    private void sendDecisionResponseMessage(LifeGameMessageTypes messageType){
-        LifeGameMessage message = new LifeGameMessage(messageType);
+    private void sendDecisionResponseMessage(int choice){
+        LifeGameMessage message = new DecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
@@ -90,7 +93,7 @@ public class GameUI implements Drawable {
         return panelWidth;
     }
 
-    public GameActionListener getGameActionListener() { return gameActionListener; }
+    GameActionListener getGameActionListener() { return gameActionListener; }
 
     @Override
     public void draw(Graphics graphics){
@@ -101,6 +104,7 @@ public class GameUI implements Drawable {
     }
 
     private class GameActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             switch(e.getActionCommand()){
@@ -109,13 +113,15 @@ public class GameUI implements Drawable {
                     break;
                 case "Choose Left Card":
                     gameInput.setEnableCardChoice(false);
-                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    sendDecisionResponseMessage(0);
                     break;
                 case "Choose Right Card":
                     gameInput.setEnableCardChoice(false);
-                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    sendDecisionResponseMessage(1);
                     break;
-
+                case "Spin The Wheel":
+                    gameInput.setEnableSpinButton(false);
+                    lastResponse = messagingInterface.sendMessageAcceptResponse(new DecisionResponseMessage(1));
 
             }
 
