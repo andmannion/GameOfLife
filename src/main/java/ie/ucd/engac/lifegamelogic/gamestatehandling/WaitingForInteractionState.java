@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
-import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -13,7 +12,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 public class WaitingForInteractionState implements GameState {
 
 	@Override
-	public void enter(GameLogic gameLogic) {//, GameStateStack gameStateStack) {
+	public void enter(GameLogic gameLogic) {
 		// Nothing to be done here
 	}
 	
@@ -22,9 +21,6 @@ public class WaitingForInteractionState implements GameState {
 		LifeGameMessageTypes incomingMessageType = lifeGameMessage.getLifeGameMessageType();
 		
 		if(incomingMessageType == LifeGameMessageTypes.StartupMessage) {
-			// 
-			
-			// Must reply with a "PlayerMustChooseInitialCareerPath" message			
 			// Should we transition to another state to send a message?
 			// Need to have a "choose one of a set of options" message
 			ArrayList<Chooseable> careerPathChoices = new ArrayList<Chooseable>();
