@@ -39,13 +39,12 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-
         LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         
         MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);        
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<LifeGameMessage>(messageRecieverAndResponder);
         
-        gameUI = new GameUI(this,renderTarget); 
+        gameUI = new GameUI(this,renderTarget,messagingInterface);
         /* TODO: Please add a messagingInterface parameter to the constructor of this GameUI object
         *		 i.e. gameUI = new GameUI(this, renderTarget, messagingInterface);
     	*/

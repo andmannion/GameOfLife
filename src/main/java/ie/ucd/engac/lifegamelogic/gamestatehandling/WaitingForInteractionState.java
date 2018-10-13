@@ -6,8 +6,9 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 public class WaitingForInteractionState implements GameState {
 
 	@Override
-	public void enter(GameLogic gameLogic, GameStateStack gameStateStack) {
-		// Nothing to be done here
+	public void enter(GameLogic gameLogic) {
+		// TODO Auto-generated method stub
+
 	}
 	
 	@Override
