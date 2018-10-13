@@ -39,7 +39,6 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-
         LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         
         MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);        

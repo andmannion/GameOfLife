@@ -17,7 +17,7 @@ public class Player {
 	private ArrayList<HouseCard> houseCards;
 
 	private OccupationCard occupationCard;
-	private CareerPath careerPathTaken;
+	private CareerPathTypes careerPathTaken;
 	
 	private MaritalStatus maritalStatus;
 	
@@ -69,12 +69,12 @@ public class Player {
 		this.occupationCard = occupationCard;
 	}
 
-	public CareerPath getCareerPath() {
+	public CareerPathTypes getCareerPath() {
 		return careerPathTaken;
 	}
 	
-	public void setCareerPath(CareerPath careerPath) {
-		careerPathTaken = careerPath;
+	public void setCareerPath(CareerPathTypes careerPathTypes) {
+		careerPathTaken = careerPathTypes;
 	}
 	
 	// Current amount of money

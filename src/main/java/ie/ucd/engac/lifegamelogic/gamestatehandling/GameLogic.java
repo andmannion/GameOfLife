@@ -1,18 +1,16 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
-import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.MessageReciever;
 
 // This holds all the elements; players, bank, etc.
 public class GameLogic {
-	private final String GAME_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
 
 	private Bank bank;
 	private ArrayList<Player> players;
@@ -20,14 +18,16 @@ public class GameLogic {
 	private int currentPlayerIndex;
 	private LifeGameMessage currentLifeGameMessageResponse;
 	
+	// Queue of expected responses
+	private Queue<LifeGameMessage> expectedResponses;
+	
 	private GameState currentState;
 	
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {		
 		this.gameBoard = gameBoard;
-		bank = new Bank();		
+		bank = new Bank();
+		expectedResponses = new LinkedList<LifeGameMessage>();
 		initialisePlayers(numPlayers);
-		
-		
 	}
 	
 	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
@@ -56,6 +56,18 @@ public class GameLogic {
 	
 	protected void setNextPlayerToCurrent() {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+	}
+	
+	protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
+		currentLifeGameMessageResponse = lifeGameMessage;
+	}
+
+	protected void addExpectedResponse(LifeGameMessage lifeGameMessage) {
+		expectedResponses.add(lifeGameMessage);
+	}
+	
+	protected LifeGameMessage getExpectedResponse() {
+		return expectedResponses.remove();
 	}
 	
 	private LifeGameMessage getLifeGameMessageResponse() {
