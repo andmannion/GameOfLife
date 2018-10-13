@@ -56,9 +56,6 @@ public class GameUI implements Drawable {
                 break;
             case SpinRequest:
                 break;
-            case CareerPathRequest:
-                //ignore this state
-                break;
             case OptionDecisionRequest:
                 uiState = CardChoice;
                 pendingDecision = (DecisionRequestMessage) lastResponse;
