@@ -24,7 +24,7 @@ public class GameUI implements Drawable {
     private UIState uiState;
     private int currentPlayer;
 
-    private boolean wasStateUpdatedD = false; //init with different values
+    private volatile boolean wasStateUpdatedD = false; //init with different values
     private boolean wasStateUpdatedQ = false;
 
     private int panelHeight;
@@ -51,20 +51,19 @@ public class GameUI implements Drawable {
     }
 
     public void updateCurrentUIScreen(){
-        System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
+        //System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
 
         boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
         boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
 
-        wasStateUpdatedQ = wasStateUpdatedD;
-
-        if (risingEdgeDetected || fallingEdgeDetected) {
-
+       if (risingEdgeDetected || fallingEdgeDetected) {
+            System.out.println(lastResponse.getLifeGameMessageType());
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
                 case SpinRequest:
                     uiState = WaitingForSpin;
+                    System.out.println("WaitingForSpin");
                     break;
                 case OptionDecisionRequest:
                     uiState = CardChoice;
@@ -72,17 +71,19 @@ public class GameUI implements Drawable {
                     currentPlayer = pendingDecision.getRelatedPlayer();
                     gameCardChoice.setChoices(pendingDecision.getChoices());
                     gameInput.setEnableCardChoice(true);
-                    gameInput.setEnableCardChoice(true);
+                    gameInput.setVisibleCardChoice(true);
                     break;
                 case OptionDecisionResponse:
                     break;
                 default:
+                    System.out.println("uhh"); //TODO remove
                     uiState = UIState.Init;
             }
         }
+        wasStateUpdatedQ = wasStateUpdatedD;
     }
 
-    private void invertWasStateUpdatedD(){
+    private synchronized void invertWasStateUpdatedD(){
         wasStateUpdatedD = !wasStateUpdatedD;
     }
 
@@ -130,13 +131,13 @@ public class GameUI implements Drawable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            wasStateUpdatedD = !wasStateUpdatedD;
             switch(e.getActionCommand()){
                 case "Quit Game":
                     gameEngine.quitGame();
                     break;
                 case "Choose Left Card":
                     gameInput.setEnableCardChoice(false);
+                    System.out.println("Chose");
                     sendDecisionResponseMessage(0);
                     break;
                 case "Choose Right Card":

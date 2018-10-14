@@ -24,7 +24,7 @@ public class WaitingForInteractionState implements GameState {
 		if(incomingMessageType == LifeGameMessageTypes.StartupMessage) {
 			// Should we transition to another state to send a message?
 			// Need to have a "choose one of a set of options" message
-			ArrayList<Chooseable> careerPathChoices = new ArrayList<Chooseable>();
+			ArrayList<Chooseable> careerPathChoices = new ArrayList<>();
 			
 			for(OccupationCardTypes occupationType : OccupationCardTypes.values()) {
 				careerPathChoices.add(new CareerPath(occupationType));
@@ -40,6 +40,9 @@ public class WaitingForInteractionState implements GameState {
 			// No further transition is necessary at this time
 			return null;
 		}
+		else {
+		    gameLogic.setResponseMessage(null);
+        }
 		
 		return null;
 	}
