@@ -47,7 +47,7 @@ public class WaitingForInteractionState implements GameState {
 		}
 		else {
 		    gameLogic.setResponseMessage(null);
-        }
+        }/*
 		// TODO: Must match; THEN check what it is
 		else if(incomingMessageType == LifeGameMessageTypes.OptionDecisionResponse
 				&& expectedIncomingMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
@@ -61,7 +61,7 @@ public class WaitingForInteractionState implements GameState {
 		else{
 			 gameLogic.setResponseMessage(null);
 		}
-		
+		*/
 		return null;
 	}
 

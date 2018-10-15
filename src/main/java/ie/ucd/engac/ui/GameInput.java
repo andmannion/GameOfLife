@@ -38,6 +38,8 @@ public class GameInput implements Drawable {
     private final int panelWidth;
 
     private JSpinner reducingChoice;
+    private ArrayList<String> spinnerValues;
+    private int spinnerIndex;
 
     private JButton spinButton;
     private JButton quitButton;
@@ -116,12 +118,25 @@ public class GameInput implements Drawable {
     }
 
     void setSpinnerOptions(ArrayList<Chooseable> choices){
-        ArrayList<String> temp = new ArrayList<>();
+        spinnerValues = new ArrayList<>();
         for(Chooseable choice:choices) {
-            temp.add(choice.displayChoiceDetails());
+            spinnerValues.add(choice.displayChoiceDetails());
         }
-        SpinnerModel model = new SpinnerListModel(temp);
+        SpinnerModel model = new SpinnerListModel(spinnerValues);
         reducingChoice.setModel(model);
+    }
+
+
+    void setSpinnerIndex(){
+        int index=0;
+        for(Object o :spinnerValues) {
+            if(o.equals(reducingChoice.getValue()))
+                spinnerIndex = index;
+            index++;
+        }
+    }
+    int getSpinnerIndex() {
+        return spinnerIndex; //TODO
     }
 
 

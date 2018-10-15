@@ -112,7 +112,13 @@ public class GameUI implements Drawable {
 
     private void sendSpinResponseMessage(){
         invertWasStateUpdatedD();
-        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
+        LifeGameMessage message = new SpinResponseMessage();
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+    }
+
+    private void sendLargeDecisionResponse(int choice){
+        invertWasStateUpdatedD();
+        LifeGameMessage message = new LargeDecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
@@ -139,7 +145,10 @@ public class GameUI implements Drawable {
         @Override
         public void stateChanged(ChangeEvent e){
             System.out.println(e);
-            //TODO update stored value
+            JSpinner spinner = (JSpinner) e.getSource();
+            System.out.println(spinner.getValue());
+            gameInput.setSpinnerIndex();
+            //TODO error checking pls
         }
 
         @Override
@@ -162,7 +171,7 @@ public class GameUI implements Drawable {
                     sendSpinResponseMessage();
                 case "Submit Choice":
                     gameInput.setEnableSubmitButton(false);
-                    //TODO add response to this button
+                    sendLargeDecisionResponse(gameInput.getSpinnerIndex());
             }
         }
     }
