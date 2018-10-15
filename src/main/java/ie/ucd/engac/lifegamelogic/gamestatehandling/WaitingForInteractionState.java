@@ -21,6 +21,11 @@ public class WaitingForInteractionState implements GameState {
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 		LifeGameMessageTypes incomingMessageType = lifeGameMessage.getLifeGameMessageType();
 		
+		/* TODO: Expected message response shouldn't be removed until the 
+		 * incoming message matches. 
+		 */
+		LifeGameMessage expectedIncomingMessage = gameLogic.getExpectedResponse();
+		
 		if(incomingMessageType == LifeGameMessageTypes.StartupMessage) {
 			// Should we transition to another state to send a message?
 			// Need to have a "choose one of a set of options" message
@@ -43,6 +48,19 @@ public class WaitingForInteractionState implements GameState {
 		else {
 		    gameLogic.setResponseMessage(null);
         }
+		// TODO: Must match; THEN check what it is
+		else if(incomingMessageType == LifeGameMessageTypes.OptionDecisionResponse
+				&& expectedIncomingMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
+			// Need to parse the response - what type of decision was made? Then assign the correct value to 
+			// the player that the message related to
+			// Then after we have updated the player - exiting UpdatePlayer state, we should construct a 
+			// shadowPlayer, and send off this message.
+			// Then transition into awaitUserInput, after pushing a new AwaitSpin expected message.
+			
+		}
+		else{
+			 gameLogic.setResponseMessage(null);
+		}
 		
 		return null;
 	}

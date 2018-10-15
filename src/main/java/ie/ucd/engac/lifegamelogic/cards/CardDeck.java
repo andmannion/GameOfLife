@@ -2,20 +2,20 @@ package ie.ucd.engac.lifegamelogic.cards;
 
 import java.util.LinkedList;
 
-public abstract class CardDeck {
+public abstract class CardDeck<T extends Card> {
 	// Want to be able to: take from the top, and add to the bottom of the deck
 
-	protected LinkedList<Card> cards;
+	protected LinkedList<T> cards;
 
 	public CardDeck() {
-		cards = new LinkedList<Card>();
+		cards = new LinkedList<T>();
 	}
 
-	public Card popTopCard() {
+	public T popTopCard() {
 		return cards.pop();
 	}
 
-	public void addCardToBottom(Card card) {
+	public void addCardToBottom(T card) {
 		cards.addLast(card);
 	}
 

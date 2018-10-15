@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -19,6 +20,7 @@ public class GameLogic {
 	private ArrayList<Player> players;
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
+	private int numberOfUnconfiguredPlayers;
 	private LifeGameMessage currentLifeGameMessageResponse;
 	
 	// Queue of expected responses
@@ -63,6 +65,12 @@ public class GameLogic {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 	
+	protected void decrementNumberOfUnconfiguredPlayers() {
+		if(numberOfUnconfiguredPlayers > 0) {
+			numberOfUnconfiguredPlayers--;
+		}
+	}
+
 	protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
 		currentLifeGameMessageResponse = lifeGameMessage;
 		
@@ -79,6 +87,10 @@ public class GameLogic {
 		return expectedResponses.remove();
 	}
 	
+	protected OccupationCard getTopStandardCareerCard() {
+		return bank.getTopStandardCareerCard();
+	}
+
 	private LifeGameMessage getLifeGameMessageResponse() {
 		return currentLifeGameMessageResponse;
 	}
@@ -89,5 +101,8 @@ public class GameLogic {
 		for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
 			players.add(new Player(playerIndex));
 		}
+		
+		// All of these players require the user to set some initial characteristics
+		numberOfUnconfiguredPlayers = numPlayers;
 	}
 }
