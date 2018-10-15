@@ -1,12 +1,9 @@
 package ie.ucd.engac.lifegamelogic.banklogic;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 
 public class Bank {
@@ -63,5 +60,9 @@ public class Bank {
 
 	public void setTotalMoneyExtracted(int totalMoneyExtracted) {
 		this.totalMoneyExtracted = totalMoneyExtracted;
+	}
+
+	public OccupationCard getTopStandardCareerCard() {
+		return careerCardDeck.popTopCard();
 	}
 }

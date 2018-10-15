@@ -3,7 +3,7 @@ package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 
-public class OccupationCardDeck extends CardDeck {
+public class OccupationCardDeck extends CardDeck<OccupationCard> {
 	private String configString;
 
 	public OccupationCardDeck(String configString) {
