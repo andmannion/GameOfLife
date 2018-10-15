@@ -4,6 +4,8 @@ import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,6 +63,13 @@ public class GameUI implements Drawable {
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
+                case LargeDecisionRequest:
+                    DecisionRequestMessage pendingLargeDecision = (DecisionRequestMessage) lastResponse;
+                    currentPlayer = pendingLargeDecision.getRelatedPlayer();
+                    gameCardChoice.setChoices(pendingLargeDecision.getChoices());
+                    gameInput.setEnableCardChoice(true);
+                    gameInput.setVisibleCardChoice(true);
+                    break;
                 case SpinRequest:
                     uiState = WaitingForSpin;
                     System.out.println("WaitingForSpin");
@@ -72,8 +81,6 @@ public class GameUI implements Drawable {
                     gameCardChoice.setChoices(pendingDecision.getChoices());
                     gameInput.setEnableCardChoice(true);
                     gameInput.setVisibleCardChoice(true);
-                    break;
-                case OptionDecisionResponse:
                     break;
                 default:
                     System.out.println("uhh"); //TODO remove
@@ -127,7 +134,13 @@ public class GameUI implements Drawable {
         gameCardChoice.draw(graphics);
     }
 
-    private class GameActionListener implements ActionListener {
+    private class GameActionListener implements ActionListener,ChangeListener {
+
+        @Override
+        public void stateChanged(ChangeEvent e){
+            System.out.println(e);
+            //TODO update stored value
+        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -147,7 +160,11 @@ public class GameUI implements Drawable {
                 case "Spin The Wheel":
                     gameInput.setEnableSpinButton(false);
                     sendSpinResponseMessage();
+                case "Submit Choice":
+                    gameInput.setEnableSubmitButton(false);
+                    //TODO add response to this button
             }
         }
     }
+
 }

@@ -4,6 +4,8 @@ public enum LifeGameMessageTypes {
 	StartupMessage,
 	SpinRequest,
 	SpinResponse,
+	LargeDecisionRequest,
+    LargeDecisionResponse,
 	OptionDecisionRequest,
 	OptionDecisionResponse
 }

@@ -27,7 +27,7 @@ public class GameEngine implements Runnable {
 
     //objects for rendering process
     private JPanel renderTarget;
-    private static final int FRAME_TIME = 1/30;
+    private static final int FRAME_TIME = (1/30)*1000;
     private Graphics graphics;
     private Image backBuffer;
     private volatile boolean running;
