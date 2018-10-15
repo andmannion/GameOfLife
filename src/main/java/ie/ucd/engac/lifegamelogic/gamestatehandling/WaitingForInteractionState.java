@@ -29,7 +29,7 @@ public class WaitingForInteractionState implements GameState {
 		if(incomingMessageType == LifeGameMessageTypes.StartupMessage) {
 			// Should we transition to another state to send a message?
 			// Need to have a "choose one of a set of options" message
-			ArrayList<Chooseable> careerPathChoices = new ArrayList<Chooseable>();
+			ArrayList<Chooseable> careerPathChoices = new ArrayList<>();
 			
 			for(OccupationCardTypes occupationType : OccupationCardTypes.values()) {
 				careerPathChoices.add(new CareerPath(occupationType));
@@ -45,6 +45,9 @@ public class WaitingForInteractionState implements GameState {
 			// No further transition is necessary at this time
 			return null;
 		}
+		else {
+		    gameLogic.setResponseMessage(null);
+        }
 		// TODO: Must match; THEN check what it is
 		else if(incomingMessageType == LifeGameMessageTypes.OptionDecisionResponse
 				&& expectedIncomingMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
@@ -54,6 +57,9 @@ public class WaitingForInteractionState implements GameState {
 			// shadowPlayer, and send off this message.
 			// Then transition into awaitUserInput, after pushing a new AwaitSpin expected message.
 			
+		}
+		else{
+			 gameLogic.setResponseMessage(null);
 		}
 		
 		return null;

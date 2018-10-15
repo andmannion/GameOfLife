@@ -32,10 +32,8 @@ public class GameLogic {
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {		
 		this.gameBoard = gameBoard;
 		bank = new Bank();
-		
-		expectedResponses = new LinkedList<LifeGameMessage>();
-		replyMessagesSent = new LinkedList<LifeGameMessage>();
-		
+		expectedResponses = new LinkedList<>();
+		replyMessagesSent = new LinkedList<>();
 		initialisePlayers(numPlayers);
 	}
 	

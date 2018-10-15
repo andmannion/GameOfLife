@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static ie.ucd.engac.ui.UIState.CardChoice;
+import static ie.ucd.engac.ui.UIState.WaitingForSpin;
 
 public class GameUI implements Drawable {
 
     private MessagingInterface<LifeGameMessage> messagingInterface;
     private LifeGameMessage lastResponse;
-    private DecisionRequestMessage pendingDecision;
     private GameEngine gameEngine;
     private GameBoard gameBoard;
     private GameHUD gameHUD;
@@ -23,6 +23,9 @@ public class GameUI implements Drawable {
 
     private UIState uiState;
     private int currentPlayer;
+
+    private volatile boolean wasStateUpdatedD = false; //init with different values
+    private boolean wasStateUpdatedQ = false;
 
     private int panelHeight;
     private int panelWidth;
@@ -40,45 +43,69 @@ public class GameUI implements Drawable {
 
         gameActionListener = new GameActionListener();
         gameBoard = new GameBoard(this);
-        gameHUD = new GameHUD(gameEngine,this);
+        gameHUD = new GameHUD(this);
         gameInput = new GameInput(this,renderTarget);
         gameCardChoice = new GameCardChoice(this);
 
-        if(true) { //edge detect the flag here
-            setCurrentUIScreen();
-        }
+        //updateCurrentUIScreen();
     }
 
-    private void setCurrentUIScreen(){
-        //System.out.println(lastResponse.getLifeGameMessageType().toString()); //TODO remove this
-        switch (lastResponse.getLifeGameMessageType()){
-            case StartupMessage:
-                break;
-            case SpinRequest:
-                break;
-            case OptionDecisionRequest:
-                uiState = CardChoice;
-                pendingDecision = (DecisionRequestMessage) lastResponse;
-                currentPlayer = pendingDecision.getRelatedPlayer();
-                gameCardChoice.setChoices(pendingDecision.getChoices());
-                gameInput.setEnableCardChoice(true);
-                break;
-            case OptionDecisionResponse:
-                break;
-            default:
-                uiState = UIState.Init;
+    public void updateCurrentUIScreen(){
+        //System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
+
+        boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
+        boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
+
+       if (risingEdgeDetected || fallingEdgeDetected) {
+            System.out.println(lastResponse.getLifeGameMessageType());
+            switch (lastResponse.getLifeGameMessageType()) {
+                case StartupMessage:
+                    break;
+                case SpinRequest:
+                    uiState = WaitingForSpin;
+                    System.out.println("WaitingForSpin");
+                    break;
+                case OptionDecisionRequest:
+                    uiState = CardChoice;
+                    DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
+                    currentPlayer = pendingDecision.getRelatedPlayer();
+                    gameCardChoice.setChoices(pendingDecision.getChoices());
+                    gameInput.setEnableCardChoice(true);
+                    gameInput.setVisibleCardChoice(true);
+                    break;
+                case OptionDecisionResponse:
+                    break;
+                default:
+                    System.out.println("uhh"); //TODO remove
+                    uiState = UIState.Init;
+            }
         }
+        wasStateUpdatedQ = wasStateUpdatedD;
     }
 
-    UIState getUIState(){ return uiState; }
+    private synchronized void invertWasStateUpdatedD(){
+        wasStateUpdatedD = !wasStateUpdatedD;
+    }
+
+    UIState getUIState(){
+        return uiState;
+    }
 
     private void sendStartupMessage(){
+        invertWasStateUpdatedD();
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
-    private void sendDecisionResponseMessage(LifeGameMessageTypes messageType){
-        LifeGameMessage message = new LifeGameMessage(messageType);
+    private void sendDecisionResponseMessage(int choice){
+        invertWasStateUpdatedD();
+        LifeGameMessage message = new DecisionResponseMessage(choice);
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+    }
+
+    private void sendSpinResponseMessage(){
+        invertWasStateUpdatedD();
+        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
     }
 
@@ -90,7 +117,7 @@ public class GameUI implements Drawable {
         return panelWidth;
     }
 
-    public GameActionListener getGameActionListener() { return gameActionListener; }
+    GameActionListener getGameActionListener() { return gameActionListener; }
 
     @Override
     public void draw(Graphics graphics){
@@ -101,6 +128,7 @@ public class GameUI implements Drawable {
     }
 
     private class GameActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             switch(e.getActionCommand()){
@@ -109,16 +137,17 @@ public class GameUI implements Drawable {
                     break;
                 case "Choose Left Card":
                     gameInput.setEnableCardChoice(false);
-                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    System.out.println("Chose");
+                    sendDecisionResponseMessage(0);
                     break;
                 case "Choose Right Card":
                     gameInput.setEnableCardChoice(false);
-                    sendDecisionResponseMessage(LifeGameMessageTypes.OptionDecisionResponse);
+                    sendDecisionResponseMessage(1);
                     break;
-
-
+                case "Spin The Wheel":
+                    gameInput.setEnableSpinButton(false);
+                    sendSpinResponseMessage();
             }
-
         }
     }
 }

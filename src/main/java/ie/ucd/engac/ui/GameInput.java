@@ -47,7 +47,7 @@ public class GameInput implements Drawable {
         int spinY = panelHeight-SPIN_HEIGHT-2*SPIN_BORDER;
         spinButton.setActionCommand("Spin The Wheel");
         spinButton.setBounds(spinX,spinY,SPIN_WIDTH,SPIN_HEIGHT);
-        spinButton.setVisible(true);
+        spinButton.setVisible(false);
         spinButton.addActionListener(actionListener);
         renderTarget.add(spinButton);
 
@@ -65,7 +65,7 @@ public class GameInput implements Drawable {
         int cLeftY = CARD_CHOICE_Y_POS;
         chooseLeftCardButton.setActionCommand("Choose Left Card");
         chooseLeftCardButton.setBounds(cLeftX,cLeftY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
-        chooseLeftCardButton.setVisible(true);
+        chooseLeftCardButton.setVisible(false);
         chooseLeftCardButton.addActionListener(actionListener);
         renderTarget.add(chooseLeftCardButton);
 
@@ -74,15 +74,25 @@ public class GameInput implements Drawable {
         int cRighY = CARD_CHOICE_Y_POS;
         chooseRightCardButton.setActionCommand("Choose Right Card");
         chooseRightCardButton.setBounds(cRightX,cRighY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
-        chooseRightCardButton.setVisible(true);
+        chooseRightCardButton.setVisible(false);
         chooseRightCardButton.addActionListener(actionListener);
         renderTarget.add(chooseRightCardButton);
 
     }
 
+    void setEnableSpinButton(boolean bool){
+        spinButton.setEnabled(bool);
+    }
+    void setVisibleSpinButton(boolean bool){
+        spinButton.setEnabled(bool);
+    }
     void setEnableCardChoice(boolean bool){
         chooseLeftCardButton.setEnabled(bool);
         chooseRightCardButton.setEnabled(bool);
+    }
+    void setVisibleCardChoice(boolean bool){
+        chooseLeftCardButton.setVisible(bool);
+        chooseRightCardButton.setVisible(bool);
     }
 
     @Override
@@ -91,14 +101,17 @@ public class GameInput implements Drawable {
             case Init:
                 break;
             case WaitingForSpin:
+                setVisibleSpinButton(true);
+                setEnableSpinButton(true);
+
+                setVisibleCardChoice(false);
                 break;
             case PostSpin:
                 break;
             case CardChoice://in normal play screen
-                quitButton.setVisible(true);
-                spinButton.setVisible(false);
-                chooseLeftCardButton.setVisible(true);
-                chooseRightCardButton.setVisible(true);
+                setVisibleSpinButton(false);
+
+                setVisibleCardChoice(true);
                 break;
             case Spin2WinPicking:
                 break;
@@ -109,15 +122,6 @@ public class GameInput implements Drawable {
             case Wedding:
                 break;
         }
-        /*
-        if (true){ //card selection screen
-            spinButton.setVisible(false);
-            chooseLeftCardButton.setVisible(true);
-            chooseRightCardButton.setVisible(true);
-        }
-        else if (true){ //some other screen
-
-        }*/
         renderTarget.paintComponents(graphics);
     }
 }
