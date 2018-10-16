@@ -65,4 +65,8 @@ public class Bank {
 	public OccupationCard getTopStandardCareerCard() {
 		return careerCardDeck.popTopCard();
 	}
+
+	public void returnStandardCareerCard(OccupationCard standardCareerCardToBeReturned) {
+		careerCardDeck.addCardToBottom(standardCareerCardToBeReturned);
+	}
 }

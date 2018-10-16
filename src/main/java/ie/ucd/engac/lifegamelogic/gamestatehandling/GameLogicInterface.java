@@ -1,6 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import ie.ucd.engac.lifegamelogic.TurnAction;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;

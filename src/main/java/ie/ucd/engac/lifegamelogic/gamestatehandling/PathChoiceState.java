@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
@@ -12,20 +13,20 @@ import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-public class PathChoiceState implements GameState {
+public class PathChoiceState extends InitialisePlayerState {
+	private final int COLLEGE_UPFRONT_COST = 100000;
 	// What is the exit condition for this state?
 
 	@Override
 	public void enter(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-	}
+		}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO Auto-generated method stub
-		// Must reply with an OptionDecisionRequest for a path type to the InitialMessage,
-		// and continue to respond to any further messages with that same message until we get
-		// the desired response type.
+		/* Must reply with an OptionDecisionRequest for a path type to the InitialMessage,
+		 * and continue to respond to any further messages with that same message until we get
+		 * the desired response type. 
+		 */
 		if(lifeGameMessage.getLifeGameMessageType() != LifeGameMessageTypes.OptionDecisionResponse) {
 			LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());			
 			gameLogic.setResponseMessage(replyMessage);
@@ -37,12 +38,15 @@ public class PathChoiceState implements GameState {
 			
 			// Must set the path choice for the current player based on what was returned
 			if(pathChoiceResponse == OccupationCardTypes.CollegeCareer) {
-				// Must transition to processCollegeCareer
 				gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.CollegeCareer);
+				gameLogic.getCurrentPlayer().subtractFromBalance(COLLEGE_UPFRONT_COST);				
 				
-				// Set the response message to "AllowSpin"
+				// Set the response message to "SpinRequest"
 				gameLogic.setResponseMessage(new LifeGameMessage(LifeGameMessageTypes.SpinRequest));				
-				return new ProcessCollegeCareer();
+				
+				// TODO: Need to exit from this inner state - what's next is the spinaccept state
+				//return new ProcessCollegeCareer();
+				return null;
 			}
 			else {
 				// Must send a message to transition to processStandardCareer
@@ -53,17 +57,20 @@ public class PathChoiceState implements GameState {
 				OccupationCard firstCareerCardChoice = gameLogic.getTopStandardCareerCard();
 				OccupationCard secondCareerCardChoice = gameLogic.getTopStandardCareerCard();
 				
+				ArrayList<Card> pendingCardChoices = new ArrayList<>();
+				pendingCardChoices.add(firstCareerCardChoice);
+				pendingCardChoices.add(secondCareerCardChoice);
+				
 				LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
 																					    (Chooseable) firstCareerCardChoice,
 																						(Chooseable) secondCareerCardChoice);
 				
 				// Need to store both choices so that we can assign the chosen one to the correct player, 
 				// and push the unchosen one to the bottom of the correct deck.
-				//gameLogic.storePendingChoiceCards(firstCareerCardChoice, secondCareerCardChoice);
-				
+				gameLogic.storePendingChoiceCards(pendingCardChoices);				
 				gameLogic.setResponseMessage(replyMessage);				
 				
-				return new ProcessStandardCareer();
+				return new ProcessStandardCareerState();
 			}
 		}
 		return null;

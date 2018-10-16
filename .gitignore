@@ -12,6 +12,9 @@
 # Log file
 *.log
 
+# Images
+state_machine_rough.jpeg
+
 # BlueJ files
 *.ctxt
 

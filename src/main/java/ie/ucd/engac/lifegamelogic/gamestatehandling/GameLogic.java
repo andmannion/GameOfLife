@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
+import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -26,6 +28,7 @@ public class GameLogic {
 	// Queue of expected responses
 	private Queue<LifeGameMessage> expectedResponses;
 	private Queue<LifeGameMessage> replyMessagesSent;
+	private ArrayList<Card> pendingCardChoices;
 	
 	private GameState currentState;
 	
@@ -40,7 +43,7 @@ public class GameLogic {
 	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		// Startup
 		if(currentState == null) {
-			currentState = new WaitingForInteractionState();
+			currentState = new InitialisePlayerState();
 			currentState.enter(this);
 		}		
 		
@@ -61,6 +64,10 @@ public class GameLogic {
 		return players.get(currentPlayerIndex);
 	}
 	
+	protected LogicGameBoard getGameBoard() {
+		return gameBoard;
+	}
+
 	protected void setNextPlayerToCurrent() {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
@@ -89,6 +96,26 @@ public class GameLogic {
 	
 	protected OccupationCard getTopStandardCareerCard() {
 		return bank.getTopStandardCareerCard();
+	}
+
+	protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
+		this.pendingCardChoices = pendingCardChoices;
+	}
+	
+	protected ArrayList<Card> getPendingCardChoices(){
+		return pendingCardChoices;
+	}
+	
+	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
+		bank.returnStandardCareerCard(careerCardToBeReturned);
+	}
+
+	protected ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
+		return gameBoard.getOutboundNeighbours(currentBoardLocation);
+	}
+
+	protected void extractMoneyFromBank(int amountToExtract) {
+		bank.extractMoney(amountToExtract);
 	}
 
 	private LifeGameMessage getLifeGameMessageResponse() {
