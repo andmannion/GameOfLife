@@ -3,6 +3,9 @@ package ie.ucd.engac.messaging;
 
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
@@ -64,7 +67,16 @@ public class ShadowPlayer {
              return "No occupation card.";
         }
         else{
-            return occupation.convertDrawableString();
+            switch(occupation.getOccupationCardType()){
+                case Career:
+                    System.out.println("123");
+                    System.out.println((occupation).convertDrawableString());
+                    return ((CareerCard) occupation).convertDrawableString();
+                case CollegeCareer:
+                    return ((CollegeCareerCard) occupation).convertDrawableString();
+                default:
+                    return null;
+            }
         }
     }
     public String numLoansToString(){
