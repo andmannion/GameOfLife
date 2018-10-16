@@ -78,12 +78,13 @@ public class GameUI implements Drawable {
                     uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
                     currentPlayer = pendingDecision.getRelatedPlayer();
+                    System.out.println(pendingDecision.getChoices().get(0).displayChoiceDetails());
                     gameCardChoice.setChoices(pendingDecision.getChoices());
                     gameInput.setEnableCardChoice(true);
                     gameInput.setVisibleCardChoice(true);
                     break;
                 default:
-                    System.out.println("This message needs handling"); //TODO remove
+                    System.out.println("A message needs handling code written"); //TODO remove
                     uiState = UIState.Init;
             }
         }

@@ -37,7 +37,7 @@ public class CareerCard extends OccupationCard implements Chooseable {
 	@Override
 	public String displayChoiceDetails() {
 		StringBuilder displayChoiceStringBuilder = new StringBuilder();		
-		displayChoiceStringBuilder.append("Type: " + occupationCardType.toString());
+		displayChoiceStringBuilder.append("Type: " + occupationCardType);//.toString());
 		displayChoiceStringBuilder.append("Subtype:" + careerType.toString());
 		displayChoiceStringBuilder.append(" Salary: " + salary);
 		displayChoiceStringBuilder.append(" Bonus payout: " + bonusPaymentAmount);

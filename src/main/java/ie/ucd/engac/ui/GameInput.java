@@ -107,7 +107,7 @@ public class GameInput implements Drawable {
                 setSpinnerIndex();//TODO see if this works & remove println()
             }
         });
-        reducingChoice.setVisible(true);
+        reducingChoice.setVisible(false);
         ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
         reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);
         renderTarget.add(reducingChoice);
@@ -115,7 +115,7 @@ public class GameInput implements Drawable {
         submitChoice = new JButton("Submit Choice");
         submitChoice.setActionCommand("Submit Choice");
         submitChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS+50,JCOMBO_WIDTH,JCOMBO_HEIGHT);
-        submitChoice.setVisible(true);
+        submitChoice.setVisible(false);
         submitChoice.addActionListener(actionListener);
         renderTarget.add(submitChoice);
 
@@ -132,11 +132,16 @@ public class GameInput implements Drawable {
 
 
     private void setSpinnerIndex(){
-        int index=0;
-        for(Object o :spinnerValues) {
-            if(o.equals(reducingChoice.getValue()))
-                spinnerIndex = index;
-            index++;
+        try {
+            int index = 0;
+            for (Object o : spinnerValues) {
+                if (o.equals(reducingChoice.getValue()))
+                    spinnerIndex = index;
+                index++;
+            }
+        }
+        catch (Exception error){ //TODO fix this
+            System.out.println(error.toString());
         }
     }
     int getSpinnerIndex() {
@@ -145,13 +150,13 @@ public class GameInput implements Drawable {
 
 
     void setEnableSubmitButton(boolean bool){
-        spinButton.setEnabled(bool);
+        submitChoice.setEnabled(bool);
     }
     void setEnableSpinButton(boolean bool){
         spinButton.setEnabled(bool);
     }
     void setVisibleSpinButton(boolean bool){
-        spinButton.setEnabled(bool);
+        spinButton.setVisible(bool);
     }
     void setEnableCardChoice(boolean bool){
         chooseLeftCardButton.setEnabled(bool);
