@@ -8,6 +8,7 @@ public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameM
 	private GameLogic gameLogic;
 	
 	public GameLogicInterface(LogicGameBoard gameBoard, int numPlayers) {
+		System.out.println("Inside GameLogicInterface constructor");
 		gameLogic = new GameLogic(gameBoard, numPlayers);
 	}
 

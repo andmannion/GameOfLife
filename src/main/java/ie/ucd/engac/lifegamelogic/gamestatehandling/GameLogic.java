@@ -32,21 +32,21 @@ public class GameLogic {
 	
 	private GameState currentState;
 	
-	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {		
+	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {	
+		System.out.println("Inside GameLogic constructor");
 		this.gameBoard = gameBoard;
 		bank = new Bank();
 		expectedResponses = new LinkedList<>();
 		replyMessagesSent = new LinkedList<>();
 		initialisePlayers(numPlayers);
+		
+		currentState = new InitialisePlayerState();
+		currentState.enter(this);
+		System.out.println("Exiting GameLogic constructor");
 	}
 	
 	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
-		// Startup
-		if(currentState == null) {
-			currentState = new InitialisePlayerState();
-			currentState.enter(this);
-		}		
-		
+		System.out.println("Trying to handle input");
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
 		if(nextGameState != null) {

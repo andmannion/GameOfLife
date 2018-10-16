@@ -13,13 +13,16 @@ import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-public class PathChoiceState extends InitialisePlayerState {
+public class PathChoiceState implements GameState {
 	private final int COLLEGE_UPFRONT_COST = 100000;
 	// What is the exit condition for this state?
 
+	
+	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		}
+		
+	}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
@@ -30,8 +33,7 @@ public class PathChoiceState extends InitialisePlayerState {
 		if(lifeGameMessage.getLifeGameMessageType() != LifeGameMessageTypes.OptionDecisionResponse) {
 			LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());			
 			gameLogic.setResponseMessage(replyMessage);
-		}
-		
+		}		
 		else {
 			// Have a path choice to resolve
 			OccupationCardTypes pathChoiceResponse = parsePathChoiceResponse((DecisionResponseMessage)lifeGameMessage);
