@@ -7,6 +7,8 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.ShadowPlayer;
+import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class ProcessStandardCareerState extends InitialisePlayerState {
 
@@ -34,7 +36,8 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			gameLogic.returnCareerCard(unchosenCareerCard);
 			
 			// Need to set the reply message to SpinRequest
-			LifeGameMessage replyMessage = new LifeGameMessage(LifeGameMessageTypes.SpinRequest);
+			LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+																  gameLogic.getCurrentPlayer().getPlayerNumber());
 			
 			gameLogic.setResponseMessage(replyMessage);
 			
