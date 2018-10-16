@@ -2,7 +2,6 @@ package ie.ucd.engac.ui;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
-import javax.xml.bind.Unmarshaller;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.EventListener;
 
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.ui.*;
-import javafx.scene.layout.HBox;
 
 public class GameInput implements Drawable {
     //TODO scalable buttons
