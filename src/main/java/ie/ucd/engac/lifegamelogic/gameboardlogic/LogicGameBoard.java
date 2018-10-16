@@ -8,13 +8,13 @@ import com.google.gson.*;
 import ie.ucd.engac.customdatastructures.UDAGraph;
 import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
-import ie.ucd.engac.lifegamelogic.WheelSpin;
+import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.*;
 
 public class LogicGameBoard {
 	private UDAGraph<String> boardGraph;
 	private HashMap<String, GameBoardTile> idToGameBoardTileMap;
-	private WheelSpin spinningWheel;
+	private Spinner spinningWheel;
 	private String jsonBoardConfigFileLocation;
 	private String jsonBoardConfigFileContent;
 	private JsonElement overallJSONElement;
@@ -23,7 +23,7 @@ public class LogicGameBoard {
 		this.jsonBoardConfigFileLocation = jsonBoardConfigFileLocation;
 		boardGraph = new UDAGraph<String>();
 		idToGameBoardTileMap = new HashMap<String, GameBoardTile>();
-		spinningWheel = new WheelSpin();
+		spinningWheel = new Spinner();
 		
 		initialiseBoard();
 	}

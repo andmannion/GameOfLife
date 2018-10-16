@@ -6,8 +6,10 @@ public class InitialisePlayerState implements GameState {
 	// According to hierarchical state machines: the substate should
 	// attempt to handle the event first.If it will not handle the event, it is passed further
 	// up the hierarchy.
+	 
+	
 	protected InitialisePlayerState() {
-		currentSubstate = new PathChoiceState(); // Potential to have ChoiceState<Path> for reuse?
+	
 	}
 	
 	private GameState currentSubstate;
