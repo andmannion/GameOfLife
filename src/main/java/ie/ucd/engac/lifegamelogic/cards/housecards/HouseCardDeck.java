@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 
-public class HouseCardDeck extends CardDeck {
+public class HouseCardDeck extends CardDeck<HouseCard> {
 	private final String configString;
 	
 	public HouseCardDeck(String configString) {

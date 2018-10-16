@@ -17,7 +17,6 @@ import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class PathChoiceState implements GameState {
 	private final int COLLEGE_UPFRONT_COST = 100000;
-	// What is the exit condition for this state?
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -45,9 +44,9 @@ public class PathChoiceState implements GameState {
 
 				// Set the response message to "SpinRequest"
 				LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
-																      gameLogic.getCurrentPlayer().getPlayerNumber());
-				
+																	  gameLogic.getCurrentPlayer().getPlayerNumber());
 				gameLogic.setResponseMessage(replyMessage);
+				
 				// TODO: Need to exit from this inner state - what's next is the spinaccept
 				// state
 				// return new ProcessCollegeCareer();
@@ -60,15 +59,15 @@ public class PathChoiceState implements GameState {
 				// Get the two top CareerCards
 				CareerCard firstCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 				CareerCard secondCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
-				
-				//System.out.println("First career choice type is null? " + firstCareerCardChoice == null);
+
+				// System.out.println("First career choice type is null? " +
+				// firstCareerCardChoice == null);
 				ArrayList<Card> pendingCardChoices = new ArrayList<>();
 				pendingCardChoices.add(firstCareerCardChoice);
 				pendingCardChoices.add(secondCareerCardChoice);
 
 				LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
-						gameLogic.getCurrentPlayer().getPlayerNumber(),
-						(Chooseable) firstCareerCardChoice,
+						gameLogic.getCurrentPlayer().getPlayerNumber(), (Chooseable) firstCareerCardChoice,
 						(Chooseable) secondCareerCardChoice);
 
 				// Need to store both choices so that we can assign the chosen one to the
@@ -85,8 +84,7 @@ public class PathChoiceState implements GameState {
 
 	@Override
 	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-		// Must clear the sent message
+		// Must clear the sent message?
 	}
 
 	private LifeGameMessage constructPathChoiceMessage(int relatedPlayerIndex) {
@@ -109,7 +107,7 @@ public class PathChoiceState implements GameState {
 			return OccupationCardTypes.CollegeCareer;
 		}
 
-		System.out.println("Invalid pathResponse received in PathChoiceState.handleInput().parsePathChoiceResponse");
+		System.out.println("Invalid pathResponse received in PathChoiceState.handleInput().parsePathChoiceResponse()");
 		return null;
 	}
 
