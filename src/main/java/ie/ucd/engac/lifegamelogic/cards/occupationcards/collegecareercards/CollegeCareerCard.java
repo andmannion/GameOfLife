@@ -21,15 +21,5 @@ public class CollegeCareerCard extends OccupationCard {
 	public CollegeCareerTypes getCareerType() {
 		return collegeCareerType;
 	}
-	
-	@Override
-	public String convertDrawableString() {
-		String string = "";
-		string.concat("Type: " + occupationCardType.toString());
-		string.concat(" Subtype:" + collegeCareerType.toString());
-		string.concat(" Salary: " + salary);
-		string.concat(" Bonus payout: " + bonusPaymentAmount);
-		string.concat(" Bonus number: " + bonusNumber);
-		return string;
-	}
+
 }
