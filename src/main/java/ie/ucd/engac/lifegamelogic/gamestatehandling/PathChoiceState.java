@@ -3,7 +3,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;

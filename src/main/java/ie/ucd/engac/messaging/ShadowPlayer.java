@@ -69,8 +69,6 @@ public class ShadowPlayer {
         else{
             switch(occupation.getOccupationCardType()){
                 case Career:
-                    System.out.println("123");
-                    System.out.println((occupation).convertDrawableString());
                     return ((CareerCard) occupation).convertDrawableString();
                 case CollegeCareer:
                     return ((CollegeCareerCard) occupation).convertDrawableString();

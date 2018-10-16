@@ -24,11 +24,6 @@ public class CareerCard extends OccupationCard implements Chooseable {
 	}
 
 	@Override
-	public String convertDrawableString() {
-        return displayChoiceDetails();
-	}
-
-	@Override
 	public String displayChoiceDetails() {
 		StringBuilder displayChoiceStringBuilder = new StringBuilder();
 		displayChoiceStringBuilder.append("Type: " + occupationCardType);
