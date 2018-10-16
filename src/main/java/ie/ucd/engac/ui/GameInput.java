@@ -1,6 +1,7 @@
 package ie.ucd.engac.ui;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -12,7 +13,7 @@ import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.ui.*;
 
 public class GameInput implements Drawable {
-    //TODO scalable buttons
+
     private static final int SPIN_WIDTH = 192;
     private static final int SPIN_HEIGHT = 36;
     private static final int SPIN_BORDER = 13;
@@ -46,7 +47,6 @@ public class GameInput implements Drawable {
     private JButton chooseRightCardButton;
 
     private ActionListener actionListener;
-    private ChangeListener changeListener;
 
     private JPanel renderTarget;
 
@@ -58,7 +58,6 @@ public class GameInput implements Drawable {
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getGameActionListener();
-        changeListener = gameUI.getGameActionListener();
 
         spinButton = new JButton("Spin The Wheel");
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
@@ -100,7 +99,14 @@ public class GameInput implements Drawable {
         SpinnerModel model = new SpinnerListModel(Arrays.asList(placeholder));
         reducingChoice = new JSpinner();
         reducingChoice.setModel(model);
-        reducingChoice.addChangeListener(changeListener);
+        reducingChoice.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e){
+                JSpinner spinner = (JSpinner) e.getSource();
+                System.out.println(spinner.getValue());
+                setSpinnerIndex();//TODO see if this works & remove println()
+            }
+        });
         reducingChoice.setVisible(true);
         ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
         reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);
@@ -125,7 +131,7 @@ public class GameInput implements Drawable {
     }
 
 
-    void setSpinnerIndex(){
+    private void setSpinnerIndex(){
         int index=0;
         for(Object o :spinnerValues) {
             if(o.equals(reducingChoice.getValue()))
@@ -134,7 +140,7 @@ public class GameInput implements Drawable {
         }
     }
     int getSpinnerIndex() {
-        return spinnerIndex; //TODO
+        return spinnerIndex;
     }
 
 
@@ -183,7 +189,6 @@ public class GameInput implements Drawable {
             case Wedding:
                 break;
         }
-
         renderTarget.paintComponents(graphics);
     }
 }

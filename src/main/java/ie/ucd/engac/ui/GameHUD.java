@@ -7,8 +7,6 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import java.awt.*;
 
 public class GameHUD implements Drawable {
-    //TODO check that all printout requirements are met
-    //add #actioncards
 
     private ShadowPlayer sPlayer;
 
@@ -62,32 +60,14 @@ public class GameHUD implements Drawable {
         rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
     }
 
-    private void updateFields(ShadowPlayer shadowPlayer){
+    void updateFields(ShadowPlayer shadowPlayer){
         this.sPlayer = shadowPlayer;
     }
     public void draw(Graphics graphics){
         switch(gameUI.getUIState()){
             case Init:
                 break;
-            case WaitingForSpin:
-                try{
-                    graphics.setColor(Color.darkGray);
-                    graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
-                    graphics.setColor(Color.black);
-                    graphics.drawString("Player: " + sPlayer.playerNumToString() + " Colour: " + sPlayer.playerColourToString(), firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
-                    graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
-                    graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
-                    graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
-                    //TODO house cards need to respect border & wrap around?
-                    graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
-                    graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
-                    graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
-                }
-                catch (Exception e){
-                    System.out.println("Exception in GameHUD.draw() " + e); //TODO remove this print statement
-                }
-                break;
-            case PostSpin:
+            case WaitingForSpin: case PostSpin:
                 try{
                     graphics.setColor(Color.darkGray);
                     graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
@@ -102,7 +82,7 @@ public class GameHUD implements Drawable {
                     graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
                 }
                 catch (Exception e){
-                    System.out.println("Exception in GameHUD.draw() " + e); //TODO remove this print statement
+                    System.err.println("Exception in GameHUD.draw() " + e); //TODO remove this print statement
                 }
                 break;
             case CardChoice:

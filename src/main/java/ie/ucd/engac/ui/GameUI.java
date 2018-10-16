@@ -53,7 +53,6 @@ public class GameUI implements Drawable {
     }
 
     public void updateCurrentUIScreen(){
-        //System.out.println(lastResponse.getLifeGameMessageType()); //TODO remove this
 
         boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
         boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
@@ -63,16 +62,17 @@ public class GameUI implements Drawable {
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
-                case LargeDecisionRequest:
+                case LargeDecisionRequest: //TODO this is untested
                     DecisionRequestMessage pendingLargeDecision = (DecisionRequestMessage) lastResponse;
                     currentPlayer = pendingLargeDecision.getRelatedPlayer();
-                    gameCardChoice.setChoices(pendingLargeDecision.getChoices());
+                    gameInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     gameInput.setEnableCardChoice(true);
                     gameInput.setVisibleCardChoice(true);
                     break;
                 case SpinRequest:
+                    SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
-                    System.out.println("WaitingForSpin");
+                    gameHUD.updateFields(spinRequest.getShadowPlayer());
                     break;
                 case OptionDecisionRequest:
                     uiState = CardChoice;
@@ -83,7 +83,7 @@ public class GameUI implements Drawable {
                     gameInput.setVisibleCardChoice(true);
                     break;
                 default:
-                    System.out.println("uhh"); //TODO remove
+                    System.out.println("This message needs handling"); //TODO remove
                     uiState = UIState.Init;
             }
         }
@@ -140,16 +140,7 @@ public class GameUI implements Drawable {
         gameCardChoice.draw(graphics);
     }
 
-    private class GameActionListener implements ActionListener,ChangeListener {
-
-        @Override
-        public void stateChanged(ChangeEvent e){
-            System.out.println(e);
-            JSpinner spinner = (JSpinner) e.getSource();
-            System.out.println(spinner.getValue());
-            gameInput.setSpinnerIndex();
-            //TODO error checking pls
-        }
+    private class GameActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {

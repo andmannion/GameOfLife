@@ -13,8 +13,8 @@ import java.awt.*;
 public class GameEngine implements Runnable {
 
 	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
-    private static final int PANWIDTH = 1280; //TODO what is the best way to
-    private static final int PANHEIGHT = 720; //TODO manage the window size?
+    private static final int PANWIDTH = 1280; //TODO what is the best way to manage the window size?
+    private static final int PANHEIGHT = 720;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -27,16 +27,14 @@ public class GameEngine implements Runnable {
 
     //objects for rendering process
     private JPanel renderTarget;
-    private static final int FRAME_TIME = (1/30)*1000;
+    private static final int FRAME_TIME = (1000/30);
     private Graphics graphics;
     private Image backBuffer;
     private volatile boolean running;
     private Thread renderingThread;
-    //TODO should I be using synchronized methods?
 
 
     GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
-        //TODO redo this constructor - am I done?
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
@@ -133,7 +131,6 @@ public class GameEngine implements Runnable {
             tempGraphics = renderTarget.getGraphics(); //initialise
             //if initialised & backBuffer exits draw new image
             if ((tempGraphics != null) && (backBuffer != null)) {
-                //TODO do we require an observer?
                 tempGraphics.drawImage(backBuffer, 0, 0,null);
             }
         }
