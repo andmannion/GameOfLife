@@ -63,7 +63,7 @@ public class WaitForSpinState implements GameState {
 				else if(0 == adjacentForwardLocations.size()) {
 					// Must initiate retirement procedure
 				}
-
+				
 				tilesMoved++;
 			}
 
