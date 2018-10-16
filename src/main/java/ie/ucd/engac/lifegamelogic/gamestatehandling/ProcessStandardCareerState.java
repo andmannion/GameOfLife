@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -28,11 +29,11 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			
 			// Need to assign the chosen card to the relevant player
 			ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();			
-			OccupationCard chosenCareerCard = (OccupationCard) pendingCardChoices.get(choiceIndex);			
+			CareerCard chosenCareerCard = (CareerCard) pendingCardChoices.get(choiceIndex);			
 			gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
 			
 			// Only two cards at the moment, return unchosen
-			OccupationCard unchosenCareerCard = (OccupationCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
+			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
 			gameLogic.returnCareerCard(unchosenCareerCard);
 			
 			// Need to set the reply message to SpinRequest

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.Chooseable;
@@ -58,15 +59,17 @@ public class PathChoiceState implements GameState {
 
 				// Set the response message to "CardChoice"
 				// Get the two top CareerCards
-				OccupationCard firstCareerCardChoice = gameLogic.getTopStandardCareerCard();
-				OccupationCard secondCareerCardChoice = gameLogic.getTopStandardCareerCard();
-
+				CareerCard firstCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
+				CareerCard secondCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
+				
+				//System.out.println("First career choice type is null? " + firstCareerCardChoice == null);
 				ArrayList<Card> pendingCardChoices = new ArrayList<>();
 				pendingCardChoices.add(firstCareerCardChoice);
 				pendingCardChoices.add(secondCareerCardChoice);
 
 				LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
-						gameLogic.getCurrentPlayer().getPlayerNumber(), (Chooseable) firstCareerCardChoice,
+						gameLogic.getCurrentPlayer().getPlayerNumber(),
+						(Chooseable) firstCareerCardChoice,
 						(Chooseable) secondCareerCardChoice);
 
 				// Need to store both choices so that we can assign the chosen one to the

@@ -9,14 +9,11 @@ public class InitialisePlayerState implements GameState {
 	private GameState currentSubstate;
 	
 	protected InitialisePlayerState() {
-		System.out.println("Creating a new InitialisePlayerState in IPS");
 		currentSubstate = new PathChoiceState();
-		
 	}	
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		System.out.println("Entering substate");
 		currentSubstate.enter(gameLogic);
 	}
 
