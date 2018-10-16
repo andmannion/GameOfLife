@@ -1,7 +1,5 @@
 package ie.ucd.engac.messaging;
 
-import java.util.ArrayList;
-
 public class SpinRequestMessage extends LifeGameMessage {
     // Need to tell what is to be chosen between
     private final int relatedPlayerIndex;

@@ -32,8 +32,7 @@ public class GameLogic {
 	
 	private GameState currentState;
 	
-	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {	
-		System.out.println("Inside GameLogic constructor");
+	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {
 		this.gameBoard = gameBoard;
 		bank = new Bank();
 		expectedResponses = new LinkedList<>();
@@ -42,7 +41,6 @@ public class GameLogic {
 		
 		currentState = new InitialisePlayerState();
 		currentState.enter(this);
-		System.out.println("Exiting GameLogic constructor");
 	}
 	
 	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
