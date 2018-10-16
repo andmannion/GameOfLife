@@ -1,9 +1,17 @@
 package ie.ucd.engac.ui;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import javax.xml.bind.Unmarshaller;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EventListener;
+
+import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.ui.*;
+import javafx.scene.layout.HBox;
 
 public class GameInput implements Drawable {
     //TODO scalable buttons
@@ -21,15 +29,24 @@ public class GameInput implements Drawable {
     private static final int CARD_CHOICE_INTER_GAP = 227;
     private static final int CARD_CHOICE_Y_POS = 504;
 
+    private static final int JCOMBO_WIDTH = 128;
+    private static final int JCOMBO_HEIGHT = 30;
+    private static final int JCOMBO_LHS_GAP = 576;
+    private static final int JCOMBO_Y_POS = 345;
+
     private final int panelHeight;
     private final int panelWidth;
 
+    private JSpinner reducingChoice;
+
     private JButton spinButton;
     private JButton quitButton;
+    private JButton submitChoice;
     private JButton chooseLeftCardButton;
     private JButton chooseRightCardButton;
 
     private ActionListener actionListener;
+    private ChangeListener changeListener;
 
     private JPanel renderTarget;
 
@@ -41,6 +58,7 @@ public class GameInput implements Drawable {
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getGameActionListener();
+        changeListener = gameUI.getGameActionListener();
 
         spinButton = new JButton("Spin The Wheel");
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
@@ -78,8 +96,38 @@ public class GameInput implements Drawable {
         chooseRightCardButton.addActionListener(actionListener);
         renderTarget.add(chooseRightCardButton);
 
+        String[] placeholder = { "Placeholder","222" };
+        SpinnerModel model = new SpinnerListModel(Arrays.asList(placeholder));
+        reducingChoice = new JSpinner();
+        reducingChoice.setModel(model);
+        reducingChoice.addChangeListener(changeListener);
+        reducingChoice.setVisible(true);
+        ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
+        reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);
+        renderTarget.add(reducingChoice);
+
+        submitChoice = new JButton("Submit Choice");
+        submitChoice.setActionCommand("Submit Choice");
+        submitChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS+50,JCOMBO_WIDTH,JCOMBO_HEIGHT);
+        submitChoice.setVisible(true);
+        submitChoice.addActionListener(actionListener);
+        renderTarget.add(submitChoice);
+
     }
 
+    void setSpinnerOptions(ArrayList<Chooseable> choices){
+        ArrayList<String> temp = new ArrayList<>();
+        for(Chooseable choice:choices) {
+            temp.add(choice.displayChoiceDetails());
+        }
+        SpinnerModel model = new SpinnerListModel(temp);
+        reducingChoice.setModel(model);
+    }
+
+
+    void setEnableSubmitButton(boolean bool){
+        spinButton.setEnabled(bool);
+    }
     void setEnableSpinButton(boolean bool){
         spinButton.setEnabled(bool);
     }
@@ -122,6 +170,7 @@ public class GameInput implements Drawable {
             case Wedding:
                 break;
         }
+
         renderTarget.paintComponents(graphics);
     }
 }
