@@ -100,27 +100,27 @@ public class GameUI implements Drawable {
     }
 
     private void sendStartupMessage(){
-        invertWasStateUpdatedD();
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
     }
 
     private void sendDecisionResponseMessage(int choice){
-        invertWasStateUpdatedD();
         LifeGameMessage message = new DecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
     }
 
     private void sendSpinResponseMessage(){
-        invertWasStateUpdatedD();
         LifeGameMessage message = new SpinResponseMessage();
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
     }
 
     private void sendLargeDecisionResponse(int choice){
-        invertWasStateUpdatedD();
         LifeGameMessage message = new LargeDecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
     }
 
     int getPanelHeight() {
