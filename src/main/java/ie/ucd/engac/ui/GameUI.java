@@ -15,25 +15,38 @@ import static ie.ucd.engac.ui.UIState.WaitingForSpin;
 
 public class GameUI implements Drawable {
 
+    //objects that manage comm. protocol
     private MessagingInterface<LifeGameMessage> messagingInterface;
     private LifeGameMessage lastResponse;
+
+    //parent GameEngine
     private GameEngine gameEngine;
+
+    //UI sub elements
     private GameBoard gameBoard;
     private GameHUD gameHUD;
     private GameInput gameInput;
     private GameCardChoice gameCardChoice;
+    private GameActionListener gameActionListener;
 
+    //tracking the UI state to draw the correct items
     private UIState uiState;
-    private int currentPlayer;
+    private int currentPlayer; //TODO remove
 
+    //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false; //init with different values
     private boolean wasStateUpdatedQ = false;
 
+    // ...
     private int panelHeight;
     private int panelWidth;
 
-    private GameActionListener gameActionListener;
-
+    /**
+     * Constructor for GameUI.
+     * @param gameEngine            Parent GameEngine.
+     * @param renderTarget          JPanel to act as render target
+     * @param messagingInterface    MessagingInterface used to comm. with logic
+     */
     public GameUI(GameEngine gameEngine, JPanel renderTarget, MessagingInterface<LifeGameMessage> messagingInterface){
         this.gameEngine = gameEngine;
         this.messagingInterface = messagingInterface;
@@ -52,6 +65,9 @@ public class GameUI implements Drawable {
         //updateCurrentUIScreen();
     }
 
+    /**
+     * Looks at edges of uistate to determine if UI view needs to be changed.
+     */
     public void updateCurrentUIScreen(){
 
         boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
@@ -91,46 +107,79 @@ public class GameUI implements Drawable {
         wasStateUpdatedQ = wasStateUpdatedD;
     }
 
+    /**
+     * Update the flag for edge detection.
+     */
     private synchronized void invertWasStateUpdatedD(){
         wasStateUpdatedD = !wasStateUpdatedD;
     }
 
+    /**
+     * Returns the UI state for subelements to draw themselves
+     * @return The state of the ui as a UIState enum
+     */
     UIState getUIState(){
         return uiState;
     }
 
+    /**
+     * Send a startup message using the interface.
+     */
     private void sendStartupMessage(){
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
 
+    /**
+     * Send a decision response message using the interface.
+     * @param choice the user's choice.
+     */
     private void sendDecisionResponseMessage(int choice){
         LifeGameMessage message = new DecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
 
+    /**
+     * Send a spin response message using the interface.
+     */
     private void sendSpinResponseMessage(){
         LifeGameMessage message = new SpinResponseMessage();
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
 
-    private void sendLargeDecisionResponse(int choice){
+    /**
+     * Send a large decision response message using the interface.
+     * @param choice the user's choice.
+     */
+    private void sendLargeDecisionResponse(int choice){ //TODO Required? Probably not
         LifeGameMessage message = new LargeDecisionResponseMessage(choice);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
 
+    /**
+     * Returns the panel height.
+     * @return the panel height as an integer.
+     */
     int getPanelHeight() {
         return panelHeight;
     }
 
+    /**
+     * Returns the panel width.
+     * @return the panel width as an integer.
+     */
     int getPanelWidth() {
         return panelWidth;
     }
 
+    /**
+     * Returns the UI's button press action listener.
+     * @return the UI's ActionListener.
+     */
     GameActionListener getGameActionListener() { return gameActionListener; }
 
     @Override
@@ -141,6 +190,9 @@ public class GameUI implements Drawable {
         gameCardChoice.draw(graphics);
     }
 
+    /**
+     * UI's ActionListener that responds to button presses
+     */
     private class GameActionListener implements ActionListener {
 
         @Override

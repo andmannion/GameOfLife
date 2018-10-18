@@ -16,7 +16,9 @@ public class LifeGame implements WindowListener{
     private Container container;
     private GameEngine gameEngine;
 
-
+    /**
+     * LifeGame class constructor.
+     */
     LifeGame() {
         jFrame = new JFrame("Life: The Game");
         Dimension dimensions = new Dimension(PANWIDTH,PANHEIGHT);
@@ -29,6 +31,9 @@ public class LifeGame implements WindowListener{
         jFrame.setIgnoreRepaint(true);
     } // end of Main (constructor)
 
+    /**
+     * Constructs the main menu panel and adds it to the main JFrame.
+     */
     private void constructUI(){
         container = jFrame.getContentPane();
 
@@ -39,6 +44,11 @@ public class LifeGame implements WindowListener{
 
     } // end of constructUI
 
+    /**
+     * Initialises the game by creating the a panel to act as the rendering
+     * target, and then creates an instance of GameEngine to run the game.
+     * @param numPlayers    Number of players.
+     */
     public void initialiseGame(int numPlayers){
         System.out.println("Initialising game.");
         playPanel = new JPanel();
@@ -56,12 +66,18 @@ public class LifeGame implements WindowListener{
         gameEngine.beginGame();
     } //end of initialiseGame
 
+    /**
+     * Toggles the current view to the play/quit screen.
+     */
     void returnToMainMenu(){
         playPanel.setVisible(false);
         mainMenu.returnToMainMenu();
         mainMenu.setVisible(true);
     }
 
+    /**
+     * Calls the garbage collector on the JFrame and then exits.
+     */
     public void dispose(){
         jFrame.dispose();
         System.exit(0);
@@ -75,6 +91,11 @@ public class LifeGame implements WindowListener{
     public void windowDeiconified(WindowEvent window_event) {}
     @Override
     public void windowIconified(WindowEvent window_event) {}
+
+    /**
+     * On window close terminates the rendering thread before exiting.
+     * @param window_event window_event on closing
+     */
     @Override
     public void windowClosing(WindowEvent window_event) {
         try {
