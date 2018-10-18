@@ -77,15 +77,19 @@ public class WaitForSpinState implements GameState {
 			// or by encountering a stop tile.
 			switch (currentTile.getGameBoardTileType()) {
 			case Payday:
-				OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-				int currentSalary = currentOccupationCard.getSalary();
-				gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
-				gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
+				OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();				
+				if(currentOccupationCard != null) {
+					int currentSalary = currentOccupationCard.getSalary();
+					gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
+					gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
+				}
 				break;
 			case Action:
 				
 				break;
-//				Holiday,
+			case Holiday:
+				// Do nothing
+				break;
 //				SpinToWin,
 //				Baby,
 //				House,
@@ -123,11 +127,14 @@ public class WaitForSpinState implements GameState {
 			// Player should collect the salary indicated in their Career/College Career
 			// card from the Bank
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-			int currentSalary = currentOccupationCard.getSalary();
+			
+			if(currentOccupationCard != null) {
+				int currentSalary = currentOccupationCard.getSalary();
 
-			// Get money from the bank, increment the player's balance by that amount
-			gameLogic.extractMoneyFromBank(currentSalary);
-			gameLogic.getCurrentPlayer().addToBalance(currentSalary);
+				// Get money from the bank, increment the player's balance by that amount
+				gameLogic.extractMoneyFromBank(currentSalary);
+				gameLogic.getCurrentPlayer().addToBalance(currentSalary);
+			}
 		}
 	}
 }
