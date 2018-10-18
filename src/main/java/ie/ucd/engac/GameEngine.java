@@ -14,16 +14,13 @@ public class GameEngine implements Runnable {
 
 	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
     private static final int PANWIDTH = 1280; //TODO what is the best way to manage the window size?
-    private static final int PANHEIGHT = 720;
+    private static final int PANHEIGHT = 720; //TODO make this work on computers that have window borders
 
     //objects relating to life game
     private LifeGame lifeGameParent;
 
     //objects that need to be drawn
     private GameUI gameUI;
-
-    //game logic
-    //private GameLogic gameLogic;
 
     //objects for rendering process
     private JPanel renderTarget;
@@ -34,6 +31,13 @@ public class GameEngine implements Runnable {
     private Thread renderingThread;
 
 
+
+    /**
+     * Constructor for GameEngine class.
+     * @param lifeGame      Parent LifeGame that created the engine.
+     * @param jPanel        Rendering target panel.
+     * @param numPlayers    Number of players in the game.
+     */
     GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
@@ -44,29 +48,46 @@ public class GameEngine implements Runnable {
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageRecieverAndResponder);
         
         gameUI = new GameUI(this,renderTarget,messagingInterface);
-    }
+    } // end of constructor
 
+    /**
+     * Stops the rendering process & returns to the main menu.
+     */
     public void quitGame(){
         running = false;
         System.out.println("Stopped rendering"); //TODO remove
         lifeGameParent.returnToMainMenu();
-    }
+    } // end of quitGame()
 
+    /**
+     * Starts the rendering process.
+     */
     void beginGame(){
         renderingThread = new Thread(this);
         System.out.println("Starting renderingThread"); //TODO remove
         renderingThread.start();
     } // end of beginGame()
 
+    /**
+     * Returns the panel height.
+     * @return  integer height of the panel.
+     */
     public int getPanelHeight() {
         return PANHEIGHT;
-    }
+    } // end of getPanelHeight()
 
+    /**
+     * Returns the panel width.
+     * @return  integer width of the panel.
+     */
     public int getPanelWidth() {
         return PANWIDTH;
-    }
+    } // end of getPanelWidth()
 
 
+    /**
+     * Run function used by the rendering thread.
+     */
     @Override
     public void run() {
         running = true;
@@ -88,6 +109,7 @@ public class GameEngine implements Runnable {
 
             timeAfter = System.nanoTime();
 
+            //compute remaining time in this frame so thread can sleep, rather than render excessively quickly
             remainingFrameTime = FRAME_TIME - (int) ((timeBefore-timeAfter+leftOverFrameTime)/1000000L);
             leftOverFrameTime = 0L;
             if (remainingFrameTime > 0) {
@@ -109,6 +131,9 @@ public class GameEngine implements Runnable {
         } //end of while(running)
     } //end of run()
 
+    /**
+     * Called in run() to draw the current representation of the game to the back buffer.
+     */
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
             backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
@@ -123,8 +148,11 @@ public class GameEngine implements Runnable {
         graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
 
         gameUI.draw(graphics);
-    }
+    } // end of renderPanel()
 
+    /**
+     * Called in run() to draw the backbuffer on the target panel.
+     */
     private void paintPanel(){
         Graphics tempGraphics;
         try {
@@ -137,5 +165,5 @@ public class GameEngine implements Runnable {
         catch (Exception e){
             System.out.println("loadPanel() in GameEngine failed");
         }
-    }
+    } // end of paintPanel()
 }
