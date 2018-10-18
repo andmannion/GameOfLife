@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 
-public class ActionCardDeck extends CardDeck {
+public class ActionCardDeck extends CardDeck<ActionCard> {
 	public ActionCardDeck() {
 		super();
 

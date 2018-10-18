@@ -19,8 +19,6 @@ public class InitialisePlayerState implements GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO Auto-generated method stub
-		
 		GameState nextSubstate = currentSubstate.handleInput(gameLogic, lifeGameMessage);
 		
 		// Three options from a substate handleInput required:
