@@ -6,6 +6,10 @@
 /.idea/workspace.xml
 *.orig
 
+# UML images
+*engac*.png
+*lifegamelogic*.png
+
 # Compiled class file
 *.class
 
