@@ -13,6 +13,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
+import javafx.scene.shape.Path;
 
 
 // This holds all the elements; players, bank, etc.
@@ -39,12 +40,13 @@ public class GameLogic {
 		replyMessagesSent = new LinkedList<>();
 		initialisePlayers(numPlayers);
 		
-		currentState = new InitialisePlayerState();
+		currentState = new PathChoiceState();
 		currentState.enter(this);
 	}
 	
 	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		System.out.println("Trying to handle input");
+		System.out.println("Current state is " + currentState.toString());
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
 		if(nextGameState != null) {
@@ -70,6 +72,22 @@ public class GameLogic {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 	
+	protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
+		BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0); 
+		
+		players.get(playerNumber).setCurrentLocation(collegeCareerPathInitialLocation);
+	}
+	
+	protected void movePlayerToInitialCareerPath(int playerNumber) {
+		BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1); 
+		
+		players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
+	}
+
+	protected int getNumberOfUninitialisedPlayers() {
+		return numberOfUnconfiguredPlayers;
+	}
+
 	protected void decrementNumberOfUnconfiguredPlayers() {
 		if(numberOfUnconfiguredPlayers > 0) {
 			numberOfUnconfiguredPlayers--;

@@ -6,30 +6,30 @@ public class InitialisePlayerState implements GameState {
 	// According to hierarchical state machines: the substate should
 	// attempt to handle the event first.If it will not handle the event, it is passed further
 	// up the hierarchy.
-	private GameState currentSubstate;
+	//private GameState currentSubstate;
 	
 	protected InitialisePlayerState() {
-		currentSubstate = new PathChoiceState();
+		//currentSubstate = new PathChoiceState();
 	}	
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		currentSubstate.enter(gameLogic);
+		//currentSubstate.enter(gameLogic);
 	}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		GameState nextSubstate = currentSubstate.handleInput(gameLogic, lifeGameMessage);
+		//GameState nextSubstate = currentSubstate.handleInput(gameLogic, lifeGameMessage);
 		
 		// Three options from a substate handleInput required:
 		// - No change in state
 		// - Change to the substate
 		// - Change required in the superstate
 		
-		if(nextSubstate != null) {
-			currentSubstate = nextSubstate;
-			currentSubstate.enter(gameLogic);
-		}
+//		if(nextSubstate != null) {
+//			currentSubstate = nextSubstate;
+//			currentSubstate.enter(gameLogic);
+//		}
 		
 		// What we should be doing here: returning the next state to the highest level, 
 		// then recursively looking for where this state is located (i.e. invoking

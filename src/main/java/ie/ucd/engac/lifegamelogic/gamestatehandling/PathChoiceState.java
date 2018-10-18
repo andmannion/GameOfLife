@@ -42,7 +42,10 @@ public class PathChoiceState implements GameState {
 			if (pathChoiceResponse == OccupationCardTypes.CollegeCareer) {
 				gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.CollegeCareer);
 				gameLogic.getCurrentPlayer().subtractFromBalance(COLLEGE_UPFRONT_COST);
-
+						
+				// Must move the player to the CollegeCareer path
+				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
+				
 				// Set the response message to "SpinRequest"
 				LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
 																	  gameLogic.getCurrentPlayer().getPlayerNumber());
@@ -50,8 +53,10 @@ public class PathChoiceState implements GameState {
 				
 				// TODO: Need to exit from this inner state - what's next is the spinaccept
 				// state
-				// return new ProcessCollegeCareer();
-				return null;
+				gameLogic.decrementNumberOfUnconfiguredPlayers();
+				
+				return new WaitForSpinState();
+				//return null;
 			} 
 			else {
 				// Must send a message to transition to processStandardCareer
@@ -67,7 +72,8 @@ public class PathChoiceState implements GameState {
 				pendingCardChoices.add(secondCareerCardChoice);
 
 				LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
-												gameLogic.getCurrentPlayer().getPlayerNumber(), (Chooseable) firstCareerCardChoice,
+												gameLogic.getCurrentPlayer().getPlayerNumber(), 
+												(Chooseable) firstCareerCardChoice,
 												(Chooseable) secondCareerCardChoice);
 
 				// Need to store both choices so that we can assign the chosen one to the
@@ -87,7 +93,7 @@ public class PathChoiceState implements GameState {
 		// Must clear the sent message?
 	}
 
-	private LifeGameMessage constructPathChoiceMessage(int relatedPlayerIndex) {
+	protected static LifeGameMessage constructPathChoiceMessage(int relatedPlayerIndex) {
 		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
 		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
 		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));

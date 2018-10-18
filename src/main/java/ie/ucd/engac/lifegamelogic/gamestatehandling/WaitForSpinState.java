@@ -32,6 +32,9 @@ public class WaitForSpinState implements GameState {
 
 			// Need to spin the spinner
 			int tilesToMove = Spinner.spinTheWheel();
+			
+			System.out.println("The number spun by player " + gameLogic.getCurrentPlayer().getPlayerNumber() + " was " + tilesToMove);
+			
 			int tilesMoved = 0;
 			boolean stopTileEncountered = false;
 			GameBoardTile currentTile = null;
@@ -60,10 +63,14 @@ public class WaitForSpinState implements GameState {
 				}
 				else if(0 == adjacentForwardLocations.size()) {
 					// Must initiate retirement procedure
+					
+					System.out.println("No spaces remaining ahead");
 				}
 				
 				tilesMoved++;
 			}
+			
+			System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile.");
 
 			// At this point, we have landed on a tile, either through the number of goes
 			// running out,
@@ -89,8 +96,19 @@ public class WaitForSpinState implements GameState {
 				// TODO: use some utility log file class to write the errors of the program to				
 				break;
 			}
+			
+			gameLogic.setNextPlayerToCurrent();
 		}
 
+		if(gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+			// Must send a message to choose a career path, etc.
+			System.out.println("Still player left to initialise");
+			LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+			gameLogic.setResponseMessage(replyMessage);
+			
+			return new PathChoiceState();
+		}
+		
 		return null;
 	}
 
