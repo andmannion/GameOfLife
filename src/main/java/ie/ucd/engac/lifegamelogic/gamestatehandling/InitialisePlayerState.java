@@ -31,6 +31,15 @@ public class InitialisePlayerState implements GameState {
 			currentSubstate.enter(gameLogic);
 		}
 		
+		// What we should be doing here: returning the next state to the highest level, 
+		// then recursively looking for where this state is located (i.e. invoking
+		// the enter() method of each subsequent substate until we enter the correct
+		// destination state).
+		
+		// Problems: how to reuse similar behaviour between states? There is no
+		// similar behaviour; rather, the events are similar, but these states 
+		// perform vastly different mutative actions on the GameBoard and Player(s)
+		
 		return null;
 	}
 

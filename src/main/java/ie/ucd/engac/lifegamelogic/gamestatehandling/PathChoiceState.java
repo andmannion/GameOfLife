@@ -33,7 +33,8 @@ public class PathChoiceState implements GameState {
 		if (lifeGameMessage.getLifeGameMessageType() != LifeGameMessageTypes.OptionDecisionResponse) {
 			LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
 			gameLogic.setResponseMessage(replyMessage);
-		} else {
+		} 
+		else {
 			// Have a path choice to resolve
 			OccupationCardTypes pathChoiceResponse = parsePathChoiceResponse((DecisionResponseMessage) lifeGameMessage);
 
@@ -51,7 +52,8 @@ public class PathChoiceState implements GameState {
 				// state
 				// return new ProcessCollegeCareer();
 				return null;
-			} else {
+			} 
+			else {
 				// Must send a message to transition to processStandardCareer
 				gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.StandardCareer);
 
@@ -60,15 +62,13 @@ public class PathChoiceState implements GameState {
 				CareerCard firstCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 				CareerCard secondCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 
-				// System.out.println("First career choice type is null? " +
-				// firstCareerCardChoice == null);
 				ArrayList<Card> pendingCardChoices = new ArrayList<>();
 				pendingCardChoices.add(firstCareerCardChoice);
 				pendingCardChoices.add(secondCareerCardChoice);
 
 				LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
-						gameLogic.getCurrentPlayer().getPlayerNumber(), (Chooseable) firstCareerCardChoice,
-						(Chooseable) secondCareerCardChoice);
+												gameLogic.getCurrentPlayer().getPlayerNumber(), (Chooseable) firstCareerCardChoice,
+												(Chooseable) secondCareerCardChoice);
 
 				// Need to store both choices so that we can assign the chosen one to the
 				// correct player,

@@ -14,12 +14,10 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.ui.GameBoard;
 
 public class WaitForSpinState implements GameState {
-	private final int PAYDAY_LANDED_ON_BONUS = 100000;
-	
+	private final int PAYDAY_LANDED_ON_BONUS = 100000;	
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
 
 	}
 
