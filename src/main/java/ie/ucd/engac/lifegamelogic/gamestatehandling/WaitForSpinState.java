@@ -32,6 +32,9 @@ public class WaitForSpinState implements GameState {
 
 			// Need to spin the spinner
 			int tilesToMove = Spinner.spinTheWheel();
+			
+			System.out.println("The number spun by player " + gameLogic.getCurrentPlayer().getPlayerNumber() + " was " + tilesToMove);
+			
 			int tilesMoved = 0;
 			boolean stopTileEncountered = false;
 			GameBoardTile currentTile = null;
@@ -60,25 +63,33 @@ public class WaitForSpinState implements GameState {
 				}
 				else if(0 == adjacentForwardLocations.size()) {
 					// Must initiate retirement procedure
+					
+					System.out.println("No spaces remaining ahead");
 				}
 				
 				tilesMoved++;
 			}
+			
+			System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile.");
 
 			// At this point, we have landed on a tile, either through the number of goes
 			// running out,
 			// or by encountering a stop tile.
 			switch (currentTile.getGameBoardTileType()) {
 			case Payday:
-				OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-				int currentSalary = currentOccupationCard.getSalary();
-				gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
-				gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
+				OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();				
+				if(currentOccupationCard != null) {
+					int currentSalary = currentOccupationCard.getSalary();
+					gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
+					gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
+				}
 				break;
 			case Action:
 				
 				break;
-//				Holiday,
+			case Holiday:
+				// Do nothing
+				break;
 //				SpinToWin,
 //				Baby,
 //				House,
@@ -89,8 +100,19 @@ public class WaitForSpinState implements GameState {
 				// TODO: use some utility log file class to write the errors of the program to				
 				break;
 			}
+			
+			gameLogic.setNextPlayerToCurrent();
 		}
 
+		if(gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+			// Must send a message to choose a career path, etc.
+			System.out.println("Still player left to initialise");
+			LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+			gameLogic.setResponseMessage(replyMessage);
+			
+			return new PathChoiceState();
+		}
+		
 		return null;
 	}
 
@@ -105,11 +127,14 @@ public class WaitForSpinState implements GameState {
 			// Player should collect the salary indicated in their Career/College Career
 			// card from the Bank
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-			int currentSalary = currentOccupationCard.getSalary();
+			
+			if(currentOccupationCard != null) {
+				int currentSalary = currentOccupationCard.getSalary();
 
-			// Get money from the bank, increment the player's balance by that amount
-			gameLogic.extractMoneyFromBank(currentSalary);
-			gameLogic.getCurrentPlayer().addToBalance(currentSalary);
+				// Get money from the bank, increment the player's balance by that amount
+				gameLogic.extractMoneyFromBank(currentSalary);
+				gameLogic.getCurrentPlayer().addToBalance(currentSalary);
+			}
 		}
 	}
 }

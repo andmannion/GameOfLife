@@ -36,14 +36,18 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
 			gameLogic.returnCareerCard(unchosenCareerCard);
 			
+			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
+			
 			// Need to set the reply message to SpinRequest
 			LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
 																  gameLogic.getCurrentPlayer().getPlayerNumber());
 			
 			gameLogic.setResponseMessage(replyMessage);
+			gameLogic.decrementNumberOfUnconfiguredPlayers();
 			
 			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 
 			// hierarchical states and who owns them, transitions from lower to higher, etc.
+			return new WaitForSpinState();
 		}
 		
 		return null;
