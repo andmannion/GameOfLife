@@ -3,7 +3,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -47,7 +46,7 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			
 			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 
 			// hierarchical states and who owns them, transitions from lower to higher, etc.
-			return new WaitForSpinState();
+			return new HandlePlayerMoveState();
 		}
 		
 		return null;

@@ -55,7 +55,7 @@ public class PathChoiceState implements GameState {
 				// state
 				gameLogic.decrementNumberOfUnconfiguredPlayers();
 				
-				return new WaitForSpinState();
+				return new HandlePlayerMoveState();
 				//return null;
 			} 
 			else {

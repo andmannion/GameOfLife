@@ -12,3 +12,4 @@ Also andrew does the eval_tile functionality exist yet? Do you actually incremen
  a board graph, or do you just arbitrarily assign a tile that we landed on?
 What I mean by that is does that need to be made.
 
+//TODO delete this class

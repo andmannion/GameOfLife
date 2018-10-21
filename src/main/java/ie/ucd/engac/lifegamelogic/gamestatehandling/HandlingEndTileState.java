@@ -1,10 +1,12 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.messaging.LifeGameMessage;
 
 public class HandlingEndTileState implements GameState {
 
     private GameState currentSubstate = null;
+    private GameBoardTile currentTile;
 
     HandlingEndTileState(){
         currentSubstate = null;
@@ -16,8 +18,8 @@ public class HandlingEndTileState implements GameState {
             currentSubstate.enter(gameLogic);
         }
         else{
-            currentSubstate = gameLogic.getCurrentTile().pop();
-            }
+            //currentTile = gameLogic.getCurrentTile(); //ask Andrew how to get this
+            //currentSubstate = currentTile.getInitialSubstate(); //get this somehow
         }
     }
 
@@ -47,3 +49,4 @@ public class HandlingEndTileState implements GameState {
 
     }
 }
+//TODO delete this class
