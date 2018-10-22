@@ -1,9 +1,10 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.messaging.*;
+
 import java.util.ArrayList;
 
-public class HouseTileDecisionState implements GameState {
+public class HouseCardSaleState implements GameState { //TODO this entire class
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -16,6 +17,7 @@ public class HouseTileDecisionState implements GameState {
         if(gameLogic.getCurrentPlayer().getNumHouseCards() != 0) { //TODO check this
             choices.add(new ChooseableString("Sell a house"));
         }
+        
 
         LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
         // Need to store both choices so that we can assign the chosen one to the

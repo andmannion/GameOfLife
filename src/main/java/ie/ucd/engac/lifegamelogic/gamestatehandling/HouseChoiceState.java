@@ -16,14 +16,15 @@ public class HouseChoiceState implements GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
         // Get the two top CareerCards
-        System.out.println("in entry function of houseChoiceState"); //todo remove
         HouseCard firstCardChoice = gameLogic.getTopHouseCard();
         HouseCard secondCardChoice = gameLogic.getTopHouseCard();
 
+        // Create a list of the choices
         ArrayList<Card> pendingCardChoices = new ArrayList<>();
         pendingCardChoices.add(firstCardChoice);
         pendingCardChoices.add(secondCardChoice);
 
+        // Construct a message with these choices
         LifeGameMessage replyMessage = constructCardChoiceMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCardChoice,
@@ -38,6 +39,7 @@ public class HouseChoiceState implements GameState {
 	}
 
     @Override
+    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
@@ -56,7 +58,7 @@ public class HouseChoiceState implements GameState {
 
             gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
 
-            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) { //if there are un init players
                 // Must send a message to choose a career path, etc.
                 System.out.println("Still player left to initialise");
                 LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
@@ -64,7 +66,7 @@ public class HouseChoiceState implements GameState {
 
                 return new PathChoiceState();
             }
-            else {
+            else { //otherwise as normal
                 gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), gameLogic.getCurrentPlayer().getPlayerNumber()));
                 return new HandlePlayerMoveState();
             }

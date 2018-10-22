@@ -105,6 +105,10 @@ public class Player {
         houseCards.add(houseCard);
     }
 
+    public int getNumHouseCards(){
+	    return houseCards.size();
+    }
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
