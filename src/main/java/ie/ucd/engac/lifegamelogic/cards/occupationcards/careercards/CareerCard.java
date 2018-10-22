@@ -25,12 +25,12 @@ public class CareerCard extends OccupationCard implements Chooseable {
 
 	@Override
 	public String displayChoiceDetails() {
-		StringBuilder displayChoiceStringBuilder = new StringBuilder();
-		displayChoiceStringBuilder.append("Type: " + occupationCardType);
-		displayChoiceStringBuilder.append(" Subtype: " + careerType.toString());
-		displayChoiceStringBuilder.append(" Salary: " + salary);
-		displayChoiceStringBuilder.append(" Bonus payout: " + bonusPaymentAmount);
-		displayChoiceStringBuilder.append(" Bonus number: " + bonusNumber);
-		return displayChoiceStringBuilder.toString();
+	    String string = "";
+		string = string.concat("Type: " + occupationCardType);
+		string = string.concat(" Subtype: " + careerType.toString());
+		string = string.concat(" Salary: " + salary);
+		string = string.concat(" Bonus payout: " + bonusPaymentAmount);
+		string = string.concat(" Bonus number: " + bonusNumber);
+		return string;
 	}
 }

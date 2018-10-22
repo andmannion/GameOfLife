@@ -31,7 +31,6 @@ public class GameUI implements Drawable {
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
-    private int currentPlayer; //TODO remove
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false; //init with different values

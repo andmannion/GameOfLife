@@ -11,7 +11,6 @@ public class GameCardChoice  implements Drawable {
     private static final int CHOICE_Y_POS = 216;
 
     private GameUI gameUI;
-    private ArrayList<Chooseable> choices;
 
     private volatile String choice1 = "";
     private volatile String choice2 = "";
@@ -21,7 +20,6 @@ public class GameCardChoice  implements Drawable {
     }
 
     void setChoices(ArrayList<Chooseable> choices){
-        this.choices = choices; //TODO remove
         choice1 = choices.get(0).displayChoiceDetails();
         choice2 = choices.get(1).displayChoiceDetails();
     }

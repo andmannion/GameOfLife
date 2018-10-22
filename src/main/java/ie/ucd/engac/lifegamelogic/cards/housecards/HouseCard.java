@@ -1,8 +1,9 @@
 package ie.ucd.engac.lifegamelogic.cards.housecards;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
+import ie.ucd.engac.messaging.Chooseable;
 
-public class HouseCard extends Card{
+public class HouseCard extends Card implements Chooseable {
 	private final HouseTypes houseType;				// Values are final as their value should not change after having been initialised to some value
 	
 	public HouseTypes getHouseType() {
@@ -38,11 +39,12 @@ public class HouseCard extends Card{
 		this.spinForSalePriceEvenNum = spinForSalePriceEvenNum;
 	}
 
-    public String convertDrawableString(){
-        String string = "";
-        string.concat("Type: " + houseType.toString());
-        string.concat(" Cost: " + purchasePrice);
-        string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
-        return string;
-    }
+	@Override
+	public String displayChoiceDetails() {
+		String string = "";
+		string = string.concat("Type: " + houseType.toString());
+		string = string.concat(" Cost: " + purchasePrice);
+		string = string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
+		return string;
+	}
 }

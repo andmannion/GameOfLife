@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.banklogic;
 
 import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
@@ -69,4 +70,12 @@ public class Bank {
 	public void returnStandardCareerCard(OccupationCard standardCareerCardToBeReturned) {
 		careerCardDeck.addCardToBottom(standardCareerCardToBeReturned);
 	}
+
+    public HouseCard getTopHouseCard() {
+        return houseCardDeck.popTopCard();
+    }
+
+    public void returnHouseCard(HouseCard houseCardToBeReturned) {
+        houseCardDeck.addCardToBottom(houseCardToBeReturned);
+    }
 }

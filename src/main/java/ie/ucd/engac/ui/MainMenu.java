@@ -106,7 +106,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JComponent source = (JComponent) e.getSource(); //TODO this actionlistener better
+        JComponent source = (JComponent) e.getSource(); //TODO this actionlistener better (anon class for jcombo?)
         if (source instanceof JButton){
             switch (((JButton) source).getActionCommand()){
                 case "New Game": newGame(); break;

@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
@@ -114,17 +115,24 @@ public class GameLogic {
 		return bank.getTopStandardCareerCard();
 	}
 
-	protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
-		this.pendingCardChoices = pendingCardChoices;
-	}
-	
-	protected ArrayList<Card> getPendingCardChoices(){
-		return pendingCardChoices;
-	}
-	
 	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
 		bank.returnStandardCareerCard(careerCardToBeReturned);
 	}
+    protected HouseCard getTopHouseCard() {
+        return bank.getTopHouseCard();
+    }
+
+    protected void returnHouseCard(HouseCard houseCardToBeReturned) {
+        bank.returnHouseCard(houseCardToBeReturned);
+    }
+
+    protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
+        this.pendingCardChoices = pendingCardChoices;
+    }
+
+    protected ArrayList<Card> getPendingCardChoices(){
+        return pendingCardChoices;
+    }
 
 	protected ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
 		return gameBoard.getOutboundNeighbours(currentBoardLocation);

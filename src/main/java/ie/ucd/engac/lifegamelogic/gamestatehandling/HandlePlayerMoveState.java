@@ -8,13 +8,12 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
-import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.ui.GameBoard;
 
 public class HandlePlayerMoveState implements GameState {
-	private final int PAYDAY_LANDED_ON_BONUS = 100000;	
+	private final int PAYDAY_LANDED_ON_BONUS = 100000;
+	GameState currentSubstate = null;
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -23,7 +22,9 @@ public class HandlePlayerMoveState implements GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
+	    GameState nextState = null;
+
+		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) { //TODO redo entry cond. if substates being used
 			// TODO: when should the fork choice after a stop tile has been
 			// encountered be handled - at the beginning or the end of a turn?
 			// I would say the beginning... TODO this should be done when you land on it - thats the natural flow as the user
@@ -41,21 +42,47 @@ public class HandlePlayerMoveState implements GameState {
             endTile = tryToMove(gameLogic, gameBoard, tilesToMove, tilesMoved);
 
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
-            evaluateTile(gameLogic,endTile);
+            nextState = evaluateTile(gameLogic,endTile);
+            System.out.println("Finished evaluating tile"); //TODO remove
 
-			gameLogic.setNextPlayerToCurrent();
 		}
+		else { //TODO finish this when doing substates again, or remove
+		    System.out.println("accessed else cond in if loop xd"); //TODO remove
+            //GameState nextSubstate = currentSubstate.handleInput(gameLogic,lifeGameMessage);
+        }
 
-		if(gameLogic.getNumberOfUninitialisedPlayers() > 0) {
-			// Must send a message to choose a career path, etc.
-			System.out.println("Still player left to initialise");
-			LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
-			gameLogic.setResponseMessage(replyMessage);
-			
-			return new PathChoiceState();
-		}
-		
-		return null;
+        /* //TODO uncommment when doing substates again, or remove
+        if(currentSubstate == null){
+            if(gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+                // Must send a message to choose a career path, etc.
+                System.out.println("Still player left to initialise");
+                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+                gameLogic.setResponseMessage(replyMessage);
+
+                return new PathChoiceState();
+            }
+            else //TO DO write this case
+                System.out.println("What should this do, HandleMoveState@HandleInput return selection"); //TODO remove
+        }
+        else{
+            return null; //exit returns null to stay here or something else to change states.
+        }
+        */
+        if (nextState == null) {
+
+            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+                // Must send a message to choose a career path, etc.
+                System.out.println("Still player left to initialise");
+                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+                gameLogic.setResponseMessage(replyMessage);
+
+                return new PathChoiceState();
+            }
+            return null;
+        }
+        else {
+            return nextState;
+        }
 	}
 
 	@Override
@@ -99,8 +126,11 @@ public class HandlePlayerMoveState implements GameState {
         return currentTile;
     }
 
-	private void evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
+	private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
+	    GameState nextState = null; //TODO -> next SUB state
         switch (currentTile.getGameBoardTileType()) {
+            case Start:
+                break;
             case Payday:
                 OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
                 if(currentOccupationCard != null) {
@@ -108,17 +138,40 @@ public class HandlePlayerMoveState implements GameState {
                     gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
                     gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
                 }
+                gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
                 break;
-            case Action:
+            case Action: //TODO using this as test, fix
+                nextState = new changingTheNameCosAndrewIsDumb();
+                nextState = new HouseChoiceState();
+                System.out.println("Action state");  //TODO remove
                 break;
             case Holiday:
                 // Do nothing
+                break;
+            case SpinToWin:
+                break;
+            case Baby:
+                break;
+            case House:
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseChoiceState();
+                break;
+            case Stop:
+                break;
+            case Retire:
                 break;
             default:
                 // There's no console to print to...
                 // TODO: use some utility log file class to write the errors of the program to
                 break;
         }
+        /* //TODO uncommment when doing substates again, or remove
+        if(nextSubstate != null) {
+            currentSubstate = nextSubstate;
+            currentSubstate.enter(gameLogic);
+        }
+        */
+        return nextState;
     }
 
 	private void performUpdateIfPassingOverTile(GameBoardTile currentTile, GameLogic gameLogic) {

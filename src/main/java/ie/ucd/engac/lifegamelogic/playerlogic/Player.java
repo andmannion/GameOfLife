@@ -101,6 +101,10 @@ public class Player {
 		return houseCards;
 	}
 
+	public void addHouseCard(HouseCard houseCard){
+        houseCards.add(houseCard);
+    }
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}

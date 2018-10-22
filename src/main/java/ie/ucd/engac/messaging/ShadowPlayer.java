@@ -53,7 +53,7 @@ public class ShadowPlayer {
             String string = "";//TODO test that this obeys boundaries (it wont)
             int i = 0;
             for(HouseCard house:houses){
-                string.concat(house.convertDrawableString());
+                string.concat(house.displayChoiceDetails());
             }
             return string;
         }
