@@ -16,6 +16,7 @@ public class HouseChoiceState implements GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
         // Get the two top CareerCards
+        System.out.println("in entry function of houseChoiceState"); //todo remove
         HouseCard firstCardChoice = gameLogic.getTopHouseCard();
         HouseCard secondCardChoice = gameLogic.getTopHouseCard();
 
@@ -52,13 +53,21 @@ public class HouseChoiceState implements GameState {
             HouseCard unchosenCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
             gameLogic.returnHouseCard(unchosenCard);
 
-            // Need to set the reply message to SpinRequest
-            LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
-                    gameLogic.getCurrentPlayer().getPlayerNumber());
 
-            gameLogic.setResponseMessage(replyMessage);
+            gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
 
-            return new HandlePlayerMoveState();
+            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+                // Must send a message to choose a career path, etc.
+                System.out.println("Still player left to initialise");
+                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+                gameLogic.setResponseMessage(replyMessage);
+
+                return new PathChoiceState();
+            }
+            else {
+                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), gameLogic.getCurrentPlayer().getPlayerNumber()));
+                return new HandlePlayerMoveState();
+            }
         }
 
         return null;

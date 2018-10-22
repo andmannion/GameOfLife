@@ -31,9 +31,10 @@ public class GameUI implements Drawable {
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
+    private int currentPlayer; //TODO remove
 
     //flags for edge detection of state changes
-    private volatile boolean wasStateUpdatedD = false; //init with different values
+    private volatile boolean wasStateUpdatedD = false;
     private boolean wasStateUpdatedQ = false;
 
     // ...
@@ -72,8 +73,7 @@ public class GameUI implements Drawable {
         boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
         boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
 
-       if (risingEdgeDetected || fallingEdgeDetected) {
-            System.out.println(lastResponse.getLifeGameMessageType());
+        if (risingEdgeDetected || fallingEdgeDetected) {
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
@@ -87,6 +87,7 @@ public class GameUI implements Drawable {
                 case SpinRequest:
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
+                    gameInput.setEnableSpinButton(true);
                     gameHUD.updateFields(spinRequest.getShadowPlayer());
                     break;
                 case OptionDecisionRequest:
@@ -99,7 +100,7 @@ public class GameUI implements Drawable {
                     gameInput.setVisibleCardChoice(true);
                     break;
                 default:
-                    System.out.println("A message needs handling code written"); //TODO remove
+                    System.out.println("A message needs handling code written, or was null"); //TODO remove
                     uiState = UIState.Init;
             }
         }
@@ -111,6 +112,7 @@ public class GameUI implements Drawable {
      */
     private synchronized void invertWasStateUpdatedD(){
         wasStateUpdatedD = !wasStateUpdatedD;
+        System.out.println("inverted D"); //TODO remove
     }
 
     /**
@@ -212,9 +214,11 @@ public class GameUI implements Drawable {
                 case "Spin The Wheel":
                     gameInput.setEnableSpinButton(false);
                     sendSpinResponseMessage();
+                    break;
                 case "Submit Choice":
                     gameInput.setEnableSubmitButton(false);
                     sendLargeDecisionResponse(gameInput.getSpinnerIndex());
+                    break;
             }
         }
     }

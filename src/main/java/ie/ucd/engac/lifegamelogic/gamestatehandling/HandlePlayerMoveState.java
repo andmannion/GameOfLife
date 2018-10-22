@@ -10,6 +10,8 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.ShadowPlayer;
+import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class HandlePlayerMoveState implements GameState {
 	private final int PAYDAY_LANDED_ON_BONUS = 100000;
@@ -43,7 +45,7 @@ public class HandlePlayerMoveState implements GameState {
 
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
             nextState = evaluateTile(gameLogic,endTile);
-            System.out.println("Finished evaluating tile"); //TODO remove
+            System.out.println("Finished evaluating tile, nextState is: "+ nextState); //TODO remove
 
 		}
 		else { //TODO finish this when doing substates again, or remove
@@ -68,6 +70,7 @@ public class HandlePlayerMoveState implements GameState {
             return null; //exit returns null to stay here or something else to change states.
         }
         */
+
         if (nextState == null) {
 
             if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
@@ -128,6 +131,7 @@ public class HandlePlayerMoveState implements GameState {
 
 	private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
 	    GameState nextState = null; //TODO -> next SUB state
+        System.out.println(currentTile.getGameBoardTileType());
         switch (currentTile.getGameBoardTileType()) {
             case Start:
                 break;
@@ -139,18 +143,22 @@ public class HandlePlayerMoveState implements GameState {
                     gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
                 }
                 gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
+                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber()));
+                //TODO refactor the above line
                 break;
             case Action: //TODO using this as test, fix
                 nextState = new changingTheNameCosAndrewIsDumb();
-                nextState = new HouseChoiceState();
-                System.out.println("Action state");  //TODO remove
+                
                 break;
             case Holiday:
+
                 // Do nothing
                 break;
             case SpinToWin:
+
                 break;
             case Baby:
+
                 break;
             case House:
                 System.out.println("House state"); //TODO remove

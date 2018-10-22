@@ -174,8 +174,6 @@ public class GameInput implements Drawable {
                 break;
             case WaitingForSpin:
                 setVisibleSpinButton(true);
-                setEnableSpinButton(true);
-
                 setVisibleCardChoice(false);
                 break;
             case PostSpin:

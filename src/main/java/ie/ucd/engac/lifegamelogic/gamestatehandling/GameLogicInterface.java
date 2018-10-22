@@ -8,12 +8,13 @@ public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameM
 	private GameLogic gameLogic;
 	
 	public GameLogicInterface(LogicGameBoard gameBoard, int numPlayers) {
-		System.out.println("Inside GameLogicInterface constructor");
+		System.out.println("Inside GameLogicInterface constructor"); //TODO remove
 		gameLogic = new GameLogic(gameBoard, numPlayers);
 	}
 
 	@Override
 	public LifeGameMessage receiveMessage(LifeGameMessage lifeGameMessage) {
+		System.out.println("Rxed message is of type: "+lifeGameMessage.getLifeGameMessageType()); //TODO remove;
 		LifeGameMessage gameLogicResponse = gameLogic.handleInput(lifeGameMessage);
 		
 		return gameLogicResponse;
