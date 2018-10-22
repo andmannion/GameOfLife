@@ -28,9 +28,9 @@ public class GameInput implements Drawable {
     private static final int CARD_CHOICE_INTER_GAP = 227;
     private static final int CARD_CHOICE_Y_POS = 504;
 
-    private static final int JCOMBO_WIDTH = 128;
+    private static final int JCOMBO_WIDTH = 164;
     private static final int JCOMBO_HEIGHT = 30;
-    private static final int JCOMBO_LHS_GAP = 576;
+    private static final int JCOMBO_LHS_GAP = 568;
     private static final int JCOMBO_Y_POS = 345;
 
     private final int panelHeight;
@@ -147,8 +147,10 @@ public class GameInput implements Drawable {
     int getSpinnerIndex() {
         return spinnerIndex;
     }
-
-
+    void setVisibleChoiceSpinner(boolean bool){
+        reducingChoice.setVisible(bool);
+        submitChoice.setVisible(bool);
+    }
     void setEnableSubmitButton(boolean bool){
         submitChoice.setEnabled(bool);
     }
@@ -175,13 +177,19 @@ public class GameInput implements Drawable {
             case WaitingForSpin:
                 setVisibleSpinButton(true);
                 setVisibleCardChoice(false);
+                setVisibleChoiceSpinner(false);
                 break;
             case PostSpin:
                 break;
             case CardChoice://in normal play screen
                 setVisibleSpinButton(false);
-
                 setVisibleCardChoice(true);
+                setVisibleChoiceSpinner(false);
+                break;
+            case LargeChoice:
+                setVisibleSpinButton(false);
+                setVisibleCardChoice(false);
+                setVisibleChoiceSpinner(true);
                 break;
             case Spin2WinPicking:
                 break;

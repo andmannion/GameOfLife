@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static ie.ucd.engac.ui.UIState.CardChoice;
+import static ie.ucd.engac.ui.UIState.LargeChoice;
 import static ie.ucd.engac.ui.UIState.WaitingForSpin;
 
 public class GameUI implements Drawable {
@@ -78,11 +79,12 @@ public class GameUI implements Drawable {
                 case StartupMessage:
                     break;
                 case LargeDecisionRequest: //TODO this is untested
-                    DecisionRequestMessage pendingLargeDecision = (DecisionRequestMessage) lastResponse;
+                    LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
                     currentPlayer = pendingLargeDecision.getRelatedPlayer();
                     gameInput.setSpinnerOptions(pendingLargeDecision.getChoices());
-                    gameInput.setEnableCardChoice(true);
-                    gameInput.setVisibleCardChoice(true);
+                    uiState = LargeChoice;
+                    gameInput.setEnableSubmitButton(true);
+
                     break;
                 case SpinRequest:
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;

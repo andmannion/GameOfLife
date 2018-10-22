@@ -5,6 +5,7 @@ public enum UIState {
     WaitingForSpin,
     PostSpin,
     CardChoice, //3 variants
+    LargeChoice,
     Spin2WinPicking,
     Spin2WinRolling,
     BabyAcquisition,

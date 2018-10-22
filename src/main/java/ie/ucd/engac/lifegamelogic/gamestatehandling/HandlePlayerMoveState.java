@@ -147,7 +147,7 @@ public class HandlePlayerMoveState implements GameState {
                 //TODO refactor the above line
                 break;
             case Action: //TODO using this as test, fix
-                nextState = new changingTheNameCosAndrewIsDumb();
+                nextState = new HouseTileDecisionState();
                 
                 break;
             case Holiday:
@@ -162,7 +162,7 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case House:
                 System.out.println("House state"); //TODO remove
-                nextState = new HouseChoiceState();
+                nextState = new HouseTileDecisionState();
                 break;
             case Stop:
                 break;
