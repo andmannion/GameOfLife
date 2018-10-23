@@ -6,7 +6,7 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 
 import java.awt.*;
 
-public class GameHUD implements Drawable {
+public class UIHUD implements Drawable {
 
     private ShadowPlayer sPlayer;
 
@@ -38,7 +38,7 @@ public class GameHUD implements Drawable {
 
     private int HOUSETEXTSKIP = 15;
 
-    GameHUD(GameUI gameUI){
+    UIHUD(GameUI gameUI){
         this.gameUI = gameUI;
 
         panelHeight = gameUI.getPanelHeight();
@@ -79,7 +79,7 @@ public class GameHUD implements Drawable {
                     graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
                 }
                 catch (Exception e){
-                    System.err.println("Exception in GameHUD.draw() " + e); //TODO remove this print statement
+                    System.err.println("Exception in UIHUD.draw() " + e); //TODO remove this print statement
                 }
                 break;
             case CardChoice:

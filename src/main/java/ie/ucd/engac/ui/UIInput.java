@@ -7,12 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EventListener;
 
 import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.ui.*;
 
-public class GameInput implements Drawable {
+public class UIInput implements Drawable {
 
     private static final int SPIN_WIDTH = 192;
     private static final int SPIN_HEIGHT = 36;
@@ -52,12 +50,12 @@ public class GameInput implements Drawable {
 
     private GameUI gameUIParent;
 
-    GameInput(GameUI gameUI,JPanel renderTarget){
+    UIInput(GameUI gameUI, JPanel renderTarget){
         this.gameUIParent = gameUI;
         this.renderTarget = renderTarget;
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
-        actionListener = gameUI.getGameActionListener();
+        actionListener = gameUI.getUiActionListener();
 
         spinButton = new JButton("Spin The Wheel");
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;

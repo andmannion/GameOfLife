@@ -5,20 +5,17 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import javax.swing.*;
 import java.awt.*;
 
-public class EventMessageDisplay implements Drawable{
+public class UIEventMessage implements Drawable{
 
     private static final int FRAMES_TO_DISPLAY_FOR = 60;
     private static final int MSG_Y_POS = 25;
     private static final int MSG_X_POS_BASE = 640;
 
-    private GameUI gameUI;
-
     private String eventMessage;
     private int remainingDisplayFrames;
     private int eventMessageLength;
 
-    EventMessageDisplay(GameUI gameUI) {
-        this.gameUI = gameUI;
+    UIEventMessage() {
         this.eventMessage = "Game Started";
         this.eventMessageLength = eventMessage.length();
     }

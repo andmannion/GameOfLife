@@ -4,8 +4,6 @@ import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,12 +22,12 @@ public class GameUI implements Drawable {
     private GameEngine gameEngine;
 
     //UI sub elements
-    private GameBoard gameBoard;
-    private GameHUD gameHUD;
-    private GameInput gameInput;
-    private GameCardChoice gameCardChoice;
-    private GameActionListener gameActionListener;
-    private EventMessageDisplay eventMessageDisplay;
+    private UIBoard uiBoard;
+    private UIHUD uiHUD;
+    private UIInput uiInput;
+    private UICardChoice uiCardChoice;
+    private UIActionListener uiActionListener;
+    private UIEventMessage uiEventMessage;
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
@@ -58,12 +56,12 @@ public class GameUI implements Drawable {
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
 
-        gameActionListener = new GameActionListener();
-        gameBoard = new GameBoard(this);
-        gameHUD = new GameHUD(this);
-        gameInput = new GameInput(this,renderTarget);
-        gameCardChoice = new GameCardChoice(this);
-        eventMessageDisplay = new EventMessageDisplay(this);
+        uiActionListener = new UIActionListener();
+        uiBoard = new UIBoard(this);
+        uiHUD = new UIHUD(this);
+        uiInput = new UIInput(this,renderTarget);
+        uiCardChoice = new UICardChoice(this);
+        uiEventMessage = new UIEventMessage();
 
         //updateCurrentUIScreen();
     }
@@ -83,26 +81,26 @@ public class GameUI implements Drawable {
                 case LargeDecisionRequest: //TODO this is untested
                     LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
                     currentPlayer = pendingLargeDecision.getRelatedPlayer();
-                    gameInput.setSpinnerOptions(pendingLargeDecision.getChoices());
+                    uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
-                    gameInput.setEnableSubmitButton(true);
+                    uiInput.setEnableSubmitButton(true);
 
                     break;
                 case SpinRequest:
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
-                    gameInput.setEnableSpinButton(true);
-                    gameHUD.updateFields(spinRequest.getShadowPlayer());
-                    eventMessageDisplay.updateEventMessage(spinRequest.getEventMsg());
+                    uiInput.setEnableSpinButton(true);
+                    uiHUD.updateFields(spinRequest.getShadowPlayer());
+                    uiEventMessage.updateEventMessage(spinRequest.getEventMsg());
                     break;
                 case OptionDecisionRequest:
                     uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
                     currentPlayer = pendingDecision.getRelatedPlayer();
                     System.out.println(pendingDecision.getChoices().get(0).displayChoiceDetails());
-                    gameCardChoice.setChoices(pendingDecision.getChoices());
-                    gameInput.setEnableCardChoice(true);
-                    gameInput.setVisibleCardChoice(true);
+                    uiCardChoice.setChoices(pendingDecision.getChoices());
+                    uiInput.setEnableCardChoice(true);
+                    uiInput.setVisibleCardChoice(true);
                     break;
                 default:
                     System.out.println("A message needs handling code written, or was null"); //TODO remove
@@ -186,21 +184,21 @@ public class GameUI implements Drawable {
      * Returns the UI's button press action listener.
      * @return the UI's ActionListener.
      */
-    GameActionListener getGameActionListener() { return gameActionListener; }
+    UIActionListener getUiActionListener() { return uiActionListener; }
 
     @Override
     public void draw(Graphics graphics){
-        gameHUD.draw(graphics);
-        gameBoard.draw(graphics);
-        gameInput.draw(graphics);
-        gameCardChoice.draw(graphics);
-        eventMessageDisplay.draw(graphics);
+        uiHUD.draw(graphics);
+        uiBoard.draw(graphics);
+        uiInput.draw(graphics);
+        uiCardChoice.draw(graphics);
+        uiEventMessage.draw(graphics);
     }
 
     /**
      * UI's ActionListener that responds to button presses
      */
-    private class GameActionListener implements ActionListener {
+    private class UIActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -209,21 +207,21 @@ public class GameUI implements Drawable {
                     gameEngine.quitGame();
                     break;
                 case "Choose Left Card":
-                    gameInput.setEnableCardChoice(false);
+                    uiInput.setEnableCardChoice(false);
                     System.out.println("Chose");
                     sendDecisionResponseMessage(0);
                     break;
                 case "Choose Right Card":
-                    gameInput.setEnableCardChoice(false);
+                    uiInput.setEnableCardChoice(false);
                     sendDecisionResponseMessage(1);
                     break;
                 case "Spin The Wheel":
-                    gameInput.setEnableSpinButton(false);
+                    uiInput.setEnableSpinButton(false);
                     sendSpinResponseMessage();
                     break;
                 case "Submit Choice":
-                    gameInput.setEnableSubmitButton(false);
-                    sendLargeDecisionResponse(gameInput.getSpinnerIndex());
+                    uiInput.setEnableSubmitButton(false);
+                    sendLargeDecisionResponse(uiInput.getSpinnerIndex());
                     break;
             }
         }
