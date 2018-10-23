@@ -48,7 +48,10 @@ public class HouseCardSaleState implements GameState { //TODO this entire class
                     return new PathChoiceState();
                 }
                 else{
-                    gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber(), ""));
+                    int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+                    String eventMessage = "Player " + playNum + "'s turn.";
+                    SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
+                    gameLogic.setResponseMessage(spinRequestMessage);
                     return new HandlePlayerMoveState();
                 }
             }

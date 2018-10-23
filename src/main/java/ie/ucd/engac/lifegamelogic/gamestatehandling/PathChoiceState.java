@@ -47,9 +47,11 @@ public class PathChoiceState implements GameState {
 				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
 				
 				// Set the response message to "SpinRequest"
-				LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
-																	  gameLogic.getCurrentPlayer().getPlayerNumber(), "");
-				gameLogic.setResponseMessage(replyMessage);
+
+				int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+				String eventMessage = "Player " + playNum + "'s turn.";
+				SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
+				gameLogic.setResponseMessage(spinRequestMessage);
 				
 				// TODO: Need to exit from this inner state - what's next is the spinaccept
 				// state

@@ -29,6 +29,7 @@ public class GameUI implements Drawable {
     private GameInput gameInput;
     private GameCardChoice gameCardChoice;
     private GameActionListener gameActionListener;
+    private EventMessageDisplay eventMessageDisplay;
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
@@ -62,6 +63,7 @@ public class GameUI implements Drawable {
         gameHUD = new GameHUD(this);
         gameInput = new GameInput(this,renderTarget);
         gameCardChoice = new GameCardChoice(this);
+        eventMessageDisplay = new EventMessageDisplay(this);
 
         //updateCurrentUIScreen();
     }
@@ -91,6 +93,7 @@ public class GameUI implements Drawable {
                     uiState = WaitingForSpin;
                     gameInput.setEnableSpinButton(true);
                     gameHUD.updateFields(spinRequest.getShadowPlayer());
+                    eventMessageDisplay.updateEventMessage(spinRequest.getEventMsg());
                     break;
                 case OptionDecisionRequest:
                     uiState = CardChoice;
@@ -191,6 +194,7 @@ public class GameUI implements Drawable {
         gameBoard.draw(graphics);
         gameInput.draw(graphics);
         gameCardChoice.draw(graphics);
+        eventMessageDisplay.draw(graphics);
     }
 
     /**
