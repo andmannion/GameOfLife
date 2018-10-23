@@ -46,7 +46,7 @@ public class HouseTileDecisionState implements GameState {
                     return new PathChoiceState();
                 }
                 else{
-                    gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber()));
+                    gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber(), ""));
                     return new HandlePlayerMoveState();
                 }
             }

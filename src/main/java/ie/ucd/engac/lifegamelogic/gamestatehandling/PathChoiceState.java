@@ -48,7 +48,7 @@ public class PathChoiceState implements GameState {
 				
 				// Set the response message to "SpinRequest"
 				LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
-																	  gameLogic.getCurrentPlayer().getPlayerNumber());
+																	  gameLogic.getCurrentPlayer().getPlayerNumber(), "");
 				gameLogic.setResponseMessage(replyMessage);
 				
 				// TODO: Need to exit from this inner state - what's next is the spinaccept

@@ -143,7 +143,7 @@ public class HandlePlayerMoveState implements GameState {
                     gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
                 }
                 gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
-                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber()));
+                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber(), ""));
                 //TODO refactor the above line
                 break;
             case Action: //TODO using this as test, fix

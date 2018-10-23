@@ -39,7 +39,7 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			
 			// Need to set the reply message to SpinRequest
 			LifeGameMessage replyMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
-																  gameLogic.getCurrentPlayer().getPlayerNumber());
+																  gameLogic.getCurrentPlayer().getPlayerNumber(), "");
 			
 			gameLogic.setResponseMessage(replyMessage);
 			gameLogic.decrementNumberOfUnconfiguredPlayers();

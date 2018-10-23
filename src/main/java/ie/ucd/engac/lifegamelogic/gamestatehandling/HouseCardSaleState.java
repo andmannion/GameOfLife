@@ -17,7 +17,7 @@ public class HouseCardSaleState implements GameState { //TODO this entire class
         if(gameLogic.getCurrentPlayer().getNumHouseCards() != 0) { //TODO check this
             choices.add(new ChooseableString("Sell a house"));
         }
-        
+
 
         LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
         // Need to store both choices so that we can assign the chosen one to the
@@ -48,7 +48,7 @@ public class HouseCardSaleState implements GameState { //TODO this entire class
                     return new PathChoiceState();
                 }
                 else{
-                    gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber()));
+                    gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),gameLogic.getCurrentPlayer().getPlayerNumber(), ""));
                     return new HandlePlayerMoveState();
                 }
             }

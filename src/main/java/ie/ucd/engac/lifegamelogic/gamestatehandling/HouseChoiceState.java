@@ -2,11 +2,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
-import ie.ucd.engac.lifegamelogic.cards.housecards.HouseTypes;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
-import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
@@ -67,7 +62,7 @@ public class HouseChoiceState implements GameState {
                 return new PathChoiceState();
             }
             else { //otherwise as normal
-                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), gameLogic.getCurrentPlayer().getPlayerNumber()));
+                gameLogic.setResponseMessage(new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), gameLogic.getCurrentPlayer().getPlayerNumber(), ""));
                 return new HandlePlayerMoveState();
             }
         }
