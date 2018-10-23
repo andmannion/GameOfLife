@@ -8,7 +8,7 @@ import java.awt.*;
 public class UIEventMessage implements Drawable{
 
     private static final int FRAMES_TO_DISPLAY_FOR = 60;
-    private static final int MSG_Y_POS = 25;
+    private static final int MSG_Y_POS = 50;
     private static final int MSG_X_POS_BASE = 640;
 
     private String eventMessage;
@@ -28,12 +28,20 @@ public class UIEventMessage implements Drawable{
 
     @Override
     public void draw(Graphics graphics) {
-        graphics.setColor(Color.black);
+
         if(remainingDisplayFrames > 0){
-            //int messageXPos = MSG_X_POS_BASE - text_width*eventMessageLength/2; //TODO figure out what width is
-            graphics.drawString(eventMessage,0,MSG_Y_POS);
+            graphics.setColor(Color.black);
+            Font currentFont = graphics.getFont();
+            Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.5F);
+            graphics.setFont(newFont); //want to use a bigger font
+
+            int text_width = graphics.getFontMetrics().stringWidth(eventMessage);
+            int messageXPos = MSG_X_POS_BASE - text_width/2;
+            System.out.println(messageXPos);
+            graphics.drawString(eventMessage,messageXPos,MSG_Y_POS);
+
             remainingDisplayFrames--;
-            //TODO drawString
+            graphics.setFont(currentFont); //reset font
         }
     }
 }
