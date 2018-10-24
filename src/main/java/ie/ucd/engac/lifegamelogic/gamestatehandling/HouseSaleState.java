@@ -1,11 +1,15 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
 public class HouseSaleState implements GameState { //TODO this entire class
+
+    int choiceIndex;
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -28,37 +32,33 @@ public class HouseSaleState implements GameState { //TODO this entire class
     @Override
     @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-        GameState nextState = null;
+
+        //TODO potential exception if erroneous spin reponse received
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
             LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
 
-            int choiceIndex = choiceMessage.getChoiceIndex();
+            choiceIndex = choiceMessage.getChoiceIndex();
 
-            if (choiceIndex == 0){ //do nothing, turn ends
-                gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
+            System.out.println(choiceIndex); //TODO why doesnt this work?
 
-                if(gameLogic.getNumberOfUninitialisedPlayers() > 0) { //if there are un init players
-                    // Must send a message to choose a career path, etc.
-                    System.out.println("Still player left to initialise");
-                    LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
-                    gameLogic.setResponseMessage(replyMessage);
+            int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+            String eventMessage = "Player " + playNum + ", spin to determine sale price.";
+            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), playNum, eventMessage);
+            gameLogic.setResponseMessage(spinRequestMessage);
 
-                    return new PathChoiceState();
-                }
-                else{
-                    int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-                    String eventMessage = "Player " + playNum + "'s turn.";
-                    SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
-                    gameLogic.setResponseMessage(spinRequestMessage);
-                    return new HandlePlayerMoveState();
-                }
-            }
-            else if (choiceIndex == 1){ //if they wish to buy
-                return new HouseChoiceState();
-            }
-            else { //if they wish to sell
-                return null; //TODO make this state
-            }
+            return null;
+        }
+        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
+            int spinNum = Spinner.spinTheWheel();
+            Player player = gameLogic.getCurrentPlayer();
+            player.sellHouseCard(choiceIndex,spinNum);
+
+            gameLogic.setNextPlayerToCurrent();
+            int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+            String eventMessage = "Player " + playNum + "'s turn.";
+            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), playNum, eventMessage);
+            gameLogic.setResponseMessage(spinRequestMessage);
+            return new HandlePlayerMoveState();
         }
         return null;
     }

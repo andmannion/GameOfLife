@@ -17,15 +17,21 @@ public class HouseCard extends Card implements Chooseable {
 	}
 	
 	private final int spinForSalePriceOddNum;
-	
-	public int getSpinForSalePriceOddNum() {
-		return spinForSalePriceOddNum;
-	}
-	
+
 	private final int spinForSalePriceEvenNum;
-	
-	public int getSpinForSalePriceEvenNum() {
-		return spinForSalePriceEvenNum;
+
+    /**
+     *
+     * @param bool true if an odd number was spun, false if even
+     * @return the sale price as an integer
+     */
+	public int getSpinForSalePrice(boolean bool) {
+		if(bool) {
+            return spinForSalePriceOddNum;
+        }
+        else{
+            return spinForSalePriceEvenNum;
+        }
 	}
 	
 	public HouseCard(HouseTypes houseType,

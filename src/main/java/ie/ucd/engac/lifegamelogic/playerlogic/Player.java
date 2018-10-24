@@ -41,7 +41,22 @@ public class Player {
 
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
-}
+	}
+
+	public void sellHouseCard(int cardIndex, int spinResult){
+	    if(cardIndex >= 0) {
+	        Boolean bool;
+	        HouseCard houseCard = houseCards.get(cardIndex);
+            if (spinResult%2 == 0){ //TODO simplfy
+                bool = false;
+            }
+            else{
+                bool = true;
+            }
+            addToBalance(houseCard.getSpinForSalePrice(bool));
+            houseCards.remove(cardIndex);
+        }
+    }
 
 	public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
