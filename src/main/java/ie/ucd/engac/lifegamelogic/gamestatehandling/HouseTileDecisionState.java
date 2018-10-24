@@ -13,7 +13,7 @@ public class HouseTileDecisionState implements GameState {
         choices.add(new ChooseableString("Do nothing"));
         choices.add(new ChooseableString("Buy a house"));
 
-        if(gameLogic.getCurrentPlayer().getNumHouseCards() != 0) { //TODO check this
+        if(gameLogic.getCurrentPlayer().getNumHouseCards() != 0) {
             choices.add(new ChooseableString("Sell a house"));
         }
 
@@ -57,7 +57,7 @@ public class HouseTileDecisionState implements GameState {
                 return new HouseChoiceState();
             }
             else { //if they wish to sell
-                return null; //TODO make this state
+                return new HouseSaleState();
             }
         }
         return null;

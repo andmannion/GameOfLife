@@ -80,7 +80,7 @@ public class GameUI implements Drawable {
                     break;
                 case LargeDecisionRequest: //TODO this is untested
                     LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
-                    currentPlayer = pendingLargeDecision.getRelatedPlayer();
+                    //currentPlayer = pendingLargeDecision.getRelatedPlayer(); //TODO remove
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
@@ -96,7 +96,7 @@ public class GameUI implements Drawable {
                 case OptionDecisionRequest:
                     uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
-                    currentPlayer = pendingDecision.getRelatedPlayer();
+                    //currentPlayer = pendingDecision.getRelatedPlayer(); //TODO remove
                     System.out.println(pendingDecision.getChoices().get(0).displayChoiceDetails());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
@@ -187,7 +187,7 @@ public class GameUI implements Drawable {
     UIActionListener getUiActionListener() { return uiActionListener; }
 
     @Override
-    public void draw(Graphics graphics){
+    public void draw(Graphics graphics){ //TODO convert to array
         uiHUD.draw(graphics);
         uiBoard.draw(graphics);
         uiInput.draw(graphics);

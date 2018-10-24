@@ -37,7 +37,6 @@ public class UIEventMessage implements Drawable{
 
             int text_width = graphics.getFontMetrics().stringWidth(eventMessage);
             int messageXPos = MSG_X_POS_BASE - text_width/2;
-            System.out.println(messageXPos);
             graphics.drawString(eventMessage,messageXPos,MSG_Y_POS);
 
             remainingDisplayFrames--;

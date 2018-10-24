@@ -150,26 +150,33 @@ public class HandlePlayerMoveState implements GameState {
                 //TODO Move the above line to the entry function if possible
                 break;
             case Action: //TODO using this as test, fix
+                System.out.println("House state"); //TODO remove
                 nextState = new HouseTileDecisionState();
-                
                 break;
             case Holiday:
-
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseTileDecisionState();
                 // Do nothing
                 break;
             case SpinToWin:
-
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseTileDecisionState();
                 break;
             case Baby:
-
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseTileDecisionState();
                 break;
             case House:
                 System.out.println("House state"); //TODO remove
                 nextState = new HouseTileDecisionState();
                 break;
             case Stop:
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseTileDecisionState();
                 break;
             case Retire:
+                System.out.println("House state"); //TODO remove
+                nextState = new HouseTileDecisionState();
                 break;
             default:
                 // There's no console to print to...

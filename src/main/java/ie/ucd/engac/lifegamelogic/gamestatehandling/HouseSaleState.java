@@ -1,23 +1,21 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class HouseCardSaleState implements GameState { //TODO this entire class
+public class HouseSaleState implements GameState { //TODO this entire class
 
     @Override
     public void enter(GameLogic gameLogic) {
-        // Get the two top CareerCards
+        // Get the CareerCards owned by this player
 
+        ArrayList<HouseCard> cards = gameLogic.getCurrentPlayer().getHouseCards();
         ArrayList<Chooseable> choices = new ArrayList<>();
-        choices.add(new ChooseableString("Do nothing"));
-        choices.add(new ChooseableString("Buy a house"));
-
-        if(gameLogic.getCurrentPlayer().getNumHouseCards() != 0) { //TODO check this
-            choices.add(new ChooseableString("Sell a house"));
+        for (HouseCard houseCard:cards){
+            choices.add( (Chooseable) houseCard );
         }
-
 
         LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
         // Need to store both choices so that we can assign the chosen one to the
