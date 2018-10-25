@@ -70,7 +70,6 @@ public class GameUI implements Drawable {
     public void updateCurrentUIScreen(){
         //TODO fix double inversion case
         if (wasStateUpdatedD == wasStateUpdatedQ || wasStateUpdatedQ == wasStateUpdatedQQ) {
-            System.out.println(lastResponse.getLifeGameMessageType());
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
@@ -81,7 +80,6 @@ public class GameUI implements Drawable {
                     uiInput.setEnableSubmitButton(true);
                     break;
                 case SpinRequest:
-                    System.out.println("rxed sping rq");
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
                     uiInput.setEnableSpinButton(true);

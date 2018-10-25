@@ -24,7 +24,7 @@ public class CollegeCareerCard extends OccupationCard implements Chooseable {
 	}
 
 	@Override
-	public String displayChoiceDetails() { //TODO rethink StringBuilder?
+	public String displayChoiceDetails() {
 		String string = "";
 		string = string.concat("Type: " + occupationCardType);
 		string = string.concat(" Subtype: " + collegeCareerType.toString());

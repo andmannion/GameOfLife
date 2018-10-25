@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
@@ -11,6 +13,7 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTil
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTileTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.ShadowPlayer;
@@ -22,7 +25,6 @@ public class HandlePlayerMoveState implements GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-	    System.out.println("Sent spin rq");
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         String eventMessage = "Player " + playNum + "'s turn.";
         SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
@@ -116,19 +118,27 @@ public class HandlePlayerMoveState implements GameState {
             case Start:
                 break;
             case Payday:
-                OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-                
-                if(currentOccupationCard != null) {
-                    int currentSalary = currentOccupationCard.getSalary();
-                    
-                    gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
-                    gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
-                }
-                nextState = new EndTurnState(); //turn is now over for this player
+               paydayTile(gameLogic);
+               nextState = new EndTurnState(); //turn is now over for this player
                 break;
-            case Action: //TODO using this as test, fix
+            case Action: //TODO move to own function
                 ActionCard thisAction = gameLogic.getTopActionCard();
-                nextState = new HouseTileDecisionState();
+                Player player = gameLogic.getCurrentPlayer();
+                switch (thisAction.getActionCardType()){
+                    case CareerChange:
+                        new CareerChangeState(); //TODO test
+                        break;
+                    case PlayersPay:
+                        return new PickPlayerState(); //TODO test
+                    case PayTheBank:
+                        PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
+                        player.subtractFromBalance(payBank.getValue()); //TODO test
+                        return new EndTurnState();
+                    case GetCashFromBank:
+                        GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;//TODO test
+                        player.addToBalance(getCash.getAmountToPay());
+                        return new EndTurnState();
+                }
                 break;
             case Holiday:
             	System.out.println("Stop tile"); //TODO remove
@@ -204,4 +214,13 @@ public class HandlePlayerMoveState implements GameState {
 			}
 		}
 	}
+
+	private void paydayTile(GameLogic gameLogic){
+        OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
+        if(currentOccupationCard != null) {
+            int currentSalary = currentOccupationCard.getSalary();
+            gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
+            gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
+        }
+    }
 }

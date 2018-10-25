@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.messaging.Chooseable;
@@ -140,5 +141,14 @@ public class NightSchoolState implements GameState {
 		gameLogic.setResponseMessage(responseMessage);			
 		return new HandlePlayerMoveState();
 	}
+    private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
+                                                       Chooseable secondOptionCard) {
 
+        ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
+
+        validStandardCareerCardOptions.add(firstOptionCard);
+        validStandardCareerCardOptions.add(secondOptionCard);
+
+        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex);
+    }
 }
