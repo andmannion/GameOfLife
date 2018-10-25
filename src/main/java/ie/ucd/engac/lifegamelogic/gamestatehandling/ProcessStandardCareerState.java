@@ -33,7 +33,7 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			
 			// Only two cards at the moment, return unchosen
 			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
-			gameLogic.returnCareerCard(unchosenCareerCard);
+			gameLogic.returnOccupationCard(unchosenCareerCard);
 			
 			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
 			

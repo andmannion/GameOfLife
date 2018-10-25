@@ -71,7 +71,15 @@ public class Bank {
 		careerCardDeck.addCardToBottom(standardCareerCardToBeReturned);
 	}
 
-    public HouseCard getTopHouseCard() {
+    public OccupationCard getTopCollegeCareerCard() {
+    	return collegeCareerCardDeck.popTopCard();
+    }
+    
+    public void returnCollegeCareerCard(OccupationCard collegeCareerCardToBeReturned) {
+    	collegeCareerCardDeck.addCardToBottom(collegeCareerCardToBeReturned);
+    }
+
+	public HouseCard getTopHouseCard() {
         return houseCardDeck.popTopCard();
     }
 

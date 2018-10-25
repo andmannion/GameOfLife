@@ -41,7 +41,7 @@ public class HandlePlayerMoveState implements GameState {
             GameBoardTile endTile;
 
             // Need to spin the spinner
-            tilesToMove = Spinner.spinTheWheel();
+            tilesToMove = 11;//Spinner.spinTheWheel();
 
 			// Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic, gameBoard, tilesToMove, tilesMoved);
@@ -164,17 +164,17 @@ public class HandlePlayerMoveState implements GameState {
 	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) {
 		switch(currentTile.getGameBoardStopTileType()) {
 		case Graduation:
-			return new GetMarriedState();
+			return new NightSchoolState();
 		case GetMarried:			
 			return new GetMarriedState();
 		case NightSchool:
-			return new GetMarriedState();
+			return new NightSchoolState();
 		case Family:
-			return new GetMarriedState();
+			return new NightSchoolState();
 		case Baby:
-			return new GetMarriedState();
+			return new NightSchoolState();
 		case Holiday:
-			return new GetMarriedState();
+			return new NightSchoolState();
 		default:
 			// Should be some error message logged to a log file here, quit altogether?
 			break;

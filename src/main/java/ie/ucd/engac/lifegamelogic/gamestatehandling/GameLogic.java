@@ -1,36 +1,27 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.MessageReceiverAndResponder;
-import javafx.scene.shape.Path;
-
 
 // This holds all the elements; players, bank, etc.
 public class GameLogic {
-
 	private Bank bank;
 	private ArrayList<Player> players;
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
 	private int numberOfUnconfiguredPlayers;
-	private LifeGameMessage currentLifeGameMessageResponse;
+	private LifeGameMessage currentLifeGameMessageResponse;	
 	
-	// Queue of expected responses
-	private Queue<LifeGameMessage> expectedResponses;
-	private Queue<LifeGameMessage> replyMessagesSent;
 	private ArrayList<Card> pendingCardChoices;
 	
 	private GameState currentState;
@@ -38,8 +29,6 @@ public class GameLogic {
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {
 		this.gameBoard = gameBoard;
 		bank = new Bank();
-		expectedResponses = new LinkedList<>();
-		replyMessagesSent = new LinkedList<>();
 		initialisePlayers(numPlayers);
 		
 		currentState = new PathChoiceState();
@@ -91,13 +80,13 @@ public class GameLogic {
 	}
 	
 	protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
-		BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0); 
+		BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1); 
 		
 		players.get(playerNumber).setCurrentLocation(collegeCareerPathInitialLocation);
 	}
 	
 	protected void movePlayerToInitialCareerPath(int playerNumber) {
-		BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1); 
+		BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0); 
 		
 		players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
 	}
@@ -118,32 +107,33 @@ public class GameLogic {
 
 	protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
 		currentLifeGameMessageResponse = lifeGameMessage;
-		
-		// Store the reply sent so that we can be aware of the context the resulting reply should be 
-		// interpreted in
-		replyMessagesSent.add(lifeGameMessage);
-	}
-
-	protected void addExpectedResponse(LifeGameMessage lifeGameMessage) {
-		expectedResponses.add(lifeGameMessage);
-	}
-	
-	protected LifeGameMessage getExpectedResponse() {
-		return expectedResponses.remove();
 	}
 
 	protected OccupationCard getTopStandardCareerCard() {
 		return bank.getTopStandardCareerCard();
+	}
+	
+	protected void returnStandardCareerCard(OccupationCard careerCardToBeReturned) {
+		bank.returnStandardCareerCard(careerCardToBeReturned);
+	}
+	
+	protected OccupationCard getTopCollegeCareerCard() {
+		return bank.getTopCollegeCareerCard();
+	}
+	
+	protected void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
+		if(occupationCardToBeReturned.getOccupationCardType() == OccupationCardTypes.Career) {
+			bank.returnStandardCareerCard(occupationCardToBeReturned);
+		}
+		else {
+			bank.returnCollegeCareerCard(occupationCardToBeReturned);
+		}
 	}
 
 	protected ActionCard getTopActionCard() {
 		return bank.getTopActionCard();
 	}
 
-	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
-		bank.returnStandardCareerCard(careerCardToBeReturned);
-	}
-    
 	protected HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
     }
