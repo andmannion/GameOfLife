@@ -20,7 +20,10 @@ public class HandlePlayerMoveState implements GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-
+        int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+        String eventMessage = "Player " + playNum + "'s turn.";
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
+        gameLogic.setResponseMessage(spinRequestMessage);
 	}
 
 	@Override
@@ -72,21 +75,7 @@ public class HandlePlayerMoveState implements GameState {
         }
         */
 
-        if (nextState == null) {
-
-            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
-                // Must send a message to choose a career path, etc.
-                System.out.println("Still player left to initialise");
-                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
-                gameLogic.setResponseMessage(replyMessage);
-
-                return new PathChoiceState();
-            }
-            return null;
-        }
-        else {
-            return nextState;
-        }
+        return nextState;
 	}
 
 	@Override
@@ -143,12 +132,7 @@ public class HandlePlayerMoveState implements GameState {
                     gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
                     gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
                 }
-                gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
-                int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-                String eventMessage = "Player " + playNum + "'s turn.";
-                SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
-                gameLogic.setResponseMessage(spinRequestMessage);
-                //TODO Move the above line to the entry function if possible
+                nextState = new EndTurnState(); //turn is now over for this player
                 break;
             case Action: //TODO using this as test, fix
                 ActionCard thisAction = gameLogic.getTopActionCard();

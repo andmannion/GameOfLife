@@ -67,12 +67,12 @@ public class UIInput implements Drawable {
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getUiActionListener();
 
-        endTurnButton = createButton("End Turn",JCOMBO_LHS_GAP, JCOMBO_Y_POS+50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
+        endTurnButton = createButton("End Turn",JCOMBO_LHS_GAP, JCOMBO_Y_POS - 50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
         renderTarget.add(endTurnButton);
 
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
         int spinY = panelHeight-SPIN_HEIGHT-2*SPIN_BORDER;
-        spinButton = createButton("End Turn",spinX, spinY,SPIN_WIDTH, SPIN_HEIGHT, actionListener);
+        spinButton = createButton("Spin The Wheel",spinX, spinY,SPIN_WIDTH, SPIN_HEIGHT, actionListener);
         renderTarget.add(spinButton);
 
         submitChoice = createButton("Submit Choice",JCOMBO_LHS_GAP, JCOMBO_Y_POS+50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
@@ -143,12 +143,24 @@ public class UIInput implements Drawable {
     void setEnableSubmitButton(boolean bool){
         submitChoice.setEnabled(bool);
     }
+    void setVisibleSubmitButton(boolean bool){
+        submitChoice.setVisible(bool);
+    }
+
+    void setEnableEndTurnButton(boolean bool){
+        endTurnButton.setEnabled(bool);
+    }
+    void setVisibleEndTurnButton(boolean bool){
+        endTurnButton.setVisible(bool);
+    }
+
     void setEnableSpinButton(boolean bool){
         spinButton.setEnabled(bool);
     }
     void setVisibleSpinButton(boolean bool){
         spinButton.setVisible(bool);
     }
+
     void setEnableCardChoice(boolean bool){
         chooseLeftCardButton.setEnabled(bool);
         chooseRightCardButton.setEnabled(bool);
@@ -160,10 +172,18 @@ public class UIInput implements Drawable {
 
     @Override
     public void draw(Graphics graphics){
+        System.err.println(gameUIParent.getUIState());
         switch(gameUIParent.getUIState()){
             case Init:
                 break;
+            case WaitingForAck:
+                setVisibleEndTurnButton(true);
+                setVisibleSpinButton(false);
+                setVisibleCardChoice(false);
+                setVisibleChoiceSpinner(false);
+                break;
             case WaitingForSpin:
+                setVisibleEndTurnButton(false);
                 setVisibleSpinButton(true);
                 setVisibleCardChoice(false);
                 setVisibleChoiceSpinner(false);
@@ -171,11 +191,13 @@ public class UIInput implements Drawable {
             case PostSpin:
                 break;
             case CardChoice://in normal play screen
+                setVisibleEndTurnButton(false);
                 setVisibleSpinButton(false);
                 setVisibleCardChoice(true);
                 setVisibleChoiceSpinner(false);
                 break;
             case LargeChoice:
+                setVisibleEndTurnButton(false);
                 setVisibleSpinButton(false);
                 setVisibleCardChoice(false);
                 setVisibleChoiceSpinner(true);

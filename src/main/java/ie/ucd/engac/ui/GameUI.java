@@ -8,9 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ie.ucd.engac.ui.UIState.CardChoice;
-import static ie.ucd.engac.ui.UIState.LargeChoice;
-import static ie.ucd.engac.ui.UIState.WaitingForSpin;
+import static ie.ucd.engac.ui.UIState.*;
 
 public class GameUI implements Drawable {
 
@@ -30,7 +28,7 @@ public class GameUI implements Drawable {
     private UIEventMessage uiEventMessage;
 
     //tracking the UI state to draw the correct items
-    private UIState uiState;
+    private volatile UIState uiState;
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
@@ -82,7 +80,6 @@ public class GameUI implements Drawable {
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
-
                     break;
                 case SpinRequest:
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
@@ -94,15 +91,17 @@ public class GameUI implements Drawable {
                 case OptionDecisionRequest:
                     uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
-                    System.out.println(pendingDecision.getChoices().get(0).displayChoiceDetails());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
-                    uiInput.setVisibleCardChoice(true);
                     break;
                 case AckRequest:
-                    //TODO display ack screen
+                    uiState = WaitingForAck;
+                    uiInput.setEnableEndTurnButton(true);
+                    break;
                 default:
-                    System.err.println("A message needs handling code written, or was null");
+                    System.err.println("A message needs handling code written, or was null:");
+                    System.err.println(lastResponse.getLifeGameMessageType());
+
                     uiState = UIState.Init;
             }
         }
@@ -152,6 +151,16 @@ public class GameUI implements Drawable {
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
+
+    /**
+     * Send an ack response message using the interface.
+     */
+    private void sendAckResponseMessage(){
+        LifeGameMessage message = new AckResponseMessage();
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
+    }
+
 
     /**
      * Send a large decision response message using the interface.
@@ -221,6 +230,10 @@ public class GameUI implements Drawable {
                 case "Submit Choice":
                     uiInput.setEnableSubmitButton(false);
                     sendLargeDecisionResponse(uiInput.getSpinnerIndex());
+                    break;
+                case "End Turn":
+                    uiInput.setEnableEndTurnButton(false);
+                    sendAckResponseMessage();
                     break;
             }
         }

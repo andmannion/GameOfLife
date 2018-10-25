@@ -35,23 +35,7 @@ public class HouseTileDecisionState implements GameState {
             int choiceIndex = choiceMessage.getChoiceIndex();
 
             if (choiceIndex == 0){ //do nothing, turn ends
-                gameLogic.setNextPlayerToCurrent(); //turn is now over for this player
-
-                if(gameLogic.getNumberOfUninitialisedPlayers() > 0) { //if there are un init players
-                    // Must send a message to choose a career path, etc.
-                    System.out.println("Still player left to initialise");
-                    LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
-                    gameLogic.setResponseMessage(replyMessage);
-
-                    return new PathChoiceState();
-                }
-                else{
-                    int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-                    String eventMessage = "Player " + playNum + "'s turn.";
-                    SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
-                    gameLogic.setResponseMessage(spinRequestMessage);
-                    return new HandlePlayerMoveState();
-                }
+                return new EndTurnState();
             }
             else if (choiceIndex == 1){ //if they wish to buy
                 return new HouseChoiceState();

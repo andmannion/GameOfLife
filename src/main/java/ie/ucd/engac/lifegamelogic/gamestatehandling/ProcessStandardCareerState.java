@@ -37,12 +37,6 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			
 			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
 			
-			// Need to set the reply message to SpinRequest
-			int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-			String eventMessage = "Player " + playNum + "'s turn.";
-			SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
-			gameLogic.setResponseMessage(spinRequestMessage);
-
 			gameLogic.decrementNumberOfUninitialisedPlayers();
 			
 			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 

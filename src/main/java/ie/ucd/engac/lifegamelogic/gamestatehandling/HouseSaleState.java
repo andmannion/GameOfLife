@@ -53,12 +53,7 @@ public class HouseSaleState implements GameState { //TODO this entire class
             Player player = gameLogic.getCurrentPlayer();
             player.sellHouseCard(choiceIndex,spinNum);
 
-            gameLogic.setNextPlayerToCurrent();
-            int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-            String eventMessage = "Player " + playNum + "'s turn.";
-            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), playNum, eventMessage);
-            gameLogic.setResponseMessage(spinRequestMessage);
-            return new HandlePlayerMoveState();
+            return new EndTurnState();
         }
         return null;
     }
