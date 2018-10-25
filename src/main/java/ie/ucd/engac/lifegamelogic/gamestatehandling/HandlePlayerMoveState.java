@@ -138,7 +138,7 @@ public class HandlePlayerMoveState implements GameState {
                 Player player = gameLogic.getCurrentPlayer();
                 switch (thisAction.getActionCardType()){
                     case CareerChange:
-                        //TODO
+                        new CareerChangeState();
                         break;
                     case PlayersPay:
                         return new PickPlayerState(); //TODO test

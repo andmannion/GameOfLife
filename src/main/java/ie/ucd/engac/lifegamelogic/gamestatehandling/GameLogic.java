@@ -10,7 +10,9 @@ import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -120,12 +122,21 @@ public class GameLogic {
 		return bank.getTopStandardCareerCard();
 	}
 
+    protected OccupationCard getTopCollegeCareerCard() {
+        return bank.getTopCollegeCareerCard();
+    }
+
 	protected ActionCard getTopActionCard() {
 		return bank.getTopActionCard();
 	}
 
-	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
-		bank.returnStandardCareerCard(careerCardToBeReturned);
+	protected void returnCareerCard(OccupationCard careerCardToBeReturned, CareerPathTypes careerPathType) {
+	    if(careerPathType == CareerPathTypes.StandardCareer) {
+            bank.returnStandardCareerCard(careerCardToBeReturned);
+        }
+        else{
+            bank.returnCollegeCareerCard(careerCardToBeReturned);
+        }
 	}
     protected HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
