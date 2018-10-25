@@ -73,6 +73,22 @@ public class GameLogic {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 	
+	protected Player getPlayerByIndex(int playerIndex) {
+		if(playerIndex < 0 || playerIndex > players.size()) {
+			return null;
+		}
+		
+		return players.get(playerIndex);
+	}
+
+	protected int getNextPlayerIndex(int playerIndex) {
+		if(playerIndex < 0 || playerIndex > players.size()) {
+			return -1;
+		}
+		
+		return (playerIndex + 1) % players.size();
+	}
+	
 	protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
 		BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0); 
 		
@@ -85,7 +101,11 @@ public class GameLogic {
 		players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
 	}
 
-	protected int getNumberOfUninitialisedPlayers() {
+	protected int getNumberOfPlayers() {
+		return players.size();
+	}
+	
+	public int getNumberOfUninitialisedPlayers() {
 		return numberOfUnconfiguredPlayers;
 	}
 
@@ -118,7 +138,8 @@ public class GameLogic {
 	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
 		bank.returnStandardCareerCard(careerCardToBeReturned);
 	}
-    protected HouseCard getTopHouseCard() {
+    
+	protected HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
     }
 

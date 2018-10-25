@@ -150,33 +150,32 @@ public class HandlePlayerMoveState implements GameState {
                 //TODO Move the above line to the entry function if possible
                 break;
             case Action: //TODO using this as test, fix
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
+            	System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             case Holiday:
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
-                // Do nothing
+            	System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             case SpinToWin:
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
+                System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             case Baby:
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
+            	System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             case House:
                 System.out.println("House state"); //TODO remove
                 nextState = new HouseTileDecisionState();
                 break;
             case Stop:
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
+            	System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             case Retire:
-                System.out.println("House state"); //TODO remove
-                nextState = new HouseTileDecisionState();
+            	System.out.println("Spin to win state"); //TODO remove
+                nextState = new SpinToWinSetupState();
                 break;
             default:
                 // There's no console to print to...

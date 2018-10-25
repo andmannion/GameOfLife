@@ -117,6 +117,10 @@ public class Player {
 	}
 
 	public void addHouseCard(HouseCard houseCard){
+		// TODO: Must prompt the user if they want to go into debt to buy a house
+		// before getting to this point
+		subtractFromBalance(houseCard.getPurchasePrice());
+		
         houseCards.add(houseCard);
     }
 
