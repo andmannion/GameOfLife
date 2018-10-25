@@ -43,7 +43,7 @@ public class ProcessStandardCareerState extends InitialisePlayerState {
 			SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
 			gameLogic.setResponseMessage(spinRequestMessage);
 
-			gameLogic.decrementNumberOfUnconfiguredPlayers();
+			gameLogic.decrementNumberOfUninitialisedPlayers();
 			
 			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 
 			// hierarchical states and who owns them, transitions from lower to higher, etc.

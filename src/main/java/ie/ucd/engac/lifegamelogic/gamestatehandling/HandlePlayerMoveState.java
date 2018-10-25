@@ -3,6 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.Spinner;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
@@ -150,7 +151,7 @@ public class HandlePlayerMoveState implements GameState {
                 //TODO Move the above line to the entry function if possible
                 break;
             case Action: //TODO using this as test, fix
-                System.out.println("House state"); //TODO remove
+                ActionCard thisAction = gameLogic.getTopActionCard();
                 nextState = new HouseTileDecisionState();
                 break;
             case Holiday:

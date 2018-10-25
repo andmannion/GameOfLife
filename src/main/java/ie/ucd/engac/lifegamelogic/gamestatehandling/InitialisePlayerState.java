@@ -46,7 +46,7 @@ public class InitialisePlayerState implements GameState {
 	@Override
 	public void exit(GameLogic gameLogic) {
 		// Should decrement the number of players to be initialised upon exiting this state
-		gameLogic.decrementNumberOfUnconfiguredPlayers();
+		gameLogic.decrementNumberOfUninitialisedPlayers();
 	}
 
 }

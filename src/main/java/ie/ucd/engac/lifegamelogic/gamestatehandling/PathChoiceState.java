@@ -55,7 +55,7 @@ public class PathChoiceState implements GameState {
 				
 				// TODO: Need to exit from this inner state - what's next is the spinaccept
 				// state
-				gameLogic.decrementNumberOfUnconfiguredPlayers();
+				gameLogic.decrementNumberOfUninitialisedPlayers();
 				
 				return new HandlePlayerMoveState();
 				//return null;

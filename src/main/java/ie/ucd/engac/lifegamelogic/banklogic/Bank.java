@@ -1,7 +1,7 @@
 package ie.ucd.engac.lifegamelogic.banklogic;
 
 import ie.ucd.engac.fileutilities.FileUtilities;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.*;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
@@ -74,6 +74,10 @@ public class Bank {
     public HouseCard getTopHouseCard() {
         return houseCardDeck.popTopCard();
     }
+
+	public ActionCard getTopActionCard(){
+		return actionCardDeck.popTopCard();
+	}
 
     public void returnHouseCard(HouseCard houseCardToBeReturned) {
         houseCardDeck.addCardToBottom(houseCardToBeReturned);

@@ -6,6 +6,7 @@ import java.util.Queue;
 
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
@@ -89,7 +90,7 @@ public class GameLogic {
 		return numberOfUnconfiguredPlayers;
 	}
 
-	protected void decrementNumberOfUnconfiguredPlayers() {
+	protected void decrementNumberOfUninitialisedPlayers() {
 		if(numberOfUnconfiguredPlayers > 0) {
 			numberOfUnconfiguredPlayers--;
 		}
@@ -110,9 +111,13 @@ public class GameLogic {
 	protected LifeGameMessage getExpectedResponse() {
 		return expectedResponses.remove();
 	}
-	
+
 	protected OccupationCard getTopStandardCareerCard() {
 		return bank.getTopStandardCareerCard();
+	}
+
+	protected ActionCard getTopActionCard() {
+		return bank.getTopActionCard();
 	}
 
 	protected void returnCareerCard(OccupationCard careerCardToBeReturned) {
