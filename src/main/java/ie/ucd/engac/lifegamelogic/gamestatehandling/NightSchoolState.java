@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -43,21 +42,26 @@ public class NightSchoolState implements GameState {
 			collegeCareerCardOptions = new ArrayList<>();
 			
 			// Give choice of top college cards			
-			CollegeCareerCard topCollegeCareerCard = (CollegeCareerCard) gameLogic.getTopCollegeCareerCard();
-			
-			collegeCareerCardOptions.add(topCollegeCareerCard);
-			pendingCollegeCareerCardChoices.add((Chooseable)topCollegeCareerCard);
-			
-			topCollegeCareerCard = (CollegeCareerCard) gameLogic.getTopCollegeCareerCard();
-			
-			collegeCareerCardOptions.add(topCollegeCareerCard);
-			pendingCollegeCareerCardChoices.add((Chooseable)topCollegeCareerCard);
-			
-			// Compose a response message with this information
-			LifeGameMessage responseMessage = new DecisionRequestMessage(pendingCollegeCareerCardChoices,
-																	     gameLogic.getCurrentPlayer().getPlayerNumber());
-			
-			gameLogic.setResponseMessage(responseMessage);
+			OccupationCard firstCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
+            OccupationCard secondCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
+
+            // Create a list of the choices
+            ArrayList<Card> pendingCardChoices = new ArrayList<>();
+            pendingCardChoices.add(firstCollegeCareerCard);
+            pendingCardChoices.add(secondCollegeCareerCard);
+
+            // Construct a message with these choices
+            LifeGameMessage replyMessage = constructCardChoiceMessage(
+                    gameLogic.getCurrentPlayer().getPlayerNumber(),
+                    (Chooseable) firstCollegeCareerCard,
+                    (Chooseable) secondCollegeCareerCard);
+
+            // Need to store both choices so that we can assign the chosen one to the
+            // correct player,
+            // and push the unchosen one to the bottom of the correct deck.
+            gameLogic.storePendingChoiceCards(pendingCardChoices);
+            gameLogic.setResponseMessage(replyMessage);
+
 		}
 		else
 		{

@@ -25,8 +25,7 @@ public class GameLogic {
 	private LifeGameMessage currentLifeGameMessageResponse;	
 	
 	private ArrayList<Card> pendingCardChoices;
-	private ArrayList<LifeGameMessage> expectedResponses;
-	
+
 	private GameState currentState;
 	
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {
@@ -112,9 +111,6 @@ public class GameLogic {
 		currentLifeGameMessageResponse = lifeGameMessage;
 	}
 
-	protected void addExpectedResponse(LifeGameMessage lifeGameMessage) {
-		expectedResponses.add(lifeGameMessage);
-    }
 	protected OccupationCard getTopStandardCareerCard() {
 		return bank.getTopStandardCareerCard();
     }

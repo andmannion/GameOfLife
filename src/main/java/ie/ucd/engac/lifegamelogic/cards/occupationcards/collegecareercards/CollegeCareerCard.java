@@ -11,7 +11,6 @@ public class CollegeCareerCard extends OccupationCard implements Chooseable {
 							 int salary,
 							 int bonusNumber,
 							 int bonusPaymentAmount) {
-		
 		occupationCardType = OccupationCardTypes.CollegeCareer;
 		this.collegeCareerType = careerType;
 		this.salary = salary;
