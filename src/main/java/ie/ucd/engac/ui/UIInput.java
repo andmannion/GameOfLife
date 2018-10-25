@@ -116,7 +116,6 @@ public class UIInput implements Drawable {
         submitChoice.setVisible(false);
         submitChoice.addActionListener(actionListener);
         renderTarget.add(submitChoice);
-
     }
 
     void setSpinnerOptions(ArrayList<Chooseable> choices){
@@ -126,8 +125,8 @@ public class UIInput implements Drawable {
         }
         SpinnerModel model = new SpinnerListModel(spinnerValues);
         reducingChoice.setModel(model);
+        setSpinnerIndex();
     }
-
 
     private void setSpinnerIndex(){
         try {
