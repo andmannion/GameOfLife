@@ -75,12 +75,12 @@ public class Bank {
         return collegeCareerCardDeck.popTopCard();
     }
 
-    public void returnCollegeCareerCard(OccupationCard standardCareerCardToBeReturned) {
-        collegeCareerCardDeck.addCardToBottom(standardCareerCardToBeReturned);
+   public void returnCollegeCareerCard(OccupationCard collegeCareerCardToBeReturned) {
+    	collegeCareerCardDeck.addCardToBottom(collegeCareerCardToBeReturned);
     }
 
-    public HouseCard getTopHouseCard() {
-        return houseCardDeck.popTopCard();
+	public HouseCard getTopHouseCard() {
+       return houseCardDeck.popTopCard();
     }
 
 	public ActionCard getTopActionCard(){
