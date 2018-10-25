@@ -172,7 +172,6 @@ public class UIInput implements Drawable {
 
     @Override
     public void draw(Graphics graphics){
-        System.err.println(gameUIParent.getUIState());
         switch(gameUIParent.getUIState()){
             case Init:
                 break;

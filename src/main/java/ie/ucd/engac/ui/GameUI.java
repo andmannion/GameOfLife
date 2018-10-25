@@ -95,7 +95,9 @@ public class GameUI implements Drawable {
                     uiInput.setEnableCardChoice(true);
                     break;
                 case AckRequest:
+                    AckRequestMessage ackRequest = (AckRequestMessage) lastResponse;
                     uiState = WaitingForAck;
+                    uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
                     break;
                 default:
