@@ -20,6 +20,7 @@ public class HandlePlayerMoveState implements GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
+	    System.out.println("Sent spin rq");
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         String eventMessage = "Player " + playNum + "'s turn.";
         SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);

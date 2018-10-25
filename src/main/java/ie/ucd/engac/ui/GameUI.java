@@ -28,11 +28,12 @@ public class GameUI implements Drawable {
     private UIEventMessage uiEventMessage;
 
     //tracking the UI state to draw the correct items
-    private volatile UIState uiState;
+    private UIState uiState;
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
     private boolean wasStateUpdatedQ = false;
+    private boolean wasStateUpdatedQQ = false;
 
     // ...
     private int panelHeight;
@@ -67,21 +68,20 @@ public class GameUI implements Drawable {
      * Looks at edges of uistate to determine if UI view needs to be changed.
      */
     public void updateCurrentUIScreen(){
-
-        boolean risingEdgeDetected = wasStateUpdatedD && (!wasStateUpdatedQ);
-        boolean fallingEdgeDetected = (!wasStateUpdatedD) && wasStateUpdatedQ;
-
-        if (risingEdgeDetected || fallingEdgeDetected) {
+        //TODO fix double inversion case
+        if (wasStateUpdatedD == wasStateUpdatedQ || wasStateUpdatedQ == wasStateUpdatedQQ) {
+            System.out.println(lastResponse.getLifeGameMessageType());
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
-                case LargeDecisionRequest: //TODO this is untested
+                case LargeDecisionRequest:
                     LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
                     break;
                 case SpinRequest:
+                    System.out.println("rxed sping rq");
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
                     uiInput.setEnableSpinButton(true);
@@ -108,6 +108,7 @@ public class GameUI implements Drawable {
             }
         }
         wasStateUpdatedQ = wasStateUpdatedD;
+        wasStateUpdatedQQ = wasStateUpdatedQ;
     }
 
     /**
