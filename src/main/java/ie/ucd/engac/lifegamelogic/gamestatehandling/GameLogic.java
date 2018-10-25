@@ -104,6 +104,10 @@ public class GameLogic {
 		replyMessagesSent.add(lifeGameMessage);
 	}
 
+	protected int getNumberOfPlayers(){
+	    return players.size();
+    }
+
 	protected void addExpectedResponse(LifeGameMessage lifeGameMessage) {
 		expectedResponses.add(lifeGameMessage);
 	}
