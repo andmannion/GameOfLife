@@ -31,7 +31,6 @@ public class GameUI implements Drawable {
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
-    private int currentPlayer; //TODO remove
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
@@ -80,7 +79,6 @@ public class GameUI implements Drawable {
                     break;
                 case LargeDecisionRequest: //TODO this is untested
                     LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
-                    //currentPlayer = pendingLargeDecision.getRelatedPlayer(); //TODO remove
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
@@ -96,14 +94,15 @@ public class GameUI implements Drawable {
                 case OptionDecisionRequest:
                     uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
-                    //currentPlayer = pendingDecision.getRelatedPlayer(); //TODO remove
                     System.out.println(pendingDecision.getChoices().get(0).displayChoiceDetails());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
                     uiInput.setVisibleCardChoice(true);
                     break;
+                case AckRequest:
+                    //TODO display ack screen
                 default:
-                    System.out.println("A message needs handling code written, or was null"); //TODO remove
+                    System.err.println("A message needs handling code written, or was null");
                     uiState = UIState.Init;
             }
         }

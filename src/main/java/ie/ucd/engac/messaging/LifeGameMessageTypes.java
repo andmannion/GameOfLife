@@ -7,5 +7,7 @@ public enum LifeGameMessageTypes {
 	LargeDecisionRequest,
     LargeDecisionResponse,
 	OptionDecisionRequest,
-	OptionDecisionResponse
+	OptionDecisionResponse,
+	AckRequest,
+	AckResponse
 }

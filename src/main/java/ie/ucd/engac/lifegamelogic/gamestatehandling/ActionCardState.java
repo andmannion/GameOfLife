@@ -6,7 +6,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 public class ActionCardState implements GameState {
     public void enter(GameLogic gameLogic){
         ActionCard thisAction = gameLogic.getTopActionCard();
-
     };
 
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage){

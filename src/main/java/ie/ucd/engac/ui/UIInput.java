@@ -41,6 +41,7 @@ public class UIInput implements Drawable {
     private JButton spinButton;
     private JButton quitButton;
     private JButton submitChoice;
+    private JButton endTurnButton;
     private JButton chooseLeftCardButton;
     private JButton chooseRightCardButton;
 
@@ -50,6 +51,15 @@ public class UIInput implements Drawable {
 
     private GameUI gameUIParent;
 
+    private JButton createButton(String string,int xPos, int yPos, int width, int height, ActionListener actionListener){
+        JButton button = new JButton(string);
+        button.setActionCommand(string);
+        button.setBounds(xPos,yPos,width,height);
+        button.setVisible(false);
+        button.addActionListener(actionListener);
+        return button;
+    }
+
     UIInput(GameUI gameUI, JPanel renderTarget){
         this.gameUIParent = gameUI;
         this.renderTarget = renderTarget;
@@ -57,40 +67,29 @@ public class UIInput implements Drawable {
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getUiActionListener();
 
-        spinButton = new JButton("Spin The Wheel");
+        endTurnButton = createButton("End Turn",JCOMBO_LHS_GAP, JCOMBO_Y_POS+50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
+        renderTarget.add(endTurnButton);
+
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;
         int spinY = panelHeight-SPIN_HEIGHT-2*SPIN_BORDER;
-        spinButton.setActionCommand("Spin The Wheel");
-        spinButton.setBounds(spinX,spinY,SPIN_WIDTH,SPIN_HEIGHT);
-        spinButton.setVisible(false);
-        spinButton.addActionListener(actionListener);
+        spinButton = createButton("End Turn",spinX, spinY,SPIN_WIDTH, SPIN_HEIGHT, actionListener);
         renderTarget.add(spinButton);
 
-        quitButton = new JButton("Quit Game");
+        submitChoice = createButton("Submit Choice",JCOMBO_LHS_GAP, JCOMBO_Y_POS+50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
+        renderTarget.add(submitChoice);
+
         int quitX = panelWidth-QUIT_WIDTH-QUIT_BORDER;
-        int quitY = QUIT_BORDER;
-        quitButton.setActionCommand("Quit Game");
-        quitButton.setBounds(quitX,quitY,QUIT_WIDTH,QUIT_HEIGHT);
+        quitButton = createButton("Quit Game",quitX, QUIT_BORDER,QUIT_WIDTH, QUIT_HEIGHT, actionListener);
         quitButton.setVisible(true);
-        quitButton.addActionListener(actionListener);
         renderTarget.add(quitButton);
 
-        chooseLeftCardButton = new JButton("Choose Left Card");
-        int cLeftX = CARD_CHOICE_LHS_GAP;
-        int cLeftY = CARD_CHOICE_Y_POS;
-        chooseLeftCardButton.setActionCommand("Choose Left Card");
-        chooseLeftCardButton.setBounds(cLeftX,cLeftY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
-        chooseLeftCardButton.setVisible(false);
+        chooseLeftCardButton = createButton("Choose Left Card",CARD_CHOICE_LHS_GAP, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
         chooseLeftCardButton.addActionListener(actionListener);
         renderTarget.add(chooseLeftCardButton);
 
         chooseRightCardButton = new JButton("Choose Right Card");
         int cRightX = CARD_CHOICE_LHS_GAP+CARD_CHOICE_WIDTH+CARD_CHOICE_INTER_GAP;
-        int cRighY = CARD_CHOICE_Y_POS;
-        chooseRightCardButton.setActionCommand("Choose Right Card");
-        chooseRightCardButton.setBounds(cRightX,cRighY,CARD_CHOICE_WIDTH,CARD_CHOICE_HEIGHT);
-        chooseRightCardButton.setVisible(false);
-        chooseRightCardButton.addActionListener(actionListener);
+        chooseRightCardButton = createButton("Choose Right Card",cRightX, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
         renderTarget.add(chooseRightCardButton);
 
         String[] placeholder = { "Placeholder","222" };
@@ -109,13 +108,6 @@ public class UIInput implements Drawable {
         ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
         reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);
         renderTarget.add(reducingChoice);
-
-        submitChoice = new JButton("Submit Choice");
-        submitChoice.setActionCommand("Submit Choice");
-        submitChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS+50,JCOMBO_WIDTH,JCOMBO_HEIGHT);
-        submitChoice.setVisible(false);
-        submitChoice.addActionListener(actionListener);
-        renderTarget.add(submitChoice);
     }
 
     void setSpinnerOptions(ArrayList<Chooseable> choices){
