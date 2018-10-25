@@ -109,7 +109,8 @@ public class HandlePlayerMoveState implements GameState {
     }
 
 	private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
-	    GameState nextState = null; //TODO -> next SUB state
+	    GameState nextState = null; 
+	    
         System.out.println(currentTile.getGameBoardTileType());
         switch (currentTile.getGameBoardTileType()) {
             case Start:
@@ -164,17 +165,22 @@ public class HandlePlayerMoveState implements GameState {
 	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) {
 		switch(currentTile.getGameBoardStopTileType()) {
 		case Graduation:
-			return new NightSchoolState();
+			//return new NightSchoolState();
+			return new GetMarriedState();
 		case GetMarried:			
 			return new GetMarriedState();
 		case NightSchool:
-			return new NightSchoolState();
+			//return new NightSchoolState();
+			return new GetMarriedState();
 		case Family:
-			return new NightSchoolState();
+			//return new NightSchoolState();
+			return new GetMarriedState();
 		case Baby:
-			return new NightSchoolState();
+			//return new NightSchoolState();
+			return new GetMarriedState();
 		case Holiday:
-			return new NightSchoolState();
+			//return new NightSchoolState();
+			return new GetMarriedState();
 		default:
 			// Should be some error message logged to a log file here, quit altogether?
 			break;

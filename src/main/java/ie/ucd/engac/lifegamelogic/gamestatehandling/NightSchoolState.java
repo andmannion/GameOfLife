@@ -3,6 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -41,12 +42,12 @@ public class NightSchoolState implements GameState {
 			collegeCareerCardOptions = new ArrayList<>();
 			
 			// Give choice of top college cards			
-			OccupationCard topCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
+			CollegeCareerCard topCollegeCareerCard = (CollegeCareerCard) gameLogic.getTopCollegeCareerCard();
 			
 			collegeCareerCardOptions.add(topCollegeCareerCard);
 			pendingCollegeCareerCardChoices.add((Chooseable)topCollegeCareerCard);
 			
-			topCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
+			topCollegeCareerCard = (CollegeCareerCard) gameLogic.getTopCollegeCareerCard();
 			
 			collegeCareerCardOptions.add(topCollegeCareerCard);
 			pendingCollegeCareerCardChoices.add((Chooseable)topCollegeCareerCard);
