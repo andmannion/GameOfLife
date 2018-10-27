@@ -1,10 +1,16 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.cards.actioncards.PlayersPayActionCard;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
 public class PickPlayerState implements GameState {
+    private PlayersPayActionCard playersPayActionCard;
+
+    public PickPlayerState(PlayersPayActionCard playersPayActionCard){
+        this.playersPayActionCard = playersPayActionCard;
+    }
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -21,7 +27,6 @@ public class PickPlayerState implements GameState {
         LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
 
         gameLogic.setResponseMessage(replyMessage);
-
     }
 
     @Override
@@ -30,6 +35,15 @@ public class PickPlayerState implements GameState {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
             LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+
+            int amount = playersPayActionCard.getAmountToPay();
+            int choiceIndex = choiceMessage.getChoiceIndex();
+            int playerIndex;
+
+
+
+            gameLogic.getCurrentPlayer().addToBalance(amount);
+            gameLogic.getPlayerByIndex(choiceIndex).subtractFromBalance(amount);
 
             //TODO use andrews new function to get the cash from the other player
         }

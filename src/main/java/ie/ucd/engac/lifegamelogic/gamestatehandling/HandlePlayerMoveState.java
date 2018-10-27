@@ -6,6 +6,7 @@ import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.PlayersPayActionCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
@@ -129,7 +130,7 @@ public class HandlePlayerMoveState implements GameState {
                         new CareerChangeState(); //TODO test
                         break;
                     case PlayersPay:
-                        return new PickPlayerState(); //TODO test
+                        return new PickPlayerState((PlayersPayActionCard) thisAction); //TODO doesnt work
                     case PayTheBank:
                         PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
                         player.subtractFromBalance(payBank.getValue()); //TODO test
