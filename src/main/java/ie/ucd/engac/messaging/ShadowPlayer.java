@@ -42,10 +42,12 @@ public class ShadowPlayer {
     public String playerColourToString(){
         return playerColour.toString();
     }
+
     public String playerNumToString(){
         Integer playerNumber = this.playerNumber;
         return playerNumber.toString();
     }
+
     //display house
     public String houseCardsToString(){
         if (houses.size() == 0){
@@ -60,10 +62,12 @@ public class ShadowPlayer {
             return string;
         }
     }
+
     public String actionCardsToString(){
         Integer numActionCards = this.numActionCards;
         return numActionCards.toString();
     }
+
     public String careerCardToString(){
         if (occupation == null){
              return "No occupation card.";
@@ -84,10 +88,12 @@ public class ShadowPlayer {
         Integer numLoans = this.numLoans;
         return numLoans.toString() + " loans worth " + loans.toString();
     }
+
     public String bankBalToString(){
         Integer bankBalance = this.bankBalance;
         return bankBalance.toString();
     }
+
     public String dependantsToString(){
         String string;
         if (martialStatus == 1){

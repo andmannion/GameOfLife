@@ -1,7 +1,6 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.Spinner;
-import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -9,18 +8,15 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class RetirePlayerState implements GameState {
-    private Player player;
+
     private int numberOfHouses;
     private int currentCardIndex;
 
-
     @Override
     public void enter(GameLogic gameLogic) {
-        player = gameLogic.getCurrentPlayer();
+        Player player = gameLogic.getCurrentPlayer();
         numberOfHouses = player.getNumberOfHouseCards();
         currentCardIndex = 0;
-
-        HouseCard houseCard = player.getHouseCards().get(currentCardIndex);
 
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         int curentHouseNumber = currentCardIndex + 1;
@@ -53,7 +49,5 @@ public class RetirePlayerState implements GameState {
     }
 
     @Override
-    public void exit(GameLogic gameLogic) {
-        //set housecards to null
-    }
+    public void exit(GameLogic gameLogic) {}
 }
