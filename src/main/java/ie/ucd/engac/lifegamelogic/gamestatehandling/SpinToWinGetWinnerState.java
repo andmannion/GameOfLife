@@ -10,11 +10,11 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class SpinToWinGetWinnerState implements GameState {
-	private final int SPIN_TO_WIN_PRIZE_MONEY = 200000;
-	private final int SPIN_TO_WIN_PRIZE_NOT_WON = -1;
+	private static final int SPIN_TO_WIN_PRIZE_MONEY = 200000;
+	private static final int SPIN_TO_WIN_PRIZE_NOT_WON = -1;
 	
 	private final HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap;
-	private int currentPlayerSpinningTheWheel;
+	private int currentPlayerSpinningTheWheelIndex;
 	
 	protected SpinToWinGetWinnerState(HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap) {
 		this.playerNumberChoiceMap = playerNumberChoiceMap; 
@@ -23,12 +23,12 @@ public class SpinToWinGetWinnerState implements GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// TODO Auto-generated method stub
-		currentPlayerSpinningTheWheel = gameLogic.getCurrentPlayer().getPlayerNumber();
+		currentPlayerSpinningTheWheelIndex = gameLogic.getCurrentPlayerIndex();
 	}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO Auto-generated method stub
+		// TODO I am not sure this works correctly, I it doesnt respect the flow of the states or I think the defined turn order
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Must keep track of the player that is currently spinning
 			int numberSpun = Spinner.spinTheWheel();
@@ -46,7 +46,7 @@ public class SpinToWinGetWinnerState implements GameState {
 				String eventMsg = "You won 200K, player " + winningPlayerIndex + 
 						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + 
 					    ", spin the wheel to move.";
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheel)), currentPlayerSpinningTheWheel, eventMsg);
+				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex)), gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber(), eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
 				
 				return new HandlePlayerMoveState();
@@ -54,7 +54,7 @@ public class SpinToWinGetWinnerState implements GameState {
 			else {
 				// No one won this turn
 				String eventMsg = "Spin the wheel to try to win.";
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheel)), currentPlayerSpinningTheWheel, eventMsg);
+				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex)), gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber(), eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
 			}
 		}

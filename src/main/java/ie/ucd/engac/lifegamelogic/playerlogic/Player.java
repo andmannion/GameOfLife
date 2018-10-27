@@ -13,6 +13,8 @@ public class Player {
     private int numDependants; // This doesn't include partner
     private int currentMoney;
 
+    private boolean retired;
+
 	private ArrayList<ActionCard> actionCards;
 	private ArrayList<HouseCard> houseCards;
 
@@ -32,6 +34,7 @@ public class Player {
 		houseCards = new ArrayList<>();
 		occupationCard = null;
 		careerPathTaken = null;
+        retired = false;
 
 		maritalStatus = MaritalStatus.Single;
 		this.playerColour = PlayerColour.fromInt(playerNumber);
@@ -45,7 +48,7 @@ public class Player {
 
 	public void sellHouseCard(int cardIndex, int spinResult){
 	    if(cardIndex >= 0) {
-	        Boolean bool;
+	        boolean bool;
 	        HouseCard houseCard = houseCards.get(cardIndex);
             if (spinResult%2 == 0){ //TODO simplfy
                 bool = false;
@@ -58,6 +61,17 @@ public class Player {
         }
     }
 
+
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+    public PlayerColour getPlayerColour() {
+        return playerColour;
+    }
+
+
+    //Location related
 	public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
 	}
@@ -66,7 +80,7 @@ public class Player {
 		currentBoardLocation = boardLocation;
 	}
 
-	// Number of people in the car
+	//Dependant related
 	public int getNumDependants() {
 		return numDependants;
 	}
@@ -75,7 +89,15 @@ public class Player {
 		numDependants += numNewDependants;
 	}
 
-	// Current career card
+	// Career related
+    public CareerPathTypes getCareerPath() {
+        return careerPathTaken;
+    }
+
+    public void setCareerPath(CareerPathTypes careerPathTypes) {
+        careerPathTaken = careerPathTypes;
+    }
+
 	public OccupationCard getOccupationCard() {
 		return occupationCard;
 	}
@@ -84,15 +106,7 @@ public class Player {
 		this.occupationCard = occupationCard;
 	}
 
-	public CareerPathTypes getCareerPath() {
-		return careerPathTaken;
-	}
-	
-	public void setCareerPath(CareerPathTypes careerPathTypes) {
-		careerPathTaken = careerPathTypes;
-	}
-	
-	// Current amount of money
+	//Balance related
 	public int getCurrentMoney() {
 		return currentMoney;
 	}
@@ -108,6 +122,8 @@ public class Player {
 		currentMoney -= amountToSubtract;
 	}
 
+
+    //Action cards
 	public ArrayList<ActionCard> getActionCards() {
 		return actionCards;
 	}
@@ -116,6 +132,7 @@ public class Player {
 		return houseCards;
 	}
 
+    //House cards
 	public void addHouseCard(HouseCard houseCard){
 		// TODO: Must prompt the user if they want to go into debt to buy a house
 		// before getting to this point
@@ -128,9 +145,7 @@ public class Player {
 	    return houseCards.size();
     }
 
-	public int getPlayerNumber() {
-		return playerNumber;
-	}
+
 	
 	public void setMaritalStatus(MaritalStatus maritalStatus) {
 		// This method assumes you can only be married to one person at a time...
@@ -144,9 +159,7 @@ public class Player {
 		return maritalStatus;
 	}
 	
-	public PlayerColour getPlayerColour() {
-		return playerColour;
-	}
+
 
 	public BoardLocation getPendingBoardForkChoice() {
 		return pendingBoardForkChoice;

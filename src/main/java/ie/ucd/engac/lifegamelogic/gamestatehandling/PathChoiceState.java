@@ -42,7 +42,7 @@ public class PathChoiceState implements GameState {
 				gameLogic.getCurrentPlayer().subtractFromBalance(COLLEGE_UPFRONT_COST);
 						
 				// Must move the player to the CollegeCareer path
-				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
+				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayerIndex());
 
 				// TODO: Need to exit from this inner state - what's next is the spinaccept
 				// state
@@ -65,12 +65,12 @@ public class PathChoiceState implements GameState {
 		// Must clear the sent message?
 	}
 
-	protected static LifeGameMessage constructPathChoiceMessage(int relatedPlayerIndex) {
+	protected static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
 		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
 		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
 		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
 
-		LifeGameMessage replyMessage = new DecisionRequestMessage(validPathChoices, relatedPlayerIndex);
+		LifeGameMessage replyMessage = new DecisionRequestMessage(validPathChoices, relatedPlayerNumber);
 
 		return replyMessage;
 	}

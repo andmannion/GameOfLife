@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class LargeDecisionRequestMessage extends LifeGameMessage {
 	// Need to tell what is to be chosen between
-	private final int relatedPlayerIndex;
+	private final int relatedPlayerNumber;
 	private final ArrayList<Chooseable> choices;
 
-	public LargeDecisionRequestMessage(ArrayList<Chooseable> choices, int relatedPlayerIndex) {
+	public LargeDecisionRequestMessage(ArrayList<Chooseable> choices, int relatedPlayerNumber) {
 		super(LifeGameMessageTypes.LargeDecisionRequest);
-		this.relatedPlayerIndex = relatedPlayerIndex;
+		this.relatedPlayerNumber = relatedPlayerNumber;
 		this.choices = choices;
 	}
 	
 	public int getRelatedPlayer() {
-		return relatedPlayerIndex;
+		return relatedPlayerNumber;
 	}
 	
 	public ArrayList<Chooseable> getChoices(){

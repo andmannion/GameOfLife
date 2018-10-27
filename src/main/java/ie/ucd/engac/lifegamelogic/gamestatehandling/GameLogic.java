@@ -19,9 +19,11 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 public class GameLogic {
 	private Bank bank;
 	private ArrayList<Player> players;
+	private ArrayList<Player> retiredPlayers;
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
 	private int numberOfUnconfiguredPlayers;
+	private int numberOfRetiredPlayers;
 	private LifeGameMessage currentLifeGameMessageResponse;	
 	
 	private ArrayList<Card> pendingCardChoices;
@@ -51,107 +53,94 @@ public class GameLogic {
 		// When there are no pending transitions, must send the current
 		// LifeGameMessage as stored in the GameLogic object.
 		return getLifeGameMessageResponse();
-	}	
+	}
+
+	//Player related
+    private void initialisePlayers(int numPlayers) {
+        players = new ArrayList<>();
+
+        for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
+            players.add(new Player(playerIndex+1));
+        }
+        // All of these players require the user to set some initial characteristics
+        numberOfUnconfiguredPlayers = numPlayers;
+    }
+
+    protected int getCurrentPlayerIndex(){
+	    return currentPlayerIndex;
+    }
 	
 	protected Player getCurrentPlayer() {
-		return players.get(currentPlayerIndex);
-	}
-	
-	protected LogicGameBoard getGameBoard() {
+        return players.get(currentPlayerIndex);
+    }
+    protected void setNextPlayerToCurrent() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+
+    protected int getNumberOfPlayers() {
+        return players.size();
+    }
+
+    protected Player getPlayerByIndex(int playerIndex) {
+        if(playerIndex < 0 || playerIndex > players.size()) {
+            return null;
+        }
+        return players.get(playerIndex);
+    }
+
+    protected int getNextPlayerIndex(int playerIndex) {
+        if(playerIndex < 0 || playerIndex > players.size()) {
+            return -1;
+        }
+        return (playerIndex + 1) % players.size();
+    }
+    public int getNumberOfUninitialisedPlayers() {
+        return numberOfUnconfiguredPlayers;
+    }
+
+    protected void decrementNumberOfUninitialisedPlayers() {
+        if(numberOfUnconfiguredPlayers > 0) {
+            numberOfUnconfiguredPlayers--;
+        }
+    }
+
+    //career related
+    protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
+        BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1);
+
+        players.get(playerNumber).setCurrentLocation(collegeCareerPathInitialLocation);
+    }
+
+    protected void movePlayerToInitialCareerPath(int playerNumber) {
+        BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
+
+        players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
+    }
+
+    //GameBoard related
+    protected LogicGameBoard getGameBoard() {
 		return gameBoard;
 	}
 
-	protected void setNextPlayerToCurrent() {
-		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-	}
-	
-	protected Player getPlayerByIndex(int playerIndex) {
-		if(playerIndex < 0 || playerIndex > players.size()) {
-			return null;
-		}
-		
-		return players.get(playerIndex);
-	}
-
-	protected int getNextPlayerIndex(int playerIndex) {
-		if(playerIndex < 0 || playerIndex > players.size()) {
-			return -1;
-		}
-		
-		return (playerIndex + 1) % players.size();
-	}
-	
-	protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
-		BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1); 
-		
-		players.get(playerNumber).setCurrentLocation(collegeCareerPathInitialLocation);
-	}
-	
-	protected void movePlayerToInitialCareerPath(int playerNumber) {
-		BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0); 
-		
-		players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
-	}
-
-	protected int getNumberOfPlayers() {
-		return players.size();
-	}
-	
-	public int getNumberOfUninitialisedPlayers() {
-		return numberOfUnconfiguredPlayers;
-	}
-
-	protected void decrementNumberOfUninitialisedPlayers() {
-		if(numberOfUnconfiguredPlayers > 0) {
-			numberOfUnconfiguredPlayers--;
-		}
-	}
-
-	protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
-		currentLifeGameMessageResponse = lifeGameMessage;
-	}
-
-	protected OccupationCard getTopStandardCareerCard() {
-		return bank.getTopStandardCareerCard();
-    }
-	
-	protected void returnStandardCareerCard(OccupationCard careerCardToBeReturned) {
-		bank.returnStandardCareerCard(careerCardToBeReturned);
-	}
-	
-	protected OccupationCard getTopCollegeCareerCard() {
-		return bank.getTopCollegeCareerCard();
-	}
-	
-	protected void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
-		if(occupationCardToBeReturned.getOccupationCardType() == OccupationCardTypes.Career) {
-			bank.returnStandardCareerCard(occupationCardToBeReturned);
-		}
-		else {
-			bank.returnCollegeCareerCard(occupationCardToBeReturned);
-		}
-	}
-
-	protected ActionCard getTopActionCard() {
-		return bank.getTopActionCard();
-	}
-
-	protected void returnCareerCard(OccupationCard careerCardToBeReturned, CareerPathTypes careerPathType) {
-	    if(careerPathType == CareerPathTypes.StandardCareer) {
-            bank.returnStandardCareerCard(careerCardToBeReturned);
-        }
-        else{
-            bank.returnCollegeCareerCard(careerCardToBeReturned);
-        }
-	}
-    protected HouseCard getTopHouseCard() {
-        return bank.getTopHouseCard();
+    protected ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
+        return gameBoard.getOutboundNeighbours(currentBoardLocation);
     }
 
-    protected void returnHouseCard(HouseCard houseCardToBeReturned) {
-        bank.returnHouseCard(houseCardToBeReturned);
+	//Bank related
+    protected void extractMoneyFromBank(int amountToExtract) {
+        bank.extractMoney(amountToExtract);
     }
 
+    //Message related
+    private LifeGameMessage getLifeGameMessageResponse() {
+        return currentLifeGameMessageResponse;
+    }
+
+    protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
+        currentLifeGameMessageResponse = lifeGameMessage;
+    }
+
+    //Generic card related
     protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
@@ -160,26 +149,44 @@ public class GameLogic {
         return pendingCardChoices;
     }
 
-	protected ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
-		return gameBoard.getOutboundNeighbours(currentBoardLocation);
-	}
+    //Occupation card related
+    protected OccupationCard getTopStandardCareerCard() {
+        return bank.getTopStandardCareerCard();
+    }
 
-	protected void extractMoneyFromBank(int amountToExtract) {
-		bank.extractMoney(amountToExtract);
-	}
+    protected OccupationCard getTopCollegeCareerCard() {
+        return bank.getTopCollegeCareerCard();
+    }
 
-	private LifeGameMessage getLifeGameMessageResponse() {
-		return currentLifeGameMessageResponse;
-	}
+    protected void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
+        if(occupationCardToBeReturned.getOccupationCardType() == OccupationCardTypes.Career) {
+            bank.returnStandardCareerCard(occupationCardToBeReturned);
+        }
+        else {
+            bank.returnCollegeCareerCard(occupationCardToBeReturned);
+        }
+    }
+    protected void returnCareerCard(OccupationCard careerCardToBeReturned, CareerPathTypes careerPathType) { //TODO remove
+        if(careerPathType == CareerPathTypes.StandardCareer) {
+            bank.returnStandardCareerCard(careerCardToBeReturned);
+        }
+        else{
+            bank.returnCollegeCareerCard(careerCardToBeReturned);
+        }
+    }
 
-	private void initialisePlayers(int numPlayers) {
-		players = new ArrayList<>();
+    //Action card related
+    protected ActionCard getTopActionCard() {
+        return bank.getTopActionCard();
+    }
 
-		for (int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
-			players.add(new Player(playerIndex));
-		}
-		
-		// All of these players require the user to set some initial characteristics
-		numberOfUnconfiguredPlayers = numPlayers;
-	}
+    //House card related
+    protected HouseCard getTopHouseCard() {
+        return bank.getTopHouseCard();
+    }
+
+    protected void returnHouseCard(HouseCard houseCardToBeReturned) {
+        bank.returnHouseCard(houseCardToBeReturned);
+    }
+
 }

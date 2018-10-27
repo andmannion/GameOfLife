@@ -18,8 +18,8 @@ public class PickPlayerState implements GameState {
         ArrayList<Chooseable> choices = new ArrayList<>();
         int numPlayers = gameLogic.getNumberOfPlayers();
         for (int i = 0;i<numPlayers;i++){
-            if(i != gameLogic.getCurrentPlayer().getPlayerNumber()){
-                String string = "Player " + i;
+            if(i != gameLogic.getCurrentPlayerIndex()){
+                String string = "Player " + gameLogic.getPlayerByIndex(i).getPlayerNumber();
                 ChooseableString cString = new ChooseableString(string);
                 choices.add(cString);
             }
@@ -40,14 +40,18 @@ public class PickPlayerState implements GameState {
             int choiceIndex = choiceMessage.getChoiceIndex();
             int playerIndex;
 
-
-
+            //map choice back to player index, accounting for the current player
+            if (choiceIndex < gameLogic.getCurrentPlayerIndex()) {
+                playerIndex = choiceIndex;
+            }
+            else{
+                playerIndex = choiceIndex + 1;
+            }
             gameLogic.getCurrentPlayer().addToBalance(amount);
-            gameLogic.getPlayerByIndex(choiceIndex).subtractFromBalance(amount);
-
-            //TODO use andrews new function to get the cash from the other player
+            gameLogic.getPlayerByIndex(playerIndex).subtractFromBalance(amount);
+            nextState = new EndTurnState();
         }
-        return null;
+        return nextState;
     }
 
     @Override

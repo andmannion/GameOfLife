@@ -130,7 +130,7 @@ public class HandlePlayerMoveState implements GameState {
                         new CareerChangeState(); //TODO test
                         break;
                     case PlayersPay:
-                        return new PickPlayerState((PlayersPayActionCard) thisAction); //TODO doesnt work
+                        return new PickPlayerState((PlayersPayActionCard) thisAction); ///TODO test
                     case PayTheBank:
                         PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
                         player.subtractFromBalance(payBank.getValue()); //TODO test
@@ -142,23 +142,26 @@ public class HandlePlayerMoveState implements GameState {
                 }
                 break;
             case Holiday:
-            	System.out.println("Stop tile"); //TODO remove
-                nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
+            	System.out.println("Holiday tile"); //TODO remove
+                //TODO notify user that it is a holiday
+                nextState = new EndTurnState();
                 break;
             case SpinToWin:
                 System.out.println("Spin to win state");
-                nextState = new SpinToWinSetupState();
+                nextState = new SpinToWinSetupState(); //TODO Check that spin2win restores control to the correct player
                 break;
             case Baby:
-            	System.out.println("Stop tile"); //TODO remove
-                nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
+            	System.out.println("Baby tile"); //TODO remove
+                //TODO notify user that it is a baby
+                gameLogic.getCurrentPlayer().addDependants(1);
+                nextState = new EndTurnState();
                 break;
             case House:
-                System.out.println("House state"); 
+                System.out.println("House state"); //TODO remove
                 nextState = new HouseTileDecisionState();
                 break;
             case Stop:
-            	System.out.println("Stop tile"); 
+            	System.out.println("Stop tile"); //TODO remove
                 nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
                 break;
             case Retire:
@@ -173,7 +176,7 @@ public class HandlePlayerMoveState implements GameState {
         return nextState;
     }
 	
-	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) {
+	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) { //TODO potentially merge into normal tile eval
 		switch(currentTile.getGameBoardStopTileType()) {
 		case Graduation:
 			//return new NightSchoolState();
@@ -223,5 +226,9 @@ public class HandlePlayerMoveState implements GameState {
             gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
             gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
         }
+    }
+
+    private void retirePlayer(){
+
     }
 }

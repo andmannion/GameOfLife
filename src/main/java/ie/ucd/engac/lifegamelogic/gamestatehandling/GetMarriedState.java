@@ -14,6 +14,7 @@ public class GetMarriedState implements GameState {
 	private int playersLeftToSpin;
 	private int playerGettingMarriedIndex;
 	private int playerToSpinIndex;
+	private int playerGettingMarriedNumber;
 	
 	@Override
 	public void enter(GameLogic gameLogic) {	
@@ -22,11 +23,12 @@ public class GetMarriedState implements GameState {
 		// Update the current player to have a spouse			
 		gameLogic.getCurrentPlayer().setMaritalStatus(MaritalStatus.Married);
 		
-		playerGettingMarriedIndex = gameLogic.getCurrentPlayer().getPlayerNumber();
+		playerGettingMarriedNumber = gameLogic.getCurrentPlayer().getPlayerNumber();
+		playerGettingMarriedIndex = gameLogic.getCurrentPlayerIndex();
 		playerToSpinIndex = gameLogic.getNextPlayerIndex(playerGettingMarriedIndex);
 		playersLeftToSpin = gameLogic.getNumberOfPlayers() - 1;
 		
-		String eventMsg = "Player " + playerToSpinIndex + ", spin the wheel.";
+		String eventMsg = "Player " + playerGettingMarriedNumber + ", spin the wheel.";
 		
 		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),

@@ -2,13 +2,13 @@ package ie.ucd.engac.messaging;
 
 public class SpinRequestMessage extends LifeGameMessage {
     // Need to tell what is to be chosen between
-    private final int relatedPlayerIndex;
+    private final int relatedPlayerNumber;
     private final ShadowPlayer shadowPlayer;
     private String eventMsg;
 
-    public SpinRequestMessage(ShadowPlayer shadowPlayer, int relatedPlayerIndex, String eventMsg) {
+    public SpinRequestMessage(ShadowPlayer shadowPlayer, int relatedPlayerNumber, String eventMsg) {
         super(LifeGameMessageTypes.SpinRequest);
-        this.relatedPlayerIndex = relatedPlayerIndex;
+        this.relatedPlayerNumber = relatedPlayerNumber;
         this.shadowPlayer = shadowPlayer;
         this.eventMsg = eventMsg;
     }
@@ -17,8 +17,8 @@ public class SpinRequestMessage extends LifeGameMessage {
         return eventMsg;
     }
 
-    public int getRelatedPlayer() {
-        return relatedPlayerIndex;
+    public int getRelatedPlayerNumber() {
+        return relatedPlayerNumber;
     }
 
     public ShadowPlayer getShadowPlayer(){
