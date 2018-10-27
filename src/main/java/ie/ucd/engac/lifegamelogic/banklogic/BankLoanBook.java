@@ -3,10 +3,14 @@ package ie.ucd.engac.lifegamelogic.banklogic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * BORROWER ID IS THE PLAYERS NUMBER NOT INDEX
+ */
+
 public class BankLoanBook {
 	private HashMap<Integer, ArrayList<BankLoan>> borrowerToLoansMap;
 	
-	public BankLoanBook() {
+	BankLoanBook() {
 		borrowerToLoansMap = new HashMap<Integer, ArrayList<BankLoan>>();
 	}
 	
@@ -22,7 +26,7 @@ public class BankLoanBook {
 		borrowerToLoansMap.put(borrowerID, bankLoans);
 	}
 	
-	public ArrayList<BankLoan> getOutstandingBankLoans(int borrowerID){
+	private ArrayList<BankLoan> getOutstandingBankLoans(int borrowerID){
 		ArrayList<BankLoan> outstandingLoans = new ArrayList<BankLoan>();
 		
 		if(borrowerToLoansMap.containsKey(borrowerID)) {
@@ -31,8 +35,27 @@ public class BankLoanBook {
 		
 		return outstandingLoans;
 	}
+
+    int getNumberOfOutstandingBankLoans(int borrowerID){
+        ArrayList<BankLoan> outstandingLoans = new ArrayList<BankLoan>();
+
+        if(borrowerToLoansMap.containsKey(borrowerID)) {
+            outstandingLoans = borrowerToLoansMap.get(borrowerID);
+        }
+
+        return outstandingLoans.size();
+    }
+
+    int getOutstandingBankLoanTotal(int borrowerID){
+		ArrayList<BankLoan> loans = getOutstandingBankLoans(borrowerID);
+		int outstandingLoanTotal = 0;
+		for (BankLoan loan:loans){
+            outstandingLoanTotal += loan.getAmount();
+        }
+        return outstandingLoanTotal;
+	}
 	
-	public void repayAllLoans(int borrowerID) {
+	void repayAllLoans(int borrowerID) {
 		if(borrowerToLoansMap.containsKey(borrowerID)) {
 			borrowerToLoansMap.remove(borrowerID);
 		}

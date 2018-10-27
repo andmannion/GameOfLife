@@ -8,9 +8,11 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 
 public class Bank {
-	private final String HOUSE_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/HouseCardConfig.json";
-	private final String CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CareerCardConfig.json";
-	private final String COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
+	private static final String HOUSE_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/HouseCardConfig.json";
+	private static final String CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CareerCardConfig.json";
+	private static final String COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
+
+	private static final int LOAN_AMOUNT = 50000;
 
 	private ActionCardDeck actionCardDeck;
 	private HouseCardDeck houseCardDeck;
@@ -46,12 +48,27 @@ public class Bank {
 	private void initialiseLoanBook() {
 		bankLoanBook = new BankLoanBook();
 	}
-	
-	public int getNumLoans(int playerID) {
-		return bankLoanBook.getOutstandingBankLoans(playerID).size();
-	}
 
-	public int getTotalMoneyExtracted() {
+	public int takeOutALoan(int playerIndex){
+        extractMoney(LOAN_AMOUNT);
+        //TODO
+        return 0;
+    }
+
+	public void repayAllLoans(int playerIndex){
+        bankLoanBook.repayAllLoans(playerIndex);
+    }
+
+    public int getNumberOfOutstandingLoans(int playerIndex) {
+        return bankLoanBook.getNumberOfOutstandingBankLoans(playerIndex);
+    }
+
+    public int getOutstandingLoanTotal(int playerIndex) {
+        return bankLoanBook.getOutstandingBankLoanTotal(playerIndex);
+    }
+
+
+    public int getTotalMoneyExtracted() {
 		return totalMoneyExtracted;
 	}
 	

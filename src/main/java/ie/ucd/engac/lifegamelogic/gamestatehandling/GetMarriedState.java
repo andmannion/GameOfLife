@@ -30,7 +30,7 @@ public class GetMarriedState implements GameState {
 		
 		String eventMsg = "Player " + playerGettingMarriedNumber + ", spin the wheel.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
 																 eventMsg);
 		gameLogic.setResponseMessage(responseMessage);
@@ -68,7 +68,7 @@ public class GetMarriedState implements GameState {
 						"You got married, player " + playerGettingMarriedIndex + ", so take an extra turn.";
 				
 				// The current player gets another go, so don't advance the current player
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 																		 playerGettingMarriedIndex,
 																		 eventMsg);				
 				gameLogic.setResponseMessage(responseMessage);				
@@ -77,7 +77,7 @@ public class GetMarriedState implements GameState {
 			else {
 				String eventMsg = "Player " + playerToSpinIndex + ", spin the wheel.";
 				
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 						 gameLogic.getCurrentPlayer().getPlayerNumber(),
 						 eventMsg);
 				gameLogic.setResponseMessage(responseMessage);

@@ -3,9 +3,9 @@ package ie.ucd.engac.messaging;
 
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
+import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
@@ -19,20 +19,22 @@ public class ShadowPlayer {
     private int numDependants;
     private int numActionCards;
     private int loans;
+    private int numLoans;
     private int bankBalance;
 
     private OccupationCard occupation;
     private int martialStatus;
     private ArrayList<HouseCard> houses;
 
-    public ShadowPlayer(Player player){
+    public ShadowPlayer(Player player, GameLogic gameLogic){
         playerNumber = player.getPlayerNumber();
         playerColour = player.getPlayerColour();
         martialStatus = player.getMaritalStatus().toInt();
-        numDependants = player.getNumDependants();
+        numDependants = player.getNumberOfDependants();
         occupation = player.getOccupationCard();
         houses = player.getHouseCards();
-        loans = 0; // TODO: Number of loans of each player should be obtained through the Bank object
+        numLoans = player.getNumberOfLoans(gameLogic);
+        loans = player.getTotalLoansOutstanding(gameLogic);
         bankBalance = player.getCurrentMoney();
         numActionCards = player.getActionCards().size();
     }
@@ -79,11 +81,12 @@ public class ShadowPlayer {
     }
     public String numLoansToString(){
         Integer loans = this.loans;
-        return loans.toString();
+        Integer numLoans = this.numLoans;
+        return numLoans.toString() + " loans worth " + loans.toString();
     }
     public String bankBalToString(){
         Integer bankBalance = this.bankBalance;
-        return "Bank Balance: " + bankBalance;
+        return bankBalance.toString();
     }
     public String dependantsToString(){
         String string;

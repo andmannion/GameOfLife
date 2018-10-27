@@ -28,7 +28,6 @@ public class SpinToWinSetupState implements GameState {
 		// Must set the response message to a choice between 1 and 10
 		remainingNumberChoices = new HashSet<>();
 		playerIndexChoiceMap = new HashMap<>();
-		ArrayList<Chooseable> choices = new ArrayList<>();
 		
 		awaitingInfoFromPlayerIndex = gameLogic.getCurrentPlayerIndex();
         initialPlayerIndex = awaitingInfoFromPlayerIndex;
@@ -47,7 +46,6 @@ public class SpinToWinSetupState implements GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO Auto-generated method stub
 		// Get two numbers back, store them in the player's spinToWinSelection
 		// Send out a LargeDecisionRequestMessage for each other player
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
@@ -56,7 +54,7 @@ public class SpinToWinSetupState implements GameState {
 			parsePlayerResponse(gameLogic,
 				    			(LargeDecisionResponseMessage) lifeGameMessage,
                     awaitingInfoFromPlayerIndex);
-                    //gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber()); //TODO I think this is not correct
+                    //gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
 			
 			int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
 			
@@ -72,7 +70,7 @@ public class SpinToWinSetupState implements GameState {
 				// We have received a message from all players, and now need to begin spinning
 				// the wheel to select numbers for each player until one of the chosen numbers is spun.
 				String eventMsg = "Spin the wheel to try to win.";
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()), gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), eventMsg);
+				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), eventMsg);
 				
 				gameLogic.setResponseMessage(responseMessage);
 				return new SpinToWinGetWinnerState(playerIndexChoiceMap);

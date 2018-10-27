@@ -5,6 +5,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class EndTurnState implements GameState {
+    //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         String eventMessage = "Player " + playNum + "'s turn is over.";

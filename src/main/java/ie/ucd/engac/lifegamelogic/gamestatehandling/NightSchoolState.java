@@ -117,7 +117,7 @@ public class NightSchoolState implements GameState {
 		
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
 																 eventMsg);			
 		gameLogic.setResponseMessage(responseMessage);			
@@ -139,7 +139,7 @@ public class NightSchoolState implements GameState {
 		// Send same message either way
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
 					
-		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),
+		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
 																 eventMsg);			
 		gameLogic.setResponseMessage(responseMessage);			

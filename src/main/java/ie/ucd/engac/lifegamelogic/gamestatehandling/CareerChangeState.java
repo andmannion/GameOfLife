@@ -69,7 +69,7 @@ public class CareerChangeState implements GameState {
             // Only two cards at the moment, return unchosen
             CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);
             //TODO into function in superclass?
-            gameLogic.returnCareerCard(unchosenCareerCard, careerPathType);
+            gameLogic.returnOccupationCard(unchosenCareerCard);
 
             return new EndTurnState();
         }

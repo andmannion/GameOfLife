@@ -198,13 +198,21 @@
 			}
 		},
 		{
-			"id": "ab",
-			"gameBoardTile": {
-				"tileMovementType": "GameBoardStopTile",				
-				"gameBoardTileType": "Stop",
-				"gameBoardStopTileType": "GetMarried"
-			}
-		}
+        "id": "ab",
+        "gameBoardTile": {
+            "tileMovementType": "GameBoardStopTile",
+            "gameBoardTileType": "Stop",
+            "gameBoardStopTileType": "GetMarried"
+            }
+        },
+        {
+          "id": "ac",
+          "gameBoardTile": {
+            "tileMovementType": "GameBoardStopTile",
+            "gameBoardTileType": "Stop",
+            "gameBoardStopTileType": "Retire"
+          }
+        }
 	],
 	"edges": [{
 		"source": "a",
@@ -317,6 +325,10 @@
 	{
 		"source": "aa",
 		"target": "ab"
+	},
+	{
+		"source": "ab",
+		"target": "ac"
 	}
 	]
 }

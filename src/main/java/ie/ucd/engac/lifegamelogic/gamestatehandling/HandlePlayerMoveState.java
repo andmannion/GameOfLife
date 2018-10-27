@@ -2,7 +2,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
@@ -11,7 +10,6 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTile;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTileTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -21,14 +19,14 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class HandlePlayerMoveState implements GameState {
-	private final int PAYDAY_LANDED_ON_BONUS = 100000;
-	GameState currentSubstate = null;
+	private final static int PAYDAY_LANDED_ON_BONUS = 100000;
+	GameState currentSubstate = null; //TODO substates?
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         String eventMessage = "Player " + playNum + "'s turn.";
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer()),playNum, eventMessage);
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),playNum, eventMessage);
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
 
@@ -73,7 +71,6 @@ public class HandlePlayerMoveState implements GameState {
 	@Override
 	public void exit(GameLogic gameLogic) {
 		// TODO Auto-generated method stub
-
 	}
 
 	private GameBoardTile tryToMove(GameLogic gameLogic, LogicGameBoard gameBoard, int tilesToMove, int tilesMoved){
@@ -164,10 +161,6 @@ public class HandlePlayerMoveState implements GameState {
             	System.out.println("Stop tile"); //TODO remove
                 nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
                 break;
-            case Retire:
-            	System.out.println("Stop tile"); //TODO remove
-                nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
-                break;
             default:
                 // There's no console to print to...
                 // TODO: use some utility log file class to write the errors of the program to
@@ -177,30 +170,47 @@ public class HandlePlayerMoveState implements GameState {
     }
 	
 	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) { //TODO potentially merge into normal tile eval
-		switch(currentTile.getGameBoardStopTileType()) {
-		case Graduation:
-			//return new NightSchoolState();
-			return new GetMarriedState();
-		case GetMarried:			
-			return new GetMarriedState();
-		case NightSchool:
-			//return new NightSchoolState();
-			return new GetMarriedState();
-		case Family:
-			//return new NightSchoolState();
-			return new GetMarriedState();
-		case Baby:
-			//return new NightSchoolState();
-			return new GetMarriedState();
-		case Holiday:
-			//return new NightSchoolState();
-			return new GetMarriedState();
-		default:
-			// Should be some error message logged to a log file here, quit altogether?
-			break;
-		}
-		
-		return null;
+        GameState nextState = null;
+        switch(currentTile.getGameBoardStopTileType()) {
+                case Graduation:
+                    //return new NightSchoolState();
+                    nextState = new EndTurnState();
+                    break;
+                case GetMarried:
+                    //nextState = new GetMarriedState();
+                    nextState = new EndTurnState();
+                    break;
+                case NightSchool:
+                    //return new NightSchoolState();
+                    nextState = new EndTurnState();
+                    break;
+                case Family:
+                    //return new NightSchoolState();
+                    nextState = new EndTurnState();
+                    break;
+                case Baby:
+                    //return new NightSchoolState();
+                    nextState = new EndTurnState();
+                    break;
+                case Holiday:
+                    //return new NightSchoolState();
+                    nextState = new EndTurnState();
+                    break;
+                case Retire:
+                    System.out.println("Retirement tile"); //TODO remove
+                    if (gameLogic.getCurrentPlayer().getNumberOfHouseCards() == 0){ //if they have houses need to sell them
+                        gameLogic.retireCurrentPlayer();
+                        nextState = new EndTurnState();
+                    }
+                    else {
+                        nextState = new RetirePlayerState(); //TODO test
+                    }
+                    break;
+                default:
+                    // Should be some error message logged to a log file here, quit altogether?
+                    break;
+            }
+            return nextState;
 	}
 
 	private void performUpdateIfPassingOverTile(GameBoardTile currentTile, GameLogic gameLogic) {
@@ -211,9 +221,7 @@ public class HandlePlayerMoveState implements GameState {
 			
 			if(currentOccupationCard != null) {
 				int currentSalary = currentOccupationCard.getSalary();
-
 				// Get money from the bank, increment the player's balance by that amount
-				gameLogic.extractMoneyFromBank(currentSalary);
 				gameLogic.getCurrentPlayer().addToBalance(currentSalary);
 			}
 		}
@@ -223,7 +231,6 @@ public class HandlePlayerMoveState implements GameState {
         OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
         if(currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
-            gameLogic.extractMoneyFromBank(currentSalary + PAYDAY_LANDED_ON_BONUS);
             gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
         }
     }

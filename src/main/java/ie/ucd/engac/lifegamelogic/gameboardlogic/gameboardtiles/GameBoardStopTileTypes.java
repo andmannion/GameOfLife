@@ -6,5 +6,6 @@ public enum GameBoardStopTileTypes {
 	NightSchool,
 	Family,
 	Baby,
-	Holiday
+	Holiday,
+	Retire
 }

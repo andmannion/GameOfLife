@@ -6,14 +6,14 @@ import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
 
 public class Player {
 
-    private int playerNumber;
-    private int numDependants; // This doesn't include partner
-    private int currentMoney;
 
-    private boolean retired;
+    private int playerNumber;
+    private int numberOfDependants; // This doesn't include partner
+    private int currentMoney;
 
 	private ArrayList<ActionCard> actionCards;
 	private ArrayList<HouseCard> houseCards;
@@ -34,33 +34,16 @@ public class Player {
 		houseCards = new ArrayList<>();
 		occupationCard = null;
 		careerPathTaken = null;
-        retired = false;
 
 		maritalStatus = MaritalStatus.Single;
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
-		numDependants = 0;
+		numberOfDependants = 0;
 		currentMoney = 200000;
 
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
 	}
-
-	public void sellHouseCard(int cardIndex, int spinResult){
-	    if(cardIndex >= 0) {
-	        boolean bool;
-	        HouseCard houseCard = houseCards.get(cardIndex);
-            if (spinResult%2 == 0){ //TODO simplfy
-                bool = false;
-            }
-            else{
-                bool = true;
-            }
-            addToBalance(houseCard.getSpinForSalePrice(bool));
-            houseCards.remove(cardIndex);
-        }
-    }
-
 
 	public int getPlayerNumber() {
 		return playerNumber;
@@ -70,6 +53,29 @@ public class Player {
         return playerColour;
     }
 
+    public void retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
+		//TODO this function
+        final int THOUSAND = 1000;
+        /*
+        retirement steps:
+            add bonus for earliness
+            action cards
+            houses
+            children
+            loans
+         */
+        int retirementBonus = (4-numberOfRetirees)*100*THOUSAND; //TODO refactor?
+        int actionCardBonus = getNumberOfActionCards()*100*THOUSAND;
+        int childrenBonus = getNumberOfChildren()*50*THOUSAND;
+
+        addToBalance(retirementBonus+actionCardBonus+childrenBonus);
+
+        int loanRepaymentCost = gameLogic.getTotalOutstandingLoans(playerNumber);
+
+        subtractFromBalance(loanRepaymentCost);
+        gameLogic.repayAllLoans(playerNumber);
+        System.out.println(currentMoney); //TODO remove
+	}
 
     //Location related
 	public BoardLocation getCurrentLocation() {
@@ -81,13 +87,17 @@ public class Player {
 	}
 
 	//Dependant related
-	public int getNumDependants() {
-		return numDependants;
+	public int getNumberOfDependants() {
+		return numberOfDependants;
 	}
 
-	public void addDependants(int numNewDependants) {
-		numDependants += numNewDependants;
+	public void addDependants(int numberOfNewDependants) {
+		numberOfDependants += numberOfNewDependants;
 	}
+
+	private int getNumberOfChildren(){
+	    return getNumberOfDependants() - 1;
+    }
 
 	// Career related
     public CareerPathTypes getCareerPath() {
@@ -122,17 +132,30 @@ public class Player {
 		currentMoney -= amountToSubtract;
 	}
 
+	public int getNumberOfLoans(GameLogic gameLogic){
+        return gameLogic.getNumberOfLoans(playerNumber);
+    }
+
+    public int getTotalLoansOutstanding(GameLogic gameLogic){
+        return gameLogic.getTotalOutstandingLoans(playerNumber);
+    }
 
     //Action cards
 	public ArrayList<ActionCard> getActionCards() {
 		return actionCards;
 	}
 
-	public ArrayList<HouseCard> getHouseCards() {
-		return houseCards;
-	}
+	public int getNumberOfActionCards(){
+        return actionCards.size();
+    }
+
+
 
     //House cards
+    public ArrayList<HouseCard> getHouseCards() {
+        return houseCards;
+    }
+
 	public void addHouseCard(HouseCard houseCard){
 		// TODO: Must prompt the user if they want to go into debt to buy a house
 		// before getting to this point
@@ -141,11 +164,24 @@ public class Player {
         houseCards.add(houseCard);
     }
 
-    public int getNumHouseCards(){
+    public int getNumberOfHouseCards(){
 	    return houseCards.size();
     }
 
-
+	public void sellHouseCard(int cardIndex, int spinResult){
+		if(cardIndex >= 0) {
+			boolean bool;
+			HouseCard houseCard = houseCards.get(cardIndex);
+			if (spinResult%2 == 0){ //TODO simplfy
+				bool = false;
+			}
+			else{
+				bool = true;
+			}
+			addToBalance(houseCard.getSpinForSalePrice(bool));
+			houseCards.remove(cardIndex);
+		}
+	}
 	
 	public void setMaritalStatus(MaritalStatus maritalStatus) {
 		// This method assumes you can only be married to one person at a time...

@@ -8,6 +8,5 @@ public enum GameBoardTileTypes {
 	SpinToWin,
 	Baby,
 	House,
-	Stop,
-	Retire
+	Stop
 }

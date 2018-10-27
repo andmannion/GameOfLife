@@ -34,6 +34,7 @@ public class GameLogic {
 		this.gameBoard = gameBoard;
 		bank = new Bank();
 		initialisePlayers(numPlayers);
+        retiredPlayers = new ArrayList<>();
 		
 		currentState = new PathChoiceState();
 		currentState.enter(this);
@@ -73,6 +74,7 @@ public class GameLogic {
 	protected Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
+
     protected void setNextPlayerToCurrent() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
@@ -94,7 +96,7 @@ public class GameLogic {
         }
         return (playerIndex + 1) % players.size();
     }
-    public int getNumberOfUninitialisedPlayers() {
+    protected int getNumberOfUninitialisedPlayers() {
         return numberOfUnconfiguredPlayers;
     }
 
@@ -102,6 +104,17 @@ public class GameLogic {
         if(numberOfUnconfiguredPlayers > 0) {
             numberOfUnconfiguredPlayers--;
         }
+    }
+
+    //Retirement related
+    void retireCurrentPlayer(){
+	    Player playerToRetire = players.remove(currentPlayerIndex);
+	    playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
+	    retiredPlayers.add(playerToRetire);
+    }
+
+    protected int getNumberOfRetiredPlayers(){
+	    return retiredPlayers.size();
     }
 
     //career related
@@ -129,6 +142,18 @@ public class GameLogic {
 	//Bank related
     protected void extractMoneyFromBank(int amountToExtract) {
         bank.extractMoney(amountToExtract);
+    }
+
+    public int getNumberOfLoans(int playerNumber) {
+        return bank.getNumberOfOutstandingLoans(playerNumber);
+    }
+
+    public void repayAllLoans(int playerNumber){
+        bank.repayAllLoans(playerNumber);
+    }
+
+    public int getTotalOutstandingLoans(int playerNumber) {
+        return bank.getOutstandingLoanTotal(playerNumber);
     }
 
     //Message related
@@ -164,14 +189,6 @@ public class GameLogic {
         }
         else {
             bank.returnCollegeCareerCard(occupationCardToBeReturned);
-        }
-    }
-    protected void returnCareerCard(OccupationCard careerCardToBeReturned, CareerPathTypes careerPathType) { //TODO remove
-        if(careerPathType == CareerPathTypes.StandardCareer) {
-            bank.returnStandardCareerCard(careerCardToBeReturned);
-        }
-        else{
-            bank.returnCollegeCareerCard(careerCardToBeReturned);
         }
     }
 
