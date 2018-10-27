@@ -4,11 +4,23 @@ import ie.ucd.engac.messaging.AckRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class EndTurnState implements GameState {
+
+    private String eventMessage;
+
+    public EndTurnState(){}
+
+    public EndTurnState(String eventMessage){
+        this.eventMessage = eventMessage;
+    }
+
     //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-        String eventMessage = "Player " + playNum + "'s turn is over.";
+        if (eventMessage == null){
+            eventMessage = "Player " + playNum + "'s turn is over.";
+        }
         AckRequestMessage ackRequestMessage = new AckRequestMessage(playNum, eventMessage);
         gameLogic.setResponseMessage(ackRequestMessage);
     }
@@ -25,6 +37,7 @@ public class EndTurnState implements GameState {
 
                 return new PathChoiceState();
             }
+            //noinspection SpellCheckingInspection
             return new HandlePlayerMoveState(); // didnt receive the correct message, looping //TODO figure out if this condition is correct
         }
 

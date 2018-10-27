@@ -215,12 +215,12 @@ public class GameUI implements Drawable {
                 case "Quit Game":
                     gameEngine.quitGame();
                     break;
-                case "Choose Left Card":
+                case "Choose Left Option":
                     uiInput.setEnableCardChoice(false);
                     System.out.println("Chose");
                     sendDecisionResponseMessage(0);
                     break;
-                case "Choose Right Card":
+                case "Choose Right Option":
                     uiInput.setEnableCardChoice(false);
                     sendDecisionResponseMessage(1);
                     break;

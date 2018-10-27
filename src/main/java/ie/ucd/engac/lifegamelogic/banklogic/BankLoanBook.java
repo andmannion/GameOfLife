@@ -11,23 +11,24 @@ public class BankLoanBook {
 	private HashMap<Integer, ArrayList<BankLoan>> borrowerToLoansMap;
 	
 	BankLoanBook() {
-		borrowerToLoansMap = new HashMap<Integer, ArrayList<BankLoan>>();
+		borrowerToLoansMap = new HashMap<>();
 	}
 	
-	public void addBorrowerLoan(int borrowerID, int loanAmount) {
+	public void addBorrowerLoan(int borrowerID, int loanAmount, int repaymentAmount) {
 		if(borrowerToLoansMap.containsKey(borrowerID)) {
-			borrowerToLoansMap.get(borrowerID).add(new BankLoan(loanAmount));
-			return;
+			borrowerToLoansMap.get(borrowerID).add(new BankLoan(loanAmount,repaymentAmount));
+
 		}
-		
-		ArrayList<BankLoan> bankLoans = new ArrayList<BankLoan>();
-		bankLoans.add(new BankLoan(loanAmount));
-		
-		borrowerToLoansMap.put(borrowerID, bankLoans);
+		else {
+            ArrayList<BankLoan> bankLoans = new ArrayList<>();
+            bankLoans.add(new BankLoan(loanAmount, repaymentAmount));
+
+            borrowerToLoansMap.put(borrowerID, bankLoans);
+        }
 	}
 	
 	private ArrayList<BankLoan> getOutstandingBankLoans(int borrowerID){
-		ArrayList<BankLoan> outstandingLoans = new ArrayList<BankLoan>();
+		ArrayList<BankLoan> outstandingLoans = new ArrayList<>();
 		
 		if(borrowerToLoansMap.containsKey(borrowerID)) {
 			outstandingLoans = borrowerToLoansMap.get(borrowerID);
@@ -37,7 +38,7 @@ public class BankLoanBook {
 	}
 
     int getNumberOfOutstandingBankLoans(int borrowerID){
-        ArrayList<BankLoan> outstandingLoans = new ArrayList<BankLoan>();
+        ArrayList<BankLoan> outstandingLoans = new ArrayList<>();
 
         if(borrowerToLoansMap.containsKey(borrowerID)) {
             outstandingLoans = borrowerToLoansMap.get(borrowerID);
@@ -50,7 +51,7 @@ public class BankLoanBook {
 		ArrayList<BankLoan> loans = getOutstandingBankLoans(borrowerID);
 		int outstandingLoanTotal = 0;
 		for (BankLoan loan:loans){
-            outstandingLoanTotal += loan.getAmount();
+            outstandingLoanTotal += loan.getPayBackAmount();
         }
         return outstandingLoanTotal;
 	}

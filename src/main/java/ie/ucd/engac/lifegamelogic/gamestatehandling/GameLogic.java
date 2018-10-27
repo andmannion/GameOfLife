@@ -23,8 +23,7 @@ public class GameLogic {
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
 	private int numberOfUnconfiguredPlayers;
-	private int numberOfRetiredPlayers;
-	private LifeGameMessage currentLifeGameMessageResponse;	
+	private LifeGameMessage currentLifeGameMessageResponse;
 	
 	private ArrayList<Card> pendingCardChoices;
 
@@ -107,13 +106,14 @@ public class GameLogic {
     }
 
     //Retirement related
-    void retireCurrentPlayer(){
+    public int retireCurrentPlayer(){
 	    Player playerToRetire = players.remove(currentPlayerIndex);
-	    playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
+	    int retirementCash = playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
 	    retiredPlayers.add(playerToRetire);
+	    return retirementCash;
     }
 
-    protected int getNumberOfRetiredPlayers(){
+    private int getNumberOfRetiredPlayers(){
 	    return retiredPlayers.size();
     }
 
@@ -154,6 +154,10 @@ public class GameLogic {
 
     public int getTotalOutstandingLoans(int playerNumber) {
         return bank.getOutstandingLoanTotal(playerNumber);
+    }
+
+    public int takeOutALoan(int playerNumber){
+	    return bank.takeOutALoan(playerNumber);
     }
 
     //Message related

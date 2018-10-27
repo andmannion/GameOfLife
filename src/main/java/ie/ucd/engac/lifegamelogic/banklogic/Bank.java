@@ -13,6 +13,7 @@ public class Bank {
 	private static final String COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
 
 	private static final int LOAN_AMOUNT = 50000;
+	private static final int REPAYMENT_AMOUNT = 60000;
 
 	private ActionCardDeck actionCardDeck;
 	private HouseCardDeck houseCardDeck;
@@ -51,8 +52,8 @@ public class Bank {
 
 	public int takeOutALoan(int playerIndex){
         extractMoney(LOAN_AMOUNT);
-        //TODO
-        return 0;
+        bankLoanBook.addBorrowerLoan(playerIndex, LOAN_AMOUNT, REPAYMENT_AMOUNT);
+        return LOAN_AMOUNT;
     }
 
 	public void repayAllLoans(int playerIndex){
@@ -66,7 +67,6 @@ public class Bank {
     public int getOutstandingLoanTotal(int playerIndex) {
         return bankLoanBook.getOutstandingBankLoanTotal(playerIndex);
     }
-
 
     public int getTotalMoneyExtracted() {
 		return totalMoneyExtracted;

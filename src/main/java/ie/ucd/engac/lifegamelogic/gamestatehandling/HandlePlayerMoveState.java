@@ -19,13 +19,24 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class HandlePlayerMoveState implements GameState {
-	private final static int PAYDAY_LANDED_ON_BONUS = 100000;
-	GameState currentSubstate = null; //TODO substates?
-	
+
+    private final static int PAYDAY_LANDED_ON_BONUS = 100000;
+    private String eventMessage ;
+
+	private GameState currentSubstate = null; //TODO substates?
+
+    public HandlePlayerMoveState(){}
+
+    public HandlePlayerMoveState(String eventMessage){
+        this.eventMessage = eventMessage;
+    }
+
 	@Override
 	public void enter(GameLogic gameLogic) {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-        String eventMessage = "Player " + playNum + "'s turn.";
+        if (eventMessage == null){
+            eventMessage = "Player " + playNum + "'s turn.";
+        }
         SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),playNum, eventMessage);
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
@@ -84,6 +95,7 @@ public class HandlePlayerMoveState implements GameState {
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
                 BoardLocation currentLocation = adjacentForwardLocations.get(0);
+                System.out.println("Current tile: " + currentLocation.getLocation()); //TODO remove
                 gameLogic.getCurrentPlayer().setCurrentLocation(currentLocation);
 
                 // Need to get the tile that this boardLocation relates to
@@ -98,10 +110,8 @@ public class HandlePlayerMoveState implements GameState {
             }
             else if(0 == adjacentForwardLocations.size()) {
                 // Must initiate retirement procedure
-
-                System.out.println("No spaces remaining ahead");
+                System.out.println("No spaces remaining ahead"); //TODO this should now be unreachable
             }
-
             tilesMoved++;
         }
         System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile."); //TODO remove
@@ -127,15 +137,23 @@ public class HandlePlayerMoveState implements GameState {
                         new CareerChangeState(); //TODO test
                         break;
                     case PlayersPay:
-                        return new PickPlayerState((PlayersPayActionCard) thisAction); ///TODO test
+                        if(gameLogic.getNumberOfPlayers() == 0){
+                            nextState = new EndTurnState("No players remaining to pick");
+                        }
+                        else {
+                            nextState = new PickPlayerState((PlayersPayActionCard) thisAction); ///TODO test
+                        }
+                        break;
                     case PayTheBank:
                         PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
-                        player.subtractFromBalance(payBank.getValue()); //TODO test
-                        return new EndTurnState();
+                        player.subtractFromBalance(payBank.getValue(), gameLogic); //TODO test
+                        nextState = new EndTurnState();
+                        break;
                     case GetCashFromBank:
                         GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;//TODO test
                         player.addToBalance(getCash.getAmountToPay());
-                        return new EndTurnState();
+                        nextState = new EndTurnState();
+                        break;
                 }
                 break;
             case Holiday:
@@ -177,34 +195,26 @@ public class HandlePlayerMoveState implements GameState {
                     nextState = new EndTurnState();
                     break;
                 case GetMarried:
-                    //nextState = new GetMarriedState();
-                    nextState = new EndTurnState();
+                    nextState = new GetMarriedState();
                     break;
                 case NightSchool:
-                    //return new NightSchoolState();
-                    nextState = new EndTurnState();
+                    nextState = new NightSchoolState();
                     break;
                 case Family:
                     //return new NightSchoolState();
-                    nextState = new EndTurnState();
+                    nextState = new EndTurnState(); //TODO
                     break;
                 case Baby:
                     //return new NightSchoolState();
-                    nextState = new EndTurnState();
+                    nextState = new EndTurnState(); //TODO
                     break;
                 case Holiday:
-                    //return new NightSchoolState();
+                    //do nothing
                     nextState = new EndTurnState();
                     break;
                 case Retire:
                     System.out.println("Retirement tile"); //TODO remove
-                    if (gameLogic.getCurrentPlayer().getNumberOfHouseCards() == 0){ //if they have houses need to sell them
-                        gameLogic.retireCurrentPlayer();
-                        nextState = new EndTurnState();
-                    }
-                    else {
-                        nextState = new RetirePlayerState(); //TODO test
-                    }
+                    nextState = retireThisPlayer(gameLogic);
                     break;
                 default:
                     // Should be some error message logged to a log file here, quit altogether?
@@ -235,7 +245,24 @@ public class HandlePlayerMoveState implements GameState {
         }
     }
 
-    private void retirePlayer(){
+    private GameState retireThisPlayer(GameLogic gameLogic){
+        GameState nextState = null;
+        Player retiree = gameLogic.getCurrentPlayer(); //TODO this code appears in 2 states
+        if (retiree.getNumberOfHouseCards() == 0){ //if they have houses need to sell them
+            int retirementCash = gameLogic.retireCurrentPlayer();
+            String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
+            if (gameLogic.getNumberOfPlayers() == 0) {
+                nextState = new GameOverState();
 
+                System.out.println("Game Over"); //TODO remove
+            }
+            else {
+                nextState = new EndTurnState(eventMessage);
+            }
+        }
+        else {
+            nextState = new RetirePlayerState(); //TODO test
+        }
+        return nextState;
     }
 }

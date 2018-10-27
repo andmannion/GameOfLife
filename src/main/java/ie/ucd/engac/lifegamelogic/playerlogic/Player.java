@@ -53,7 +53,7 @@ public class Player {
         return playerColour;
     }
 
-    public void retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
+    public int retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
 		//TODO this function
         final int THOUSAND = 1000;
         /*
@@ -72,9 +72,10 @@ public class Player {
 
         int loanRepaymentCost = gameLogic.getTotalOutstandingLoans(playerNumber);
 
-        subtractFromBalance(loanRepaymentCost);
+        subtractFromBalance(loanRepaymentCost, gameLogic);
         gameLogic.repayAllLoans(playerNumber);
-        System.out.println(currentMoney); //TODO remove
+        System.out.println("retire $" + currentMoney); //TODO remove
+        return getCurrentMoney();
 	}
 
     //Location related
@@ -117,7 +118,7 @@ public class Player {
 	}
 
 	//Balance related
-	public int getCurrentMoney() {
+    public int getCurrentMoney() {
 		return currentMoney;
 	}
 	
@@ -128,8 +129,11 @@ public class Player {
 	/* TODO: Should return type be boolean to signal if a loan is required, as the amount to be subtracted would
 	* send the balance negative?
 	*/
-	public void subtractFromBalance(int amountToSubtract) {
-		currentMoney -= amountToSubtract;
+	public void subtractFromBalance(int amountToSubtract, GameLogic gameLogic) {
+	   while (currentMoney - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
+           addToBalance(gameLogic.takeOutALoan(playerNumber));
+        }
+	    currentMoney -= amountToSubtract;
 	}
 
 	public int getNumberOfLoans(GameLogic gameLogic){
@@ -149,18 +153,12 @@ public class Player {
         return actionCards.size();
     }
 
-
-
     //House cards
     public ArrayList<HouseCard> getHouseCards() {
         return houseCards;
     }
 
 	public void addHouseCard(HouseCard houseCard){
-		// TODO: Must prompt the user if they want to go into debt to buy a house
-		// before getting to this point
-		subtractFromBalance(houseCard.getPurchasePrice());
-		
         houseCards.add(houseCard);
     }
 
@@ -195,8 +193,6 @@ public class Player {
 		return maritalStatus;
 	}
 	
-
-
 	public BoardLocation getPendingBoardForkChoice() {
 		return pendingBoardForkChoice;
 	}

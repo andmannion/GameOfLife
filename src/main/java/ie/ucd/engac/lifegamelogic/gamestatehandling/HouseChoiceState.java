@@ -2,11 +2,19 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class HouseChoiceState implements GameState {
+    private boolean loanRequired;
+
+    HouseChoiceState(){
+        this.loanRequired = false;
+    }
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -21,9 +29,7 @@ public class HouseChoiceState implements GameState {
 
         // Construct a message with these choices
         LifeGameMessage replyMessage = constructCardChoiceMessage(
-                gameLogic.getCurrentPlayer().getPlayerNumber(),
-                (Chooseable) firstCardChoice,
-                (Chooseable) secondCardChoice);
+                gameLogic.getCurrentPlayer().getPlayerNumber(), firstCardChoice, secondCardChoice);
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
@@ -36,7 +42,9 @@ public class HouseChoiceState implements GameState {
     @Override
     @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-        if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
+	    GameState nextState = null;
+        Player player = gameLogic.getCurrentPlayer();
+        if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse && !loanRequired) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
@@ -44,15 +52,15 @@ public class HouseChoiceState implements GameState {
             // Need to assign the chosen card to the relevant player
             ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
             HouseCard chosenCard = (HouseCard) pendingCardChoices.get(choiceIndex);
-            gameLogic.getCurrentPlayer().addHouseCard(chosenCard);
 
-            // Only two cards at the moment, return unchosen
             HouseCard unchosenCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
             gameLogic.returnHouseCard(unchosenCard);
 
-            return new EndTurnState();
+            int housePrice = chosenCard.getPurchasePrice();
+
+            nextState = purchaseHouse(player, housePrice, gameLogic, chosenCard);
         }
-        return null;
+        return nextState;
     }
 
 	@Override
@@ -60,8 +68,10 @@ public class HouseChoiceState implements GameState {
 		// Must clear the sent message?
 	}
 
-	private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
-			Chooseable secondOptionCard) {
+	@NotNull
+    @Contract("_, _, _ -> new")
+    private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
+                                                       Chooseable secondOptionCard) {
 
 		ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
 
@@ -70,4 +80,21 @@ public class HouseChoiceState implements GameState {
 
 		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex);
 	}
+
+	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
+	    GameState nextState;
+        if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
+            //TODO make message
+            loanRequired = true;
+            nextState = null;
+        }
+        else {
+            player.subtractFromBalance(housePrice, gameLogic);
+
+            gameLogic.getCurrentPlayer().addHouseCard(chosenCard);
+
+            nextState = new EndTurnState();
+        }
+        return nextState;
+    }
 }

@@ -83,27 +83,24 @@ public class UIInput implements Drawable {
         quitButton.setVisible(true);
         renderTarget.add(quitButton);
 
-        chooseLeftCardButton = createButton("Choose Left Card",CARD_CHOICE_LHS_GAP, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
+        chooseLeftCardButton = createButton("Choose Left Option",CARD_CHOICE_LHS_GAP, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
         chooseLeftCardButton.addActionListener(actionListener);
         renderTarget.add(chooseLeftCardButton);
 
-        chooseRightCardButton = new JButton("Choose Right Card");
         int cRightX = CARD_CHOICE_LHS_GAP+CARD_CHOICE_WIDTH+CARD_CHOICE_INTER_GAP;
-        chooseRightCardButton = createButton("Choose Right Card",cRightX, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
+        chooseRightCardButton = createButton("Choose Right Option",cRightX, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
         renderTarget.add(chooseRightCardButton);
 
         String[] placeholder = { "Placeholder","222" };
         SpinnerModel model = new SpinnerListModel(Arrays.asList(placeholder));
         reducingChoice = new JSpinner();
         reducingChoice.setModel(model);
-        reducingChoice.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e){
-                JSpinner spinner = (JSpinner) e.getSource();
-                System.out.println(spinner.getValue());
-                setSpinnerIndex();//TODO see if this works & remove println()
-            }
-        });
+        reducingChoice.addChangeListener(e -> {
+            JSpinner spinner = (JSpinner) e.getSource();
+            System.out.println(spinner.getValue());
+            setSpinnerIndex();//TODO see if this works & remove println()
+        }
+        );
         reducingChoice.setVisible(false);
         ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
         reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);

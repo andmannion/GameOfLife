@@ -35,5 +35,5 @@ public abstract class OccupationCard extends Card {
         displayChoiceStringBuilder.append(" Bonus payout: " + bonusPaymentAmount);
         displayChoiceStringBuilder.append(" Bonus number: " + bonusNumber);
         return displayChoiceStringBuilder.toString();
-	};
+	}
 }

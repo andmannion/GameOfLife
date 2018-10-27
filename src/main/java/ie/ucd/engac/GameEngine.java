@@ -10,6 +10,7 @@ import ie.ucd.engac.ui.GameUI;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("ALL")
 public class GameEngine implements Runnable {
 
 	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
@@ -44,8 +45,8 @@ public class GameEngine implements Runnable {
 
         LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
         
-        MessageReceiverAndResponder<LifeGameMessage> messageRecieverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
-        MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageRecieverAndResponder);
+        MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
+        MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);
         
         gameUI = new GameUI(this,renderTarget,messagingInterface);
     } // end of constructor

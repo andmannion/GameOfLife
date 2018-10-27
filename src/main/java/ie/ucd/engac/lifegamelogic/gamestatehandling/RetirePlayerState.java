@@ -30,9 +30,9 @@ public class RetirePlayerState implements GameState {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
             int spinNum = Spinner.spinTheWheel();
-            Player player = gameLogic.getCurrentPlayer();
+            Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
-            player.sellHouseCard(currentCardIndex, spinNum);
+            retiree.sellHouseCard(currentCardIndex, spinNum);
             currentCardIndex = currentCardIndex + 1;
             if (currentCardIndex < numberOfHouses) { //if there are cards left to sell
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
@@ -40,9 +40,17 @@ public class RetirePlayerState implements GameState {
                 String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + curentHouseNumber + "/" + numberOfHouses;
                 SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), playNum, eventMessage);
                 gameLogic.setResponseMessage(spinRequestMessage);
-            } else {
-                player.retirePlayer(gameLogic.getNumberOfRetiredPlayers(), gameLogic);
-                nextState = new EndTurnState();
+            }
+            else {
+                int retirementCash = gameLogic.retireCurrentPlayer();
+                String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
+                if (gameLogic.getNumberOfPlayers() == 0) {
+                    nextState = new GameOverState();
+                    System.out.println("Game Over"); //TODO remove
+                }
+                else {
+                    nextState = new EndTurnState(eventMessage);
+                }
             }
         }
         return nextState;

@@ -8,12 +8,13 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class GetMarriedState implements GameState {
-	private final int GET_MARRIED_EVEN_PAYMENT = 50000;
-	private final int GET_MARRIED_ODD_PAYMENT = 100000;
+	private static final int GET_MARRIED_EVEN_PAYMENT = 50000;
+	private static final int GET_MARRIED_ODD_PAYMENT = 100000;
 	
 	private int playersLeftToSpin;
 	private int playerGettingMarriedIndex;
 	private int playerToSpinIndex;
+	private int playerToSpinNumber;
 	private int playerGettingMarriedNumber;
 	
 	@Override
@@ -26,9 +27,10 @@ public class GetMarriedState implements GameState {
 		playerGettingMarriedNumber = gameLogic.getCurrentPlayer().getPlayerNumber();
 		playerGettingMarriedIndex = gameLogic.getCurrentPlayerIndex();
 		playerToSpinIndex = gameLogic.getNextPlayerIndex(playerGettingMarriedIndex);
+        playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
 		playersLeftToSpin = gameLogic.getNumberOfPlayers() - 1;
 		
-		String eventMsg = "Player " + playerGettingMarriedNumber + ", spin the wheel.";
+		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 		
 		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
@@ -39,52 +41,53 @@ public class GetMarriedState implements GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
+	    GameState nextState = null;
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Spin the wheel for the next player
-			String paymentMsg = "";
-			
+			String paymentMsg;
+
 			int spinResult = Spinner.spinTheWheel();
+			int getMarriedPayment;
 			
-			
+			//compute payment
 			if(spinResult % 2 == 0) {
 				// Current spinner must give the player getting married 100K
-				gameLogic.getPlayerByIndex(playerToSpinIndex).subtractFromBalance(GET_MARRIED_EVEN_PAYMENT);
-				gameLogic.getCurrentPlayer().addToBalance(GET_MARRIED_EVEN_PAYMENT);
-				
-				paymentMsg =  "Player " + playerToSpinIndex + " paid player " + playerGettingMarriedIndex + " " + GET_MARRIED_EVEN_PAYMENT + ".\n";
+                getMarriedPayment = GET_MARRIED_EVEN_PAYMENT;
 			}
 			else {
-				gameLogic.getPlayerByIndex(playerToSpinIndex).subtractFromBalance(GET_MARRIED_ODD_PAYMENT);
-				gameLogic.getCurrentPlayer().addToBalance(GET_MARRIED_ODD_PAYMENT);
-				
-				paymentMsg =  "Player " + playerToSpinIndex + " paid player " + playerGettingMarriedIndex + " " + GET_MARRIED_ODD_PAYMENT + ".\n";
+                getMarriedPayment = GET_MARRIED_ODD_PAYMENT;
 			}
+
+			//make payment
+            gameLogic.getPlayerByIndex(playerToSpinIndex).subtractFromBalance(getMarriedPayment, gameLogic);
+            gameLogic.getCurrentPlayer().addToBalance(getMarriedPayment);
+
+            playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
+            playerGettingMarriedNumber = gameLogic.getPlayerByIndex(playerGettingMarriedIndex).getPlayerNumber();
+
+            paymentMsg =  "Player " + playerToSpinNumber + " paid player " + playerGettingMarriedNumber + " " + getMarriedPayment + ".\n";
 			
 			playersLeftToSpin--;
 			playerToSpinIndex = gameLogic.getNextPlayerIndex(playerToSpinIndex);
+            playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
 			
 			if(playersLeftToSpin == 0) {
 				String eventMsg = paymentMsg + 
-						"You got married, player " + playerGettingMarriedIndex + ", so take an extra turn.";
-				
-				// The current player gets another go, so don't advance the current player
-				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
-																		 playerGettingMarriedIndex,
-																		 eventMsg);				
-				gameLogic.setResponseMessage(responseMessage);				
-				return new HandlePlayerMoveState();
+						"You got married, player " + playerGettingMarriedNumber + ", so take an extra turn.";
+
+                nextState = new HandlePlayerMoveState(eventMsg);
 			}
 			else {
-				String eventMsg = "Player " + playerToSpinIndex + ", spin the wheel.";
+				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 				
 				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
 						 gameLogic.getCurrentPlayer().getPlayerNumber(),
 						 eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
+                nextState = null;
 			}
 		}
-		
-		return null;
+		return nextState;
 	}
 
 	@Override
