@@ -17,6 +17,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 
 // This holds all the elements; players, bank, etc.
 public class GameLogic {
+    public static final int MAX_NUM_PLAYERS = 4;
 	private Bank bank;
 	private ArrayList<Player> players;
 	private ArrayList<Player> retiredPlayers;

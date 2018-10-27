@@ -253,7 +253,6 @@ public class HandlePlayerMoveState implements GameState {
             String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
             if (gameLogic.getNumberOfPlayers() == 0) {
                 nextState = new GameOverState();
-
                 System.out.println("Game Over"); //TODO remove
             }
             else {

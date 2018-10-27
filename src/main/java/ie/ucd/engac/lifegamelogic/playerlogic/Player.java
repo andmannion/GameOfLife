@@ -10,7 +10,6 @@ import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
 
 public class Player {
 
-
     private int playerNumber;
     private int numberOfDependants; // This doesn't include partner
     private int currentMoney;
@@ -54,7 +53,6 @@ public class Player {
     }
 
     public int retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
-		//TODO this function
         final int THOUSAND = 1000;
         /*
         retirement steps:
@@ -64,7 +62,7 @@ public class Player {
             children
             loans
          */
-        int retirementBonus = (4-numberOfRetirees)*100*THOUSAND; //TODO refactor?
+        int retirementBonus = (GameLogic.MAX_NUM_PLAYERS-numberOfRetirees)*100*THOUSAND; //TODO refactor?
         int actionCardBonus = getNumberOfActionCards()*100*THOUSAND;
         int childrenBonus = getNumberOfChildren()*50*THOUSAND;
 

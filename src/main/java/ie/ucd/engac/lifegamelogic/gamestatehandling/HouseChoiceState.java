@@ -42,7 +42,7 @@ public class HouseChoiceState implements GameState {
     @Override
     @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-	    GameState nextState = null;
+	    GameState nextState = null; //TODO
         Player player = gameLogic.getCurrentPlayer();
         if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse && !loanRequired) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
