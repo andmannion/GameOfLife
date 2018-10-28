@@ -52,7 +52,7 @@ public class ProcessStandardCareerState implements GameState {
 			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
 			gameLogic.returnOccupationCard(unchosenCareerCard);
 			
-			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayer().getPlayerNumber());
+			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayerIndex());
 			
 			// Need to set the reply message to SpinRequest
 			int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();

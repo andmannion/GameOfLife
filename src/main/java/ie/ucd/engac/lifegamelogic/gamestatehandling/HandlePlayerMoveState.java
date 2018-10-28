@@ -63,8 +63,10 @@ public class HandlePlayerMoveState implements GameState {
 			// Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic, gameBoard, tilesToMove, tilesMoved);
 
+            
+            
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
-            nextState = evaluateTile(gameLogic,endTile);
+            nextState = evaluateTile(gameLogic, endTile);
 		}
 
         if (nextState == null) {
@@ -115,9 +117,15 @@ public class HandlePlayerMoveState implements GameState {
         
         while (tilesMoved < tilesToMove && !stopTileEncountered) {
             // Go forward
-            BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
-            ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);
-
+            BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();         
+            
+            System.out.println("CurrentBoardLocation is null?\n" + currentBoardLocation == null);
+            
+            ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);    
+            
+            System.out.println("DEBUG: outboundTileID 0 : " + adjacentForwardLocations.get(0).getLocation()); // TODO: Get rid of this
+            //System.out.println("DEBUG: outboundTileID 0 : " + adjacentForwardLocations.get(0).getLocation()); // TODO: Get rid of this
+            
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
                 BoardLocation currentLocation = adjacentForwardLocations.get(0);

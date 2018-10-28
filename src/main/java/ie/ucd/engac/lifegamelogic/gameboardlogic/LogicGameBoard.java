@@ -36,9 +36,10 @@ public class LogicGameBoard {
 		ArrayList<BoardLocation> outboundLocations = new ArrayList<BoardLocation>();
 		
 		for(String locationID : boardGraph.outboundNeighbours(boardLocation.getLocation())) {
-			outboundLocations.add(new BoardLocation(locationID));
+			if(locationID != null) {
+				outboundLocations.add(new BoardLocation(locationID));
+			}
 		}
-		
 		return outboundLocations;
 	}
 

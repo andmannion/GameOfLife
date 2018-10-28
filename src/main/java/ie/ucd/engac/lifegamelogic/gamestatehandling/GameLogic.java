@@ -123,16 +123,18 @@ public class GameLogic {
     }
 
     // Career related
-    protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
+    protected void movePlayerToInitialCollegeCareerPath(int playerIndex) {
         BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1);
 
-        players.get(playerNumber).setCurrentLocation(collegeCareerPathInitialLocation);
+        players.get(playerIndex).setCurrentLocation(collegeCareerPathInitialLocation);
     }
 
-    protected void movePlayerToInitialCareerPath(int playerNumber) {
+    protected void movePlayerToInitialCareerPath(int playerIndex) {
         BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
+        
+        System.out.println("DEBUG: careerPathInitialLocation string is " + careerPathInitialLocation.getLocation());
 
-        players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
+        players.get(playerIndex).setCurrentLocation(careerPathInitialLocation);
     }
 
     // GameBoard related
