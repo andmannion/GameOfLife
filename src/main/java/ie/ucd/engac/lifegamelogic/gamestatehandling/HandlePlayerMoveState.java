@@ -119,12 +119,7 @@ public class HandlePlayerMoveState implements GameState {
             // Go forward
             BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();         
             
-            System.out.println("CurrentBoardLocation is null?\n" + currentBoardLocation == null);
-            
             ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);    
-            
-            System.out.println("DEBUG: outboundTileID 0 : " + adjacentForwardLocations.get(0).getLocation()); // TODO: Get rid of this
-            //System.out.println("DEBUG: outboundTileID 0 : " + adjacentForwardLocations.get(0).getLocation()); // TODO: Get rid of this
             
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
