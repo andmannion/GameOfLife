@@ -15,7 +15,6 @@ import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 
-// This holds all the elements; players, bank, etc.
 public class GameLogic {
     public static final int MAX_NUM_PLAYERS = 4;
 	private Bank bank;
@@ -56,7 +55,7 @@ public class GameLogic {
 		return getLifeGameMessageResponse();
 	}
 
-	//Player related
+	// Player related
     private void initialisePlayers(int numPlayers) {
         players = new ArrayList<>();
 
@@ -65,6 +64,10 @@ public class GameLogic {
         }
         // All of these players require the user to set some initial characteristics
         numberOfUnconfiguredPlayers = numPlayers;
+    }
+
+    protected ArrayList<Player> getPlayers(){
+    	return players;
     }
 
     protected int getCurrentPlayerIndex(){
@@ -96,6 +99,7 @@ public class GameLogic {
         }
         return (playerIndex + 1) % players.size();
     }
+    
     protected int getNumberOfUninitialisedPlayers() {
         return numberOfUnconfiguredPlayers;
     }
@@ -106,7 +110,7 @@ public class GameLogic {
         }
     }
 
-    //Retirement related
+    // Retirement related
     public int retireCurrentPlayer(){
 	    Player playerToRetire = players.remove(currentPlayerIndex);
 	    int retirementCash = playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
@@ -118,7 +122,7 @@ public class GameLogic {
 	    return retiredPlayers.size();
     }
 
-    //career related
+    // Career related
     protected void movePlayerToInitialCollegeCareerPath(int playerNumber) {
         BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1);
 
@@ -131,7 +135,7 @@ public class GameLogic {
         players.get(playerNumber).setCurrentLocation(careerPathInitialLocation);
     }
 
-    //GameBoard related
+    // GameBoard related
     protected LogicGameBoard getGameBoard() {
 		return gameBoard;
 	}
@@ -140,7 +144,7 @@ public class GameLogic {
         return gameBoard.getOutboundNeighbours(currentBoardLocation);
     }
 
-	//Bank related
+	// Bank related
     protected void extractMoneyFromBank(int amountToExtract) {
         bank.extractMoney(amountToExtract);
     }
@@ -161,7 +165,7 @@ public class GameLogic {
 	    return bank.takeOutALoan(playerNumber);
     }
 
-    //Message related
+    // Message related
     private LifeGameMessage getLifeGameMessageResponse() {
         return currentLifeGameMessageResponse;
     }
@@ -170,7 +174,7 @@ public class GameLogic {
         currentLifeGameMessageResponse = lifeGameMessage;
     }
 
-    //Generic card related
+    // Generic card related
     protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
@@ -179,7 +183,7 @@ public class GameLogic {
         return pendingCardChoices;
     }
 
-    //Occupation card related
+    // Occupation card related
     protected OccupationCard getTopStandardCareerCard() {
         return bank.getTopStandardCareerCard();
     }
@@ -197,12 +201,12 @@ public class GameLogic {
         }
     }
 
-    //Action card related
+    // Action card related
     protected ActionCard getTopActionCard() {
         return bank.getTopActionCard();
     }
 
-    //House card related
+    // House card related
     protected HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
     }
@@ -210,5 +214,4 @@ public class GameLogic {
     protected void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
-
 }

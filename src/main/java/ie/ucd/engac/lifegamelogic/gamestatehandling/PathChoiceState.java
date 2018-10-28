@@ -42,16 +42,11 @@ public class PathChoiceState implements GameState {
 				// Must move the player to the CollegeCareer path
 				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayerIndex());
 
-				// TODO: Need to exit from this inner state - what's next is the spinaccept
-				// state
 				gameLogic.decrementNumberOfUninitialisedPlayers();
 				
 				return new HandlePlayerMoveState();
-				//return null;
 			} 
 			else {
-
-
 				return new ProcessStandardCareerState();
 			}
 		}

@@ -22,7 +22,7 @@ public class NightSchoolState implements GameState {
 	
 	private final int NIGHT_SCHOOL_TUITION_FEES = 100000;
 	
-	private ArrayList<OccupationCard> collegeCareerCardOptions; 
+	private ArrayList<Card> collegeCareerCardOptions; 
 	private boolean pendingCollegeCareerCardDecision = false;
 	
 	private ArrayList<String> nightSchoolOptions;
@@ -38,7 +38,6 @@ public class NightSchoolState implements GameState {
 			
 			pendingCollegeCareerCardDecision = true;
 			
-			ArrayList<Chooseable> pendingCollegeCareerCardChoices = new ArrayList<>();			
 			collegeCareerCardOptions = new ArrayList<>();
 			
 			// Give choice of top college cards			
@@ -46,9 +45,8 @@ public class NightSchoolState implements GameState {
             OccupationCard secondCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
 
             // Create a list of the choices
-            ArrayList<Card> pendingCardChoices = new ArrayList<>();
-            pendingCardChoices.add(firstCollegeCareerCard);
-            pendingCardChoices.add(secondCollegeCareerCard);
+            collegeCareerCardOptions.add(firstCollegeCareerCard);
+            collegeCareerCardOptions.add(secondCollegeCareerCard);
 
             // Construct a message with these choices
             LifeGameMessage replyMessage = constructCardChoiceMessage(
@@ -59,9 +57,8 @@ public class NightSchoolState implements GameState {
             // Need to store both choices so that we can assign the chosen one to the
             // correct player,
             // and push the unchosen one to the bottom of the correct deck.
-            gameLogic.storePendingChoiceCards(pendingCardChoices);
+            gameLogic.storePendingChoiceCards(collegeCareerCardOptions);
             gameLogic.setResponseMessage(replyMessage);
-
 		}
 		else
 		{
@@ -112,7 +109,7 @@ public class NightSchoolState implements GameState {
 		gameLogic.getCurrentPlayer().subtractFromBalance(NIGHT_SCHOOL_TUITION_FEES, gameLogic);
 		
 		// Assign the correct college career card
-		OccupationCard selectedCollegeCareerCard = collegeCareerCardOptions.get(choiceIndex);		
+		OccupationCard selectedCollegeCareerCard = (OccupationCard) collegeCareerCardOptions.get(choiceIndex);		
 		gameLogic.getCurrentPlayer().setOccupationCard(selectedCollegeCareerCard);
 		
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
@@ -145,9 +142,10 @@ public class NightSchoolState implements GameState {
 		gameLogic.setResponseMessage(responseMessage);			
 		return new HandlePlayerMoveState();
 	}
-    private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
+    
+	static LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, 
+													   Chooseable firstOptionCard,
                                                        Chooseable secondOptionCard) {
-
         ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
 
         validStandardCareerCardOptions.add(firstOptionCard);
