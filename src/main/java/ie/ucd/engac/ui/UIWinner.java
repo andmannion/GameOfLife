@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class UIWinner implements Drawable{
 
     private ArrayList<Player> rankedPlayers;
+    private GameUI gameUIParent;
+
+    UIWinner(GameUI gameUI){this.gameUIParent = gameUI;}
 
     void setRankedPlayers(ArrayList<Player> rankedPlayers){
         this.rankedPlayers = rankedPlayers;
@@ -14,11 +17,13 @@ public class UIWinner implements Drawable{
 
     @Override
     public void draw(Graphics graphics) {//TODO finish this
-        graphics.drawString("Results:", 100, 100);
-        int playerNum;
-        for(Player player:rankedPlayers){
-            playerNum = player.getPlayerNumber();
-            graphics.drawString("Player "+playerNum+" has "+player.getCurrentMoney(),100, 100+playerNum*12);
+        if(gameUIParent.getUIState() == UIState.EndGame) {
+            graphics.drawString("Results:", 100, 100);
+            int playerNum;
+            for (Player player : rankedPlayers) {
+                playerNum = player.getPlayerNumber();
+                graphics.drawString("Player " + playerNum + " has " + player.getCurrentMoney(), 100, 100 + playerNum * 12);
+            }
         }
     }
 }

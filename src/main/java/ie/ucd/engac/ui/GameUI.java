@@ -60,7 +60,7 @@ public class GameUI implements Drawable {
         uiInput = new UIInput(this,renderTarget);
         uiCardChoice = new UICardChoice(this);
         uiEventMessage = new UIEventMessage();
-        uiWinner = new UIWinner();
+        uiWinner = new UIWinner(this);
 
         //updateCurrentUIScreen();
     }
