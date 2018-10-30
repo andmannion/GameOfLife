@@ -18,6 +18,7 @@ public class UIWinner implements Drawable{
     @Override
     public void draw(Graphics graphics) {//TODO finish this
         if(gameUIParent.getUIState() == UIState.EndGame) {
+            graphics.setColor(Color.black);
             graphics.drawString("Results:", 100, 100);
             int playerNum;
             for (Player player : rankedPlayers) {

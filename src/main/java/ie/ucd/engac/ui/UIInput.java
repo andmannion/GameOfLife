@@ -197,13 +197,10 @@ public class UIInput implements Drawable {
                 setVisibleCardChoice(false);
                 setVisibleChoiceSpinner(true);
                 break;
-            case Spin2WinPicking:
+            case EndGame:
+                setVisibleSpinButton(false);
                 break;
-            case Spin2WinRolling:
-                break;
-            case BabyAcquisition:
-                break;
-            case Wedding:
+            default:
                 break;
         }
         renderTarget.paintComponents(graphics);

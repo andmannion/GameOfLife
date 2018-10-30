@@ -105,6 +105,7 @@ public class GameUI implements Drawable {
                     uiWinner.setRankedPlayers(endGameMessage.getRankedPlayers());
                     uiState = EndGame;
                     uiEventMessage.updateEventMessage("Game Over.");
+                    break;
                 default:
                     System.err.println("A message needs handling code written, or was null:");
                     System.err.println(lastResponse.getLifeGameMessageType());
