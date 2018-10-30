@@ -289,7 +289,7 @@ public class HandlePlayerMoveState implements GameState {
         if(currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
             gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
-            paydayUpdateString = "Player " + gameLogic.getCurrentPlayerIndex() + ", you obtained " + (currentSalary + PAYDAY_LANDED_ON_BONUS) + 
+            paydayUpdateString = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you obtained " + (currentSalary + PAYDAY_LANDED_ON_BONUS) +
             					 " after landing on a Payday tile.";
         }
         

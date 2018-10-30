@@ -1,7 +1,7 @@
 	[{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "Doctor",
+	 "collegeCareerType": "Doctor",
 	 "salary": "130000",
 	 "bonusNumber": "10",
 	 "bonusPaymentAmount": "20000"
@@ -9,7 +9,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "Lawyer",
+	 "collegeCareerType": "Lawyer",
 	 "salary": "120000",
 	 "bonusNumber": "9",
 	 "bonusPaymentAmount": "20000"
@@ -17,7 +17,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "VideoGameDesigner",
+	 "collegeCareerType": "VideoGameDesigner",
 	 "salary": "110000",
 	 "bonusNumber": "8",
 	 "bonusPaymentAmount": "20000"
@@ -25,7 +25,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "Vet",
+	 "collegeCareerType": "Vet",
 	 "salary": "100000",
 	 "bonusNumber": "7",
 	 "bonusPaymentAmount": "20000"
@@ -33,7 +33,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "Teacher",
+	 "collegeCareerType": "Teacher",
 	 "salary": "100000",
 	 "bonusNumber": "6",
 	 "bonusPaymentAmount": "20000"
@@ -41,7 +41,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "Scientist",
+	 "collegeCareerType": "Scientist",
 	 "salary": "100000",
 	 "bonusNumber": "9",
 	 "bonusPaymentAmount": "20000"
@@ -49,7 +49,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "SecretAgent",
+	 "collegeCareerType": "SecretAgent",
 	 "salary": "100000",
 	 "bonusNumber": "8",
 	 "bonusPaymentAmount": "20000"
@@ -57,7 +57,7 @@
 	{
 	 "occupationSubtype": "CollegeCareerCard",
 	 "occupationCardType": "CollegeCareer",
-	 "careerType": "FashionDesigner",
+	 "collegeCareerType": "FashionDesigner",
 	 "salary": "80000",
 	 "bonusNumber": "7",
 	 "bonusPaymentAmount": "20000"

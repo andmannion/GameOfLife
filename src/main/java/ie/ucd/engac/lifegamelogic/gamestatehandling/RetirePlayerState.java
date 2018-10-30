@@ -49,6 +49,7 @@ public class RetirePlayerState implements GameState {
                     System.out.println("Game Over"); //TODO remove
                 }
                 else {
+                    eventMessage = "Player " + retiree.getPlayerNumber() + " has retired.";
                     nextState = new EndTurnState(eventMessage);
                 }
             }
