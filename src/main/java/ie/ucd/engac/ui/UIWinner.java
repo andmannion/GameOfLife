@@ -8,7 +8,7 @@ public class UIWinner implements Drawable{
 
     private ArrayList<Player> rankedPlayers;
 
-    protected void setRankedPlayers(ArrayList<Player> rankedPlayers){
+    void setRankedPlayers(ArrayList<Player> rankedPlayers){
         this.rankedPlayers = rankedPlayers;
     }
 

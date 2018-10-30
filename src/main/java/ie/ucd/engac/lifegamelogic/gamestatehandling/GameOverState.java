@@ -1,13 +1,10 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.AckRequestMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class GameOverState implements GameState {
 
     private String eventMessage;
@@ -18,6 +15,8 @@ public class GameOverState implements GameState {
     public void enter(GameLogic gameLogic){
 
         ArrayList<Player> rankings = gameLogic.getRankedRetiredPlayers();
+        LifeGameMessage responseMessage = new EndGameMessage(rankings);
+        gameLogic.setResponseMessage(responseMessage);
 
     }
 
