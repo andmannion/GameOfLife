@@ -156,17 +156,21 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case Payday:
             	String paydayLandedOnMessage = handlePaydayTile(gameLogic);
-                nextState = new EndTurnState(paydayLandedOnMessage); 
+                nextState = new EndTurnState(paydayLandedOnMessage);
+                nextState = new HouseTileDecisionState();
                 break;
             case Action:                
                 nextState = evaluateActionTile(gameLogic);
+                nextState = new HouseTileDecisionState();
                 break;
             case Holiday:  
             	String holidayMessage = "You are on holiday, so do nothing for this turn.";
-                nextState = new EndTurnState(holidayMessage); 
+                nextState = new EndTurnState(holidayMessage);
+                nextState = new HouseTileDecisionState();
                 break;
             case SpinToWin:
-                nextState = new SpinToWinSetupState(); 
+                nextState = new SpinToWinSetupState();
+                nextState = new HouseTileDecisionState();
                 break;
             case Baby:
             	gameLogic.getCurrentPlayer().addDependants(1);
@@ -178,6 +182,7 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case Stop:
             	nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
+                nextState = new HouseTileDecisionState();
                 break;
             default:
                 // There's no console to print to...
@@ -232,7 +237,7 @@ public class HandlePlayerMoveState implements GameState {
             	nextActionState = new CareerChangeState(); //TODO test
                 break;
             case PlayersPay:
-                if(gameLogic.getNumberOfPlayers() == 0){
+                if(gameLogic.getNumberOfPlayers() == 1){
                 	nextActionState = new EndTurnState("No players remaining to pick");
                 }
                 else {

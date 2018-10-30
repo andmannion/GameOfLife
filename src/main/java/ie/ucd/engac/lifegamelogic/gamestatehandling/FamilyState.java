@@ -30,7 +30,7 @@ public class FamilyState implements GameState {
 		familyPathChoices.add(LIFE_PATH_MESSAGE);
 		
 		// Generate response for the player to choose between the choices provided
-		LifeGameMessage responseMessage = new DecisionRequestMessage(convertToChooseableArray(familyPathChoices),
+		LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(familyPathChoices),
 																	 gameLogic.getCurrentPlayerIndex());
 		
 		gameLogic.setResponseMessage(responseMessage);
@@ -90,14 +90,5 @@ public class FamilyState implements GameState {
 		return null;
 	}
 	
-	// TODO: move this to a more appropriate place
-	private static ArrayList<Chooseable> convertToChooseableArray(ArrayList<String> stringArray){
-		ArrayList<Chooseable> chooseableArray = new ArrayList<>();
-		
-		for(String str : stringArray) {
-			chooseableArray.add(new ChooseableString(str));
-		}
-		
-		return chooseableArray;
-	}
+
 }

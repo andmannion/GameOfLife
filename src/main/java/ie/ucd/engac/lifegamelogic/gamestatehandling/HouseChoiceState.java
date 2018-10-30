@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class HouseChoiceState implements GameState {
+    private static final int LOAN_AMOUNT = 60000;
     private boolean loanRequired;
+    private HouseCard chosenCard;
 
     HouseChoiceState(){
         this.loanRequired = false;
@@ -51,7 +53,7 @@ public class HouseChoiceState implements GameState {
 
             // Need to assign the chosen card to the relevant player
             ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
-            HouseCard chosenCard = (HouseCard) pendingCardChoices.get(choiceIndex);
+            chosenCard = (HouseCard) pendingCardChoices.get(choiceIndex);
 
             HouseCard unchosenCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
             gameLogic.returnHouseCard(unchosenCard);
@@ -59,6 +61,25 @@ public class HouseChoiceState implements GameState {
             int housePrice = chosenCard.getPurchasePrice();
 
             nextState = purchaseHouse(player, housePrice, gameLogic, chosenCard);
+        }
+        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
+            DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
+
+            int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
+            if(choiceIndex == 0){ //do not take out loan
+                gameLogic.returnHouseCard(chosenCard);
+                nextState = new EndTurnState();
+            }
+            else{
+                int housePrice = chosenCard.getPurchasePrice();
+
+                int currentMoney = player.getCurrentMoney();
+                while (currentMoney - housePrice < 0){ //user has to take out loans or else they go bankrupt
+                    player.addToBalance(gameLogic.takeOutALoan(player.getPlayerNumber()));
+                    currentMoney = player.getCurrentMoney();
+                }
+                nextState = purchaseHouse(player, housePrice, gameLogic, chosenCard);
+            }
         }
         return nextState;
     }
@@ -84,7 +105,15 @@ public class HouseChoiceState implements GameState {
 	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
 	    GameState nextState;
         if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
-            //TODO make message
+            ArrayList<String> decisionStrings = new ArrayList<>();
+            decisionStrings.add("Don't buy.");
+            double loanTotal = (double)(housePrice - player.getCurrentMoney());
+            int numLoans = (int)Math.ceil(loanTotal/LOAN_AMOUNT);
+            decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*LOAN_AMOUNT + ".");
+            LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(decisionStrings),
+                    gameLogic.getCurrentPlayerIndex());
+
+            gameLogic.setResponseMessage(responseMessage);
             loanRequired = true;
             nextState = null;
         }

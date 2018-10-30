@@ -5,10 +5,11 @@ public enum UIState {
     WaitingForAck,
     WaitingForSpin,
     PostSpin,
-    CardChoice, //3 variants
+    CardChoice,
     LargeChoice,
     Spin2WinPicking,
     Spin2WinRolling,
     BabyAcquisition,
-    Wedding //babies and wedding may need two states
+    Wedding,
+    EndGame
 }

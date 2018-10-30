@@ -33,7 +33,6 @@ public class ProcessStandardCareerState implements GameState {
 		// and push the unchosen one to the bottom of the correct deck.
 		gameLogic.storePendingChoiceCards(pendingCardChoices);
 		gameLogic.setResponseMessage(replyMessage);
-		
 	}
 
 	@Override

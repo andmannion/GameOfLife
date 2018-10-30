@@ -26,6 +26,7 @@ public class GameUI implements Drawable {
     private UICardChoice uiCardChoice;
     private UIActionListener uiActionListener;
     private UIEventMessage uiEventMessage;
+    private UIWinner uiWinner;
 
     //tracking the UI state to draw the correct items
     private UIState uiState;
@@ -33,7 +34,6 @@ public class GameUI implements Drawable {
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
     private boolean wasStateUpdatedQ = false;
-    private boolean wasStateUpdatedQQ = false;
 
     // ...
     private int panelHeight;
@@ -60,6 +60,7 @@ public class GameUI implements Drawable {
         uiInput = new UIInput(this,renderTarget);
         uiCardChoice = new UICardChoice(this);
         uiEventMessage = new UIEventMessage();
+        uiWinner = new UIWinner();
 
         //updateCurrentUIScreen();
     }
@@ -68,8 +69,9 @@ public class GameUI implements Drawable {
      * Looks at edges of uistate to determine if UI view needs to be changed.
      */
     public void updateCurrentUIScreen(){
-        //TODO fix double inversion case
-        if (wasStateUpdatedD == wasStateUpdatedQ || wasStateUpdatedQ == wasStateUpdatedQQ) {
+
+        if (wasStateUpdatedD != wasStateUpdatedQ){// || wasStateUpdatedQ == wasStateUpdatedQQ) {
+            System.out.println("event");
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
@@ -98,6 +100,11 @@ public class GameUI implements Drawable {
                     uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
                     break;
+                case EndGameMessage:
+                    EndGameMessage endGameMessage = (EndGameMessage) lastResponse;
+                    uiWinner.setRankedPlayers(endGameMessage.getRankedPlayers());
+                    uiState = EndGame;
+                    uiEventMessage.updateEventMessage("Game Over.");
                 default:
                     System.err.println("A message needs handling code written, or was null:");
                     System.err.println(lastResponse.getLifeGameMessageType());
@@ -106,7 +113,6 @@ public class GameUI implements Drawable {
             }
         }
         wasStateUpdatedQ = wasStateUpdatedD;
-        wasStateUpdatedQQ = wasStateUpdatedQ;
     }
 
     /**
@@ -202,6 +208,7 @@ public class GameUI implements Drawable {
         uiInput.draw(graphics);
         uiCardChoice.draw(graphics);
         uiEventMessage.draw(graphics);
+        uiWinner.draw(graphics);
     }
 
     /**
@@ -217,7 +224,6 @@ public class GameUI implements Drawable {
                     break;
                 case "Choose Left Option":
                     uiInput.setEnableCardChoice(false);
-                    System.out.println("Chose");
                     sendDecisionResponseMessage(0);
                     break;
                 case "Choose Right Option":

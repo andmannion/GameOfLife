@@ -13,6 +13,7 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
 
 public class GameLogic {
@@ -120,6 +121,12 @@ public class GameLogic {
 
     private int getNumberOfRetiredPlayers(){
 	    return retiredPlayers.size();
+    }
+
+    public ArrayList<Player> getRankedRetiredPlayers(){
+	    ArrayList<Player> ranked = retiredPlayers;
+        ranked.sort(new PlayerMoneyComparator());
+        return ranked;
     }
 
     // Career related

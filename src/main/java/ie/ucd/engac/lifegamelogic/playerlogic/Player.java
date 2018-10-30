@@ -7,8 +7,11 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
+import org.jetbrains.annotations.NotNull;
 
 public class Player {
+
+	private static final int STARTING_MONEY = 100001;
 
     private int playerNumber;
     private int numberOfDependants; // This doesn't include partner
@@ -38,7 +41,7 @@ public class Player {
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
-		currentMoney = 200000;
+		currentMoney = STARTING_MONEY;
 
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
@@ -206,4 +209,5 @@ public class Player {
 	public void setMovesRemaining(int movesRemaining) {
 		this.movesRemaining = movesRemaining;
 	}
+
 }
