@@ -30,7 +30,6 @@ public class HandlePlayerMoveState implements GameState {
 
 	public HandlePlayerMoveState() {}
 	
-
 	@Override
 	public void enter(GameLogic gameLogic) {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
@@ -53,7 +52,7 @@ public class HandlePlayerMoveState implements GameState {
             GameBoardTile endTile;
 
             // Need to spin the spinner
-            tilesToMove = Spinner.spinTheWheel();
+            tilesToMove = gameLogic.getSpinner().spinTheWheel();
             
             /* Must give the bonus salary to the player(s) depending with the value has been spun
 			*  based on the bonus number on their current OccupationCard.	

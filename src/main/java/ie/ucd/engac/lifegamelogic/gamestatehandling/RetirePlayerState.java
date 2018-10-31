@@ -29,7 +29,7 @@ public class RetirePlayerState implements GameState {
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
-            int spinNum = Spinner.spinTheWheel();
+            int spinNum = Spinner.spinWheel();
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
             retiree.sellHouseCard(currentCardIndex, spinNum);

@@ -13,7 +13,7 @@ import java.awt.*;
 @SuppressWarnings("ALL")
 public class GameEngine implements Runnable {
 
-	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
+	public static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
     private static final int PANWIDTH = 1280; //TODO what is the best way to manage the window size?
     private static final int PANHEIGHT = 720; //TODO make this work on computers that have window borders
 
@@ -69,6 +69,7 @@ public class GameEngine implements Runnable {
         renderingThread.start();
     } // end of beginGame()
 
+    // TODO: if these values are static and final, why are you using a getter method?
     /**
      * Returns the panel height.
      * @return  integer height of the panel.

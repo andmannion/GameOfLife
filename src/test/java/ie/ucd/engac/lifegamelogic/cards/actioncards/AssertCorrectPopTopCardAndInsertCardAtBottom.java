@@ -1,4 +1,4 @@
-package TestLifeGameLogic.TestCards.TestActionCards;
+package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
 import static org.junit.jupiter.api.Assertions.*;
 

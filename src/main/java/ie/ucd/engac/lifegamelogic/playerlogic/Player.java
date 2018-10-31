@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Player {
 
-	private static final int STARTING_MONEY = 200000;
+	public static final int STARTING_MONEY = 200000;
 
     private int playerNumber;
     private int numberOfDependants; // This doesn't include partner
