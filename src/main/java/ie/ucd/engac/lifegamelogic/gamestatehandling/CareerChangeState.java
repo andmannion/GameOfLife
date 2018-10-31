@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
@@ -63,11 +62,11 @@ public class CareerChangeState implements GameState {
 
             // Need to assign the chosen card to the relevant player
             ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
-            CareerCard chosenCareerCard = (CareerCard) pendingCardChoices.get(choiceIndex);
+            OccupationCard chosenCareerCard = (OccupationCard) pendingCardChoices.get(choiceIndex);
             gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
 
             // Only two cards at the moment, return unchosen
-            CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);
+            OccupationCard unchosenCareerCard = (OccupationCard) pendingCardChoices.get((choiceIndex + 1) % 2);
             //TODO into function in superclass?
             gameLogic.returnOccupationCard(unchosenCareerCard);
 

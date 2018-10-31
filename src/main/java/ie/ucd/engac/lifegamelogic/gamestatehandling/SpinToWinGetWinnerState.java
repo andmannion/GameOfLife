@@ -28,7 +28,7 @@ public class SpinToWinGetWinnerState implements GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO I am not sure this works correctly, I it doesnt respect the flow of the states or I think the defined turn order
+		// TODO test for >2 players
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Must keep track of the player that is currently spinning
 			int numberSpun = Spinner.spinTheWheel();
@@ -48,7 +48,7 @@ public class SpinToWinGetWinnerState implements GameState {
 				LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex), gameLogic), gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber(), eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
 				
-				return new EndTurnState();
+				return new EndTurnState(eventMsg);
 			}			
 			else {
 				// No one won this turn

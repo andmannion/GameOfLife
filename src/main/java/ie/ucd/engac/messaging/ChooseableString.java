@@ -1,5 +1,7 @@
 package ie.ucd.engac.messaging;
 
+import java.util.ArrayList;
+
 public class ChooseableString implements Chooseable {
     private String string;
 
@@ -14,5 +16,16 @@ public class ChooseableString implements Chooseable {
     @Override
     public String displayChoiceDetails() {
         return string;
+    }
+
+    // TODO: move this to a more appropriate place
+    public static ArrayList<Chooseable> convertToChooseableArray(ArrayList<String> stringArray){
+        ArrayList<Chooseable> chooseableArray = new ArrayList<>();
+
+        for(String str : stringArray) {
+            chooseableArray.add(new ChooseableString(str));
+        }
+
+        return chooseableArray;
     }
 }

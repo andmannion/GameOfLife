@@ -155,17 +155,17 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case Payday:
             	String paydayLandedOnMessage = handlePaydayTile(gameLogic);
-                nextState = new EndTurnState(paydayLandedOnMessage); 
+                nextState = new EndTurnState(paydayLandedOnMessage);
                 break;
             case Action:                
                 nextState = evaluateActionTile(gameLogic);
                 break;
             case Holiday:  
             	String holidayMessage = "You are on holiday, so do nothing for this turn.";
-                nextState = new EndTurnState(holidayMessage); 
+                nextState = new EndTurnState(holidayMessage);
                 break;
             case SpinToWin:
-                nextState = new SpinToWinSetupState(); 
+                nextState = new SpinToWinSetupState();
                 break;
             case Baby:
             	gameLogic.getCurrentPlayer().addDependants(1);
@@ -194,7 +194,7 @@ public class HandlePlayerMoveState implements GameState {
                 nextState = new GraduationState();
                 break;
             case GetMarried:
-            	nextState = new GetMarriedState();
+                nextState = handleGetMarriedTile(gameLogic);
                 break;
             case NightSchool:
                 nextState = new NightSchoolState();
@@ -231,7 +231,7 @@ public class HandlePlayerMoveState implements GameState {
             	nextActionState = new CareerChangeState(); //TODO test
                 break;
             case PlayersPay:
-                if(gameLogic.getNumberOfPlayers() == 0){
+                if(gameLogic.getNumberOfPlayers() == 1){
                 	nextActionState = new EndTurnState("No players remaining to pick");
                 }
                 else {
@@ -252,6 +252,19 @@ public class HandlePlayerMoveState implements GameState {
         
         return nextActionState;
 	}
+	private GameState handleGetMarriedTile(GameLogic gameLogic){
+	    GameState nextState;
+        if(gameLogic.getNumberOfPlayers() == 1){
+
+            String eventMsg = "You got married, player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", so take an extra turn.";
+
+            nextState = new HandlePlayerMoveState(eventMsg);
+        }
+        else {
+            nextState = new GetMarriedState();
+        }
+        return nextState;
+    }
 
 	private void performUpdateIfPassingOverTile(GameBoardTile currentTile, GameLogic gameLogic) {
 		if (currentTile.getGameBoardTileType() == GameBoardTileTypes.Payday) {
@@ -275,7 +288,7 @@ public class HandlePlayerMoveState implements GameState {
         if(currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
             gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
-            paydayUpdateString = "Player " + gameLogic.getCurrentPlayerIndex() + ", you obtained " + (currentSalary + PAYDAY_LANDED_ON_BONUS) + 
+            paydayUpdateString = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you obtained " + (currentSalary + PAYDAY_LANDED_ON_BONUS) +
             					 " after landing on a Payday tile.";
         }
         

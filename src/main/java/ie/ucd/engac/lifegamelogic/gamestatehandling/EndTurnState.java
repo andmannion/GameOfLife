@@ -17,11 +17,13 @@ public class EndTurnState implements GameState {
 
     //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){
-        int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
+        AckRequestMessage ackRequestMessage;
         if (eventMessage == null){
+            int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             eventMessage = "Player " + playNum + "'s turn is over.";
+
         }
-        AckRequestMessage ackRequestMessage = new AckRequestMessage(playNum, eventMessage);
+        ackRequestMessage = new AckRequestMessage(eventMessage);
         gameLogic.setResponseMessage(ackRequestMessage);
     }
 

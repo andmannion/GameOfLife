@@ -9,5 +9,6 @@ public enum LifeGameMessageTypes {
 	OptionDecisionRequest,
 	OptionDecisionResponse,
 	AckRequest,
-	AckResponse
+	AckResponse,
+	EndGameMessage
 }

@@ -84,7 +84,6 @@ public class UIInput implements Drawable {
         renderTarget.add(quitButton);
 
         chooseLeftCardButton = createButton("Choose Left Option",CARD_CHOICE_LHS_GAP, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
-        chooseLeftCardButton.addActionListener(actionListener);
         renderTarget.add(chooseLeftCardButton);
 
         int cRightX = CARD_CHOICE_LHS_GAP+CARD_CHOICE_WIDTH+CARD_CHOICE_INTER_GAP;
@@ -198,13 +197,10 @@ public class UIInput implements Drawable {
                 setVisibleCardChoice(false);
                 setVisibleChoiceSpinner(true);
                 break;
-            case Spin2WinPicking:
+            case EndGame:
+                setVisibleSpinButton(false);
                 break;
-            case Spin2WinRolling:
-                break;
-            case BabyAcquisition:
-                break;
-            case Wedding:
+            default:
                 break;
         }
         renderTarget.paintComponents(graphics);
