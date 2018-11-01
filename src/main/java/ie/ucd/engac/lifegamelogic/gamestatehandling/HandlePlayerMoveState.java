@@ -102,7 +102,8 @@ public class HandlePlayerMoveState implements GameState {
 
 	private GameBoardTile tryToMove(GameLogic gameLogic, LogicGameBoard gameBoard, int tilesToMove, int tilesMoved){
         boolean stopTileEncountered = false;
-        GameBoardTile currentTile = null;
+        BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
+        GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);
         
         BoardLocation pendingLocation = gameLogic.getCurrentPlayer().getPendingBoardForkChoice();
         
@@ -115,7 +116,7 @@ public class HandlePlayerMoveState implements GameState {
         
         while (tilesMoved < tilesToMove && !stopTileEncountered) {
             // Go forward
-            BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();         
+            currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
             
             ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);    
             
@@ -140,8 +141,9 @@ public class HandlePlayerMoveState implements GameState {
                 System.out.println("No spaces remaining ahead"); //TODO this should now be unreachable
             }
             tilesMoved++;
+            System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile."); //TODO remove
         }
-        System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile."); //TODO remove
+
         return currentTile;
     }
 
@@ -213,6 +215,8 @@ public class HandlePlayerMoveState implements GameState {
                 nextState = retireThisPlayer(gameLogic);
                 break;
             default:
+                nextState = new EndTurnState();
+                System.err.println("Player has landed on an unhandled stop tile.");
                 // Should be some error message logged to a log file here, quit altogether?
                 break;
         }

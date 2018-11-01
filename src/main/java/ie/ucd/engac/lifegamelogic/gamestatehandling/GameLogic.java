@@ -43,8 +43,12 @@ public class GameLogic {
 		currentState = new PathChoiceState();
 		currentState.enter(this);
 	}
-	
-	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
+
+    public void setSpinner(Spinnable spinner) {
+        this.spinner = spinner;
+    }
+
+    public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		System.out.println("Trying to handle input");
 		System.out.println("Current state is " + currentState.toString());
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
