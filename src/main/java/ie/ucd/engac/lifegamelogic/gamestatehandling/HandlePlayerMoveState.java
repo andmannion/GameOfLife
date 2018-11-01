@@ -175,6 +175,11 @@ public class HandlePlayerMoveState implements GameState {
             	String babyNonStopTileMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", you have had a baby.";                
                 nextState = new EndTurnState(babyNonStopTileMessage); 
                 break;
+            case Twins:
+                gameLogic.getCurrentPlayer().addDependants(2);
+                String twinsNonStopTileMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", you have had twins.";
+                nextState = new EndTurnState(twinsNonStopTileMessage);
+                break;
             case House:
                 nextState = new HouseTileDecisionState();
                 break;
