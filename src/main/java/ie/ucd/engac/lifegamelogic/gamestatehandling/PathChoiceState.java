@@ -79,8 +79,6 @@ public class PathChoiceState implements GameState {
 		if (1 == choiceIndex) {
 			return OccupationCardTypes.CollegeCareer;
 		}
-
-		System.out.println("Invalid pathResponse received in PathChoiceState.handleInput().parsePathChoiceResponse()");
 		return null;
 	}
 }

@@ -50,7 +50,6 @@ public class SpinToWinSetupState implements GameState {
 		// Send out a LargeDecisionRequestMessage for each other player
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
 			// Check who this reply relates to
-			System.out.println("Taking number from player " + gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
 			parsePlayerResponse(gameLogic,
 				    			(LargeDecisionResponseMessage) lifeGameMessage,
                     awaitingInfoFromPlayerIndex);

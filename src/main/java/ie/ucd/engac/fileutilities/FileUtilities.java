@@ -11,7 +11,7 @@ public class FileUtilities{
 		try {
 			encodedFileContent = Files.readAllBytes(Paths.get(filepath));
 		} catch (Exception e) {
-			System.out.println("Exception in FileUtilities.GetEntireContentsAsString() : \n" + e.toString());
+			System.err.println("Exception in FileUtilities.GetEntireContentsAsString() : \n" + e.toString());
 		}
 		
 		Charset charset = Charset.defaultCharset();		

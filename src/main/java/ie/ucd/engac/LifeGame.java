@@ -50,7 +50,6 @@ public class LifeGame implements WindowListener{
      * @param numPlayers    Number of players.
      */
     public void initialiseGame(int numPlayers){
-        System.out.println("Initialising game.");
         playPanel = new JPanel();
         playPanel.setVisible(false);
         playPanel.setBackground(Color.white);

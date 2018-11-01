@@ -119,6 +119,6 @@ public class MainMenu extends JPanel implements ActionListener {
             numPlayers = comboBox.getSelectedIndex()+2;
         }
         else
-            System.out.println(e.getSource());
+            System.err.println("Error, unhandled action event" + e.getSource());
     }
 }

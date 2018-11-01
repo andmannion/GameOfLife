@@ -18,9 +18,7 @@ public class GetMarriedState implements GameState {
 	private int playerGettingMarriedNumber;
 	
 	@Override
-	public void enter(GameLogic gameLogic) {	
-		System.out.println("Getting married...");
-		
+	public void enter(GameLogic gameLogic) {
 		// Update the current player to have a spouse			
 		gameLogic.getCurrentPlayer().setMaritalStatus(MaritalStatus.Married);
 		

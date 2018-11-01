@@ -90,14 +90,12 @@ public class UIInput implements Drawable {
         chooseRightCardButton = createButton("Choose Right Option",cRightX, CARD_CHOICE_Y_POS,CARD_CHOICE_WIDTH, CARD_CHOICE_HEIGHT, actionListener);
         renderTarget.add(chooseRightCardButton);
 
-        String[] placeholder = { "Placeholder","222" };
+        String[] placeholder = { ".","." };
         SpinnerModel model = new SpinnerListModel(Arrays.asList(placeholder));
         reducingChoice = new JSpinner();
         reducingChoice.setModel(model);
         reducingChoice.addChangeListener(e -> {
-            JSpinner spinner = (JSpinner) e.getSource();
-            System.out.println(spinner.getValue());
-            setSpinnerIndex();//TODO see if this works & remove println()
+            setSpinnerIndex();
         }
         );
         reducingChoice.setVisible(false);
@@ -126,7 +124,7 @@ public class UIInput implements Drawable {
             }
         }
         catch (Exception error){ //TODO fix this
-            System.out.println(error.toString());
+            System.err.println("Error in spinner values: "+ error.toString());
         }
     }
     int getSpinnerIndex() {

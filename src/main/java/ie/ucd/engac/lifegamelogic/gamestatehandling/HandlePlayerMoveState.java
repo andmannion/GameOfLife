@@ -71,7 +71,6 @@ public class HandlePlayerMoveState implements GameState {
 
             if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
                 // Must send a message to choose a career path, etc.
-                System.out.println("Still player left to initialise");
                 LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
                 gameLogic.setResponseMessage(replyMessage);
 
@@ -104,7 +103,6 @@ public class HandlePlayerMoveState implements GameState {
         boolean stopTileEncountered = false;
         BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
         GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);
-        System.out.println("Current tile: " + currentTile); //TODO remove
 
         BoardLocation pendingLocation = gameLogic.getCurrentPlayer().getPendingBoardForkChoice();
         
@@ -124,7 +122,6 @@ public class HandlePlayerMoveState implements GameState {
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
                 BoardLocation currentLocation = adjacentForwardLocations.get(0);
-                System.out.println("Current tile: " + currentLocation.getLocation()); //TODO remove
                 gameLogic.getCurrentPlayer().setCurrentLocation(currentLocation);
 
                 // Need to get the tile that this boardLocation relates to
@@ -142,16 +139,13 @@ public class HandlePlayerMoveState implements GameState {
                 System.out.println("No spaces remaining ahead"); //TODO this should now be unreachable
             }
             tilesMoved++;
-            System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile."); //TODO remove
         }
 
         return currentTile;
     }
 
 	private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
-	    GameState nextState = null; 
-	    
-        System.out.println(currentTile.getGameBoardTileType());
+	    GameState nextState = null;
         switch (currentTile.getGameBoardTileType()) {
             case Start:
                 nextState = new EndTurnState();
@@ -218,13 +212,11 @@ public class HandlePlayerMoveState implements GameState {
                 nextState = new EndTurnState(holidayMessage);
                 break;
             case Retire:
-                System.out.println("Retirement tile"); //TODO remove
                 nextState = retireThisPlayer(gameLogic);
                 break;
             default:
                 nextState = new EndTurnState();
                 System.err.println("Player has landed on an unhandled stop tile.");
-                // Should be some error message logged to a log file here, quit altogether?
                 break;
         }
         return nextState;
@@ -313,7 +305,6 @@ public class HandlePlayerMoveState implements GameState {
             String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
             if (gameLogic.getNumberOfPlayers() == 0) {
                 nextState = new GameOverState();
-                System.out.println("Game Over"); //TODO remove
             }
             else {
                 nextState = new EndTurnState(eventMessage);

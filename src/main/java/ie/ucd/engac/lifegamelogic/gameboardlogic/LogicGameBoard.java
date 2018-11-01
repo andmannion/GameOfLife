@@ -61,7 +61,7 @@ public class LogicGameBoard {
 		try {
 			overallJSONElement = (JsonElement) parser.parse(jsonBoardConfigFileContent);
 		} catch (Exception e) {
-			System.out.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
+			System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
 	}

@@ -39,8 +39,6 @@ public class HouseSaleState implements GameState { //TODO this entire class
 
             choiceIndex = choiceMessage.getChoiceIndex();
 
-            System.out.println(choiceIndex); //TODO why doesnt this work?
-
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             String eventMessage = "Player " + playNum + ", spin to determine sale price.";
             SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), playNum, eventMessage);

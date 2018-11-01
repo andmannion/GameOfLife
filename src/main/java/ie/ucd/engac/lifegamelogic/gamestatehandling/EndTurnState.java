@@ -31,16 +31,16 @@ public class EndTurnState implements GameState {
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse){
 
             gameLogic.setNextPlayerToCurrent();
-            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) { //
+            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
                 // Must send a message to choose a career path, etc.
-                System.out.println("Still player left to initialise");
                 LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
                 gameLogic.setResponseMessage(replyMessage);
 
                 return new PathChoiceState();
             }
             //noinspection SpellCheckingInspection
-            return new HandlePlayerMoveState(); // didnt receive the correct message, looping //TODO figure out if this condition is correct
+            return new HandlePlayerMoveState(); // didnt receive the correct message, looping
+            // TODO figure out if this condition is correct
         }
 
         return null;

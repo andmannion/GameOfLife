@@ -71,7 +71,6 @@ public class GameUI implements Drawable {
     public void updateCurrentUIScreen(){
 
         if (wasStateUpdatedD != wasStateUpdatedQ){// || wasStateUpdatedQ == wasStateUpdatedQQ) {
-            System.out.println("event");
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
@@ -121,7 +120,6 @@ public class GameUI implements Drawable {
      */
     private synchronized void invertWasStateUpdatedD(){
         wasStateUpdatedD = !wasStateUpdatedD;
-        System.out.println("inverted D"); //TODO remove
     }
 
     /**

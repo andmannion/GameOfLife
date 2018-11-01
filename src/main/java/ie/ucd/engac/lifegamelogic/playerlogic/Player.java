@@ -75,7 +75,6 @@ public class Player {
 
         subtractFromBalance(loanRepaymentCost, gameLogic);
         gameLogic.repayAllLoans(playerNumber);
-        System.out.println("retire $" + currentMoney); //TODO remove
         return getCurrentMoney();
 	}
 

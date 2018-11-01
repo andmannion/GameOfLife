@@ -56,7 +56,6 @@ public class GameEngine implements Runnable {
      */
     public void quitGame(){
         running = false;
-        System.out.println("Stopped rendering"); //TODO remove
         lifeGameParent.returnToMainMenu();
     } // end of quitGame()
 
@@ -65,11 +64,10 @@ public class GameEngine implements Runnable {
      */
     void beginGame(){
         renderingThread = new Thread(this);
-        System.out.println("Starting renderingThread"); //TODO remove
         renderingThread.start();
     } // end of beginGame()
 
-    // TODO: if these values are static and final, why are you using a getter method?
+    // TODO: if these values are static and final, why are you using a getter method? - will they always be? (c)
     /**
      * Returns the panel height.
      * @return  integer height of the panel.
@@ -140,7 +138,7 @@ public class GameEngine implements Runnable {
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
             backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
             if (backBuffer == null) { //if create image somehow failed
-                System.out.println("image null");//TODO delete
+                System.err.println("image null");
                 return;
             }
             else
@@ -165,7 +163,7 @@ public class GameEngine implements Runnable {
             }
         }
         catch (Exception e){
-            System.out.println("loadPanel() in GameEngine failed");
+            System.err.println("paintPanel() in GameEngine failed");
         }
     } // end of paintPanel()
 }

@@ -231,7 +231,6 @@ class HouseChoiceStateTest {
 
         // Assert preconditions
         int playerInitMoney = player.getCurrentMoney();
-        System.out.println(setBalanceToOne);
         assertEquals(1,playerInitMoney);
 
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));

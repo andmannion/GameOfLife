@@ -49,8 +49,6 @@ public class GameLogic {
     }
 
     public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
-		System.out.println("Trying to handle input");
-		System.out.println("Current state is " + currentState.toString());
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
 		if(nextGameState != null) {
@@ -150,8 +148,6 @@ public class GameLogic {
 
     public void movePlayerToInitialCareerPath(int playerIndex) {
         BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
-        
-        System.out.println("DEBUG: careerPathInitialLocation string is " + careerPathInitialLocation.getLocation());
 
         players.get(playerIndex).setCurrentLocation(careerPathInitialLocation);
     }

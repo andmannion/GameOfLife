@@ -53,7 +53,7 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 		try {
 			overallJSONElement = parser.parse(jsonBoardLayout);
 		} catch (Exception e) {
-			System.out.println("Exception in OccupationCardConfigHandler....initialiseParser(): \n" + e.toString());
+			System.err.println("Exception in OccupationCardConfigHandler....initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
 	}
