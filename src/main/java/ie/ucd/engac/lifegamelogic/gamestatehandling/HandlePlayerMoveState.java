@@ -62,7 +62,6 @@ public class HandlePlayerMoveState implements GameState {
 
 			// Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic, gameBoard, tilesToMove, tilesMoved);
-
             
             
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.

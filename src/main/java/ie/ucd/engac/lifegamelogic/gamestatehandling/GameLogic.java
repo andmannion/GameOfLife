@@ -67,45 +67,45 @@ public class GameLogic {
         numberOfUnconfiguredPlayers = numPlayers;
     }
 
-    protected ArrayList<Player> getPlayers(){
+    public ArrayList<Player> getPlayers(){
     	return players;
     }
 
-    protected int getCurrentPlayerIndex(){
+    public int getCurrentPlayerIndex(){
 	    return currentPlayerIndex;
     }
 	
-	protected Player getCurrentPlayer() {
+	public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
 
-    protected void setNextPlayerToCurrent() {
+    public void setNextPlayerToCurrent() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 
-    protected int getNumberOfPlayers() {
+    public int getNumberOfPlayers() {
         return players.size();
     }
 
-    protected Player getPlayerByIndex(int playerIndex) {
+    public Player getPlayerByIndex(int playerIndex) {
         if(playerIndex < 0 || playerIndex > players.size()) {
             return null;
         }
         return players.get(playerIndex);
     }
 
-    protected int getNextPlayerIndex(int playerIndex) {
+    public int getNextPlayerIndex(int playerIndex) {
         if(playerIndex < 0 || playerIndex > players.size()) {
             return -1;
         }
         return (playerIndex + 1) % players.size();
     }
     
-    protected int getNumberOfUninitialisedPlayers() {
+    public int getNumberOfUninitialisedPlayers() {
         return numberOfUnconfiguredPlayers;
     }
 
-    protected void decrementNumberOfUninitialisedPlayers() {
+    public void decrementNumberOfUninitialisedPlayers() {
         if(numberOfUnconfiguredPlayers > 0) {
             numberOfUnconfiguredPlayers--;
         }
@@ -130,13 +130,13 @@ public class GameLogic {
     }
 
     // Career related
-    protected void movePlayerToInitialCollegeCareerPath(int playerIndex) {
+    public void movePlayerToInitialCollegeCareerPath(int playerIndex) {
         BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1);
 
         players.get(playerIndex).setCurrentLocation(collegeCareerPathInitialLocation);
     }
 
-    protected void movePlayerToInitialCareerPath(int playerIndex) {
+    public void movePlayerToInitialCareerPath(int playerIndex) {
         BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
         
         System.out.println("DEBUG: careerPathInitialLocation string is " + careerPathInitialLocation.getLocation());
@@ -145,16 +145,16 @@ public class GameLogic {
     }
 
     // GameBoard related
-    protected LogicGameBoard getGameBoard() {
+    public LogicGameBoard getGameBoard() {
 		return gameBoard;
 	}
 
-    protected ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
+    public ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
         return gameBoard.getOutboundNeighbours(currentBoardLocation);
     }
 
 	// Bank related
-    protected void extractMoneyFromBank(int amountToExtract) {
+    public void extractMoneyFromBank(int amountToExtract) {
         bank.extractMoney(amountToExtract);
     }
 
@@ -179,29 +179,29 @@ public class GameLogic {
         return currentLifeGameMessageResponse;
     }
 
-    protected void setResponseMessage(LifeGameMessage lifeGameMessage) {
+    public void setResponseMessage(LifeGameMessage lifeGameMessage) {
         currentLifeGameMessageResponse = lifeGameMessage;
     }
 
     // Generic card related
-    protected void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
+    public void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
 
-    protected ArrayList<Card> getPendingCardChoices(){
+    public ArrayList<Card> getPendingCardChoices(){
         return pendingCardChoices;
     }
 
     // Occupation card related
-    protected OccupationCard getTopStandardCareerCard() {
+    public OccupationCard getTopStandardCareerCard() {
         return bank.getTopStandardCareerCard();
     }
 
-    protected OccupationCard getTopCollegeCareerCard() {
+    public OccupationCard getTopCollegeCareerCard() {
         return bank.getTopCollegeCareerCard();
     }
 
-    protected void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
+    public void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
         if(occupationCardToBeReturned.getOccupationCardType() == OccupationCardTypes.Career) {
             bank.returnStandardCareerCard(occupationCardToBeReturned);
         }
@@ -211,16 +211,16 @@ public class GameLogic {
     }
 
     // Action card related
-    protected ActionCard getTopActionCard() {
+    public ActionCard getTopActionCard() {
         return bank.getTopActionCard();
     }
 
     // House card related
-    protected HouseCard getTopHouseCard() {
+    public HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
     }
 
-    protected void returnHouseCard(HouseCard houseCardToBeReturned) {
+    public void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
 }
