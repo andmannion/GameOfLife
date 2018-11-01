@@ -203,7 +203,7 @@
             "tileMovementType": "GameBoardStopTile",
             "gameBoardTileType": "Stop",
             "gameBoardStopTileType": "GetMarried"
-            }
+          }
         },
         {
           "id": "ac",
@@ -212,7 +212,15 @@
             "gameBoardTileType": "Stop",
             "gameBoardStopTileType": "Retire"
           }
-        }
+        },
+		{
+		  "id": "ad",
+		  "gameBoardTile": {
+		    "tileMovementType": "GameBoardStopTile",
+		    "gameBoardTileType": "Stop",
+		    "gameBoardStopTileType": "Retire"
+		  }
+		}
 	],
 	"edges": [{
 		"source": "a",
@@ -329,6 +337,10 @@
 	{
 		"source": "ab",
 		"target": "ac"
-	}
+	},
+    {
+      "source": "ac",
+      "target": "ad"
+    }
 	]
 }
