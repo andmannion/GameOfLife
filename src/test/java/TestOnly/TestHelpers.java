@@ -53,9 +53,6 @@ public class TestHelpers {
 
         //set object to use the function spinner
         gameLogic.setSpinner(spinner);
-
-        System.out.println("Set up initial conditions");
-        System.out.println("-------------------------");
         return gameLogic;
     }
 }
