@@ -209,8 +209,7 @@
           "id": "ac",
           "gameBoardTile": {
             "tileMovementType": "GameBoardStopTile",
-            "gameBoardTileType": "Stop",
-            "gameBoardStopTileType": "Retire"
+			"gameBoardTileType": "House"
           }
         },
 		{

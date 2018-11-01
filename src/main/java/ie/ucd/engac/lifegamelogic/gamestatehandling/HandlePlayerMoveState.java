@@ -104,7 +104,8 @@ public class HandlePlayerMoveState implements GameState {
         boolean stopTileEncountered = false;
         BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
         GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);
-        
+        System.out.println("Current tile: " + currentTile); //TODO remove
+
         BoardLocation pendingLocation = gameLogic.getCurrentPlayer().getPendingBoardForkChoice();
         
         if(pendingLocation != null) {
@@ -153,6 +154,7 @@ public class HandlePlayerMoveState implements GameState {
         System.out.println(currentTile.getGameBoardTileType());
         switch (currentTile.getGameBoardTileType()) {
             case Start:
+                nextState = new EndTurnState();
                 break;
             case Payday:
             	String paydayLandedOnMessage = handlePaydayTile(gameLogic);
