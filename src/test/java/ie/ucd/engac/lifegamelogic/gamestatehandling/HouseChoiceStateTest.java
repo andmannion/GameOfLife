@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HouseChoiceStateTest {
     private final int NUM_PLAYERS = 2;
-    private final String PRIOR_TILE_LOCATION = "ab";
-    private final String HOUSE_TILE_LOCATION = "ac";
-    private final int LOAN_AMOUNT = 60000;
+    private final String PRIOR_TILE_LOCATION = "ak";
+    private final String HOUSE_TILE_LOCATION = "al";
+    private final int LOAN_AMOUNT = 50000;
 
     @Test
     void testNoAction() {
