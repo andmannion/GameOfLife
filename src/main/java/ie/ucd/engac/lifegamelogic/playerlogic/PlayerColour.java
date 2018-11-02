@@ -16,7 +16,7 @@ public enum PlayerColour {
     }
     public static PlayerColour fromInt(int colourNumber) {
         for (PlayerColour pc : PlayerColour .values()) {
-            if (pc.getValue() == colourNumber) { return pc; }
+            if (pc.getValue() == colourNumber-1) { return pc; }
         }
         return null;
     }
