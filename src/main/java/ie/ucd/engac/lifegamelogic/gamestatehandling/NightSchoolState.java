@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -15,12 +17,12 @@ import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class NightSchoolState implements GameState {
 	private final String KEEP_CAREER_MSG = "Keep your current career";
-	//private final int KEEP_CAREER_MSG_INDEX = 0;
+	private static final int KEEP_CAREER_INDEX = 0;
 	
 	private final String ATTEND_NIGHT_SCHOOL_MSG = "Attend night school";
-	private final int ATTEND_NIGHT_SCHOOL_INDEX = 1;
+	public static final int ATTEND_NIGHT_SCHOOL_INDEX = 1;
 	
-	private final int NIGHT_SCHOOL_TUITION_FEES = 100000;
+	public static final int NIGHT_SCHOOL_TUITION_FEES = 100000;
 	
 	private ArrayList<Card> collegeCareerCardOptions; 
 	private boolean pendingCollegeCareerCardDecision = false;
@@ -91,7 +93,8 @@ public class NightSchoolState implements GameState {
 			else if (pendingNightSchoolDecision) {
 				pendingNightSchoolDecision = false;
 				
-				return parsePendingNightSchoolDecision(gameLogic, ((DecisionResponseMessage) lifeGameMessage).getChoiceIndex());
+				 
+			    return parsePendingNightSchoolDecision(gameLogic, ((DecisionResponseMessage) lifeGameMessage).getChoiceIndex());
 			}	
 		}
 		
@@ -129,17 +132,20 @@ public class NightSchoolState implements GameState {
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();			
 			gameLogic.returnOccupationCard(currentOccupationCard);
 			
-			OccupationCard topCollegeCareerCard = gameLogic.getTopCollegeCareerCard();			
-			gameLogic.getCurrentPlayer().setOccupationCard(topCollegeCareerCard);
+			OccupationCard topCollegeCareerCard = gameLogic.getTopCollegeCareerCard();	
+			
+			Player currentPlayer = gameLogic.getCurrentPlayer();			
+			currentPlayer.setOccupationCard(topCollegeCareerCard);
+			
+			BoardLocation currentLocation = currentPlayer.getCurrentLocation();
+			BoardLocation nightSchoolPathChoiceLocation = gameLogic.getGameBoard().getOutboundNeighbours(currentLocation).get(ATTEND_NIGHT_SCHOOL_INDEX);
+			
+			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(nightSchoolPathChoiceLocation);
 		}
 		
 		// Send same message either way
-		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
-					
-		LifeGameMessage responseMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),
-																 gameLogic.getCurrentPlayer().getPlayerNumber(),
-																 eventMsg);			
-		gameLogic.setResponseMessage(responseMessage);			
+		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again."; // TODO: How to display this?
+				
 		return new HandlePlayerMoveState();
 	}
     

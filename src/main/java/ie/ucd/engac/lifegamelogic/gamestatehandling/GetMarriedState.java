@@ -8,8 +8,8 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class GetMarriedState implements GameState {
-	private static final int GET_MARRIED_EVEN_PAYMENT = 50000;
-	private static final int GET_MARRIED_ODD_PAYMENT = 100000;
+	public static final int GET_MARRIED_EVEN_PAYMENT = 50000;
+	public static final int GET_MARRIED_ODD_PAYMENT = 100000;
 	
 	private int playersLeftToSpin;
 	private int playerGettingMarriedIndex;
@@ -38,7 +38,6 @@ public class GetMarriedState implements GameState {
 		gameLogic.setResponseMessage(responseMessage);
 	}
 	
-
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 	    GameState nextState = null;
