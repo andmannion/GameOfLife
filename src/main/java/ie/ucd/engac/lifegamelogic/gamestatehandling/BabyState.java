@@ -24,7 +24,7 @@ public class BabyState implements GameState {
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			int spinResult = Spinner.spinWheel();			
-			return handleSpinForBabyState(gameLogic, spinResult);			
+            return handleSpinForBabyState(gameLogic, spinResult);			
 		}
 
 		return null;

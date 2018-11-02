@@ -9,7 +9,7 @@ public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameM
 	private GameLogic gameLogic;
 	
 	public GameLogicInterface(LogicGameBoard gameBoard, int numPlayers) {
-		gameLogic = new GameLogic(gameBoard, numPlayers, new Spinner());
+        gameLogic = new GameLogic(gameBoard, numPlayers, new Spinner());
 	}
 
 	@Override

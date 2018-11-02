@@ -43,7 +43,8 @@ public class GetMarriedState implements GameState {
 			// Spin the wheel for the next player
 			String paymentMsg;
 
-			int spinResult = Spinner.spinWheel();
+    		int spinResult = gameLogic.getSpinner().spinTheWheel();
+
 			int getMarriedPayment;
 			
 			//compute payment
