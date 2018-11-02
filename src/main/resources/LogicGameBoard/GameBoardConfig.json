@@ -514,6 +514,7 @@
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
+		}
 		},
 		{
 		  "id": "aav",

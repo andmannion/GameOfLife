@@ -7,6 +7,7 @@ public enum GameBoardTileTypes {
 	Holiday,
 	SpinToWin,
 	Baby,
+	Twins,
 	House,
 	Stop
 }
