@@ -23,6 +23,41 @@ public class CollegeCareerCard extends OccupationCard implements Chooseable {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		
+		if(!CollegeCareerCard.class.isAssignableFrom(obj.getClass())) {
+			return false;
+		}
+		
+		final CollegeCareerCard otherCCCard = (CollegeCareerCard) obj;
+		
+		if(this.collegeCareerType != otherCCCard.getCareerType()) {
+			return false;
+		}
+		
+		if(this.getOccupationCardType() != otherCCCard.getOccupationCardType()) {
+			return false;
+		}
+		
+		if(this.getBonusPaymentAmount() != otherCCCard.getBonusPaymentAmount()) {
+			return false;
+		}
+		
+		if(this.getBonusNumber() != otherCCCard.getBonusNumber()) {
+			return false;
+		}
+		
+		if(this.getSalary() != otherCCCard.getSalary()) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
 	public String displayChoiceDetails() {
 		String string = "";
 		string = string.concat("Type: " + occupationCardType);

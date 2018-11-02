@@ -56,9 +56,6 @@ public class GameLogic {
 			currentState.enter(this);
 		}
 		
-		// Need to send a response message to the user
-		// When there are no pending transitions, must send the current
-		// LifeGameMessage as stored in the GameLogic object.
 		return getLifeGameMessageResponse();
 	}
 

@@ -36,7 +36,7 @@ public class HandlePlayerMoveState implements GameState {
         if (eventMessage == null){
             eventMessage = "Player " + playNum + "'s turn.";
         }
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),playNum, eventMessage);
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), playNum, eventMessage);
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
 
@@ -254,6 +254,7 @@ public class HandlePlayerMoveState implements GameState {
         
         return nextActionState;
 	}
+	
 	private GameState handleGetMarriedTile(GameLogic gameLogic){
 	    GameState nextState;
         if(gameLogic.getNumberOfPlayers() == 1){
