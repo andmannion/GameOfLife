@@ -2,6 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.lifegamelogic.Spinnable;
+import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
@@ -9,9 +11,7 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
-import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -19,6 +19,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 public class GameLogic {
     public static final int MAX_NUM_PLAYERS = 4;
 	private Bank bank;
+	private Spinnable spinner;
 	private ArrayList<Player> players;
 	private ArrayList<Player> retiredPlayers;
 	private LogicGameBoard gameBoard;
@@ -30,19 +31,24 @@ public class GameLogic {
 
 	private GameState currentState;
 	
-	public GameLogic(LogicGameBoard gameBoard, int numPlayers) {
+	public GameLogic(LogicGameBoard gameBoard, int numPlayers, Spinnable spinner) {
 		this.gameBoard = gameBoard;
+		this.spinner = spinner;
 		bank = new Bank();
+		
 		initialisePlayers(numPlayers);
+		
         retiredPlayers = new ArrayList<>();
 		
 		currentState = new PathChoiceState();
 		currentState.enter(this);
 	}
-	
-	public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
-		System.out.println("Trying to handle input");
-		System.out.println("Current state is " + currentState.toString());
+
+    public void setSpinner(Spinnable spinner) {
+        this.spinner = spinner;
+    }
+
+    public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
 		if(nextGameState != null) {
@@ -108,6 +114,10 @@ public class GameLogic {
         }
     }
 
+    public Spinnable getSpinner() {
+    	return spinner;
+    }
+    
     // Retirement related
     public int retireCurrentPlayer(){
 	    Player playerToRetire = players.remove(currentPlayerIndex);
@@ -135,8 +145,6 @@ public class GameLogic {
 
     public void movePlayerToInitialCareerPath(int playerIndex) {
         BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
-        
-        System.out.println("DEBUG: careerPathInitialLocation string is " + careerPathInitialLocation.getLocation());
 
         players.get(playerIndex).setCurrentLocation(careerPathInitialLocation);
     }

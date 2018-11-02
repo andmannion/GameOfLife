@@ -31,7 +31,7 @@ public class SpinToWinGetWinnerState implements GameState {
 		// TODO test for >2 players
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Must keep track of the player that is currently spinning
-			int numberSpun = Spinner.spinTheWheel();
+			int numberSpun = gameLogic.getSpinner().spinTheWheel();
 			
 			int winningPlayerIndex = parseSpinToWinAction(numberSpun);
 			

@@ -1,5 +1,6 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
@@ -9,7 +10,8 @@ public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameM
 	
 	public GameLogicInterface(LogicGameBoard gameBoard, int numPlayers) {
 		System.out.println("Inside GameLogicInterface constructor"); //TODO remove
-		gameLogic = new GameLogic(gameBoard, numPlayers);
+		Spinner spinner = new Spinner();
+		gameLogic = new GameLogic(gameBoard, numPlayers, spinner);
 	}
 
 	@Override
