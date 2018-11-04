@@ -12,8 +12,6 @@ import java.awt.*;
 
 @SuppressWarnings("ALL")
 public class GameEngine implements Runnable {
-
-	private static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
     private int panelWidth = GameConfig.panelWidth; //TODO what is the best way to manage the window size?
     private int panelHeight = GameConfig.panelHeight; //TODO make this work on computers that have window borders
 
@@ -43,7 +41,7 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-        LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard logicGameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         
         MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);
