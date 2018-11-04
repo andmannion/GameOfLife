@@ -212,13 +212,4 @@ public class Player {
 		this.movesRemaining = movesRemaining;
 	}
 
-	public ShadowPlayer getShadowPlayer(GameLogic gameLogic){
-        int martialStatus = getMaritalStatus().toInt();
-        int numLoans = getNumberOfLoans(gameLogic);
-        int loans = getTotalLoansOutstanding(gameLogic);
-        int numActionCards = getActionCards().size();
-
-	    return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
-    }
-
 }

@@ -69,7 +69,7 @@ public class SpinToWinSetupState implements GameState {
 				// We have received a message from all players, and now need to begin spinning
 				// the wheel to select numbers for each player until one of the chosen numbers is spun.
 				String eventMsg = "Spin the wheel to try to win.";
-				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic),
+				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 						gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), eventMsg);
 				
 				gameLogic.setResponseMessage(responseMessage);
