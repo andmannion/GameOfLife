@@ -9,7 +9,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
 public class CareerChangeState implements GameState {
-    CareerPathTypes careerPathType;
+    private CareerPathTypes careerPathType;
 
     @Override
     public void enter(GameLogic gameLogic) {

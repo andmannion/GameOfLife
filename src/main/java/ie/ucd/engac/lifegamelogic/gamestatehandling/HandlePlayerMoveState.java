@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
@@ -19,8 +20,6 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class HandlePlayerMoveState implements GameState {
-
-    private final static int PAYDAY_LANDED_ON_BONUS = 100000;
     private String eventMessage ;
 
 	public HandlePlayerMoveState(String eventMessage){
@@ -292,8 +291,8 @@ public class HandlePlayerMoveState implements GameState {
         
         if(currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
-            gameLogic.getCurrentPlayer().addToBalance(currentSalary + PAYDAY_LANDED_ON_BONUS);
-            paydayUpdateString = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you obtained " + (currentSalary + PAYDAY_LANDED_ON_BONUS) +
+            gameLogic.getCurrentPlayer().addToBalance(currentSalary + GameConfig.payday_landed_on_bonus);
+            paydayUpdateString = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you obtained " + (currentSalary + GameConfig.payday_landed_on_bonus) +
             					 " after landing on a Payday tile.";
         }
         

@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
@@ -12,7 +13,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class PathChoiceState implements GameState {
-	private final int COLLEGE_UPFRONT_COST = 100000;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -37,7 +37,7 @@ public class PathChoiceState implements GameState {
 			// Must set the path choice for the current player based on what was returned
 			if (pathChoiceResponse == OccupationCardTypes.CollegeCareer) {
 				gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.CollegeCareer);
-				gameLogic.getCurrentPlayer().subtractFromBalance(COLLEGE_UPFRONT_COST, gameLogic);
+				gameLogic.getCurrentPlayer().subtractFromBalance(GameConfig.college_upfront_cost, gameLogic);
 						
 				// Must move the player to the CollegeCareer path
 				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayerIndex());

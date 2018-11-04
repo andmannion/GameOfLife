@@ -1,5 +1,6 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -10,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class HouseChoiceState implements GameState {
-    private static final int LOAN_AMOUNT = 60000;
     private boolean loanRequired;
     private HouseCard chosenCard;
 
@@ -108,8 +108,8 @@ public class HouseChoiceState implements GameState {
             ArrayList<String> decisionStrings = new ArrayList<>();
             decisionStrings.add("Don't buy.");
             double loanTotal = (double)(housePrice - player.getCurrentMoney());
-            int numLoans = (int)Math.ceil(loanTotal/LOAN_AMOUNT);
-            decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*LOAN_AMOUNT + ".");
+            int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
+            decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");
             LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(decisionStrings),
                     gameLogic.getCurrentPlayerIndex());
 

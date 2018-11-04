@@ -1,15 +1,19 @@
 package ie.ucd.engac;
 
+import javax.print.DocFlavor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
 
 import ie.ucd.engac.ui.*;
 
 public class LifeGame implements WindowListener{
 
-    private static final int PANWIDTH = 1280;
-    private static final int PANHEIGHT = 720;
+    private int panelWidth = 1280;
+    private int panelHeight = 720;
     private JFrame jFrame;
     private JPanel playPanel;
     private MainMenu mainMenu;
@@ -21,7 +25,19 @@ public class LifeGame implements WindowListener{
      */
     LifeGame() {
         jFrame = new JFrame("Life: The Game");
-        Dimension dimensions = new Dimension(PANWIDTH,PANHEIGHT);
+        InputStream inputStream = null;
+        Properties properties = new Properties();
+        try{
+            inputStream = new FileInputStream("src/main/resources/config.properties");
+            properties.load(inputStream);
+            panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
+            panelHeight = Integer.parseInt(properties.getProperty("PANHEIGHT"));
+        }
+        catch(Exception exception){
+            System.err.println("config.properties not found.");
+        }
+        new GameConfig(properties);
+        Dimension dimensions = new Dimension(panelWidth,panelHeight);
         constructUI();
         jFrame.addWindowListener(this);
         jFrame.pack();
@@ -29,6 +45,8 @@ public class LifeGame implements WindowListener{
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         jFrame.setIgnoreRepaint(true);
+
+
     } // end of Main (constructor)
 
     /**
@@ -54,7 +72,7 @@ public class LifeGame implements WindowListener{
         playPanel = new JPanel();
         playPanel.setVisible(false);
         playPanel.setBackground(Color.white);
-        playPanel.setPreferredSize( new Dimension(PANWIDTH, PANHEIGHT));
+        playPanel.setPreferredSize( new Dimension(panelWidth, panelHeight));
         playPanel.setLayout(null);
         JTextField textField = new JTextField("Error: Rendering error");
         playPanel.add(textField);

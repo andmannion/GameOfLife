@@ -2,16 +2,14 @@ package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
-import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class Player {
-
-	private static final int STARTING_MONEY = 200000;
 
     private int playerNumber;
     private int numberOfDependants; // This doesn't include partner
@@ -41,7 +39,7 @@ public class Player {
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
-		currentMoney = STARTING_MONEY;
+		currentMoney = GameConfig.starting_money;
 
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
@@ -65,7 +63,7 @@ public class Player {
             children
             loans
          */
-        int retirementBonus = (GameLogic.MAX_NUM_PLAYERS-numberOfRetirees)*100*THOUSAND; //TODO refactor?
+        int retirementBonus = (GameConfig.max_num_players -numberOfRetirees)*100*THOUSAND; //TODO refactor?
         int actionCardBonus = getNumberOfActionCards()*100*THOUSAND;
         int childrenBonus = getNumberOfChildren()*50*THOUSAND;
 

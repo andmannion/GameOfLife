@@ -19,7 +19,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class GameLogic {
-    public static final int MAX_NUM_PLAYERS = 4;
 	private Bank bank;
 	private Spinnable spinner;
 	private ArrayList<Player> players;
