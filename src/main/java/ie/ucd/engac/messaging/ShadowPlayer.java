@@ -26,17 +26,17 @@ public class ShadowPlayer {
     private int martialStatus;
     private ArrayList<HouseCard> houses;
 
-    public ShadowPlayer(Player player, GameLogic gameLogic){
-        playerNumber = player.getPlayerNumber();
-        playerColour = player.getPlayerColour();
-        martialStatus = player.getMaritalStatus().toInt();
-        numDependants = player.getNumberOfDependants();
-        occupation = player.getOccupationCard();
-        houses = player.getHouseCards();
-        numLoans = player.getNumberOfLoans(gameLogic);
-        loans = player.getTotalLoansOutstanding(gameLogic);
-        bankBalance = player.getCurrentMoney();
-        numActionCards = player.getActionCards().size();
+    public ShadowPlayer(int playerNumber, PlayerColour playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard>  houses, int numLoans, int loans, int bankBalance, int numActionCards){
+        this.playerNumber = playerNumber;
+        this.playerColour = playerColour;
+        this.martialStatus = martialStatus;
+        this.numDependants = numDependants;
+        this.occupation = occupation;
+        this.houses = houses;
+        this.numLoans = numLoans;
+        this.loans = loans;
+        this.bankBalance = bankBalance;
+        this.numActionCards = numActionCards;
     }
 
     public String playerColourToString(){

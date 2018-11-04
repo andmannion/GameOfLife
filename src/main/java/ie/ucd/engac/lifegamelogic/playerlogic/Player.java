@@ -7,6 +7,7 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
+import ie.ucd.engac.messaging.ShadowPlayer;
 import org.jetbrains.annotations.NotNull;
 
 public class Player {
@@ -181,7 +182,8 @@ public class Player {
 			houseCards.remove(cardIndex);
 		}
 	}
-	
+
+	//Marriage related
 	public void setMaritalStatus(MaritalStatus maritalStatus) {
 		// This method assumes you can only be married to one person at a time...
 		if(this.maritalStatus == MaritalStatus.Single && maritalStatus == MaritalStatus.Married) {
@@ -193,7 +195,8 @@ public class Player {
 	public MaritalStatus getMaritalStatus() {
 		return maritalStatus;
 	}
-	
+
+	//Fork choices
 	public BoardLocation getPendingBoardForkChoice() {
 		return pendingBoardForkChoice;
 	}
@@ -202,6 +205,7 @@ public class Player {
 		this.pendingBoardForkChoice = pendingBoardForkChoice;
 	}
 
+	//remaining moves
 	public int getMovesRemaining() {
 		return movesRemaining;
 	}
@@ -209,5 +213,14 @@ public class Player {
 	public void setMovesRemaining(int movesRemaining) {
 		this.movesRemaining = movesRemaining;
 	}
+
+	public ShadowPlayer getShadowPlayer(GameLogic gameLogic){
+        int martialStatus = getMaritalStatus().toInt();
+        int numLoans = getNumberOfLoans(gameLogic);
+        int loans = getTotalLoansOutstanding(gameLogic);
+        int numActionCards = getActionCards().size();
+
+	    return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
+    }
 
 }
