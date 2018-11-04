@@ -53,31 +53,16 @@ public class Player {
         return playerColour;
     }
 
-    public int retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
-        final int THOUSAND = 1000;
-        /*
-        retirement steps:
-            add bonus for earliness
-            action cards
-            houses
-            children
-            loans
-         */
-        int retirementBonus = (GameConfig.max_num_players -numberOfRetirees)*100*THOUSAND; //TODO refactor?
-        int actionCardBonus = getNumberOfActionCards()*100*THOUSAND;
-        int childrenBonus = getNumberOfChildren()*50*THOUSAND;
-
-        addToBalance(retirementBonus+actionCardBonus+childrenBonus);
-
-        int loanRepaymentCost = gameLogic.getTotalOutstandingLoans(playerNumber);
-
-        gameLogic.subtractFromCurrentPlayersBalance(loanRepaymentCost);
-        gameLogic.repayAllLoans(playerNumber);
-        return getCurrentMoney();
-	}
+    //Retirement related
+    public int computeRetirementBonuses(int numberOfRetirees){
+        int retirementBonus = (GameConfig.max_num_players -numberOfRetirees)*100*1000; //TODO refactor?
+        int actionCardBonus = getNumberOfActionCards()*100*1000;
+        int childrenBonus = getNumberOfChildren()*50*1000;
+        return retirementBonus + actionCardBonus + childrenBonus;
+    }
 
     //Location related
-	public BoardLocation getCurrentLocation() {
+    public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
 	}
 	

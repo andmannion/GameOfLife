@@ -2,8 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.Spinnable;
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
@@ -151,9 +151,16 @@ public class GameLogic {
     // Retirement related
     public int retireCurrentPlayer(){
 	    Player playerToRetire = players.remove(currentPlayerIndex);
-	    int retirementCash = playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
+
+        int retirementBonus = playerToRetire.computeRetirementBonuses(getNumberOfRetiredPlayers());
+        playerToRetire.addToBalance(retirementBonus);
+
+        int loanRepaymentCost = getTotalOutstandingLoans(playerToRetire.getPlayerNumber());
+        subtractFromCurrentPlayersBalance(loanRepaymentCost);
+        repayAllLoans(playerToRetire.getPlayerNumber());
+
 	    retiredPlayers.add(playerToRetire);
-	    return retirementCash;
+	    return playerToRetire.getCurrentMoney();
     }
 
     private int getNumberOfRetiredPlayers(){
@@ -258,4 +265,6 @@ public class GameLogic {
     public void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
+
+
 }
