@@ -114,6 +114,7 @@ public class HandlePlayerMoveState implements GameState {
         }
         
         while (tilesMoved < tilesToMove && !stopTileEncountered) {
+            tilesMoved++;
             // Go forward
             BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();         
             
@@ -130,7 +131,7 @@ public class HandlePlayerMoveState implements GameState {
 
                 stopTileEncountered = (currentTile.getGameBoardTileType() == GameBoardTileTypes.Stop);
 
-                if (!stopTileEncountered) {
+                if (tilesMoved < tilesToMove && !stopTileEncountered) {
                     // Perform actions if the tile requires action when passed over
                     performUpdateIfPassingOverTile(currentTile, gameLogic);
                 }
@@ -139,7 +140,6 @@ public class HandlePlayerMoveState implements GameState {
                 // Must initiate retirement procedure
                 System.out.println("No spaces remaining ahead"); //TODO this should now be unreachable
             }
-            tilesMoved++;
         }
         System.out.println("Landed on a " + currentTile.getGameBoardTileType() + " tile."); //TODO remove
         return currentTile;
