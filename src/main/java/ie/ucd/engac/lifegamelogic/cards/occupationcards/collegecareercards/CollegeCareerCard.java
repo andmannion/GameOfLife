@@ -60,11 +60,11 @@ public class CollegeCareerCard extends OccupationCard implements Chooseable {
 	@Override
 	public String displayChoiceDetails() {
 		String string = "";
-		string = string.concat("Type: " + occupationCardType);
-		string = string.concat(" Subtype: " + collegeCareerType.toString());
-		string = string.concat(" Salary: " + salary);
-		string = string.concat(" Bonus payout: " + bonusPaymentAmount);
-		string = string.concat(" Bonus number: " + bonusNumber);
+		string = string.concat("Type: " + occupationCardType + "\n");
+		string = string.concat(" Subtype: " + collegeCareerType.toString() + "\n");
+		string = string.concat(" Salary: " + salary + "\n");
+		string = string.concat(" Bonus payout: " + bonusPaymentAmount + "\n");
+		string = string.concat(" Bonus number: " + bonusNumber + "\n");
 		return string;
 	}
 }
