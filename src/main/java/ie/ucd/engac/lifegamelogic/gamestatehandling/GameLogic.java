@@ -79,6 +79,17 @@ public class GameLogic {
         return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
     }
 
+    public void subtractFromCurrentPlayersBalance(int amountToSubtract){
+        subtractFromPlayersBalance(currentPlayerIndex, amountToSubtract);
+    }
+
+    public void subtractFromPlayersBalance(int playerIndex, int amountToSubtract){
+	    Player player = getPlayerByIndex(playerIndex);
+        while (player.getCurrentMoney() - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
+            player.addToBalance(takeOutALoan(player.getPlayerNumber()));
+        }
+    }
+
     private void initialisePlayers(int numPlayers) {
         players = new ArrayList<>();
 

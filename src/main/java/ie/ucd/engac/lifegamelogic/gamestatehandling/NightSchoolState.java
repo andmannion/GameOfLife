@@ -108,7 +108,7 @@ public class NightSchoolState implements GameState {
 	private GameState parseCollegeCareerCardDecision(GameLogic gameLogic, int choiceIndex) {
 		
 		// First option was chosen
-		gameLogic.getCurrentPlayer().subtractFromBalance(GameConfig.night_school_tuition_fees, gameLogic);
+		gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
 		
 		// Assign the correct college career card
 		OccupationCard selectedCollegeCareerCard = (OccupationCard) collegeCareerCardOptions.get(choiceIndex);		
@@ -126,7 +126,7 @@ public class NightSchoolState implements GameState {
 	private GameState parsePendingNightSchoolDecision(GameLogic gameLogic, int choiceIndex) {
 		if(choiceIndex == ATTEND_NIGHT_SCHOOL_INDEX) {
 			// Player wishes to attend night school:			
-			gameLogic.getCurrentPlayer().subtractFromBalance(GameConfig.night_school_tuition_fees, gameLogic);
+			gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
 			
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();			
 			gameLogic.returnOccupationCard(currentOccupationCard);

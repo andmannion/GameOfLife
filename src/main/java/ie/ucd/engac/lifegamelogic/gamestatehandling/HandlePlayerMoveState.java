@@ -243,7 +243,7 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case PayTheBank:
                 PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
-                player.subtractFromBalance(payBank.getValue(), gameLogic); //TODO test
+                gameLogic.subtractFromCurrentPlayersBalance(payBank.getValue()); //TODO test
                 nextActionState = new EndTurnState();
                 break;
             case GetCashFromBank:

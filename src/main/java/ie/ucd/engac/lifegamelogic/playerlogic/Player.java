@@ -71,9 +71,8 @@ public class Player {
 
         int loanRepaymentCost = gameLogic.getTotalOutstandingLoans(playerNumber);
 
-        subtractFromBalance(loanRepaymentCost, gameLogic);
+        gameLogic.subtractFromCurrentPlayersBalance(loanRepaymentCost);
         gameLogic.repayAllLoans(playerNumber);
-        System.out.println("retire $" + currentMoney); //TODO remove
         return getCurrentMoney();
 	}
 
@@ -125,13 +124,7 @@ public class Player {
 		currentMoney += amountToAdd;
 	}
 	
-	/* TODO: Should return type be boolean to signal if a loan is required, as the amount to be subtracted would
-	* send the balance negative?
-	*/
-	public void subtractFromBalance(int amountToSubtract, GameLogic gameLogic) {
-	   while (currentMoney - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
-           addToBalance(gameLogic.takeOutALoan(playerNumber));
-        }
+	public void subtractFromBalance(int amountToSubtract) {
 	    currentMoney -= amountToSubtract;
 	}
 

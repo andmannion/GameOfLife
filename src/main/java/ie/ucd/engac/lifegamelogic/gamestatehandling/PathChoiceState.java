@@ -37,7 +37,7 @@ public class PathChoiceState implements GameState {
 			// Must set the path choice for the current player based on what was returned
 			if (pathChoiceResponse == OccupationCardTypes.CollegeCareer) {
 				gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.CollegeCareer);
-				gameLogic.getCurrentPlayer().subtractFromBalance(GameConfig.college_upfront_cost, gameLogic);
+				gameLogic.subtractFromCurrentPlayersBalance(GameConfig.college_upfront_cost);
 						
 				// Must move the player to the CollegeCareer path
 				gameLogic.movePlayerToInitialCollegeCareerPath(gameLogic.getCurrentPlayerIndex());

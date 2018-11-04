@@ -118,7 +118,7 @@ public class HouseChoiceState implements GameState {
             nextState = null;
         }
         else {
-            player.subtractFromBalance(housePrice, gameLogic);
+            gameLogic.subtractFromCurrentPlayersBalance(housePrice);
 
             gameLogic.getCurrentPlayer().addHouseCard(chosenCard);
 
