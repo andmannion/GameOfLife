@@ -48,7 +48,7 @@ public class PickPlayerState implements GameState {
                 playerIndex = choiceIndex + 1;
             }
             gameLogic.getCurrentPlayer().addToBalance(amount);
-            gameLogic.getPlayerByIndex(playerIndex).subtractFromBalance(amount, gameLogic);
+            gameLogic.subtractFromPlayersBalance(playerIndex,amount);
             nextState = new EndTurnState();
         }
         return nextState;

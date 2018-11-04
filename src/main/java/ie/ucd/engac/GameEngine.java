@@ -10,12 +10,11 @@ import ie.ucd.engac.ui.GameUI;
 import javax.swing.*;
 import java.awt.*;
 
-@SuppressWarnings("ALL")
-public class GameEngine implements Runnable {
 
-	public static final String LOGIC_BOARD_CONFIG_FILE_LOCATION = "src/main/resources/LogicGameBoard/GameBoardConfig.json";
-    private static final int PANWIDTH = 1280; //TODO what is the best way to manage the window size?
-    private static final int PANHEIGHT = 720; //TODO make this work on computers that have window borders
+public class GameEngine implements Runnable {
+    private int panelWidth = GameConfig.panelWidth; //TODO what is the best way to manage the window size?
+    private int panelHeight = GameConfig.panelHeight; //TODO make this work on computers that have window borders
+
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -43,7 +42,7 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-        LogicGameBoard logicGameBoard = new LogicGameBoard(LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard logicGameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         
         MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);
@@ -73,7 +72,7 @@ public class GameEngine implements Runnable {
      * @return  integer height of the panel.
      */
     public int getPanelHeight() {
-        return PANHEIGHT;
+        return panelHeight;
     } // end of getPanelHeight()
 
     /**
@@ -81,7 +80,7 @@ public class GameEngine implements Runnable {
      * @return  integer width of the panel.
      */
     public int getPanelWidth() {
-        return PANWIDTH;
+        return panelWidth;
     } // end of getPanelWidth()
 
 
@@ -136,7 +135,7 @@ public class GameEngine implements Runnable {
      */
     private void renderPanel(){
         if (backBuffer == null){ //cannot do this in constructor, must do it here each time
-            backBuffer = renderTarget.createImage(PANWIDTH, PANHEIGHT);
+            backBuffer = renderTarget.createImage(panelWidth, panelHeight);
             if (backBuffer == null) { //if create image somehow failed
                 System.err.println("image null");
                 return;
@@ -145,7 +144,7 @@ public class GameEngine implements Runnable {
                 graphics = backBuffer.getGraphics();
         }
         graphics.setColor(Color.lightGray);
-        graphics.fillRect (0, 0, PANWIDTH, PANHEIGHT);
+        graphics.fillRect (0, 0, panelWidth, panelHeight);
 
         gameUI.draw(graphics);
     } // end of renderPanel()

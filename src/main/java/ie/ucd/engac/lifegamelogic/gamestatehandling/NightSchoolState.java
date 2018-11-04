@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
@@ -21,8 +22,6 @@ public class NightSchoolState implements GameState {
 	
 	private final String ATTEND_NIGHT_SCHOOL_MSG = "Attend night school";
 	public static final int ATTEND_NIGHT_SCHOOL_INDEX = 1;
-	
-	public static final int NIGHT_SCHOOL_TUITION_FEES = 100000;
 	
 	private ArrayList<Card> collegeCareerCardOptions; 
 	private boolean pendingCollegeCareerCardDecision = false;
@@ -109,7 +108,7 @@ public class NightSchoolState implements GameState {
 	private GameState parseCollegeCareerCardDecision(GameLogic gameLogic, int choiceIndex) {
 		
 		// First option was chosen
-		gameLogic.getCurrentPlayer().subtractFromBalance(NIGHT_SCHOOL_TUITION_FEES, gameLogic);
+		gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
 		
 		// Assign the correct college career card
 		OccupationCard selectedCollegeCareerCard = (OccupationCard) collegeCareerCardOptions.get(choiceIndex);		
@@ -127,7 +126,7 @@ public class NightSchoolState implements GameState {
 	private GameState parsePendingNightSchoolDecision(GameLogic gameLogic, int choiceIndex) {
 		if(choiceIndex == ATTEND_NIGHT_SCHOOL_INDEX) {
 			// Player wishes to attend night school:			
-			gameLogic.getCurrentPlayer().subtractFromBalance(NIGHT_SCHOOL_TUITION_FEES, gameLogic);
+			gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
 			
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();			
 			gameLogic.returnOccupationCard(currentOccupationCard);

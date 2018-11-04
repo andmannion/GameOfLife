@@ -1,5 +1,6 @@
 package ie.ucd.engac.lifegamelogic.banklogic;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.*;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
@@ -8,13 +9,6 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 
 public class Bank {
-	private static final String HOUSE_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/HouseCardConfig.json";
-	private static final String CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CareerCardConfig.json";
-	private static final String COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION = "src/main/resources/CardDecks/CollegeCareerCardConfig.json";
-
-	private static final int LOAN_AMOUNT = 50000;
-	private static final int REPAYMENT_AMOUNT = 60000;
-
 	private ActionCardDeck actionCardDeck;
 	private HouseCardDeck houseCardDeck;
 	private OccupationCardDeck careerCardDeck;
@@ -34,9 +28,9 @@ public class Bank {
 		actionCardDeck = new ActionCardDeck();
 		actionCardDeck.shuffle();	
 		
-		String houseCardDeckConfigString = FileUtilities.GetEntireContentsAsString(HOUSE_CARD_DECK_CONFIG_FILE_LOCATION);
-		String careerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(CAREER_CARD_DECK_CONFIG_FILE_LOCATION);
-		String collegeCareerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION);
+		String houseCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.house_card_deck_config_file_location);
+		String careerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.career_card_deck_config_file_location);
+		String collegeCareerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.college_career_card_deck_config_file_location);
 
 		houseCardDeck = new HouseCardDeck(houseCardDeckConfigString);
 		houseCardDeck.shuffle();
@@ -51,9 +45,9 @@ public class Bank {
 	}
 
 	public int takeOutALoan(int playerIndex){
-        extractMoney(LOAN_AMOUNT);
-        bankLoanBook.addBorrowerLoan(playerIndex, LOAN_AMOUNT, REPAYMENT_AMOUNT);
-        return LOAN_AMOUNT;
+        extractMoney(GameConfig.loan_amount);
+        bankLoanBook.addBorrowerLoan(playerIndex, GameConfig.loan_amount, GameConfig.repayment_amount);
+        return GameConfig.loan_amount;
     }
 
 	public void repayAllLoans(int playerIndex){

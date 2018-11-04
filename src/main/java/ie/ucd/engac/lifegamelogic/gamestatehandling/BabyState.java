@@ -6,7 +6,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class BabyState implements GameState {
-	private final String BABY_EVENT_MESSAGE = "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3."; 
+	private final String BABY_EVENT_MESSAGE = "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
 	
 	
 	@Override

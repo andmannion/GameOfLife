@@ -1,5 +1,6 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -8,8 +9,6 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class GetMarriedState implements GameState {
-	public static final int GET_MARRIED_EVEN_PAYMENT = 50000;
-	public static final int GET_MARRIED_ODD_PAYMENT = 100000;
 	
 	private int playersLeftToSpin;
 	private int playerGettingMarriedIndex;
@@ -50,14 +49,14 @@ public class GetMarriedState implements GameState {
 			//compute payment
 			if(spinResult % 2 == 0) {
 				// Current spinner must give the player getting married 100K
-                getMarriedPayment = GET_MARRIED_EVEN_PAYMENT;
+                getMarriedPayment = GameConfig.get_married_even_payment;
 			}
 			else {
-                getMarriedPayment = GET_MARRIED_ODD_PAYMENT;
+                getMarriedPayment = GameConfig.get_married_odd_payment;
 			}
 
 			//make payment
-            gameLogic.getPlayerByIndex(playerToSpinIndex).subtractFromBalance(getMarriedPayment, gameLogic);
+            gameLogic.subtractFromPlayersBalance(playerToSpinIndex,getMarriedPayment);
             gameLogic.getCurrentPlayer().addToBalance(getMarriedPayment);
 
             playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();

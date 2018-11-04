@@ -2,16 +2,14 @@ package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
-import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class Player {
-
-	public static final int STARTING_MONEY = 200000;
 
     private int playerNumber;
     private int numberOfDependants; // This doesn't include partner
@@ -41,7 +39,7 @@ public class Player {
 		this.playerColour = PlayerColour.fromInt(playerNumber);
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
-		currentMoney = STARTING_MONEY;
+		currentMoney = GameConfig.starting_money;
 
 		pendingBoardForkChoice = null;
 		movesRemaining = 0;
@@ -55,6 +53,7 @@ public class Player {
         return playerColour;
     }
 
+<<<<<<< HEAD
     public int retirePlayer(int numberOfRetirees, GameLogic gameLogic){ //bank hashmap uses number, not index
         final int THOUSAND = 1000;
         /*
@@ -77,9 +76,18 @@ public class Player {
         gameLogic.repayAllLoans(playerNumber);
         return getCurrentMoney();
 	}
+=======
+    //Retirement related
+    public int computeRetirementBonuses(int numberOfRetirees){
+        int retirementBonus = (GameConfig.max_num_players -numberOfRetirees)*100*1000; //TODO refactor?
+        int actionCardBonus = getNumberOfActionCards()*100*1000;
+        int childrenBonus = getNumberOfChildren()*50*1000;
+        return retirementBonus + actionCardBonus + childrenBonus;
+    }
+>>>>>>> dev
 
     //Location related
-	public BoardLocation getCurrentLocation() {
+    public BoardLocation getCurrentLocation() {
 		return currentBoardLocation;
 	}
 	
@@ -126,13 +134,7 @@ public class Player {
 		currentMoney += amountToAdd;
 	}
 	
-	/* TODO: Should return type be boolean to signal if a loan is required, as the amount to be subtracted would
-	* send the balance negative?
-	*/
-	public void subtractFromBalance(int amountToSubtract, GameLogic gameLogic) {
-	   while (currentMoney - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
-           addToBalance(gameLogic.takeOutALoan(playerNumber));
-        }
+	public void subtractFromBalance(int amountToSubtract) {
 	    currentMoney -= amountToSubtract;
 	}
 

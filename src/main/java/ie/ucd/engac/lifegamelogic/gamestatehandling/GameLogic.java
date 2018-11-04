@@ -2,8 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.Spinnable;
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
@@ -19,7 +19,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class GameLogic {
-    public static final int MAX_NUM_PLAYERS = 4;
 	private Bank bank;
 	private Spinnable spinner;
 	private ArrayList<Player> players;
@@ -78,6 +77,17 @@ public class GameLogic {
         int numActionCards = player.getActionCards().size();
 
         return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
+    }
+
+    public void subtractFromCurrentPlayersBalance(int amountToSubtract){
+        subtractFromPlayersBalance(currentPlayerIndex, amountToSubtract);
+    }
+
+    public void subtractFromPlayersBalance(int playerIndex, int amountToSubtract){
+	    Player player = getPlayerByIndex(playerIndex);
+        while (player.getCurrentMoney() - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
+            player.addToBalance(takeOutALoan(player.getPlayerNumber()));
+        }
     }
 
     private void initialisePlayers(int numPlayers) {
@@ -141,9 +151,16 @@ public class GameLogic {
     // Retirement related
     public int retireCurrentPlayer(){
 	    Player playerToRetire = players.remove(currentPlayerIndex);
-	    int retirementCash = playerToRetire.retirePlayer(getNumberOfRetiredPlayers(),this);
+
+        int retirementBonus = playerToRetire.computeRetirementBonuses(getNumberOfRetiredPlayers());
+        playerToRetire.addToBalance(retirementBonus);
+
+        int loanRepaymentCost = getTotalOutstandingLoans(playerToRetire.getPlayerNumber());
+        subtractFromCurrentPlayersBalance(loanRepaymentCost);
+        repayAllLoans(playerToRetire.getPlayerNumber());
+
 	    retiredPlayers.add(playerToRetire);
-	    return retirementCash;
+	    return playerToRetire.getCurrentMoney();
     }
 
     private int getNumberOfRetiredPlayers(){
@@ -248,4 +265,6 @@ public class GameLogic {
     public void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
+
+
 }

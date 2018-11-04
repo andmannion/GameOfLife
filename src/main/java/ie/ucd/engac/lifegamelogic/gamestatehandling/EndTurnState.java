@@ -4,7 +4,6 @@ import ie.ucd.engac.messaging.AckRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class EndTurnState implements GameState {
 
     private String eventMessage;

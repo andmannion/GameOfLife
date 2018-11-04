@@ -3,6 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -10,7 +11,6 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class SpinToWinGetWinnerState implements GameState {
-	private static final int SPIN_TO_WIN_PRIZE_MONEY = 200000;
 	private static final int SPIN_TO_WIN_PRIZE_NOT_WON = -1;
 	
 	private final HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap;
@@ -82,6 +82,6 @@ public class SpinToWinGetWinnerState implements GameState {
 	}
 	
 	private void assignSpinToWinPrize(GameLogic gameLogic, int winningPlayerIndex) {
-		gameLogic.getPlayerByIndex(winningPlayerIndex).addToBalance(SPIN_TO_WIN_PRIZE_MONEY);
+		gameLogic.getPlayerByIndex(winningPlayerIndex).addToBalance(GameConfig.spin_to_win_prize_money);
 	}
 }
