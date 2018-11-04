@@ -32,7 +32,7 @@ public class GetMarriedState implements GameState {
 		
 		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic),
+		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
 																 eventMsg);
 		gameLogic.setResponseMessage(responseMessage);
@@ -79,7 +79,7 @@ public class GetMarriedState implements GameState {
 			else {
 				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 				
-				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic),
+				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 						 gameLogic.getCurrentPlayer().getPlayerNumber(),
 						 eventMsg);
 				gameLogic.setResponseMessage(responseMessage);

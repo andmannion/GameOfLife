@@ -13,8 +13,10 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class GameLogic {
     public static final int MAX_NUM_PLAYERS = 4;
@@ -60,6 +62,24 @@ public class GameLogic {
 	}
 
 	// Player related
+
+    public ShadowPlayer getShadowPlayer(int playerIndex){
+	    Player player = getPlayerByIndex(playerIndex);
+
+	    int playerNumber = player.getPlayerNumber();
+        PlayerColour playerColour = player.getPlayerColour();
+        int martialStatus = player.getMaritalStatus().toInt();
+        int numberOfDependants = player.getNumberOfDependants();
+        OccupationCard occupationCard = player.getOccupationCard();
+        ArrayList<HouseCard> houseCards = player.getHouseCards();
+        int numLoans = player.getNumberOfLoans(this);
+        int loans = player.getTotalLoansOutstanding(this);
+        int currentMoney = player.getCurrentMoney();
+        int numActionCards = player.getActionCards().size();
+
+        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
+    }
+
     private void initialisePlayers(int numPlayers) {
         players = new ArrayList<>();
 

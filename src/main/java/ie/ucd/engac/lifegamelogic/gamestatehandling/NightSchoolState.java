@@ -117,7 +117,7 @@ public class NightSchoolState implements GameState {
 		
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic),
+		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 																 gameLogic.getCurrentPlayer().getPlayerNumber(),
 																 eventMsg);			
 		gameLogic.setResponseMessage(responseMessage);			
