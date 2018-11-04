@@ -15,7 +15,6 @@ import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTyp
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class HandlePlayerMoveState implements GameState {

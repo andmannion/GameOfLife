@@ -391,7 +391,6 @@ class HouseChoiceStateTest {
         assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType());
         //card should be sold so do the maths
         int houseSalePrice = houseCard.getSpinForSalePrice(true); //true for odd (we have spinner that only returns 1
-        System.out.println(houseCard.getHouseType());
         int playerEndMoney = playerInitMoney-houseCost+houseSalePrice;
 
         //check the player has the correct money and no housecard

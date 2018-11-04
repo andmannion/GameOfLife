@@ -26,7 +26,6 @@ public class TestHelpers {
         responseMessage = gameLogic.handleInput(initialMessage);
 
         while (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
-            System.out.println(gameLogic.getNumberOfUninitialisedPlayers() + " Players remaining");
             assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
 
             //choose a path for this player
@@ -54,8 +53,6 @@ public class TestHelpers {
         //set object to use the function spinner
         gameLogic.setSpinner(spinner);
 
-        System.out.println("Set up initial conditions");
-        System.out.println("-------------------------");
         return gameLogic;
     }
 }
