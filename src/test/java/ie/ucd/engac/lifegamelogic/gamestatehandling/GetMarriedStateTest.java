@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import TestOnly.TestHelpers;
@@ -56,17 +57,17 @@ class GetMarriedStateTest {
         */
         int currentBalance = gameLogic.getCurrentPlayer().getCurrentMoney();
         
-        if(currentBalance == playerUnderTestInitialBalance + GetMarriedState.GET_MARRIED_EVEN_PAYMENT) {
+        if(currentBalance == playerUnderTestInitialBalance + GameConfig.get_married_even_payment) {
         	// Ensure the other player's balance was decremented by the same amount
         	int marriageGuestCurrentBalance = gameLogic.getPlayerByIndex(1).getCurrentMoney();        	
         	int marriageGuestBalanceDelta = marriageGuestInitialBalance - marriageGuestCurrentBalance;
-        	assertEquals(GetMarriedState.GET_MARRIED_EVEN_PAYMENT, marriageGuestBalanceDelta);
+        	assertEquals(GameConfig.get_married_even_payment, marriageGuestBalanceDelta);
         }
-        else if(currentBalance == playerUnderTestInitialBalance + GetMarriedState.GET_MARRIED_ODD_PAYMENT) {
+        else if(currentBalance == playerUnderTestInitialBalance + GameConfig.get_married_odd_payment) {
         	// Ensure the other player's balance was decremented by the same amount
         	int marriageGuestCurrentBalance = gameLogic.getPlayerByIndex(1).getCurrentMoney();        	
         	int marriageGuestBalanceDelta = marriageGuestInitialBalance - marriageGuestCurrentBalance;
-        	assertEquals(GetMarriedState.GET_MARRIED_ODD_PAYMENT, marriageGuestBalanceDelta);
+        	assertEquals(GameConfig.get_married_odd_payment, marriageGuestBalanceDelta);
         }
         else {
         	int invalidBalanceDelta = currentBalance - playerUnderTestInitialBalance;        	
@@ -78,7 +79,7 @@ class GetMarriedStateTest {
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
 		Spinnable spinner = new TestSpinner(1);	
-		LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
 		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, spinner);
 		
 		return gameLogic;

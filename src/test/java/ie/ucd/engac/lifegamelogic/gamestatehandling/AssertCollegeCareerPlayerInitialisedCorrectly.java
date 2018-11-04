@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import ie.ucd.engac.GameEngine;
@@ -24,7 +25,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		   restricted. */
 		
 		// Set up test
-		LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
 		Spinnable testSpinner = new TestSpinner(1);
 		GameLogic gameLogic = new GameLogic(gameBoard, NUM_PLAYERS, testSpinner);
 		
@@ -38,7 +39,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		assertEquals(gameLogic.getPlayerByIndex(0).getHouseCards().size(), 0);
 		assertEquals(gameLogic.getPlayerByIndex(0).getMaritalStatus(), MaritalStatus.Single);
 		assertEquals(gameLogic.getPlayerByIndex(0).getMovesRemaining(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), Player.STARTING_MONEY);		
+		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
 		
 		// Mock messages to logic, performing pathChoiceState functionality
 		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);		
@@ -56,7 +57,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		// Assert that player 0 has been initialised correctly
 		assertEquals(gameLogic.getNumberOfUninitialisedPlayers(), NUM_PLAYERS - 1);
 		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentLocation().getLocation(), "f");
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), Player.STARTING_MONEY - PathChoiceState.COLLEGE_UPFRONT_COST);
+		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money - GameConfig.college_upfront_cost);
 		assertEquals(gameLogic.getPlayerByIndex(0).getCareerPath(), CareerPathTypes.CollegeCareer);
 	}
 }

@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import TestOnly.TestHelpers;
@@ -55,7 +56,7 @@ class NightSchoolStateTest {
         // Assert that night school fees have been deducted from the current player's balance
         int balanceDelta = initialBalance - currentPlayerUnderTest.getCurrentMoney();
         
-        assertEquals(NightSchoolState.NIGHT_SCHOOL_TUITION_FEES, balanceDelta);
+        assertEquals(GameConfig.night_school_tuition_fees, balanceDelta);
         
         // Assert that the player gets another turn to spin
         assertEquals(1, gameLogic.getCurrentPlayer().getPlayerNumber());
@@ -77,7 +78,7 @@ class NightSchoolStateTest {
 		int FIRST_COLLEGE_CAREER_CARD_CHOICE = 0;
 		
 		Spinnable spinner = new TestSpinner(1);	
-		LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
 		
 		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, spinner);		
 		gameLogic.getCurrentPlayer().setCurrentLocation(new BoardLocation(PRIOR_TO_GRADUATE_TILE_LOCATION));

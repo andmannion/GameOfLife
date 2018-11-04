@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import TestOnly.TestHelpers;
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
@@ -29,7 +30,7 @@ class HouseChoiceStateTest {
     @Test
     void testNoAction() {
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(1);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 
@@ -146,7 +147,7 @@ class HouseChoiceStateTest {
     void testHousePurchaseLoanOptNo(){
         //PART 3 - CHOOSING A HOUSE, CANNOT AFFORD, NO LOAN
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(1);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 
@@ -159,7 +160,7 @@ class HouseChoiceStateTest {
 
         //ensure player cannot afford the house
         Player player = gameLogic.getCurrentPlayer();
-        player.subtractFromBalance(player.getCurrentMoney()-1, gameLogic);
+        gameLogic.subtractFromCurrentPlayersBalance(player.getCurrentMoney()-1);
 
         // Assert preconditions
         int playerInitMoney = player.getCurrentMoney();
@@ -216,7 +217,7 @@ class HouseChoiceStateTest {
     void testHousePurchaseLoanOptYes(){
         //PART 3 - CHOOSING A HOUSE, CANNOT AFFORD, TAKE OUT LOAN
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(1);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 
@@ -228,8 +229,7 @@ class HouseChoiceStateTest {
 
         //ensure player cannot afford the house
         Player player = gameLogic.getCurrentPlayer();
-        int setBalanceToOne = player.getCurrentMoney()-1;
-        player.subtractFromBalance(setBalanceToOne, gameLogic);
+        gameLogic.subtractFromCurrentPlayersBalance(player.getCurrentMoney()-1);
 
         // Assert preconditions
         int playerInitMoney = player.getCurrentMoney();
@@ -293,7 +293,7 @@ class HouseChoiceStateTest {
     //TODO many duplicate lines of code here
     void testHousePurchaseNoLoanAndSale(){
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(1);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 

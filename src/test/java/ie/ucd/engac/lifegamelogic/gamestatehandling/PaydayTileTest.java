@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import TestOnly.TestHelpers;
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
@@ -27,7 +28,7 @@ class PaydayTileTest {
 
     @Test
     void testPassingOver() {
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(2);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 
@@ -64,7 +65,7 @@ class PaydayTileTest {
 
     @Test
     void testLandingOn() {
-        LogicGameBoard gameBoard = new LogicGameBoard(GameEngine.LOGIC_BOARD_CONFIG_FILE_LOCATION);
+        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
         Spinnable testSpinner = new TestSpinner(1);
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
 
