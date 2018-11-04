@@ -56,7 +56,7 @@ public class ProcessStandardCareerState implements GameState {
 			// Need to set the reply message to SpinRequest
 			int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
 			String eventMessage = "Player " + playNum + "'s turn.";
-			SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic),playNum, eventMessage);
+			SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic),playNum, eventMessage);
 			gameLogic.setResponseMessage(spinRequestMessage);
 
 			gameLogic.decrementNumberOfUninitialisedPlayers();

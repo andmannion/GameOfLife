@@ -2,7 +2,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
 
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
@@ -36,7 +35,7 @@ public class HandlePlayerMoveState implements GameState {
         if (eventMessage == null){
             eventMessage = "Player " + playNum + "'s turn.";
         }
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), playNum, eventMessage);
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic), playNum, eventMessage);
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
 

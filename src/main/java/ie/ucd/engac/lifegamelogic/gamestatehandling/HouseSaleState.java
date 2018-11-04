@@ -41,7 +41,7 @@ public class HouseSaleState implements GameState { //TODO this entire class
 
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             String eventMessage = "Player " + playNum + ", spin to determine sale price.";
-            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(new ShadowPlayer(gameLogic.getCurrentPlayer(), gameLogic), playNum, eventMessage);
+            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getCurrentPlayer().getShadowPlayer(gameLogic), playNum, eventMessage);
             gameLogic.setResponseMessage(spinRequestMessage);
 
             return null;
