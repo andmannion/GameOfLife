@@ -8,7 +8,6 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
 import ie.ucd.engac.messaging.ShadowPlayer;
-import org.jetbrains.annotations.NotNull;
 
 public class Player {
 

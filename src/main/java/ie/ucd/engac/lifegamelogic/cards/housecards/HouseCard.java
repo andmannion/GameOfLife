@@ -48,8 +48,8 @@ public class HouseCard extends Card implements Chooseable {
 	@Override
 	public String displayChoiceDetails() {
 		String string = "";
-		string = string.concat("Type: " + houseType.toString());
-		string = string.concat(" Cost: " + purchasePrice);
+		string = string.concat("Type: " + houseType.toString() + "\n");
+		string = string.concat(" Cost: " + purchasePrice + "\n");
 		string = string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
 		return string;
 	}
