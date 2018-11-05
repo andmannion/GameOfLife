@@ -2,7 +2,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.cards.Card;
@@ -25,14 +24,11 @@ class HouseChoiceStateTest {
     private final int NUM_PLAYERS = 2;
     private final String PRIOR_TILE_LOCATION = "ak";
     private final String HOUSE_TILE_LOCATION = "al";
-    private final int LOAN_AMOUNT = 50000;
 
     @Test
     void testNoAction() {
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(1);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 
         // Assert preconditions
         OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();
@@ -147,9 +143,7 @@ class HouseChoiceStateTest {
     void testHousePurchaseLoanOptNo(){
         //PART 3 - CHOOSING A HOUSE, CANNOT AFFORD, NO LOAN
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(1);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 
 
         OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();
@@ -217,9 +211,7 @@ class HouseChoiceStateTest {
     void testHousePurchaseLoanOptYes(){
         //PART 3 - CHOOSING A HOUSE, CANNOT AFFORD, TAKE OUT LOAN
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(1);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 
 
         OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();
@@ -274,7 +266,7 @@ class HouseChoiceStateTest {
 
         //calculate players end money
         double potentialDeficit = (double)(houseCost-playerInitMoney);
-        int totalInLoans = (int)(LOAN_AMOUNT*Math.ceil(potentialDeficit/LOAN_AMOUNT));
+        int totalInLoans = (int)(GameConfig.loan_amount*Math.ceil(potentialDeficit/GameConfig.loan_amount));
         int playerEndMoney = playerInitMoney-houseCost+totalInLoans;
 
         //assert correct loan calculation
@@ -293,9 +285,7 @@ class HouseChoiceStateTest {
     //TODO many duplicate lines of code here
     void testHousePurchaseNoLoanAndSale(){
         // Set up test
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(1);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 
 
         OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();

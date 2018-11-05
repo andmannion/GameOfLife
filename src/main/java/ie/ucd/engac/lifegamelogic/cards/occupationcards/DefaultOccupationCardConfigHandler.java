@@ -1,32 +1,27 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
+import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 
 public class DefaultOccupationCardConfigHandler implements CardConfigHandler<OccupationCard> {
-	private String jsonBoardLayout;
-	private JsonElement overallJSONElement;	
+	private JsonElement overallJSONElement;
 
-	public DefaultOccupationCardConfigHandler(String jsonBoardLayout) {
-		this.jsonBoardLayout = jsonBoardLayout;
+	DefaultOccupationCardConfigHandler(String configPath) {
+		this.overallJSONElement = resourceToJson(configPath);
 	}
 
 	@Override
 	public ArrayList<OccupationCard> initialiseCards() {
-		initialiseParser(jsonBoardLayout);
-
 		JsonArray occupationCardsAsJsonArray = overallJSONElement.getAsJsonArray();
 
 		RuntimeTypeAdapterFactory<OccupationCard> occupationCardAdapterFactory = RuntimeTypeAdapterFactory
@@ -45,16 +40,20 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 
 		return occupationCards;
 	}
-	
-	private void initialiseParser(String jsonBoardLayout) {
-		JsonParser parser = new JsonParser();
-		overallJSONElement = null;
+
+	private JsonElement resourceToJson(String path){
+
+		InputStream boardInputStream = Bank.class.getClassLoader().getResourceAsStream(path);
+		JsonStreamParser streamParser = new JsonStreamParser(new InputStreamReader(boardInputStream));
+		JsonElement jsonElement = null;
 
 		try {
-			overallJSONElement = parser.parse(jsonBoardLayout);
+			jsonElement = (JsonElement) streamParser.next();
 		} catch (Exception e) {
-			System.err.println("Exception in OccupationCardConfigHandler....initialiseParser(): \n" + e.toString());
+			System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
+		return jsonElement;
 	}
+
 }

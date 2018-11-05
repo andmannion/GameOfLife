@@ -6,11 +6,9 @@ import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import TestOnly.TestHelpers;
-import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -78,9 +76,8 @@ class GetMarriedStateTest {
 	// TODO: Test this functionality with more than one other player.
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
-		Spinnable spinner = new TestSpinner(1);	
-		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, spinner);
+		Spinnable spinner = new TestSpinner(1);
+		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 		
 		return gameLogic;
 	}

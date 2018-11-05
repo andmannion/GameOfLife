@@ -1,10 +1,8 @@
 package ie.ucd.engac;
 
-import javax.print.DocFlavor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -25,10 +23,11 @@ public class LifeGame implements WindowListener{
      */
     LifeGame() {
         jFrame = new JFrame("Life: The Game");
-        InputStream inputStream = null;
+        InputStream inputStream;
         Properties properties = new Properties();
         try{
-            inputStream = new FileInputStream("src/main/resources/config.properties");
+            inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");//new FileInputStream("src/main/resources/config.properties");
+
             properties.load(inputStream);
             panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
             panelHeight = Integer.parseInt(properties.getProperty("PANHEIGHT"));

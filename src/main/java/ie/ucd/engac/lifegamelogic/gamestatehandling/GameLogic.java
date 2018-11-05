@@ -88,6 +88,7 @@ public class GameLogic {
         while (player.getCurrentMoney() - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
             player.addToBalance(takeOutALoan(player.getPlayerNumber()));
         }
+        player.subtractFromBalance(amountToSubtract);
     }
 
     private void initialisePlayers(int numPlayers) {

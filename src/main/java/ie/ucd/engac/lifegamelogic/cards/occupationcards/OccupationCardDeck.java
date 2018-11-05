@@ -1,19 +1,17 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
+import com.google.gson.JsonElement;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 
 public class OccupationCardDeck extends CardDeck<OccupationCard> {
-	private String configString;
 
-	public OccupationCardDeck(String configString) {
-		this.configString = configString;
-		
-		initialiseCards();
+	public OccupationCardDeck(String configPath) {
+		initialiseCards(configPath);
 	}
 
-	private void initialiseCards() {
-		CardConfigHandler<OccupationCard> occupationCardConfigHandler = new DefaultOccupationCardConfigHandler(configString);
+	private void initialiseCards(String configPath) {
+		CardConfigHandler<OccupationCard> occupationCardConfigHandler = new DefaultOccupationCardConfigHandler(configPath);
 		cards.addAll(occupationCardConfigHandler.initialiseCards());
 	}
 }

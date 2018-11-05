@@ -1,5 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gameboardlogic;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +19,7 @@ public class LogicGameBoard {
 	private Spinner spinningWheel;
 	private String jsonBoardConfigFileLocation;
 	private String jsonBoardConfigFileContent;
+	private InputStream boardInputStream;
 	private JsonElement overallJSONElement;
 
 	public LogicGameBoard(String jsonBoardConfigFileLocation) {
@@ -55,19 +58,21 @@ public class LogicGameBoard {
 	}
 
 	private void initialiseParser() {
-		JsonParser parser = new JsonParser();
-		overallJSONElement = null;
 
-		try {
-			overallJSONElement = (JsonElement) parser.parse(jsonBoardConfigFileContent);
-		} catch (Exception e) {
-			System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
-			System.exit(-1);
-		}
+        JsonStreamParser streamParser = new JsonStreamParser(new InputStreamReader(boardInputStream));
+        overallJSONElement = null;
+
+        try {
+            overallJSONElement = (JsonElement) streamParser.next();
+        } catch (Exception e) {
+            System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
+            System.exit(-1);
+        }
+
 	}
 
 	private void initialiseBoard() {
-		jsonBoardConfigFileContent = FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
+        boardInputStream = LogicGameBoard.class.getClassLoader().getResourceAsStream(jsonBoardConfigFileLocation);//FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
 		
 		initialiseParser();
 		

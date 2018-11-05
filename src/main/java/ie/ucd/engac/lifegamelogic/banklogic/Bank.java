@@ -7,6 +7,10 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
+import com.google.gson.*;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class Bank {
 	private ActionCardDeck actionCardDeck;
@@ -27,16 +31,12 @@ public class Bank {
 		
 		actionCardDeck = new ActionCardDeck();
 		actionCardDeck.shuffle();	
-		
-		String houseCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.house_card_deck_config_file_location);
-		String careerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.career_card_deck_config_file_location);
-		String collegeCareerCardDeckConfigString = FileUtilities.GetEntireContentsAsString(GameConfig.college_career_card_deck_config_file_location);
 
-		houseCardDeck = new HouseCardDeck(houseCardDeckConfigString);
+		houseCardDeck = new HouseCardDeck(GameConfig.house_card_deck_config_file_location);
 		houseCardDeck.shuffle();
-		careerCardDeck = new OccupationCardDeck(careerCardDeckConfigString);
+		careerCardDeck = new OccupationCardDeck(GameConfig.career_card_deck_config_file_location);
 		careerCardDeck.shuffle();
-		collegeCareerCardDeck = new OccupationCardDeck(collegeCareerCardDeckConfigString);
+		collegeCareerCardDeck = new OccupationCardDeck(GameConfig.college_career_card_deck_config_file_location);
 		collegeCareerCardDeck.shuffle();
 	}
 	

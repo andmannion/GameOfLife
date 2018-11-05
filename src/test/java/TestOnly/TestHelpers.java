@@ -1,6 +1,7 @@
 package TestOnly;
 
-import ie.ucd.engac.lifegamelogic.Spinnable;
+import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
@@ -9,12 +10,17 @@ import ie.ucd.engac.lifegamelogic.gamestatehandling.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestHelpers {
-    public static GameLogic setupTestGenericPreconditions(LogicGameBoard gameBoard, int numberOfPlayers, Spinnable spinner){
+    public static GameLogic setupTestGenericPreconditions(int numberOfPlayers, int fixedSpinnerValue){
         //setup object with non functional spinner
-        GameLogic gameLogic = new GameLogic(gameBoard, numberOfPlayers, new TestSpinner(0));
+
+        importGameConfig();
+        GameLogic gameLogic = new GameLogic(new LogicGameBoard(GameConfig.game_board_config_file_location), numberOfPlayers, new TestSpinner(0));
 
         LifeGameMessage initialMessage;
         LifeGameMessage responseMessage;
@@ -51,8 +57,21 @@ public class TestHelpers {
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
 
         //set object to use the function spinner
-        gameLogic.setSpinner(spinner);
+        gameLogic.setSpinner(new TestSpinner(fixedSpinnerValue));
 
         return gameLogic;
+    }
+
+    public static void importGameConfig() {
+            InputStream inputStream;
+            Properties properties = new Properties();
+            try {
+                inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");//new FileInputStream("src/main/resources/config.properties");
+
+                properties.load(inputStream);
+            } catch (Exception exception) {
+                System.err.println("config.properties not found.");
+            }
+            new GameConfig(properties);
     }
 }

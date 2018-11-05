@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		   restricted. */
 		
 		// Set up test
+		TestHelpers.importGameConfig();
 		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
 		Spinnable testSpinner = new TestSpinner(1);
 		GameLogic gameLogic = new GameLogic(gameBoard, NUM_PLAYERS, testSpinner);

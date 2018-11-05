@@ -1,0 +1,84 @@
+	[{
+	 "houseType": "Ranch",
+	 "purchasePrice": "600000",
+	 "spinForSalePriceOddNum": "600000",
+	 "spinForSalePriceEvenNum": "750000"
+	},
+	{
+	 "houseType": "CityPenthouse",
+	 "purchasePrice": "600000",
+	 "spinForSalePriceOddNum": "650000",
+	 "spinForSalePriceEvenNum": "700000"
+	},
+	{
+	 "houseType": "IslandHolidayHome",
+	 "purchasePrice": "600000",
+	 "spinForSalePriceOddNum": "650000",
+	 "spinForSalePriceEvenNum": "800000"
+	},
+	{
+	 "houseType": "DreamVilla",
+	 "purchasePrice": "300000",
+	 "spinForSalePriceOddNum": "250000",
+	 "spinForSalePriceEvenNum": "380000"
+	},
+	{
+	 "houseType": "Farmhouse",
+	 "purchasePrice": "300000",
+	 "spinForSalePriceOddNum": "250000",
+	 "spinForSalePriceEvenNum": "380000"
+	},
+	{
+	 "houseType": "Windmill",
+	 "purchasePrice": "350000",
+	 "spinForSalePriceOddNum": "300000",
+	 "spinForSalePriceEvenNum": "500000"
+	},
+	{
+	 "houseType": "FamilyHouse",
+	 "purchasePrice": "250000",
+	 "spinForSalePriceOddNum": "200000",
+	 "spinForSalePriceEvenNum": "300000"
+	},
+	{
+	 "houseType": "LuxuryFlat",
+	 "purchasePrice": "250000",
+	 "spinForSalePriceOddNum": "200000",
+	 "spinForSalePriceEvenNum": "300000"
+	},
+	{
+	 "houseType": "EcoHouse",
+	 "purchasePrice": "200000",
+	 "spinForSalePriceOddNum": "180000",
+	 "spinForSalePriceEvenNum": "300000"
+	},
+	{
+	 "houseType": "StudioFlat",
+	 "purchasePrice": "100000",
+	 "spinForSalePriceOddNum": "80000",
+	 "spinForSalePriceEvenNum": "150000"
+	},
+	{
+	 "houseType": "HouseBoat",
+	 "purchasePrice": "200000",
+	 "spinForSalePriceOddNum": "180000",
+	 "spinForSalePriceEvenNum": "300000"
+	},
+	{
+	 "houseType": "Teepee",
+	 "purchasePrice": "100000",
+	 "spinForSalePriceOddNum": "80000",
+	 "spinForSalePriceEvenNum": "150000"
+	},
+	{
+	 "houseType": "CozyCottage",
+	 "purchasePrice": "150000",
+	 "spinForSalePriceOddNum": "120000",
+	 "spinForSalePriceEvenNum": "200000"
+	},
+	{
+	 "houseType": "BeachHut",
+	 "purchasePrice": "100000",
+	 "spinForSalePriceOddNum": "80000",
+	 "spinForSalePriceEvenNum": "150000"
+	}]

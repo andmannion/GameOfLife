@@ -2,12 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.lifegamelogic.Spinnable;
-import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -24,21 +20,20 @@ class PaydayTileTest {
     private final static String PRIOR_TILE_LOCATION = "aag";
     private final static String ONE_TILES_AHEAD = "aah";
     private final static String TWO_TILES_AHEAD = "aai";
-    private final static int PAYDAY_LANDED_ON_BONUS = 100000;
 
     @Test
     void testPassingOver() {
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(2);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 2);
 
         // Assert preconditions
         OccupationCard occupationCard = gameLogic.getTopCollegeCareerCard();
         int numberOfActionCards = gameLogic.getPlayerByIndex(0).getNumberOfActionCards();
+        int numberOfHouseCards = gameLogic.getPlayerByIndex(0).getNumberOfHouseCards();
         CareerPathTypes careerPath = gameLogic.getPlayerByIndex(0).getCareerPath();
         MaritalStatus maritalStatus = gameLogic.getPlayerByIndex(0).getMaritalStatus();
 
         Player player = gameLogic.getCurrentPlayer();
+
         int playerInitMoney = player.getCurrentMoney();
 
         player.setOccupationCard(occupationCard);
@@ -46,7 +41,7 @@ class PaydayTileTest {
         int playerSalary = player.getOccupationCard().getSalary();
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
-        // Mock messages to logic, performing pathChoiceState functionality
+        // Mock messages to logic, performing turn functionality
         LifeGameMessage initialMessage = new SpinResponseMessage();
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -54,6 +49,7 @@ class PaydayTileTest {
 
         assertEquals(playerInitMoney+playerSalary, player.getCurrentMoney());
 
+        assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
         assertEquals(TWO_TILES_AHEAD, gameLogic.getPlayerByIndex(0).getCurrentLocation().getLocation());
@@ -65,13 +61,14 @@ class PaydayTileTest {
 
     @Test
     void testLandingOn() {
-        LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-        Spinnable testSpinner = new TestSpinner(1);
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, testSpinner);
+
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
+
 
         // Assert preconditions
         OccupationCard occupationCard = gameLogic.getTopCollegeCareerCard();
         int numberOfActionCards = gameLogic.getPlayerByIndex(0).getNumberOfActionCards();
+        int numberOfHouseCards = gameLogic.getPlayerByIndex(0).getNumberOfHouseCards();
         CareerPathTypes careerPath = gameLogic.getPlayerByIndex(0).getCareerPath();
         MaritalStatus maritalStatus = gameLogic.getPlayerByIndex(0).getMaritalStatus();
 
@@ -83,15 +80,16 @@ class PaydayTileTest {
         int playerSalary = player.getOccupationCard().getSalary();
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
-        // Mock messages to logic, performing pathChoiceState functionality
+        // Mock messages to logic, performing turn functionality
         LifeGameMessage initialMessage = new SpinResponseMessage();
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
-        assertEquals(playerInitMoney+playerSalary+PAYDAY_LANDED_ON_BONUS, player.getCurrentMoney());
+        assertEquals(playerInitMoney+playerSalary+GameConfig.payday_landed_on_bonus, player.getCurrentMoney());
 
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
+        assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
         assertEquals(ONE_TILES_AHEAD, gameLogic.getPlayerByIndex(0).getCurrentLocation().getLocation());
         assertNull(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice());

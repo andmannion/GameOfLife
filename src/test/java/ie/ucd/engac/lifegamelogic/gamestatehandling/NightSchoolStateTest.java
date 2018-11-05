@@ -6,14 +6,9 @@ import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import TestOnly.TestHelpers;
-import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.lifegamelogic.Spinnable;
-import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.AckRequestMessage;
 import ie.ucd.engac.messaging.AckResponseMessage;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -76,11 +71,10 @@ class NightSchoolStateTest {
 	private static GameLogic configureNightSchoolStateTestGameLogic() {
 		String PRIOR_TO_GRADUATE_TILE_LOCATION = "o";
 		int FIRST_COLLEGE_CAREER_CARD_CHOICE = 0;
-		
-		Spinnable spinner = new TestSpinner(1);	
-		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
-		
-		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(gameBoard, NUM_PLAYERS, spinner);		
+
+
+		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
+
 		gameLogic.getCurrentPlayer().setCurrentLocation(new BoardLocation(PRIOR_TO_GRADUATE_TILE_LOCATION));
 		
 		LifeGameMessage messageToLogic = new SpinResponseMessage();
