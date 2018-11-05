@@ -13,12 +13,11 @@ import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class NightSchoolState implements GameState {
 	private final String KEEP_CAREER_MSG = "Keep your current career";
-	private static final int KEEP_CAREER_INDEX = 0;
+	public static final int KEEP_CAREER_INDEX = 0;
 	
 	private final String ATTEND_NIGHT_SCHOOL_MSG = "Attend night school";
 	public static final int ATTEND_NIGHT_SCHOOL_INDEX = 1;
@@ -145,7 +144,7 @@ public class NightSchoolState implements GameState {
 		// Send same message either way
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again."; // TODO: How to display this?
 				
-		return new HandlePlayerMoveState();
+		return new HandlePlayerMoveState(eventMsg);
 	}
     
 	static LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, 
