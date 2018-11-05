@@ -64,8 +64,8 @@ class NightSchoolStateTest {
         assertEquals(NIGHT_SCHOOL_INITIAL_TILE, currentPlayerUnderTest.getCurrentLocation().getLocation());
 	}
 	
+	@Test
 	void testNotAttendingNightSchool() {
-		//fail("Not implemented");
 		GameLogic gameLogic = configureNightSchoolStateTestGameLogic();
 		
 		Player currentPlayerUnderTest = gameLogic.getCurrentPlayer();
