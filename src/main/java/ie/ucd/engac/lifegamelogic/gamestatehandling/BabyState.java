@@ -23,7 +23,7 @@ public class BabyState implements GameState {
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
-			int spinResult = Spinner.spinWheel();			
+			int spinResult = gameLogic.getSpinner().spinTheWheel();
             return handleSpinForBabyState(gameLogic, spinResult);			
 		}
 

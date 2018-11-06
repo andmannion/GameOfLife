@@ -9,12 +9,9 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinResponseMessage;
-import org.jetbrains.annotations.TestOnly;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class BabyTileTest {
     private static int NUM_PLAYERS = 2;
@@ -38,13 +35,22 @@ public class BabyTileTest {
 
     @Test
     void testBabyStopTile(){
-        String priorTileLocation = "aay";
-        String endTileLocation = "aaz";
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 2);
-        testBabyStopTile(gameLogic, priorTileLocation, endTileLocation);
-        gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 2);
+        String priorTileLocation = "aax";
+        String endTileLocation = "aay";
+        int expectedDependants;
+        double divVal;
+        for (int inc = 1;inc<=10;inc++) {
+            if(inc <= 6) {
+                divVal = 3.1; //maps 1-3 -> 0, 4-6 -> 1
+            }
+            else {
+                divVal = 3; //maps 7-8-> 2, 9-10 -> 3
+            }
+            GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, inc);
+            expectedDependants = (int)Math.floor(((double)inc)/divVal);
+            testBabyStopTile(gameLogic, priorTileLocation, endTileLocation, expectedDependants);
+        }
     }
-
 
     private void testNStandardTile(GameLogic gameLogic, String priorTileLocation, String endTileLocation,
                                    int numDependantsToAdd){
@@ -80,7 +86,7 @@ public class BabyTileTest {
         assertEquals(playerMoney, gameLogic.getPlayerByIndex(0).getCurrentMoney());
     }
 
-    private void testBabyStopTile(GameLogic gameLogic, String priorTileLocation, String endTileLocation){
+    private void testBabyStopTile(GameLogic gameLogic, String priorTileLocation, String endTileLocation, int expectedDependants){
         // Assert preconditions
         OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();
         int numberOfActionCards = gameLogic.getPlayerByIndex(0).getNumberOfActionCards();
@@ -99,12 +105,13 @@ public class BabyTileTest {
 
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
 
+        initialMessage = new SpinResponseMessage();
+        responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
-        fail();
-
-
-        assertEquals(numberOfDependants+0, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
+        //check that the correct number of kids has been added
+        assertEquals(numberOfDependants+expectedDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
