@@ -63,7 +63,8 @@ class NightSchoolStateTest {
         // Assert that the player has been moved to the night school board path
         assertEquals(NIGHT_SCHOOL_INITIAL_TILE, currentPlayerUnderTest.getCurrentLocation().getLocation());
 	}
-	
+
+	@Test
 	void testNotAttendingNightSchool() {
 		//fail("Not implemented");
 		GameLogic gameLogic = configureNightSchoolStateTestGameLogic();
