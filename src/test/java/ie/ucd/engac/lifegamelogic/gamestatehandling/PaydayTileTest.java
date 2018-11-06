@@ -23,7 +23,8 @@ class PaydayTileTest {
 
     @Test
     void testPassingOver() {
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 2);
+        int fixedSpinnerValue = 2;
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, fixedSpinnerValue);
 
         // Assert preconditions
         OccupationCard occupationCard = gameLogic.getTopCollegeCareerCard();
@@ -38,6 +39,7 @@ class PaydayTileTest {
 
         player.setOccupationCard(occupationCard);
 
+        int playerBonusNumber = occupationCard.getBonusNumber();
         int playerSalary = player.getOccupationCard().getSalary();
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
@@ -47,7 +49,16 @@ class PaydayTileTest {
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
-        assertEquals(playerInitMoney+playerSalary, player.getCurrentMoney());
+        int expectedBalance;
+        if (playerBonusNumber == fixedSpinnerValue){
+            expectedBalance = playerInitMoney+playerSalary+occupationCard.getBonusPaymentAmount();
+        }
+        else{
+
+            expectedBalance = playerInitMoney+playerSalary;
+        }
+
+        assertEquals(expectedBalance, player.getCurrentMoney());
 
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
@@ -62,7 +73,8 @@ class PaydayTileTest {
     @Test
     void testLandingOn() {
 
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
+        int fixedSpinnerValue = 1;
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, fixedSpinnerValue);
 
 
         // Assert preconditions
@@ -77,6 +89,7 @@ class PaydayTileTest {
 
         player.setOccupationCard(occupationCard);
 
+        int playerBonusNumber = occupationCard.getBonusNumber();
         int playerSalary = player.getOccupationCard().getSalary();
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
@@ -86,7 +99,16 @@ class PaydayTileTest {
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
-        assertEquals(playerInitMoney+playerSalary+GameConfig.payday_landed_on_bonus, player.getCurrentMoney());
+        int expectedBalance;
+        if (playerBonusNumber == fixedSpinnerValue){
+            expectedBalance = playerInitMoney+playerSalary+occupationCard.getBonusPaymentAmount()+GameConfig.payday_landed_on_bonus;
+        }
+        else{
+
+            expectedBalance = playerInitMoney+playerSalary+GameConfig.payday_landed_on_bonus;
+        }
+
+        assertEquals(expectedBalance, player.getCurrentMoney());
 
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());

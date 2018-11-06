@@ -37,12 +37,13 @@ public class HolidayTileTest {
 
     private void testGenericHolidayTile(GameLogic gameLogic, String priorTileLocation,String endTileLocation){
         // Assert preconditions
-        OccupationCard occupationCard = gameLogic.getTopCollegeCareerCard();
+        OccupationCard occupationCard = gameLogic.getPlayerByIndex(0).getOccupationCard();
         int numberOfActionCards = gameLogic.getPlayerByIndex(0).getNumberOfActionCards();
         int numberOfHouseCards = gameLogic.getPlayerByIndex(0).getNumberOfHouseCards();
         CareerPathTypes careerPath = gameLogic.getPlayerByIndex(0).getCareerPath();
         MaritalStatus maritalStatus = gameLogic.getPlayerByIndex(0).getMaritalStatus();
         int playerMoney = gameLogic.getPlayerByIndex(0).getCurrentMoney();
+        int numberOfDependants = gameLogic.getPlayerByIndex(0).getNumberOfDependants();
 
 
         Player player = gameLogic.getCurrentPlayer();
@@ -62,5 +63,7 @@ public class HolidayTileTest {
         assertEquals(numberOfActionCards, gameLogic.getPlayerByIndex(0).getNumberOfActionCards());
         assertEquals(careerPath, gameLogic.getPlayerByIndex(0).getCareerPath());
         assertEquals(maritalStatus, gameLogic.getPlayerByIndex(0).getMaritalStatus());
+        assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
+        assertEquals(playerMoney, gameLogic.getPlayerByIndex(0).getCurrentMoney());
     }
 }
