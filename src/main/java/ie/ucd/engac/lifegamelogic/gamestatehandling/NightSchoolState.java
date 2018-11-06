@@ -73,9 +73,11 @@ public class NightSchoolState implements GameState {
 			
 			pendingNightSchoolChoice.add(new ChooseableString(ATTEND_NIGHT_SCHOOL_MSG));
 			nightSchoolOptions.add(ATTEND_NIGHT_SCHOOL_MSG);
-			
+
+			String eventMessage = "Would you like to attend night school?";
+
 			LifeGameMessage responseMessage = new DecisionRequestMessage(pendingNightSchoolChoice,
-																		 gameLogic.getCurrentPlayer().getPlayerNumber());			
+																		 gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
 			gameLogic.setResponseMessage(responseMessage);
 		}
 	}
@@ -161,6 +163,7 @@ public class NightSchoolState implements GameState {
         validStandardCareerCardOptions.add(firstOptionCard);
         validStandardCareerCardOptions.add(secondOptionCard);
 
-        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex);
+        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, "This decision request " +
+                "message needs a String");
     }
 }

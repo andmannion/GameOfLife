@@ -17,7 +17,9 @@ public class HouseTileDecisionState implements GameState {
             choices.add(new ChooseableString("Sell a house"));
         }
 
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
+        String eventMessage = "What action would you like to perform?";
+
+        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.

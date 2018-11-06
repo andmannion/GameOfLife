@@ -3,8 +3,6 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
-import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
@@ -31,7 +29,8 @@ public class FamilyState implements GameState {
 		
 		// Generate response for the player to choose between the choices provided
 		LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(familyPathChoices),
-																	 gameLogic.getCurrentPlayerIndex());
+																	 gameLogic.getCurrentPlayerIndex(), "This decision" +
+				" request message needs a String");
 		
 		gameLogic.setResponseMessage(responseMessage);
 	}
@@ -74,7 +73,7 @@ public class FamilyState implements GameState {
 			BoardLocation familyPathTile = familyPathOptions.get(FAMILY_PATH_MESSAGE_INDEX);
 			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(familyPathTile);
 			
-			String endTurnEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + END_TURN_MESSAGE_FAMILY_PATH;
+			String endTurnEventMessage = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", " + END_TURN_MESSAGE_FAMILY_PATH;
 			
 			return new EndTurnState(endTurnEventMessage);
 		}
