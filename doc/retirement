@@ -1,0 +1,22 @@
+title Retirement
+
+user->UI: Click Spin
+UI->logic: Spin message
+logic->logic: compute roll
+logic->logic: reach end of board
+logic->retire calc: retire played
+retire calc->retire calc: add early retrement bonus
+retire calc->retire calc: add bonus for dependants
+retire calc->retire calc: add bonus for action cards
+loop for each house owned
+   retire calc->UI: request spin to determine price
+   user->UI: Click spin
+   UI->retire calc: Spin message
+   retire calc->retire calc: Sell house based on spin
+end
+retire calc->logic: return retirement money
+logic->logic: remove player from active set
+logic->UI: turn over/status update
+user->UI: acknowledge turn end
+UI->logic: ack. message
+logic->logic: next player
