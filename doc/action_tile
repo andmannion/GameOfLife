@@ -1,0 +1,19 @@
+title Action Tile
+
+user->UI: Click Spin
+UI->logic: Spin message
+logic->logic: compute roll
+logic->logic: land on action tile
+logic->logic: draw action card from deck
+logic->UI: inform user of action card
+alt pay player card
+    logic->UI: request target
+    user->UI: select target
+    UI->logic: pass on selection
+else otherwise
+    logic->logic: perform action on card
+end
+logic->UI: turn over/status update
+user->UI: acknowledge turn end
+UI->logic: ack. message
+logic->logic: next player

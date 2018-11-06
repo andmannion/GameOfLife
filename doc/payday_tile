@@ -1,0 +1,17 @@
+title Payday tile
+
+user->UI: Click Spin
+UI->logic: Spin message
+logic->logic: compute roll
+logic->logic: 
+alt passed payday
+    logic->logic: add salary to balance
+else landed on payday
+    logic->logic: add salary+bonus to balance
+    logic->end tile: do end tile action
+end
+logic->UI: turn over/status update
+user->UI: acknowledge turn end
+UI->logic: ack. message
+logic->logic: next player
+                       

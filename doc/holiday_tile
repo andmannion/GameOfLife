@@ -1,0 +1,10 @@
+title Holiday Tile
+
+user->UI: Click Spin
+UI->logic: Spin message
+logic->logic: compute roll
+logic->logic: land on holiday/encounter holiday stop
+logic->UI: turn over/status update
+user->UI: acknowledge turn end
+UI->logic: ack. message
+logic->logic: next player
