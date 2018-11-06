@@ -66,7 +66,6 @@ class NightSchoolStateTest {
 
 	@Test
 	void testNotAttendingNightSchool() {
-		//fail("Not implemented");
 		GameLogic gameLogic = configureNightSchoolStateTestGameLogic();
 		
 		Player currentPlayerUnderTest = gameLogic.getCurrentPlayer();

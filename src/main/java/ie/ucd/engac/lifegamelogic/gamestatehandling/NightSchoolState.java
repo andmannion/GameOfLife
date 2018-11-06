@@ -140,6 +140,12 @@ public class NightSchoolState implements GameState {
 			
 			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(nightSchoolPathChoiceLocation);
 		}
+		else {
+			Player currentPlayer = gameLogic.getCurrentPlayer();	
+			BoardLocation currentLocation = currentPlayer.getCurrentLocation();
+			BoardLocation lifePathChoiceLocation = gameLogic.getGameBoard().getOutboundNeighbours(currentLocation).get(KEEP_CAREER_INDEX);
+			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(lifePathChoiceLocation);
+		}
 		
 		// Send same message either way
 		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again."; // TODO: How to display this?
