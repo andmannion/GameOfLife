@@ -14,21 +14,20 @@ import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 
 public class DefaultHouseCardConfigHandler implements CardConfigHandler<HouseCard> {
 	private JsonElement jsonElement;
-	
+
 	public DefaultHouseCardConfigHandler(String configPath) {
 		this.jsonElement = resourceToJson(configPath);
 	}
-	
-	public ArrayList<HouseCard> initialiseCards(){
-		// Parse the json data into an array of HouseCards		
+
+	public ArrayList<HouseCard> initialiseCards() {
+		// Parse the json data into an array of HouseCards
 		HouseCard[] houseCards = new Gson().fromJson(jsonElement, HouseCard[].class);
-		
+
 		return new ArrayList<>(Arrays.asList(houseCards));
 	}
 
-	private JsonElement resourceToJson(String path){
-
-		InputStream boardInputStream = Bank.class.getClassLoader().getResourceAsStream(path);
+	private JsonElement resourceToJson(String path) {
+		InputStream boardInputStream = DefaultHouseCardConfigHandler.class.getClassLoader().getResourceAsStream(path);
 		JsonStreamParser streamParser = new JsonStreamParser(new InputStreamReader(boardInputStream));
 		JsonElement jsonElement = null;
 

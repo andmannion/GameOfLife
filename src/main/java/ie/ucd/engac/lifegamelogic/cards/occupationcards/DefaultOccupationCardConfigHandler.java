@@ -43,7 +43,7 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 
 	private JsonElement resourceToJson(String path){
 
-		InputStream boardInputStream = Bank.class.getClassLoader().getResourceAsStream(path);
+		InputStream boardInputStream = DefaultOccupationCardConfigHandler.class.getClassLoader().getResourceAsStream(path);
 		JsonStreamParser streamParser = new JsonStreamParser(new InputStreamReader(boardInputStream));
 		JsonElement jsonElement = null;
 
