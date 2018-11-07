@@ -1,0 +1,32 @@
+title Handling SpinTheWheelTile
+
+actor Actor
+
+Actor->UI:From previous
+UI->Game Logic:From previous
+Game Logic->SpinTheWheelState:From previous
+loop while current player hasn't chosen two numbers, and the others haven't chosen one each
+SpinTheWheelState->SpinTheWheelState:Construct message with set of\n remaining number choices
+SpinTheWheelState->SpinTheWheelState:Remember the player the eventual\n response will refer to
+SpinTheWheelState->Game Logic:Set response message requesting\n number choice from focus player
+Game Logic->UI:Send RequestForDecision message
+Actor->UI:Focus player chooses\n number from set
+UI->Game Logic:Send DecisionResponse message
+Game Logic->SpinTheWheelState:Offload message input
+SpinTheWheelState->SpinTheWheelState:Remove the chosen number from the list\n of remaining number choices
+end
+
+loop while number spun doesn't match any chosen number
+SpinTheWheelState->Game Logic:Set response message requesting spin
+Game Logic->UI:Send RequestForSpin message
+UI->UI: Enable spin wheel
+Actor->UI:Spin the wheel
+UI->Game Logic:Send SpinResponse message
+Game Logic->SpinTheWheelState:Offload message input
+SpinTheWheelState->SpinTheWheelState:Check result of spin against previous number\nchoices
+alt number spun matches a number chosen
+SpinTheWheelState->SpinTheWheelState:Assign winnings to owner of choice which \nwas spun
+
+else no match, so iterate loop
+end
+end

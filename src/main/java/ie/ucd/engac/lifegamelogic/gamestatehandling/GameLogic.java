@@ -61,7 +61,6 @@ public class GameLogic {
 	}
 
 	// Player related
-
     public ShadowPlayer getShadowPlayer(int playerIndex){
 	    Player player = getPlayerByIndex(playerIndex);
 
@@ -266,6 +265,4 @@ public class GameLogic {
     public void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
-
-
 }
