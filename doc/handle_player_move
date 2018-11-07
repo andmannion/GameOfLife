@@ -1,0 +1,24 @@
+title Handle Player Move
+
+UI->logic: spin message
+logic->?: get spin result
+note over logic,?
+    Spinner
+end note
+?->logic: return spin result
+loop while tiles moved < spin result
+    logic->?: move forward 1
+    ?->?: check for stop/payday
+    ?->logic: moves-- 
+end
+logic->?: evaluate end tile
+logic->UI: tell user what end tile is
+alt simple action
+    ?->logic: manipulate objects
+else complex
+    ?->?: case specific seq. diagram 
+end
+logic->UI: turn over/status update
+UI->logic: ack. message from user
+logic->logic: next player
+

@@ -1,0 +1,46 @@
+title House Tile(initial)
+
+user->UI: Click Spin
+UI->logic: Spin message
+logic->logic: compute roll
+logic->logic: land on house tile
+logic->logic: check if player owns any houses
+logic->UI: pass 2(3) options to UI
+user->UI: choose action
+UI->logic: inform logic of decision
+alt Do nothing
+    
+else Sell
+    logic->logic: get list of users houses
+    logic->UI: pass list to UI
+    user->UI: select house to sell
+    UI->logic: pass on selection
+    logic->UI: request spin to set price
+    user->UI: Click spin
+    UI->logic: Spin message
+    logic->logic: compute roll
+    logic->logic: sell card
+else Buy
+    logic->logic: get top cards from deck
+    logic->UI: pass options to UI
+    user->UI: select a house
+    UI->logic: pass on selection
+    alt Player can afford
+        logic->logic: buy house
+    else Player cannot afford
+        logic->logic: options are - loan or do nothing
+        logic->UI: pass options to UI
+        user->UI: select a option
+        UI->logic: pass on selection
+        alt Loan
+            logic->logic: take out loan
+            logic->logic: buy house
+        else Do nothing
+            
+        end
+    end
+end
+logic->UI: turn over/status update
+user->UI: acknowledge turn end
+UI->logic: ack. message
+logic->logic: next player

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
@@ -90,6 +89,7 @@ public class CareerChangeState implements GameState {
         validStandardCareerCardOptions.add(firstOptionCard);
         validStandardCareerCardOptions.add(secondOptionCard);
 
-        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex);
+        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, "This decision request " +
+                "message needs a String");
     }
 }

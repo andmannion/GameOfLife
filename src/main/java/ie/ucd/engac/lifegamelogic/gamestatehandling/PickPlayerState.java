@@ -24,7 +24,10 @@ public class PickPlayerState implements GameState {
                 choices.add(cString);
             }
         }
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
+
+        String eventMessage = "Pick a player to receive 20k from";
+
+        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
 
         gameLogic.setResponseMessage(replyMessage);
     }

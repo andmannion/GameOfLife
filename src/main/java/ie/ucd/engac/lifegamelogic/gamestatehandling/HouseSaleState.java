@@ -1,6 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
@@ -20,8 +19,8 @@ public class HouseSaleState implements GameState { //TODO this entire class
         for (HouseCard houseCard:cards){
             choices.add( (Chooseable) houseCard );
         }
-
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber());
+        String eventMessage = "Which house would you like to sell?";
+        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.

@@ -11,7 +11,6 @@ import ie.ucd.engac.messaging.LargeDecisionRequestMessage;
 import ie.ucd.engac.messaging.LargeDecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class SpinToWinSetupState implements GameState {
@@ -40,7 +39,8 @@ public class SpinToWinSetupState implements GameState {
 
 		// First message with current player's number
 		LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
+                gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber(), "This decision request " +
+				"message needs a String");
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -81,7 +81,8 @@ public class SpinToWinSetupState implements GameState {
 
 				// First message with current player's number
 				LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                        gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber());
+                        gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), "This decision request " +
+						"message needs a String");
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}

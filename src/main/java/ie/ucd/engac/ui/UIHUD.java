@@ -79,7 +79,7 @@ public class UIHUD implements Drawable {
                     graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
                 }
                 catch (Exception e){
-                    System.err.println("Exception in UIHUD.draw() " + e); //TODO remove this print statement
+                    System.err.println("Exception in UIHUD.draw() " + e.toString()); //TODO remove this print statement
                 }
                 break;
             case CardChoice:

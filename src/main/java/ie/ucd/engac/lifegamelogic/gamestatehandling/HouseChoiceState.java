@@ -99,7 +99,9 @@ public class HouseChoiceState implements GameState {
 		validStandardCareerCardOptions.add(firstOptionCard);
 		validStandardCareerCardOptions.add(secondOptionCard);
 
-		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex);
+		String eventMessage = "Which house do you want to purchase?";
+
+		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, eventMessage);
 	}
 
 	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
@@ -110,8 +112,9 @@ public class HouseChoiceState implements GameState {
             double loanTotal = (double)(housePrice - player.getCurrentMoney());
             int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
             decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");
+            String eventMessage = "You cannot afford this house right now.";
             LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(decisionStrings),
-                    gameLogic.getCurrentPlayerIndex());
+                    gameLogic.getCurrentPlayerIndex(), eventMessage);
 
             gameLogic.setResponseMessage(responseMessage);
             loanRequired = true;

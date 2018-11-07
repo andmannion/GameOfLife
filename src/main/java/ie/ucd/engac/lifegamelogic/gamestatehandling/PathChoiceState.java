@@ -64,7 +64,9 @@ public class PathChoiceState implements GameState {
 		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
 		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
 
-		LifeGameMessage replyMessage = new DecisionRequestMessage(validPathChoices, relatedPlayerNumber);
+		String eventMessage = "Choose either a college or standard career path.";
+
+		LifeGameMessage replyMessage = new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage);
 
 		return replyMessage;
 	}
