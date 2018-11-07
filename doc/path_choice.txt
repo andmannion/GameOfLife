@@ -1,0 +1,23 @@
+title Initialising players
+
+User->UI:Select a career path
+UI->Game Logic:Send DecisionResponse\nMessage
+Game Logic->Path Choice State: Offload message input
+
+alt Standard Career
+Path Choice State->Path Choice State: Get top Standard Career cards
+Path Choice State ->Path Choice State: Construct choice message
+Path Choice State ->Game Logic:Set response message requesting choice
+Game Logic->UI: Send RequestForDecision message
+User->UI:Choose career card
+UI->Game Logic:Send DecisionResponse\nMessage
+Game Logic->Path Choice State: Offload message input
+Path Choice State->Path Choice State:Assign choice card to player
+Path Choice State->Path Choice State: Move player to S.C. path
+Path Choice State->Path Choice State:Return unchosen card to deck
+else College Career
+	Path Choice State ->Path Choice State: Move player to C.C. path\nLevy college fees
+end
+Path Choice State->Path Choice State:Set next state to HandlePlayerMovement
+Path Choice State->Game Logic:Set response message requesting spin
+Game Logic->UI:Send RequestForSpinMessage
