@@ -1,19 +1,26 @@
 title Action Tile
 
-user->UI: Click Spin
-UI->logic: Spin message
-logic->logic: compute roll
-logic->logic: land on action tile
-logic->logic: draw action card from deck
-logic->UI: inform user of action card
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll [spinTheWheel()]
+logic->logic: land on action tile [tryToMove()]
+logic->logic: draw action card from deck [evaluateEndTile()]
+logic->UI: inform user of action card [setResponseMessage()]
 alt pay player card
-    logic->UI: request target
+    logic->UI: request target [setResponseMessage()]
     user->UI: select target
-    UI->logic: pass on selection
+    UI->logic: pass on selection [handleInput()]
+else career change
+	logic->logic: get 2 cards of current career type
+    logic->UI: send the options to the ui [setResponseMessage()]
+    user->UI: choose card
+    UI->logic: pass on selection [handleInput()]
+    logic->logic: assign new career [player.setOccupationCard()]
 else otherwise
-    logic->logic: perform action on card
+    logic->logic: perform action on card [evaluateActionTile()]
 end
-logic->UI: turn over/status update
+logic->logic: add card to player [player.addActionCard()]
+logic->UI: turn over/status update [setResponseMessage()]
 user->UI: acknowledge turn end
-UI->logic: ack. message
-logic->logic: next player
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]

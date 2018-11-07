@@ -1,15 +1,17 @@
 title Baby Stop Tile
 
-user->UI: Click Spin
-UI->logic: Spin message
-logic->logic: compute roll
-logic->logic: land on baby stop title
-logic->UI: request a spin from user to determine dependants
-user->UI: Click Spin
-UI->logic: Spin message
-logic->logic: compute roll
-logic->logic: add corresponding number of dependants
-logic->UI: turn over/status update
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll [SpinTheWheel()]
+logic->logic: land on baby stop title [tryToMove()]
+logic->UI: request a spin from user to determine dependants [setReponseMessage()]
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll[SpinTheWheel()]
+logic->logic: add corresponding number of dependants [player.addDependants()]
+logic->UI: turn over/status update [setResponseMessage()]
 user->UI: acknowledge turn end
-UI->logic: ack. message
-logic->logic: next player
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]
+                                      
+
