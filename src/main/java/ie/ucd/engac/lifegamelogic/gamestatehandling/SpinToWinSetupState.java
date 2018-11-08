@@ -38,9 +38,9 @@ public class SpinToWinSetupState implements GameState {
 		outgoingChoices = getRemainingChooseableNumberChoices();
 
 		// First message with current player's number
+		int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
 		LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber(), "This decision request " +
-				"message needs a String");
+                playerNumber, "Player "+playerNumber+" pick a spin2win number.");
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -68,7 +68,8 @@ public class SpinToWinSetupState implements GameState {
 			if (nextPlayer == initialPlayerIndex) {
 				// We have received a message from all players, and now need to begin spinning
 				// the wheel to select numbers for each player until one of the chosen numbers is spun.
-				String eventMsg = "Spin the wheel to try to win.";
+                int playerNumber = gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber();
+				String eventMsg = " Player "+ playerNumber+" Spin the wheel to try to win.";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 						gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), eventMsg);
 				
@@ -80,9 +81,10 @@ public class SpinToWinSetupState implements GameState {
 				outgoingChoices = getRemainingChooseableNumberChoices();
 
 				// First message with current player's number
+                int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
 				LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                        gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), "This decision request " +
-						"message needs a String");
+                        gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(),
+                        "Player "+playerNumber+" pick a spin2win number.");
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}

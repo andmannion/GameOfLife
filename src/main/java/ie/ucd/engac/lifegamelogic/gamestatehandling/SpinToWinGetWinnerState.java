@@ -44,8 +44,8 @@ public class SpinToWinGetWinnerState implements GameState {
 				// Set the message to a spinrequest, shadow player is the one that won the game
 
 				String eventMsg = "You won 200K, player " + winningPlayerIndex + 
-						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + 
-					    ", spin the wheel to move.";
+						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() +
+					    "'s turn is over.";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex),
 						gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber(), eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
@@ -54,9 +54,10 @@ public class SpinToWinGetWinnerState implements GameState {
 			}
 			else {
 				// No one won this turn
-				String eventMsg = "Spin the wheel to try to win.";
+				int playerNumber = gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber();
+				String eventMsg = "Player " + playerNumber + " spin the wheel to try to win.";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex),
-                        gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber(), eventMsg);
+                        playerNumber, eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
 			}
 		}
