@@ -10,11 +10,9 @@ import ie.ucd.engac.ui.GameUI;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class GameEngine implements Runnable {
     private int panelWidth = GameConfig.panelWidth; //TODO what is the best way to manage the window size?
     private int panelHeight = GameConfig.panelHeight; //TODO make this work on computers that have window borders
-
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -29,8 +27,6 @@ public class GameEngine implements Runnable {
     private Image backBuffer;
     private volatile boolean running;
     private Thread renderingThread;
-
-
 
     /**
      * Constructor for GameEngine class.
@@ -82,7 +78,6 @@ public class GameEngine implements Runnable {
     public int getPanelWidth() {
         return panelWidth;
     } // end of getPanelWidth()
-
 
     /**
      * Run function used by the rendering thread.
