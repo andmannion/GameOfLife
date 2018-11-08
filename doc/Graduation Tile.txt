@@ -5,15 +5,14 @@ actor Actor
 Actor->UI:From previous
 UI->Game Logic:From previous
 Game Logic->Graduation State:From previous
-Graduation State->Graduation State:Get top two CollegeCareer\ncards
-Graduation State->Graduation State:Construct message with options\n relating to these two cards
-Graduation State->Graduation State:Store the pending decision information
-Graduation State->Game Logic:Set response message requesting\na choice from the player
-Game Logic->UI:Send RequestForDecision message
+Graduation State->Graduation State:Get top two CollegeCareer cards\n[getTopCollegeCareerCard() (x2)]
+Graduation State->Graduation State:Store card choices\n[pendingChoices.add(card)]
+Graduation State->Graduation State:Construct message with options\n relating to these two cards\n[constructCardChoiceMessage()]
+Graduation State->Game Logic:Set response message requesting\na choice from the player\n[setResponseMessage()]
+Game Logic-->UI:Send RequestForDecision message
 Actor->UI:Choose one of the options\n presented
-UI->Game Logic:Send DecisionResponse message
-Game Logic->Graduation State:Offload message input
-Graduation State->Graduation State:Assign chosen card to the player
-Graduation State->Graduation State:Add the unchosen card to the bottom\nof the relevant deck
-
-Graduation State->Actor:return through normal updates
+UI->Game Logic:Send DecisionResponse message\n[handleInput()]
+Game Logic->Graduation State:Offload message input\n[currentState.handleInput()]
+Graduation State->Graduation State:Assign chosen card to the player\n[currentPlayer.setOccupationCard(chosenCard)]
+Graduation State->Graduation State:Add the unchosen card to the bottom\nof the relevant deck\n[returnOccupationCard(unchosenCard)]
+Graduation State->UI:Set up for next player's turn

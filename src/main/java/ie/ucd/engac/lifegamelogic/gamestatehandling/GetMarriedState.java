@@ -56,7 +56,7 @@ public class GetMarriedState implements GameState {
 			}
 
 			//make payment
-            gameLogic.subtractFromPlayersBalance(playerToSpinIndex,getMarriedPayment);
+            gameLogic.subtractFromPlayersBalance(playerToSpinIndex, getMarriedPayment);
             gameLogic.getCurrentPlayer().addToBalance(getMarriedPayment);
 
             playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
