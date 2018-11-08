@@ -150,7 +150,7 @@ public class GameLogic {
     
     // Retirement related
     public int retireCurrentPlayer(){
-	    Player playerToRetire = players.remove(currentPlayerIndex);
+	    Player playerToRetire = players.get(currentPlayerIndex);
 
         int retirementBonus = playerToRetire.computeRetirementBonuses(getNumberOfRetiredPlayers());
         playerToRetire.addToBalance(retirementBonus);
@@ -159,6 +159,7 @@ public class GameLogic {
         subtractFromCurrentPlayersBalance(loanRepaymentCost);
         repayAllLoans(playerToRetire.getPlayerNumber());
 
+        players.remove(currentPlayerIndex);
 	    retiredPlayers.add(playerToRetire);
 	    return playerToRetire.getCurrentMoney();
     }
