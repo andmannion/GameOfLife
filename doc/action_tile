@@ -11,7 +11,7 @@ alt pay player card
     user->UI: select target
     UI->logic: pass on selection [handleInput()]
 else career change
-	logic->logic: get 2 cards of current career type
+    logic->logic: get 2 cards of current career type [bank.getTopOcc...Card()]
     logic->UI: send the options to the ui [setResponseMessage()]
     user->UI: choose card
     UI->logic: pass on selection [handleInput()]
