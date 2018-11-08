@@ -54,7 +54,6 @@ class PaydayTileTest {
             expectedBalance = playerInitMoney+playerSalary+occupationCard.getBonusPaymentAmount();
         }
         else{
-
             expectedBalance = playerInitMoney+playerSalary;
         }
 
