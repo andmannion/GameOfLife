@@ -232,7 +232,7 @@ public class HandlePlayerMoveState implements GameState {
                     nextActionState = new CareerChangeState(); //TODO test
                 }
                 else{
-                    String eventMessage = "CareerChange: No career assigned yet";
+                    String eventMessage = "CareerChange: Cannot change career before graduation.";
                     nextActionState = new EndTurnState(eventMessage);
                 }
                 break;
