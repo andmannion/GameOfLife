@@ -14,6 +14,10 @@ public class DecisionRequestMessage extends LifeGameMessage {
 		this.choices = choices;
 		this.eventMsg = eventMessage;
 	}
+
+	public String getEventMsg(){
+		return eventMsg;
+	}
 	
 	public int getRelatedPlayer() {
 		return relatedPlayerIndex;

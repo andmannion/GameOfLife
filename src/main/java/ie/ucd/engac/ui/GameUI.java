@@ -76,6 +76,7 @@ public class GameUI implements Drawable {
                     break;
                 case LargeDecisionRequest:
                     LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
+                    uiEventMessage.updateEventMessage(pendingLargeDecision.getEventMsg());
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
@@ -83,13 +84,14 @@ public class GameUI implements Drawable {
                 case SpinRequest:
                     SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
+                    uiEventMessage.updateEventMessage(spinRequest.getEventMsg());
                     uiInput.setEnableSpinButton(true);
                     uiHUD.updateFields(spinRequest.getShadowPlayer());
-                    uiEventMessage.updateEventMessage(spinRequest.getEventMsg());
                     break;
                 case OptionDecisionRequest:
-                    uiState = CardChoice;
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
+                    uiState = CardChoice;
+                    uiEventMessage.updateEventMessage(pendingDecision.getEventMsg());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
                     break;

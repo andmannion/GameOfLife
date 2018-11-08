@@ -55,7 +55,7 @@ public class SpinToWinGetWinnerState implements GameState {
 			else {
 				// No one won this turn
 				int playerNumber = gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber();
-				String eventMsg = "Player " + playerNumber + " spin the wheel to try to win.";
+				String eventMsg = "Spin the wheel to determine the winner";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex),
                         playerNumber, eventMsg);
 				gameLogic.setResponseMessage(responseMessage);
