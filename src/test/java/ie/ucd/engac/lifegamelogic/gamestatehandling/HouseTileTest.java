@@ -2,13 +2,10 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.lifegamelogic.Spinnable;
-import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -20,7 +17,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HouseChoiceStateTest {
+class HouseTileTest {
     private final int NUM_PLAYERS = 2;
     private final String PRIOR_TILE_LOCATION = "ak";
     private final String HOUSE_TILE_LOCATION = "al";

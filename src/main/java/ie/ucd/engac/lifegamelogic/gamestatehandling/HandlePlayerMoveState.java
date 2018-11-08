@@ -222,16 +222,23 @@ public class HandlePlayerMoveState implements GameState {
 	private GameState evaluateActionTile(GameLogic gameLogic) {
 		ActionCard thisAction = gameLogic.getTopActionCard();
         Player player = gameLogic.getCurrentPlayer();
+        player.addActionCard(thisAction);
         
         GameState nextActionState = null;
         
         switch (thisAction.getActionCardType()){
             case CareerChange:
-            	nextActionState = new CareerChangeState(); //TODO test
+                if(player.getOccupationCard() != null) {
+                    nextActionState = new CareerChangeState(); //TODO test
+                }
+                else{
+                    String eventMessage = "CareerChange: No career assigned yet";
+                    nextActionState = new EndTurnState(eventMessage);
+                }
                 break;
             case PlayersPay:
                 if(gameLogic.getNumberOfPlayers() == 1){
-                	nextActionState = new EndTurnState("No players remaining to pick");
+                	nextActionState = new EndTurnState("PlayersPay: No players remaining to pick");
                 }
                 else {
                 	nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction); ///TODO test

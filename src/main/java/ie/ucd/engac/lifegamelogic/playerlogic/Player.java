@@ -122,6 +122,9 @@ public class Player {
     }
 
     //Action cards
+    public void addActionCard(ActionCard actionCard){
+	    actionCards.add(actionCard);
+    }
 	public ArrayList<ActionCard> getActionCards() {
 		return actionCards;
 	}
