@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.Spinner;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -32,7 +33,8 @@ public class RetirePlayerState implements GameState {
             int spinNum = gameLogic.getSpinner().spinTheWheel();;
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
-            retiree.sellHouseCard(currentCardIndex, spinNum);
+            HouseCard soldCard = retiree.sellHouseCard(currentCardIndex, spinNum);
+            gameLogic.returnHouseCard(soldCard);
             currentCardIndex = currentCardIndex + 1;
             if (currentCardIndex < numberOfHouses) { //if there are cards left to sell
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
@@ -48,7 +50,6 @@ public class RetirePlayerState implements GameState {
                     nextState = new GameOverState();
                 }
                 else {
-                    eventMessage = "Player " + retiree.getPlayerNumber() + " has retired.";
                     nextState = new EndTurnState(eventMessage);
                 }
             }

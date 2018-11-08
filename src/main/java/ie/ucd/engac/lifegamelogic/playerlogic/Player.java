@@ -143,10 +143,11 @@ public class Player {
 	    return houseCards.size();
     }
 
-	public void sellHouseCard(int cardIndex, int spinResult){
+	public HouseCard sellHouseCard(int cardIndex, int spinResult){
+		HouseCard houseCard = null;
 		if(cardIndex >= 0) {
 			boolean bool;
-			HouseCard houseCard = houseCards.get(cardIndex);
+			houseCard = houseCards.get(cardIndex);
 			if (spinResult%2 == 0){ //TODO simplfy
 				bool = false;
 			}
@@ -156,6 +157,7 @@ public class Player {
 			addToBalance(houseCard.getSpinForSalePrice(bool));
 			houseCards.remove(cardIndex);
 		}
+		return houseCard;
 	}
 
 	//Marriage related
