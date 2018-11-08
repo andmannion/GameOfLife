@@ -48,8 +48,8 @@ public class HouseSaleState implements GameState { //TODO this entire class
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
             int spinNum = gameLogic.getSpinner().spinTheWheel();
             Player player = gameLogic.getCurrentPlayer();
-            player.sellHouseCard(choiceIndex,spinNum);
-
+            HouseCard soldCard = player.sellHouseCard(choiceIndex,spinNum);
+            gameLogic.returnHouseCard(soldCard);
             return new EndTurnState();
         }
         return null;
