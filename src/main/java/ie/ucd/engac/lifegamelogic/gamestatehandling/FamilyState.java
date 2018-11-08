@@ -29,8 +29,7 @@ public class FamilyState implements GameState {
 		
 		// Generate response for the player to choose between the choices provided
 		LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(familyPathChoices),
-																	 gameLogic.getCurrentPlayerIndex(), "This decision" +
-				" request message needs a String");
+					gameLogic.getCurrentPlayerIndex(), "Choose either the Life or Family path.");
 		
 		gameLogic.setResponseMessage(responseMessage);
 	}

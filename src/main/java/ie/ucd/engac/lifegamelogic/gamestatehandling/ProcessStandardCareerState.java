@@ -84,7 +84,6 @@ public class ProcessStandardCareerState implements GameState {
         validStandardCareerCardOptions.add(secondOptionCard);
 
         return new DecisionRequestMessage(validStandardCareerCardOptions,
-        								  relatedPlayerIndex,
-        								  "This decision request message needs a String");
+        								  relatedPlayerIndex,"Choose career card");
     }
 }
