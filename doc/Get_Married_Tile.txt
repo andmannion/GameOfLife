@@ -1,0 +1,19 @@
+title Handling GraduationTile
+
+actor Actor
+
+Actor->UI:From previous
+UI->Game Logic:From previous
+Game Logic->Get Married State:From previous
+Get Married State->Get Married State:Update marital status of player
+loop while all other players haven't gifted by spinning the wheel
+Get Married State->Get Married State:Construct message requesting\na spin from the next player
+Get Married State->Game Logic:Set response message requesting spin
+Game Logic->UI:Send RequestForSpin message
+UI->UI: Enable spin the wheel
+Actor->UI: Spin the wheel
+UI->Game Logic:Send SpinRequest message
+Game Logic->Get Married State:Offload message input
+Get Married State->Get Married State:Spin wheel, assign amount to \npay based on even/odd result
+Get Married State->Get Married State:Advance gifting player focus
+end
