@@ -74,15 +74,17 @@ public class ProcessStandardCareerState implements GameState {
 		// TODO Auto-generated method stub
 		
 	}
-    private LifeGameMessage constructStandardCareerCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
+    
+	private LifeGameMessage constructStandardCareerCardChoiceMessage(int relatedPlayerIndex,
+																	 Chooseable firstOptionCard,
                                                                      Chooseable secondOptionCard) {
-
         ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
 
         validStandardCareerCardOptions.add(firstOptionCard);
         validStandardCareerCardOptions.add(secondOptionCard);
 
-        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, "This decision request " +
-                "message needs a String");
+        return new DecisionRequestMessage(validStandardCareerCardOptions,
+        								  relatedPlayerIndex,
+        								  "This decision request message needs a String");
     }
 }
