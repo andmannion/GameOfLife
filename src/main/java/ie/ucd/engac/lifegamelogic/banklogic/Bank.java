@@ -1,7 +1,6 @@
 package ie.ucd.engac.lifegamelogic.banklogic;
 
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.fileutilities.FileUtilities;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.*;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
