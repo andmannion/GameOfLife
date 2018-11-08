@@ -1,0 +1,25 @@
+title Retirement
+
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll [spinTheWheel()]
+logic->logic: reach end of board [tryToMove()]
+logic->logic: See that is is the retirement tile [evaluateCurrentTile()]
+logic->retire calc: retire player [RetirementState]
+loop for each house owned
+   retire calc->UI: request spin to determine price  [setResponseMessage()]
+   user->UI: click spin
+   UI->retire calc: Spin message [handleInput()]
+   retire calc->retire calc: Sell house based on spin [spinTheWheel()&player.sellHouseCard()]
+end
+retire calc->player: calculate bonuses [player.calcRetireBonus()]
+player->player: add early retrement bonus 
+player->player: add bonus for dependants
+player->player: add bonus for action cards
+player-->retire calc: return bonus money [player.calcRetireBonus()]
+retire calc-->logic: return retirement money 
+logic->logic: move player from active set to retirees
+logic->UI: turn over/status update [setResponseMessage()]
+user->UI: acknowledge turn end
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]

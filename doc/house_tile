@@ -1,0 +1,45 @@
+title House Tile
+
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll [spinTheWheel()]
+logic->logic: land on house tile [tryToMove()/evaluateTile()]
+logic->logic: check if player owns any houses [player.getHouseCards()]
+logic->UI: pass 2(3) options to UI [setReponseMessage()]
+user->UI: choose action
+UI->logic: inform logic of decision [handleInput()]
+alt Do nothing
+    
+else Sell
+    logic->logic: get list of users houses [player.getHouseCards()]
+    logic->UI: pass list to UI [setResponseMessage()]
+    user->UI: select house to sell
+    UI->logic: pass on selection [handleInput()]
+    logic->UI: request spin to set price [setResponseMessage()]
+    user->UI: spin message [handleInput()]
+	logic->logic: compute roll [spinTheWheel()]
+    logic->logic: sell card [player.removeHouseCard()]
+else Buy
+    logic->logic: get top cards from deck [bank.getTopActionCard()]
+    logic->UI: pass options to UI [setResponseMessage()]
+    user->UI: select a house 
+    UI->logic: pass on selection [handleInput()]
+    alt Player can afford
+        logic->logic: buy house [player.addHouseCard()]
+    else Player cannot afford
+        logic->logic: options are - loan or do nothing
+        logic->UI: pass options to UI [setResponse()]
+        user->UI: select a option 
+        UI->logic: pass on selection [handleInput()]
+        alt Loan
+            logic->logic: take out loan [bank.takeOutLoan(playerid)]
+            logic->logic: buy house [player.addHouseCard()]
+        else Do nothing
+            
+        end
+    end
+endlogic->UI: turn over/status update [setResponseMessage()]
+user->UI: acknowledge turn end
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]
+

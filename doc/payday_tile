@@ -1,0 +1,16 @@
+title Payday tile
+
+user->UI: click spin
+UI->logic: spin message [handleInput()]
+logic->logic: compute roll [spinTheSpinner()]
+logic->logic: moveforward [tryToMove()]
+alt passed payday
+    logic->logic: add salary to balance [player.addToBalance()]
+    logic->logic: move forward ...
+else landed on payday
+    logic->logic: add salary+bonus to balance [player.addToBalance()]
+end
+logic->UI: turn over/status update [setResponseMessage()]
+user->UI: acknowledge turn end
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]

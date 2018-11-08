@@ -1,0 +1,23 @@
+title Initialising players
+
+User->UI:Select a career path
+UI->Game Logic:Send DecisionResponse\nMessage\n[handleInput()]
+Game Logic->Path Choice State: Offload message input\n[currentState.handleInput()]
+alt Standard Career
+Path Choice State->Path Choice State: Get top StandardCareer cards\ngetTopStandardCareerCard()x2
+Path Choice State->Path Choice State:Store card choices
+Path Choice State ->Path Choice State: Construct choice message\nconstructStandardCareerCardChoiceMessage()
+Path Choice State ->Game Logic:Set response message requesting choice\n[setResponseMessage()]
+Game Logic-->UI: Send RequestForDecision message
+User->UI:Choose career card
+UI->Game Logic:Send DecisionResponse message\n[handleInput()]
+Game Logic->Path Choice State: Offload message input\n[currentState.handleInput()]
+Path Choice State->Path Choice State:Assign choice card to player\n[currentPlayer.setOccupationCard(chosenCard)]
+Path Choice State->Path Choice State: Move player to S.C. path\n[movePlayerToInitialCareerPath()]
+Path Choice State->Path Choice State:Return unchosen card to deck\n[returnOccupationCard(unchosenCard)]
+else College Career
+	Path Choice State ->Path Choice State: Move player to C.C. path\n[movePlayerToInitialCollegeCareerPath()]
+    
+Path Choice State->Path Choice State:  Levy college fees\n[subtractFromCurrentPlayersBalance(FEES)]
+end
+Path Choice State-->Game Logic:Set next state to HandlePlayerMoveState

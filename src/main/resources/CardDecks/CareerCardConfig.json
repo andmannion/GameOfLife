@@ -1,0 +1,64 @@
+	[{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Actor",
+	 "salary": "100000",
+	 "bonusNumber": "5",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Inventor",
+	 "salary": "80000",
+	 "bonusNumber": "4",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Singer",
+	 "salary": "70000",
+	 "bonusNumber": "3",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "RaceCarDriver",
+	 "salary": "60000",
+	 "bonusNumber": "2",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Athlete",
+	 "salary": "50000",
+	 "bonusNumber": "1",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "PoliceOfficer",
+	 "salary": "50000",
+	 "bonusNumber": "4",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Chef",
+	 "salary": "50000",
+	 "bonusNumber": "3",
+	 "bonusPaymentAmount": "20000"
+	},
+	{
+	 "occupationSubtype": "CareerCard",
+	 "occupationCardType": "Career",
+	 "careerType": "Dancer",
+	 "salary": "50000",
+	 "bonusNumber": "2",
+	 "bonusPaymentAmount": "20000"
+	}]

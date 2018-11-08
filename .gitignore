@@ -1,14 +1,23 @@
 # IDE specific files
-#.idea/
-#.classpath
-#.project
-#*.iml
+.idea/
+.classpath
+.project
+*.iml
+/.idea/workspace.xml
+*.orig
+
+# UML images
+*engac*.png
+*lifegamelogic*.png
 
 # Compiled class file
 *.class
 
 # Log file
 *.log
+
+# Images
+state_machine_rough.jpeg
 
 # BlueJ files
 *.ctxt
@@ -28,3 +37,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
+/out/
+/bin1/
+/target/
