@@ -16,7 +16,7 @@ public class SpinToWinGetWinnerState implements GameState {
 	private final HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap;
 	private int currentPlayerSpinningTheWheelIndex;
 	
-	protected SpinToWinGetWinnerState(HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap) {
+	SpinToWinGetWinnerState(HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap) {
 		this.playerNumberChoiceMap = playerNumberChoiceMap; 
 	}
 	
@@ -41,9 +41,9 @@ public class SpinToWinGetWinnerState implements GameState {
 				assignSpinToWinPrize(gameLogic, winningPlayerIndex);
 				
 				// Set the next state to HandlePlayerMoveState, 
-				// Set the message to a spinrequest, shadow player is the one that won the game
+				// Set the message to a SpinRequest, shadow player is the one that won the game
 
-				String eventMsg = "You won 200K, player " + winningPlayerIndex + 
+				String eventMsg = "You won 200K, player " + gameLogic.getPlayerByIndex(winningPlayerIndex).getPlayerNumber() +
 						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() +
 					    "'s turn is over.";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex),
@@ -72,7 +72,7 @@ public class SpinToWinGetWinnerState implements GameState {
 	}
 
 	private int parseSpinToWinAction(int numberSpun) {
-		// Must check the values in the hashmap
+		// Must check the values in the hash map
 		for(HashMap.Entry<Integer,ArrayList<Integer>> kvps : playerNumberChoiceMap.entrySet()) {
 			if(kvps.getValue().contains(numberSpun)) {
 				return kvps.getKey();

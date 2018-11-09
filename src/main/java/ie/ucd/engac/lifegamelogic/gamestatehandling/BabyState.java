@@ -12,7 +12,8 @@ public class BabyState implements GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// Request a spin from the current player to determine how many babies they had
-		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + BABY_EVENT_MESSAGE;
+		int currentPlayerIndex = gameLogic.getCurrentPlayerIndex();
+		String babyEventMessage = "Player " + gameLogic.getPlayerByIndex(currentPlayerIndex).getPlayerNumber() + ", " + BABY_EVENT_MESSAGE;
 		
 		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 																 gameLogic.getCurrentPlayerIndex(),

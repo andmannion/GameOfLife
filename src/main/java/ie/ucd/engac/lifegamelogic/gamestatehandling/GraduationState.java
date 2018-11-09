@@ -47,7 +47,7 @@ public class GraduationState implements GameState {
 			OccupationCard unchosenCollegeCareerCard = pendingCollegeCareerCardChoices.get((choiceIndex + 1) % 1);			
 			gameLogic.returnOccupationCard(unchosenCollegeCareerCard);
 			
-			String graduationStateEndMessage = "You chose the " + ((CollegeCareerCard) chosenCollegeCareerCard).getOccupationCardType() + " card.";
+			String graduationStateEndMessage = "You chose the " + ((CollegeCareerCard) chosenCollegeCareerCard).getCareerType() + " card.";
 			
 			return new EndTurnState(graduationStateEndMessage);
 		}		

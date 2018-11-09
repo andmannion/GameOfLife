@@ -73,9 +73,9 @@ public class ShadowPlayer {
         else{
             switch(occupation.getOccupationCardType()){
                 case Career:
-                    return ((CareerCard) occupation).convertDrawableString();
+                    return ((CareerCard) occupation).displayChoiceDetails();
                 case CollegeCareer:
-                    return ((CollegeCareerCard) occupation).convertDrawableString();
+                    return ((CollegeCareerCard) occupation).displayChoiceDetails();
                 default:
                     return null;
             }

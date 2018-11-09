@@ -40,7 +40,7 @@ public class SpinToWinSetupState implements GameState {
 		// First message with current player's number
 		int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
 		LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                playerNumber, "Player "+playerNumber+" pick a spin2win number.");
+                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.");
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -61,7 +61,7 @@ public class SpinToWinSetupState implements GameState {
                 awaitingInfoFromPlayerIndex = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
 			} 
 			else {				
-				// Don't increment the awaitingInforFromPlayerIndex
+				// Don't increment the awaitingInfoFromPlayerIndex
 				sendSecondFromInitialPlayer = false;
 			}
 			
@@ -69,7 +69,7 @@ public class SpinToWinSetupState implements GameState {
 				// We have received a message from all players, and now need to begin spinning
 				// the wheel to select numbers for each player until one of the chosen numbers is spun.
                 int playerNumber = gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber();
-				String eventMsg = " Player "+ playerNumber+" Spin the wheel to try to win.";
+				String eventMsg = " Player " + playerNumber + ", spin the wheel to try to win.";
 				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 						gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(), eventMsg);
 				
@@ -84,7 +84,7 @@ public class SpinToWinSetupState implements GameState {
                 int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
 				LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
                         gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(),
-                        "Player "+playerNumber+" pick a spin2win number.");
+                        "Player " + playerNumber + ", pick a SpinToWin number.");
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}
@@ -102,9 +102,6 @@ public class SpinToWinSetupState implements GameState {
 		// Must set what the player has chosen, and remove what they have chosen from the allowable remaining
 		// choices
 		int selectedNumber = Integer.parseInt(outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails());
-		for (Integer chooseableNumber : remainingNumberChoices) {
-			System.out.println(chooseableNumber);
-		}
 
 		if(!playerIndexChoiceMap.containsKey(relatedPlayerIndex)) {
 			playerIndexChoiceMap.put(relatedPlayerIndex, new ArrayList<Integer>());
@@ -116,10 +113,6 @@ public class SpinToWinSetupState implements GameState {
 		
 		// Remove the selected number from the set of allowable numbers
 		remainingNumberChoices.remove(selectedNumber);
-		
-		for (Integer chooseableNumber : remainingNumberChoices) {
-			System.out.println(chooseableNumber);
-		}
 	}
 
 	private ArrayList<Chooseable> getRemainingChooseableNumberChoices() {

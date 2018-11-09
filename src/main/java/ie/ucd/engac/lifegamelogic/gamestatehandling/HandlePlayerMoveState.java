@@ -134,7 +134,7 @@ public class HandlePlayerMoveState implements GameState {
             }
             else if(0 == adjacentForwardLocations.size()) {
                 // Must initiate retirement procedure
-                System.out.println("No spaces remaining ahead"); //TODO this should now be unreachable
+                System.err.println("No spaces remaining ahead"); //TODO this should now be unreachable
             }
         }
 
@@ -163,12 +163,14 @@ public class HandlePlayerMoveState implements GameState {
                 break;
             case Baby:
             	gameLogic.getCurrentPlayer().addDependants(1);
-            	String babyNonStopTileMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", you have had a baby.";                
+                int currentPlayerIndex = gameLogic.getCurrentPlayerIndex();
+            	String babyNonStopTileMessage = "Player " + gameLogic.getPlayerByIndex(currentPlayerIndex).getPlayerNumber() + ", you have had a baby.";
                 nextState = new EndTurnState(babyNonStopTileMessage); 
                 break;
             case Twins:
                 gameLogic.getCurrentPlayer().addDependants(2);
-                String twinsNonStopTileMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", you have had twins.";
+                currentPlayerIndex = gameLogic.getCurrentPlayerIndex();
+                String twinsNonStopTileMessage = "Player " + gameLogic.getPlayerByIndex(currentPlayerIndex).getPlayerNumber() + ", you have had twins.";
                 nextState = new EndTurnState(twinsNonStopTileMessage);
                 break;
             case House:
@@ -193,7 +195,9 @@ public class HandlePlayerMoveState implements GameState {
                 nextState = new GraduationState();
                 break;
             case GetMarried:
-                nextState = handleGetMarriedTile(gameLogic);
+                int currentNumberOfPlayers = gameLogic.getNumberOfPlayers();
+                int currentPlayerNumber = gameLogic.getPlayerByIndex(gameLogic.getCurrentPlayerIndex()).getPlayerNumber();
+                nextState = handleGetMarriedTile(currentNumberOfPlayers, currentPlayerNumber);
                 break;
             case NightSchool:
                 nextState = new NightSchoolState();
@@ -259,11 +263,11 @@ public class HandlePlayerMoveState implements GameState {
         return nextActionState;
 	}
 	
-	private GameState handleGetMarriedTile(GameLogic gameLogic){
+	private GameState handleGetMarriedTile(int currentNumberOfPlayers, int currentPlayerNumber){
 	    GameState nextState;
-        if(gameLogic.getNumberOfPlayers() == 1){
+        if(1 == currentNumberOfPlayers){
 
-            String eventMsg = "You got married, player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", so take an extra turn.";
+            String eventMsg = "You got married, player " + currentPlayerNumber + ", so take an extra turn.";
 
             nextState = new HandlePlayerMoveState(eventMsg);
         }
