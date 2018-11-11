@@ -24,9 +24,8 @@ public class NightSchoolState extends GameState {
 	
 	private ArrayList<Card> collegeCareerCardOptions; 
 	private boolean pendingCollegeCareerCardDecision = false;
-	
-	private ArrayList<String> nightSchoolOptions;
-	private boolean pendingNightSchoolDecision = false;
+
+    private boolean pendingNightSchoolDecision = false;
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -64,16 +63,16 @@ public class NightSchoolState extends GameState {
 		else
 		{
 			pendingNightSchoolDecision = true;
-			
-			nightSchoolOptions = new ArrayList<>();			
+
+            //ArrayList<String> nightSchoolOptions = new ArrayList<>(); //TODO remove
 			ArrayList<Chooseable> pendingNightSchoolChoice = new ArrayList<>();
 			
 			// Must give the player the choice to either keep their current job or go to night school			
 			pendingNightSchoolChoice.add(new ChooseableString(KEEP_CAREER_MSG));
-			nightSchoolOptions.add(KEEP_CAREER_MSG);
+			//nightSchoolOptions.add(KEEP_CAREER_MSG); //TODO remove
 			
 			pendingNightSchoolChoice.add(new ChooseableString(ATTEND_NIGHT_SCHOOL_MSG));
-			nightSchoolOptions.add(ATTEND_NIGHT_SCHOOL_MSG);
+			//nightSchoolOptions.add(ATTEND_NIGHT_SCHOOL_MSG); //TODO remove
 
 			String eventMessage = "Would you like to attend night school?";
 
