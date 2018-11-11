@@ -40,7 +40,13 @@ public class HouseChoiceState extends GameState {
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
-            chosenCard = actOnHouseCardChoice(gameLogic, choiceIndex);
+            // Only two cards at the moment, return unchosen
+            HouseCard unchosenHouseCard = (HouseCard) getPendingCardChoices().get((choiceIndex + 1) % 2);
+            gameLogic.returnHouseCard(unchosenHouseCard);
+
+            //store the unchosen as we need to see if it can be afforded
+            chosenCard = (HouseCard) getPendingCardChoices().get(choiceIndex);
+
 
             int housePrice = chosenCard.getPurchasePrice();
 

@@ -51,17 +51,4 @@ public abstract class GameState {
 		OccupationCard unchosenCareerCard = (OccupationCard) getPendingCardChoices().get((choiceIndex + 1) % 2);
 		gameLogic.returnOccupationCard(unchosenCareerCard);
 	}
-
-    protected HouseCard actOnHouseCardChoice(GameLogic gameLogic, int choiceIndex){
-        // Need to assign the chosen card to the relevant player
-        //ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();  //TODO remove
-        HouseCard chosenHouseCard = (HouseCard) getPendingCardChoices().get(choiceIndex);
-        gameLogic.getCurrentPlayer().addHouseCard(chosenHouseCard);
-
-        // Only two cards at the moment, return unchosen
-        HouseCard unchosenHouseCard = (HouseCard) getPendingCardChoices().get((choiceIndex + 1) % 2);
-        gameLogic.returnHouseCard(unchosenHouseCard);
-
-        return chosenHouseCard;
-    }
 }
