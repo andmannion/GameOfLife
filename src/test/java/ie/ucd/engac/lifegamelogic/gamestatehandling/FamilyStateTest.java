@@ -35,7 +35,7 @@ class FamilyStateTest {
             assertEquals(playerUnderTestNumber, currentPlayerUnderTest.getPlayerNumber());
             currentPlayerUnderTest.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
-            messageToLogic = new SpinResponseMessage();
+            messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             messageFromLogic = gameLogic.handleInput(messageToLogic);
 
             // Should have a choice to make now
@@ -62,7 +62,7 @@ class FamilyStateTest {
             assertNotNull(gameLogic.getCurrentPlayer().getPendingBoardForkChoice());
 
             // Send back an ACK response to end the turn
-            messageToLogic = new AckResponseMessage();
+            messageToLogic = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
             messageFromLogic = gameLogic.handleInput(messageToLogic);
 
             playerUnderTestNumber++;
@@ -70,7 +70,7 @@ class FamilyStateTest {
 
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
 
-        messageToLogic = new SpinResponseMessage();
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
 
         // Assert players have been moved off the tile

@@ -1,9 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
 
-import com.sun.tools.internal.ws.wsdl.framework.DuplicateEntityException;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -12,8 +10,8 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class FamilyState extends GameState {
-	private static final int FAMILY_PATH_MESSAGE_INDEX = 0;
-	private static final int LIFE_PATH_MESSAGE_INDEX = 1;
+	private static final int LIFE_PATH_MESSAGE_INDEX = 0;
+	public static final int FAMILY_PATH_MESSAGE_INDEX = 1;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
