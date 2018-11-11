@@ -45,7 +45,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
 		
 		// Mock messages to logic, performing pathChoiceState functionality
-		LifeGameMessage initialMessage = new StartupMessage();
+		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
 		LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 		
 		assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.OptionDecisionRequest);
