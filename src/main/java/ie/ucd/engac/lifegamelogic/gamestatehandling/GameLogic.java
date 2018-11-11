@@ -28,8 +28,6 @@ public class GameLogic {
 	private int numberOfUnconfiguredPlayers;
 	private LifeGameMessage currentLifeGameMessageResponse;
 	
-	private ArrayList<Card> pendingCardChoices;
-
 	private GameState currentState;
 	
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers, Spinnable spinner) {
@@ -226,14 +224,6 @@ public class GameLogic {
         currentLifeGameMessageResponse = lifeGameMessage;
     }
 
-    // Generic card related
-    public void storePendingChoiceCards(ArrayList<Card> pendingCardChoices) {
-        this.pendingCardChoices = pendingCardChoices;
-    }
-
-    public ArrayList<Card> getPendingCardChoices(){
-        return pendingCardChoices;
-    }
 
     // Occupation card related
     public OccupationCard getTopStandardCareerCard() {

@@ -10,11 +10,22 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import java.util.ArrayList;
 
 public abstract class GameState {
+
+    private ArrayList<Chooseable> pendingCardChoices;
+
 	abstract void enter(GameLogic gameLogic);
 
 	abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
 
 	abstract void exit(GameLogic gameLogic);
+
+    protected void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
+        this.pendingCardChoices = pendingCardChoices;
+    }
+
+    public ArrayList<Chooseable> getPendingCardChoices(){
+        return pendingCardChoices;
+    }
 
 	protected static LifeGameMessage constructChoiceMessage(int relatedPlayerIndex, Chooseable firstOption,
                                                             Chooseable secondOption, String eventMessage) {
