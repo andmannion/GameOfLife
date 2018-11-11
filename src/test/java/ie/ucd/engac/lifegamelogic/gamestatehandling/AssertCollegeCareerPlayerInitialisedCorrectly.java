@@ -6,13 +6,11 @@ import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
-import ie.ucd.engac.GameEngine;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
-import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -44,7 +42,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
 		
 		// Mock messages to logic, performing pathChoiceState functionality
-		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);		
+		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
 		LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 		
 		assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.OptionDecisionRequest);

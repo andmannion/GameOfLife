@@ -8,7 +8,6 @@ import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinResponseMessage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -67,7 +66,7 @@ public class BabyTileTest {
         player.setCurrentLocation(new BoardLocation(priorTileLocation));
 
         // Mock messages to logic, performing turn functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
@@ -100,12 +99,12 @@ public class BabyTileTest {
         player.setCurrentLocation(new BoardLocation(priorTileLocation));
 
         // Mock messages to logic, performing turn functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
 
-        initialMessage = new SpinResponseMessage();
+        initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());

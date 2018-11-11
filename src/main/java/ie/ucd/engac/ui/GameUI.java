@@ -1,6 +1,7 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
+import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;
@@ -96,7 +97,7 @@ public class GameUI implements Drawable {
                     uiInput.setEnableCardChoice(true);
                     break;
                 case AckRequest:
-                    AckRequestMessage ackRequest = (AckRequestMessage) lastResponse;
+                    LifeGameRequestMessage ackRequest = (LifeGameRequestMessage) lastResponse;
                     uiState = WaitingForAck;
                     uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
@@ -155,7 +156,7 @@ public class GameUI implements Drawable {
      * Send a spin response message using the interface.
      */
     private void sendSpinResponseMessage(){
-        LifeGameMessage message = new SpinResponseMessage();
+        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
@@ -164,7 +165,7 @@ public class GameUI implements Drawable {
      * Send an ack response message using the interface.
      */
     private void sendAckResponseMessage(){
-        LifeGameMessage message = new AckResponseMessage();
+        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
