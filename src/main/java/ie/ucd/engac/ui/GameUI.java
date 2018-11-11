@@ -164,7 +164,7 @@ public class GameUI implements Drawable {
      * Send an ack response message using the interface.
      */
     private void sendAckResponseMessage(){
-        LifeGameMessage message = new AckResponseMessage();
+        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }

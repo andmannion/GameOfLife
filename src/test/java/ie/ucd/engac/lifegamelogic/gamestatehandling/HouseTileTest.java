@@ -342,7 +342,7 @@ class HouseTileTest {
         assertEquals(careerPath, gameLogic.getPlayerByIndex(0).getCareerPath());
         assertEquals(maritalStatus, gameLogic.getPlayerByIndex(0).getMaritalStatus());
 
-        initialMessage = new AckResponseMessage();
+        initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());

@@ -49,7 +49,7 @@ public class TestHelpers {
             responseMessage = gameLogic.handleInput(spinMessage);
             assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
-            ackMessage = new AckResponseMessage();
+            ackMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
             responseMessage = gameLogic.handleInput(ackMessage);
         }
 

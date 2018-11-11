@@ -9,7 +9,6 @@ import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.AckResponseMessage;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
@@ -121,7 +120,7 @@ class NightSchoolStateTest {
         messageToLogic = new DecisionResponseMessage(FIRST_COLLEGE_CAREER_CARD_CHOICE);        
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
-        messageToLogic = new AckResponseMessage();
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Cheat here
