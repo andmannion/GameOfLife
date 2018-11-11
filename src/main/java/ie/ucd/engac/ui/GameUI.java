@@ -1,6 +1,7 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
+import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;
@@ -96,7 +97,7 @@ public class GameUI implements Drawable {
                     uiInput.setEnableCardChoice(true);
                     break;
                 case AckRequest:
-                    AckRequestMessage ackRequest = (AckRequestMessage) lastResponse;
+                    LifeGameRequestMessage ackRequest = (LifeGameRequestMessage) lastResponse;
                     uiState = WaitingForAck;
                     uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
