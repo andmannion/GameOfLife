@@ -62,24 +62,17 @@ public class CareerChangeState extends GameState {
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
-            //TODO from here
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
-            // Need to assign the chosen card to the relevant player
-            ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
-            OccupationCard chosenCareerCard = (OccupationCard) pendingCardChoices.get(choiceIndex);
-            gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
-
-            // Only two cards at the moment, return unchosen
-            OccupationCard unchosenCareerCard = (OccupationCard) pendingCardChoices.get((choiceIndex + 1) % 2);
-            //TODO into function in superclass?
-            gameLogic.returnOccupationCard(unchosenCareerCard);
+            actOnOccupationCardChoice(gameLogic, choiceIndex);
 
             return new EndTurnState();
         }
 
         return null;
     }
+
+
 
     @Override
     public void exit(GameLogic gameLogic) {

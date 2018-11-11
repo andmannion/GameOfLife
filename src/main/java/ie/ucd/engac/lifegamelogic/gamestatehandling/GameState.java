@@ -1,5 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.cards.Card;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -22,5 +24,16 @@ public abstract class GameState {
 		validStandardCareerCardOptions.add(secondOptionCard);
 
 		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, eventMessage);
+	}
+
+	protected static void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
+		// Need to assign the chosen card to the relevant player
+		ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
+		OccupationCard chosenCareerCard = (OccupationCard) pendingCardChoices.get(choiceIndex);
+		gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
+
+		// Only two cards at the moment, return unchosen
+		OccupationCard unchosenCareerCard = (OccupationCard) pendingCardChoices.get((choiceIndex + 1) % 2);
+		gameLogic.returnOccupationCard(unchosenCareerCard);
 	}
 }

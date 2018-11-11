@@ -23,7 +23,6 @@ public class BabyState extends GameState {
 			int spinResult = gameLogic.getSpinner().spinTheWheel();
             return handleSpinForBabyState(gameLogic, spinResult);			
 		}
-
 		return null;
 	}
 
