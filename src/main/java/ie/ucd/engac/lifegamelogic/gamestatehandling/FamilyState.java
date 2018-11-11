@@ -63,7 +63,6 @@ public class FamilyState extends GameState {
 		if(numberOfFamilyPathChoices != 2) {
 			// Error
 			System.err.println("Error: board has been configured incorrectly at the Family Stop Tile for player " + gameLogic.getCurrentPlayer().getPlayerNumber());
-			throw new InvalidPropertiesFormatException()
 			System.exit(-1);
 		}
 
