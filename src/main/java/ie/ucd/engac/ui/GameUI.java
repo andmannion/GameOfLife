@@ -136,7 +136,7 @@ public class GameUI implements Drawable {
      * Send a startup message using the interface.
      */
     private void sendStartupMessage(){
-        LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
+        LifeGameMessage message = new StartupMessage();
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }

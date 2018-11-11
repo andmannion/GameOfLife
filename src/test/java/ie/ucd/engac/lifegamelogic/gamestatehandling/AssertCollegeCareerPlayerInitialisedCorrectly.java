@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.messaging.StartupMessage;
 import org.junit.jupiter.api.Test;
 
 import ie.ucd.engac.GameEngine;
@@ -44,7 +45,7 @@ class AssertCollegeCareerPlayerInitialisedCorrectly {
 		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
 		
 		// Mock messages to logic, performing pathChoiceState functionality
-		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);		
+		LifeGameMessage initialMessage = new StartupMessage();
 		LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 		
 		assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.OptionDecisionRequest);

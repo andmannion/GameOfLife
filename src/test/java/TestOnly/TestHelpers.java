@@ -28,7 +28,7 @@ public class TestHelpers {
         LifeGameMessage spinMessage;
         LifeGameMessage ackMessage;
 
-        initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
+        initialMessage = new StartupMessage();
         responseMessage = gameLogic.handleInput(initialMessage);
 
         while (gameLogic.getNumberOfUninitialisedPlayers() > 0) {

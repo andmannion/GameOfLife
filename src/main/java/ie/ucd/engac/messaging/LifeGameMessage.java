@@ -1,7 +1,7 @@
 package ie.ucd.engac.messaging;
 
 // TODO: Probably make this an abstract class
-public class LifeGameMessage {
+public abstract class LifeGameMessage {
 	private LifeGameMessageTypes lifeGameMessageType;
 	//private ArrayList<GameCommand> commandsToUI;
 	//private ArrayList<GameUpdate> updates;
