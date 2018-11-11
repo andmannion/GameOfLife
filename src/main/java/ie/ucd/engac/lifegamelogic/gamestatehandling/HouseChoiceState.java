@@ -5,7 +5,6 @@ import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -24,18 +23,10 @@ public class HouseChoiceState extends GameState {
         HouseCard firstCardChoice = gameLogic.getTopHouseCard();
         HouseCard secondCardChoice = gameLogic.getTopHouseCard();
 
-        // Create a list of the choices
-        ArrayList<Card> pendingCardChoices = new ArrayList<>();
-        pendingCardChoices.add(firstCardChoice);
-        pendingCardChoices.add(secondCardChoice);
-
         // Construct a message with these choices
-        LifeGameMessage replyMessage = constructChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
+        LifeGameMessage replyMessage = setupChoiceAndMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
                 firstCardChoice, secondCardChoice, "Choose a house to purchase");
-        // Need to store both choices so that we can assign the chosen one to the
-        // correct player,
-        // and push the unchosen one to the bottom of the correct deck.
-        gameLogic.storePendingChoiceCards(pendingCardChoices);
+
         gameLogic.setResponseMessage(replyMessage);
 
 	}
@@ -87,7 +78,7 @@ public class HouseChoiceState extends GameState {
         if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
             ArrayList<String> decisionStrings = new ArrayList<>();
             decisionStrings.add("Don't buy.");
-            
+
             double loanTotal = (double)(housePrice - player.getCurrentMoney());
             int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
             decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");

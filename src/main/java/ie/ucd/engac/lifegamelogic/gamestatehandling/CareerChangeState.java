@@ -23,6 +23,7 @@ public class CareerChangeState extends GameState {
         OccupationCard firstCareerCardChoice;
         OccupationCard secondCareerCardChoice;
 
+        // Get the two top CareerCards
         switch (careerPathType) {
             case CollegeCareer:
                 firstCareerCardChoice = gameLogic.getTopCollegeCareerCard();
@@ -38,12 +39,8 @@ public class CareerChangeState extends GameState {
         }
 
         // Set the response message to "CardChoice"
-        // Get the two top CareerCards
-        ArrayList<Card> pendingCardChoices = new ArrayList<>();
-        pendingCardChoices.add(firstCareerCardChoice);
-        pendingCardChoices.add(secondCareerCardChoice);
 
-        LifeGameMessage replyMessage = constructChoiceMessage(
+        LifeGameMessage replyMessage = setupChoiceAndMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
                 (Chooseable) secondCareerCardChoice,
@@ -52,9 +49,7 @@ public class CareerChangeState extends GameState {
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.
-        gameLogic.storePendingChoiceCards(pendingCardChoices);
         gameLogic.setResponseMessage(replyMessage);
-
     }
 
     @Override

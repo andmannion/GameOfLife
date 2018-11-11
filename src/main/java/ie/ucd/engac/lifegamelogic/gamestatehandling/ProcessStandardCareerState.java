@@ -1,8 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
@@ -19,20 +16,14 @@ public class ProcessStandardCareerState extends GameState {
 		CareerCard firstCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 		CareerCard secondCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 
-		ArrayList<Card> pendingCardChoices = new ArrayList<>();
-		pendingCardChoices.add(firstCareerCardChoice);
-		pendingCardChoices.add(secondCareerCardChoice);
-
-		LifeGameMessage replyMessage = constructChoiceMessage(
+		LifeGameMessage replyMessage = setupChoiceAndMessage(
 				gameLogic.getCurrentPlayer().getPlayerNumber(),
-				(Chooseable) firstCareerCardChoice,
-				(Chooseable) secondCareerCardChoice,
+				firstCareerCardChoice, secondCareerCardChoice,
 				"Choose career card");
 
 		// Need to store both choices so that we can assign the chosen one to the
 		// correct player,
 		// and push the unchosen one to the bottom of the correct deck.
-		gameLogic.storePendingChoiceCards(pendingCardChoices);
 		gameLogic.setResponseMessage(replyMessage);
 	}
 

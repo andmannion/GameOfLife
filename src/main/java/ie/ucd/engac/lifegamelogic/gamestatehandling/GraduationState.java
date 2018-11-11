@@ -1,8 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
@@ -15,17 +12,13 @@ public class GraduationState extends GameState {
 	public void enter(GameLogic gameLogic) {
 		// player has no card at this stage, so no reason to return the old one
 		// Take the two top college career cards off the top the deck
-        ArrayList<Card> pendingCardChoices = new ArrayList<>();
-		
+
 		// Give choice of top college cards			
 		OccupationCard firstCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
         OccupationCard secondCollegeCareerCard = gameLogic.getTopCollegeCareerCard();
 
-        pendingCardChoices.add(firstCollegeCareerCard);
-        pendingCardChoices.add(secondCollegeCareerCard);
-
-    // Construct a message with these choices
-    LifeGameMessage replyMessage = constructChoiceMessage(
+        // Construct a message with these choices
+        LifeGameMessage replyMessage = setupChoiceAndMessage(
             gameLogic.getCurrentPlayer().getPlayerNumber(),
             (Chooseable) firstCollegeCareerCard,
             (Chooseable) secondCollegeCareerCard,
@@ -35,7 +28,6 @@ public class GraduationState extends GameState {
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.
         gameLogic.setResponseMessage(replyMessage);
-        gameLogic.storePendingChoiceCards(pendingCardChoices);
 	}
 
 	@Override
