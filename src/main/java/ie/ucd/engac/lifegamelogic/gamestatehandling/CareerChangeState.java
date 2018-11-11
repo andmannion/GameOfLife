@@ -64,6 +64,7 @@ public class CareerChangeState extends GameState {
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
+            //call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
 
             return new EndTurnState();

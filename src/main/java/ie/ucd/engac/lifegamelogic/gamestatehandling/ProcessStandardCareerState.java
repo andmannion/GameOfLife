@@ -42,15 +42,9 @@ public class ProcessStandardCareerState extends GameState {
 			DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
 			
 			int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
-			
-			// Need to assign the chosen card to the relevant player
-			ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();			
-			CareerCard chosenCareerCard = (CareerCard) pendingCardChoices.get(choiceIndex);			
-			gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
-			
-			// Only two cards at the moment, return unchosen
-			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
-			gameLogic.returnOccupationCard(unchosenCareerCard);
+
+			//call static method in superclass to set/return card
+            actOnOccupationCardChoice(gameLogic, choiceIndex);
 			
 			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayerIndex());
 			

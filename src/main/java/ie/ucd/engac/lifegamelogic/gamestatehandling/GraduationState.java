@@ -44,6 +44,7 @@ public class GraduationState extends GameState {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
 		    int choiceIndex = ((DecisionResponseMessage) lifeGameMessage).getChoiceIndex();
 
+            //call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
 
 			String graduationStateEndMessage = "You chose the " + gameLogic.getCurrentPlayer().getOccupationCard().getOccupationCardType() + " card."; //TODO many chained methods
