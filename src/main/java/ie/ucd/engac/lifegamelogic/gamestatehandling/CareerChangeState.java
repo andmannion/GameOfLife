@@ -43,10 +43,11 @@ public class CareerChangeState extends GameState {
         pendingCardChoices.add(firstCareerCardChoice);
         pendingCardChoices.add(secondCareerCardChoice);
 
-        LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
+        LifeGameMessage replyMessage = constructCardChoiceMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
-                (Chooseable) secondCareerCardChoice);
+                (Chooseable) secondCareerCardChoice,
+                "Choose career card.");
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
@@ -83,17 +84,5 @@ public class CareerChangeState extends GameState {
     @Override
     public void exit(GameLogic gameLogic) {
         // TODO Auto-generated method stub
-
-    }
-
-    private LifeGameMessage constructStandardCareerCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
-                                                                     Chooseable secondOptionCard) {
-
-        ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
-
-        validStandardCareerCardOptions.add(firstOptionCard);
-        validStandardCareerCardOptions.add(secondOptionCard);
-
-        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, "Choose career card.");
     }
 }

@@ -1,6 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import ie.ucd.engac.messaging.AckRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
@@ -15,7 +14,6 @@ public class EndTurnState extends GameState {
         this.eventMessage = eventMessage;
     }
 
-    //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){
         if (eventMessage == null){
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();

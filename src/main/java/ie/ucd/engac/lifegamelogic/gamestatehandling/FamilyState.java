@@ -86,6 +86,4 @@ public class FamilyState extends GameState {
 			
 		return null;
 	}
-	
-
 }

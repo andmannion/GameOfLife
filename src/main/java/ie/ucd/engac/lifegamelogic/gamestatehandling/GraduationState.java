@@ -25,11 +25,12 @@ public class GraduationState extends GameState {
         pendingCollegeCareerCardChoices.add(firstCollegeCareerCard);
         pendingCollegeCareerCardChoices.add(secondCollegeCareerCard);
 
-        // Construct a message with these choices
-        LifeGameMessage replyMessage = NightSchoolState.constructCardChoiceMessage( // TODO: find a better home for this reused logic
-                gameLogic.getCurrentPlayer().getPlayerNumber(),
-                (Chooseable) firstCollegeCareerCard,
-                (Chooseable) secondCollegeCareerCard);
+    // Construct a message with these choices
+    LifeGameMessage replyMessage = constructCardChoiceMessage(
+            gameLogic.getCurrentPlayer().getPlayerNumber(),
+            (Chooseable) firstCollegeCareerCard,
+            (Chooseable) secondCollegeCareerCard,
+            "Choose new college career card");
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,

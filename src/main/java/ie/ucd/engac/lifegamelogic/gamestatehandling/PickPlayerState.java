@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PickPlayerState extends GameState {
     private PlayersPayActionCard playersPayActionCard;
 
-    public PickPlayerState(PlayersPayActionCard playersPayActionCard){
+    PickPlayerState(PlayersPayActionCard playersPayActionCard){
         this.playersPayActionCard = playersPayActionCard;
     }
 

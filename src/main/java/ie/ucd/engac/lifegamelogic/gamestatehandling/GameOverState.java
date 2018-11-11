@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 public class GameOverState extends GameState {
 
-    private String eventMessage;
 
-    public GameOverState(){}
+    GameOverState(){}
 
     //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){

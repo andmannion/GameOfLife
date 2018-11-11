@@ -5,13 +5,11 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class BabyState extends GameState {
-	private final String BABY_EVENT_MESSAGE = "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
-	
-	
+
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// Request a spin from the current player to determine how many babies they had
-		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + BABY_EVENT_MESSAGE;
+		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
 		
 		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
 																 gameLogic.getCurrentPlayerIndex(),

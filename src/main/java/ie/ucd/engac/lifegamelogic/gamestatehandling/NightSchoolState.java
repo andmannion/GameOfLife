@@ -52,7 +52,8 @@ public class NightSchoolState extends GameState {
             LifeGameMessage replyMessage = constructCardChoiceMessage(
                     gameLogic.getCurrentPlayer().getPlayerNumber(),
                     (Chooseable) firstCollegeCareerCard,
-                    (Chooseable) secondCollegeCareerCard);
+                    (Chooseable) secondCollegeCareerCard,
+                    "Choose new college career card");
 
             // Need to store both choices so that we can assign the chosen one to the
             // correct player,
@@ -156,15 +157,5 @@ public class NightSchoolState extends GameState {
 				
 		return new HandlePlayerMoveState(eventMsg);
 	}
-    
-	static LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, 
-													   Chooseable firstOptionCard,
-                                                       Chooseable secondOptionCard) {
-        ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
 
-        validStandardCareerCardOptions.add(firstOptionCard);
-        validStandardCareerCardOptions.add(secondOptionCard);
-
-        return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, "Choose new college career card");
-    }
 }
