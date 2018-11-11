@@ -128,10 +128,12 @@ public class NightSchoolState implements GameState {
 		if(choiceIndex == ATTEND_NIGHT_SCHOOL_INDEX) {
 			// Player wishes to attend night school:			
 			gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
-			
-			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();			
-			gameLogic.returnOccupationCard(currentOccupationCard);
-			
+
+			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
+			if (currentOccupationCard != null){ //shouldnt be null, but just in case
+				gameLogic.returnOccupationCard(currentOccupationCard);
+			}
+
 			OccupationCard topCollegeCareerCard = gameLogic.getTopCollegeCareerCard();	
 			
 			Player currentPlayer = gameLogic.getCurrentPlayer();			

@@ -8,12 +8,18 @@ import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
 public class CareerChangeState implements GameState {
-    private CareerPathTypes careerPathType;
 
     @Override
     public void enter(GameLogic gameLogic) {
         // Must send a message to transition to processStandardCareer
-        careerPathType = gameLogic.getCurrentPlayer().getCareerPath();
+        CareerPathTypes careerPathType = gameLogic.getCurrentPlayer().getCareerPath();
+
+        //must return the old career card to the bottom of the deck
+        OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
+        if (currentOccupationCard != null){ //shouldnt be null, but just in case
+            gameLogic.returnOccupationCard(currentOccupationCard);
+        }
+
         OccupationCard firstCareerCardChoice;
         OccupationCard secondCareerCardChoice;
 
@@ -30,10 +36,9 @@ public class CareerChangeState implements GameState {
                 firstCareerCardChoice = null;
                 secondCareerCardChoice = null;
         }
+
         // Set the response message to "CardChoice"
         // Get the two top CareerCards
-
-
         ArrayList<Card> pendingCardChoices = new ArrayList<>();
         pendingCardChoices.add(firstCareerCardChoice);
         pendingCardChoices.add(secondCareerCardChoice);

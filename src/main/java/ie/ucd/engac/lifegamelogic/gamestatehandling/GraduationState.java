@@ -14,6 +14,7 @@ public class GraduationState implements GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
+		// player has no card at this stage, so no reason to return the old one
 		// Take the two top college career cards off the top the deck
 		pendingCollegeCareerCardChoices = new ArrayList<>();
 		
@@ -44,7 +45,7 @@ public class GraduationState implements GameState {
 			OccupationCard chosenCollegeCareerCard = pendingCollegeCareerCardChoices.get(choiceIndex);			
 			gameLogic.getCurrentPlayer().setOccupationCard(chosenCollegeCareerCard);
 			
-			OccupationCard unchosenCollegeCareerCard = pendingCollegeCareerCardChoices.get((choiceIndex + 1) % 1);			
+			OccupationCard unchosenCollegeCareerCard = pendingCollegeCareerCardChoices.get((choiceIndex + 1) % 2);
 			gameLogic.returnOccupationCard(unchosenCollegeCareerCard);
 			
 			String graduationStateEndMessage = "You chose the " + ((CollegeCareerCard) chosenCollegeCareerCard).getOccupationCardType() + " card.";
