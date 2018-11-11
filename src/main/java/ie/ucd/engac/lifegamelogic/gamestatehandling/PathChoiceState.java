@@ -13,8 +13,9 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class PathChoiceState extends GameState {
-        public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
+	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
 	public static final int COLLEGE_CAREER_CHOICE_INDEX = 1;
+
 	@Override
 	public void enter(GameLogic gameLogic) {
 

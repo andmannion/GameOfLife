@@ -22,7 +22,6 @@ public class SpinToWinGetWinnerState extends GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
 		currentPlayerSpinningTheWheelIndex = gameLogic.getCurrentPlayerIndex();
 	}
 

@@ -55,9 +55,7 @@ public class ProcessStandardCareerState extends GameState {
 			gameLogic.setResponseMessage(spinRequestMessage);
 
 			gameLogic.decrementNumberOfUninitialisedPlayers();
-			
-			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 
-			// hierarchical states and who owns them, transitions from lower to higher, etc.
+
 			return new HandlePlayerMoveState();
 		}
 		

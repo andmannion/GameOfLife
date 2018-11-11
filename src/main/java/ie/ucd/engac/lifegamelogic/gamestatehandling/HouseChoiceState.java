@@ -30,9 +30,8 @@ public class HouseChoiceState extends GameState {
         pendingCardChoices.add(secondCardChoice);
 
         // Construct a message with these choices
-        LifeGameMessage replyMessage = constructCardChoiceMessage(
-                gameLogic.getCurrentPlayer().getPlayerNumber(), firstCardChoice, secondCardChoice);
-
+        LifeGameMessage replyMessage = constructChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
+                firstCardChoice, secondCardChoice, "Choose a house to purchase");
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.
@@ -42,7 +41,6 @@ public class HouseChoiceState extends GameState {
 	}
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 	    GameState nextState = null; //TODO
         Player player = gameLogic.getCurrentPlayer();
@@ -51,12 +49,7 @@ public class HouseChoiceState extends GameState {
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
-            // Need to assign the chosen card to the relevant player
-            ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
-            chosenCard = (HouseCard) pendingCardChoices.get(choiceIndex);
-
-            HouseCard unchosenCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
-            gameLogic.returnHouseCard(unchosenCard);
+            chosenCard = actOnHouseCardChoice(gameLogic, choiceIndex);
 
             int housePrice = chosenCard.getPurchasePrice();
 
@@ -89,26 +82,12 @@ public class HouseChoiceState extends GameState {
 		// Must clear the sent message?
 	}
 
-	@NotNull
-    @Contract("_, _, _ -> new")
-    private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
-                                                       Chooseable secondOptionCard) {
-
-		ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
-
-		validStandardCareerCardOptions.add(firstOptionCard);
-		validStandardCareerCardOptions.add(secondOptionCard);
-
-		String eventMessage = "Which house do you want to purchase?";
-
-		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, eventMessage);
-	}
-
 	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
 	    GameState nextState;
         if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
             ArrayList<String> decisionStrings = new ArrayList<>();
             decisionStrings.add("Don't buy.");
+            
             double loanTotal = (double)(housePrice - player.getCurrentMoney());
             int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
             decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");

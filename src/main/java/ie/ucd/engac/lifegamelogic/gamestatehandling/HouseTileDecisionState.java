@@ -28,7 +28,6 @@ public class HouseTileDecisionState extends GameState {
     }
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {

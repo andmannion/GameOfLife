@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -36,4 +37,17 @@ public abstract class GameState {
 		OccupationCard unchosenCareerCard = (OccupationCard) pendingCardChoices.get((choiceIndex + 1) % 2);
 		gameLogic.returnOccupationCard(unchosenCareerCard);
 	}
+
+    protected static HouseCard actOnHouseCardChoice(GameLogic gameLogic, int choiceIndex){
+        // Need to assign the chosen card to the relevant player
+        ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
+        HouseCard chosenHouseCard = (HouseCard) pendingCardChoices.get(choiceIndex);
+        gameLogic.getCurrentPlayer().addHouseCard(chosenHouseCard);
+
+        // Only two cards at the moment, return unchosen
+        HouseCard unchosenHouseCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
+        gameLogic.returnHouseCard(unchosenHouseCard);
+
+        return chosenHouseCard;
+    }
 }
