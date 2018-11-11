@@ -15,15 +15,15 @@ public abstract class GameState {
 
 	abstract void exit(GameLogic gameLogic);
 
-	protected static LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
-																		Chooseable secondOptionCard, String eventMessage) {
+	protected static LifeGameMessage constructChoiceMessage(int relatedPlayerIndex, Chooseable firstOption,
+                                                            Chooseable secondOption, String eventMessage) {
 
-		ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
+		ArrayList<Chooseable> validOptions = new ArrayList<>();
 
-		validStandardCareerCardOptions.add(firstOptionCard);
-		validStandardCareerCardOptions.add(secondOptionCard);
+        validOptions.add(firstOption);
+        validOptions.add(secondOption);
 
-		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, eventMessage);
+		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage);
 	}
 
 	protected static void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){

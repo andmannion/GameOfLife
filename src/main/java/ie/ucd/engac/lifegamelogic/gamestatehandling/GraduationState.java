@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -26,7 +25,7 @@ public class GraduationState extends GameState {
         pendingCardChoices.add(secondCollegeCareerCard);
 
     // Construct a message with these choices
-    LifeGameMessage replyMessage = constructCardChoiceMessage(
+    LifeGameMessage replyMessage = constructChoiceMessage(
             gameLogic.getCurrentPlayer().getPlayerNumber(),
             (Chooseable) firstCollegeCareerCard,
             (Chooseable) secondCollegeCareerCard,

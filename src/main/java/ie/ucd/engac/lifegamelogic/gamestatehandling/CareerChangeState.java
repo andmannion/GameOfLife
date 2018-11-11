@@ -43,7 +43,7 @@ public class CareerChangeState extends GameState {
         pendingCardChoices.add(firstCareerCardChoice);
         pendingCardChoices.add(secondCareerCardChoice);
 
-        LifeGameMessage replyMessage = constructCardChoiceMessage(
+        LifeGameMessage replyMessage = constructChoiceMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
                 (Chooseable) secondCareerCardChoice,
