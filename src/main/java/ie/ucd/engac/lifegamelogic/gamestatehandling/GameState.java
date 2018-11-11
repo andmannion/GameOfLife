@@ -2,10 +2,10 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.messaging.LifeGameMessage;
 
-public interface GameState {
-	void enter(GameLogic gameLogic);
-	
-	GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
-	
-	void exit(GameLogic gameLogic);
+public abstract class GameState {
+	abstract void enter(GameLogic gameLogic);
+
+	abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
+
+	abstract void exit(GameLogic gameLogic);
 }

@@ -3,7 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import ie.ucd.engac.messaging.*;
 import java.util.ArrayList;
 
-public class HouseTileDecisionState implements GameState {
+public class HouseTileDecisionState extends GameState {
 
     @Override
     public void enter(GameLogic gameLogic) {

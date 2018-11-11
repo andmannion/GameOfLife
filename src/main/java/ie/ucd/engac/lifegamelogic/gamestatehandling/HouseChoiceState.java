@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class HouseChoiceState implements GameState {
+public class HouseChoiceState extends GameState {
     private boolean loanRequired;
     private HouseCard chosenCard;
 

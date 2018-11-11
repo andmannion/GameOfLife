@@ -6,7 +6,7 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class HouseSaleState implements GameState { //TODO this entire class
+public class HouseSaleState extends GameState { //TODO this entire class
 
     private int choiceIndex;
     private boolean choseCard = false;

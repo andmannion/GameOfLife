@@ -5,7 +5,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
 
-public class EndTurnState implements GameState {
+public class EndTurnState extends GameState {
 
     private String eventMessage;
 

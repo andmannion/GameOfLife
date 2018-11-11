@@ -5,7 +5,7 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class PickPlayerState implements GameState {
+public class PickPlayerState extends GameState {
     private PlayersPayActionCard playersPayActionCard;
 
     public PickPlayerState(PlayersPayActionCard playersPayActionCard){

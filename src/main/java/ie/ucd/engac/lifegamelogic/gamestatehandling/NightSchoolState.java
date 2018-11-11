@@ -15,7 +15,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class NightSchoolState implements GameState {
+public class NightSchoolState extends GameState {
 	private final String KEEP_CAREER_MSG = "Keep your current career";
 	public static final int KEEP_CAREER_INDEX = 0;
 	

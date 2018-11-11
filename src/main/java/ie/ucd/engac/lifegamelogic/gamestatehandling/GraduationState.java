@@ -9,7 +9,7 @@ import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-public class GraduationState implements GameState {
+public class GraduationState extends GameState {
 	private ArrayList<OccupationCard> pendingCollegeCareerCardChoices;
 	
 	@Override

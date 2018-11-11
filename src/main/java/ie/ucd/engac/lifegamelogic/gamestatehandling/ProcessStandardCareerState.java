@@ -7,7 +7,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
-public class ProcessStandardCareerState implements GameState {
+public class ProcessStandardCareerState extends GameState {
 
 	@Override
 	public void enter(GameLogic gameLogic) {

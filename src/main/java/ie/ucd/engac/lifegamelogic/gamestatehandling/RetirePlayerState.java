@@ -8,7 +8,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class RetirePlayerState implements GameState {
+public class RetirePlayerState extends GameState {
 
     private int numberOfHouses;
     private int currentCardIndex;

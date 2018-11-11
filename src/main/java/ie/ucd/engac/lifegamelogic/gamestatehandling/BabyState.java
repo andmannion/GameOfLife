@@ -1,11 +1,10 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class BabyState implements GameState {
+public class BabyState extends GameState {
 	private final String BABY_EVENT_MESSAGE = "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
 	
 	

@@ -2,7 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.messaging.LifeGameMessage;
 
-public class InitialisePlayerState implements GameState {
+public class InitialisePlayerState extends GameState {
 	// According to hierarchical state machines: the substate should
 	// attempt to handle the event first.If it will not handle the event, it is passed further
 	// up the hierarchy.

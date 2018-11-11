@@ -5,7 +5,7 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class GameOverState implements GameState {
+public class GameOverState extends GameState {
 
     private String eventMessage;
 
