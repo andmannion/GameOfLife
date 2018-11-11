@@ -3,7 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 import ie.ucd.engac.messaging.*;
 import java.util.ArrayList;
 
-public class HouseTileDecisionState implements GameState {
+public class HouseTileDecisionState extends GameState {
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -28,7 +28,6 @@ public class HouseTileDecisionState implements GameState {
     }
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {

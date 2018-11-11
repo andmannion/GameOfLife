@@ -13,7 +13,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class SpinToWinSetupState implements GameState {
+public class SpinToWinSetupState extends GameState {
 
 	private HashSet<Integer> remainingNumberChoices;
 	private HashMap<Integer, ArrayList<Integer>> playerIndexChoiceMap;

@@ -1,13 +1,10 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
-public class ProcessStandardCareerState implements GameState {
+public class ProcessStandardCareerState extends GameState {
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -19,19 +16,14 @@ public class ProcessStandardCareerState implements GameState {
 		CareerCard firstCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 		CareerCard secondCareerCardChoice = (CareerCard) gameLogic.getTopStandardCareerCard();
 
-		ArrayList<Card> pendingCardChoices = new ArrayList<>();
-		pendingCardChoices.add(firstCareerCardChoice);
-		pendingCardChoices.add(secondCareerCardChoice);
-
-		LifeGameMessage replyMessage = constructStandardCareerCardChoiceMessage(
+		LifeGameMessage replyMessage = setupChoiceAndMessage(
 				gameLogic.getCurrentPlayer().getPlayerNumber(),
-				(Chooseable) firstCareerCardChoice,
-				(Chooseable) secondCareerCardChoice);
+				firstCareerCardChoice, secondCareerCardChoice,
+				"Choose career card");
 
 		// Need to store both choices so that we can assign the chosen one to the
 		// correct player,
 		// and push the unchosen one to the bottom of the correct deck.
-		gameLogic.storePendingChoiceCards(pendingCardChoices);
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -41,15 +33,9 @@ public class ProcessStandardCareerState implements GameState {
 			DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
 			
 			int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
-			
-			// Need to assign the chosen card to the relevant player
-			ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();			
-			CareerCard chosenCareerCard = (CareerCard) pendingCardChoices.get(choiceIndex);			
-			gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
-			
-			// Only two cards at the moment, return unchosen
-			CareerCard unchosenCareerCard = (CareerCard) pendingCardChoices.get((choiceIndex + 1) % 2);			
-			gameLogic.returnOccupationCard(unchosenCareerCard);
+
+			//call static method in superclass to set/return card
+            actOnOccupationCardChoice(gameLogic, choiceIndex);
 			
 			gameLogic.movePlayerToInitialCareerPath(gameLogic.getCurrentPlayerIndex());
 			
@@ -60,9 +46,7 @@ public class ProcessStandardCareerState implements GameState {
 			gameLogic.setResponseMessage(spinRequestMessage);
 
 			gameLogic.decrementNumberOfUninitialisedPlayers();
-			
-			// TODO: Need to transition to the waitForSpinState - still need to figure out correct layout of 
-			// hierarchical states and who owns them, transitions from lower to higher, etc.
+
 			return new HandlePlayerMoveState();
 		}
 		
@@ -74,16 +58,5 @@ public class ProcessStandardCareerState implements GameState {
 		// TODO Auto-generated method stub
 		
 	}
-    
-	private LifeGameMessage constructStandardCareerCardChoiceMessage(int relatedPlayerIndex,
-																	 Chooseable firstOptionCard,
-                                                                     Chooseable secondOptionCard) {
-        ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
 
-        validStandardCareerCardOptions.add(firstOptionCard);
-        validStandardCareerCardOptions.add(secondOptionCard);
-
-        return new DecisionRequestMessage(validStandardCareerCardOptions,
-        								  relatedPlayerIndex,"Choose career card");
-    }
 }

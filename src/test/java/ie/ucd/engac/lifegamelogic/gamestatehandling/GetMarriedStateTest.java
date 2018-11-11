@@ -13,7 +13,6 @@ import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinResponseMessage;
 
 class GetMarriedStateTest {
 	private final String PRIOR_TILE_LOCATION = "aa";
@@ -33,14 +32,14 @@ class GetMarriedStateTest {
 		int marriageGuestInitialBalance = gameLogic.getPlayerByIndex(1).getCurrentMoney();
 		
 		// Mock messages to logic, performing pathChoiceState functionality
-        LifeGameMessage messageToLogic = new SpinResponseMessage();
+        LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Now the current player is on the GetMarriedTile - other players have to be queried to spin
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
         // Provide mock UI response
-        messageToLogic = new SpinResponseMessage();
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Assert the current player is still the same, and they are being asked to spin again

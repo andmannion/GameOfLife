@@ -5,12 +5,11 @@ import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class HouseChoiceState implements GameState {
+public class HouseChoiceState extends GameState {
     private boolean loanRequired;
     private HouseCard chosenCard;
 
@@ -24,25 +23,15 @@ public class HouseChoiceState implements GameState {
         HouseCard firstCardChoice = gameLogic.getTopHouseCard();
         HouseCard secondCardChoice = gameLogic.getTopHouseCard();
 
-        // Create a list of the choices
-        ArrayList<Card> pendingCardChoices = new ArrayList<>();
-        pendingCardChoices.add(firstCardChoice);
-        pendingCardChoices.add(secondCardChoice);
-
         // Construct a message with these choices
-        LifeGameMessage replyMessage = constructCardChoiceMessage(
-                gameLogic.getCurrentPlayer().getPlayerNumber(), firstCardChoice, secondCardChoice);
+        LifeGameMessage replyMessage = setupChoiceAndMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
+                firstCardChoice, secondCardChoice, "Choose a house to purchase");
 
-        // Need to store both choices so that we can assign the chosen one to the
-        // correct player,
-        // and push the unchosen one to the bottom of the correct deck.
-        gameLogic.storePendingChoiceCards(pendingCardChoices);
         gameLogic.setResponseMessage(replyMessage);
 
 	}
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 	    GameState nextState = null; //TODO
         Player player = gameLogic.getCurrentPlayer();
@@ -51,12 +40,13 @@ public class HouseChoiceState implements GameState {
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
-            // Need to assign the chosen card to the relevant player
-            ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices();
-            chosenCard = (HouseCard) pendingCardChoices.get(choiceIndex);
+            // Only two cards at the moment, return unchosen
+            HouseCard unchosenHouseCard = (HouseCard) getPendingCardChoices().get((choiceIndex + 1) % 2);
+            gameLogic.returnHouseCard(unchosenHouseCard);
 
-            HouseCard unchosenCard = (HouseCard) pendingCardChoices.get((choiceIndex + 1) % 2);
-            gameLogic.returnHouseCard(unchosenCard);
+            //store the unchosen as we need to see if it can be afforded
+            chosenCard = (HouseCard) getPendingCardChoices().get(choiceIndex);
+
 
             int housePrice = chosenCard.getPurchasePrice();
 
@@ -89,26 +79,12 @@ public class HouseChoiceState implements GameState {
 		// Must clear the sent message?
 	}
 
-	@NotNull
-    @Contract("_, _, _ -> new")
-    private LifeGameMessage constructCardChoiceMessage(int relatedPlayerIndex, Chooseable firstOptionCard,
-                                                       Chooseable secondOptionCard) {
-
-		ArrayList<Chooseable> validStandardCareerCardOptions = new ArrayList<>();
-
-		validStandardCareerCardOptions.add(firstOptionCard);
-		validStandardCareerCardOptions.add(secondOptionCard);
-
-		String eventMessage = "Which house do you want to purchase?";
-
-		return new DecisionRequestMessage(validStandardCareerCardOptions, relatedPlayerIndex, eventMessage);
-	}
-
 	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
 	    GameState nextState;
         if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
             ArrayList<String> decisionStrings = new ArrayList<>();
             decisionStrings.add("Don't buy.");
+
             double loanTotal = (double)(housePrice - player.getCurrentMoney());
             int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
             decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");

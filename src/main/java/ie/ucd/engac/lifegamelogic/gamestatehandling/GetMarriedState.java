@@ -8,7 +8,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class GetMarriedState implements GameState {
+public class GetMarriedState extends GameState {
 	
 	private int playersLeftToSpin;
 	private int playerGettingMarriedIndex;

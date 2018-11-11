@@ -12,9 +12,10 @@ import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-public class PathChoiceState implements GameState {
-        public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
+public class PathChoiceState extends GameState {
+	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
 	public static final int COLLEGE_CAREER_CHOICE_INDEX = 1;
+
 	@Override
 	public void enter(GameLogic gameLogic) {
 
@@ -59,16 +60,14 @@ public class PathChoiceState implements GameState {
 		// Must clear the sent message?
 	}
 
-	protected static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
+	static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
 		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
 		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
 		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
 
 		String eventMessage = "Choose either a college or standard career path.";
 
-		LifeGameMessage replyMessage = new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage);
-
-		return replyMessage;
+		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage);
 	}
 
 	private OccupationCardTypes parsePathChoiceResponse(DecisionResponseMessage pathChoiceMessage) {

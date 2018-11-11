@@ -2,23 +2,17 @@ package ie.ucd.engac.messaging;
 
 import java.util.ArrayList;
 
-public class DecisionRequestMessage extends LifeGameMessage {
+public class DecisionRequestMessage extends LifeGameRequestMessage {
 	// Need to tell what is to be chosen between
 	private final int relatedPlayerIndex;
 	private final ArrayList<Chooseable> choices;
-    private String eventMsg;
 	
 	public DecisionRequestMessage(ArrayList<Chooseable> choices, int relatedPlayerIndex, String eventMessage) {
-		super(LifeGameMessageTypes.OptionDecisionRequest);
+		super(LifeGameMessageTypes.OptionDecisionRequest,eventMessage);
 		this.relatedPlayerIndex = relatedPlayerIndex;
 		this.choices = choices;
-		this.eventMsg = eventMessage;
 	}
 
-	public String getEventMsg(){
-		return eventMsg;
-	}
-	
 	public int getRelatedPlayer() {
 		return relatedPlayerIndex;
 	}

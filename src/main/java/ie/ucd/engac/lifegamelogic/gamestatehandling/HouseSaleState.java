@@ -6,9 +6,10 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class HouseSaleState implements GameState { //TODO this entire class
+public class HouseSaleState extends GameState { //TODO this entire class
 
-    int choiceIndex;
+    private int choiceIndex;
+    private boolean choseCard = false;
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -29,10 +30,8 @@ public class HouseSaleState implements GameState { //TODO this entire class
     }
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 
-        //TODO potential exception if erroneous spin reponse received
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
             LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
 
@@ -43,9 +42,10 @@ public class HouseSaleState implements GameState { //TODO this entire class
             SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
             gameLogic.setResponseMessage(spinRequestMessage);
 
+            choseCard = true;
             return null;
         }
-        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
+        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse && choseCard) {
             int spinNum = gameLogic.getSpinner().spinTheWheel();
             Player player = gameLogic.getCurrentPlayer();
             HouseCard soldCard = player.sellHouseCard(choiceIndex,spinNum);
