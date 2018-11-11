@@ -1,6 +1,6 @@
 package ie.ucd.engac.messaging;
 
-public class AckResponseMessage extends LifeGameResponseMessage {
+public class AckResponseMessage extends LifeGameMessage {
     public AckResponseMessage(){
         super(LifeGameMessageTypes.AckResponse);
     }

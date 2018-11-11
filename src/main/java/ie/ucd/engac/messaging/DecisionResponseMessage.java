@@ -1,6 +1,6 @@
 package ie.ucd.engac.messaging;
 
-public class DecisionResponseMessage extends LifeGameResponseMessage {
+public class DecisionResponseMessage extends LifeGameMessage {
 	private final int choiceIndex;	
 	
 	public DecisionResponseMessage(int choiceIndex) {
