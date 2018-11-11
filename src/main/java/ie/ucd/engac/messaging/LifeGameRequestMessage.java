@@ -1,6 +1,6 @@
 package ie.ucd.engac.messaging;
 
-public abstract class LifeGameRequestMessage extends LifeGameMessage {
+public class LifeGameRequestMessage extends LifeGameMessage {
 
     private String eventMsg;
 
