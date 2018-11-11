@@ -15,7 +15,7 @@ import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
-class AssertCollegeCareerPlayerInitialisedCorrectly {
+class PathChoiceCollegeCareerTest {
 	private final int NUM_PLAYERS = 2;
 	@Test
 	void test() {	

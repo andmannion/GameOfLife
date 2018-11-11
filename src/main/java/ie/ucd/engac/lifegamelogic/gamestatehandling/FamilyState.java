@@ -1,7 +1,9 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 
+import com.sun.tools.internal.ws.wsdl.framework.DuplicateEntityException;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.messaging.ChooseableString;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
@@ -56,11 +58,13 @@ public class FamilyState extends GameState {
 		ArrayList<BoardLocation> familyPathOptions = gameLogic.getAdjacentForwardLocations(currentBoardLocation);
 		
 		int numberOfFamilyPathChoices = familyPathOptions.size();
-		
+		System.out.println("Parsing response for player " + gameLogic.getCurrentPlayer().getPlayerNumber());
+
 		if(numberOfFamilyPathChoices != 2) {
 			// Error
-			System.err.println("Error: board has been configured incorrectly at the Family Stop Tile.");
-			return null;
+			System.err.println("Error: board has been configured incorrectly at the Family Stop Tile for player " + gameLogic.getCurrentPlayer().getPlayerNumber());
+			throw new InvalidPropertiesFormatException()
+			System.exit(-1);
 		}
 
 
