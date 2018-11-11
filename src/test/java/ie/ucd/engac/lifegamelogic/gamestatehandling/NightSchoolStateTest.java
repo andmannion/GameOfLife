@@ -13,7 +13,6 @@ import ie.ucd.engac.messaging.AckResponseMessage;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinResponseMessage;
 
 class NightSchoolStateTest {
 	private static final int NUM_PLAYERS = 2;
@@ -36,7 +35,7 @@ class NightSchoolStateTest {
 				
 		currentPlayerUnderTest.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 		
-		LifeGameMessage messageToLogic = new SpinResponseMessage();
+		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Message should be requesting a choice to move to the family path or the night school path
@@ -57,7 +56,7 @@ class NightSchoolStateTest {
         assertEquals(1, gameLogic.getCurrentPlayer().getPlayerNumber());
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
-        messageToLogic = new SpinResponseMessage();        
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);        
         
         // Assert that the player has been moved to the night school board path
@@ -79,7 +78,7 @@ class NightSchoolStateTest {
 				
 		currentPlayerUnderTest.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 		
-		LifeGameMessage messageToLogic = new SpinResponseMessage();
+		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Message should be requesting a choice to move to the family path or the night school path
@@ -99,7 +98,7 @@ class NightSchoolStateTest {
         assertEquals(1, gameLogic.getCurrentPlayer().getPlayerNumber());
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
-        messageToLogic = new SpinResponseMessage();        
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);        
         
         // Assert that the player has been moved to the night school board path
@@ -115,7 +114,7 @@ class NightSchoolStateTest {
 
 		gameLogic.getCurrentPlayer().setCurrentLocation(new BoardLocation(PRIOR_TO_GRADUATE_TILE_LOCATION));
 		
-		LifeGameMessage messageToLogic = new SpinResponseMessage();
+		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Just choose the first CollegeCareerCard

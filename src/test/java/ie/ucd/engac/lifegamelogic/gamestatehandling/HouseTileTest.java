@@ -41,7 +41,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
         // Mock messages to logic, performing pathChoiceState functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType());
@@ -93,7 +93,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
         // Mock messages to logic, performing pathChoiceState functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
@@ -159,7 +159,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
         // Mock messages to logic, performing pathChoiceState functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
@@ -227,7 +227,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
         // Mock messages to logic, performing pathChoiceState functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
@@ -302,7 +302,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
         // Mock messages to logic, performing  functionality
-        LifeGameMessage initialMessage = new SpinResponseMessage();
+        LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
@@ -351,7 +351,7 @@ class HouseTileTest {
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION)); //and move him to prior tile
 
         // Mock messages to logic, performing  functionality
-        initialMessage = new SpinResponseMessage();
+        initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
@@ -372,7 +372,7 @@ class HouseTileTest {
         //should now be spinning to choose the sale price
         assertEquals(LifeGameMessageTypes.SpinRequest,responseMessage.getLifeGameMessageType());
         // Mock messages to logic, performing  functionality
-        initialMessage = new SpinResponseMessage();
+        initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType());

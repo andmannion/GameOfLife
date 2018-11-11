@@ -45,7 +45,7 @@ public class TestHelpers {
             //force player back to "a"
             player.setCurrentLocation(new BoardLocation("a"));
             //send back a spin response
-            spinMessage = new SpinResponseMessage();
+            spinMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(spinMessage);
             assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
 
