@@ -8,7 +8,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class RetirePlayerState implements GameState {
+public class RetirePlayerState extends GameState {
 
     private int numberOfHouses;
     private int currentCardIndex;
@@ -30,22 +30,27 @@ public class RetirePlayerState implements GameState {
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
+
             int spinNum = gameLogic.getSpinner().spinTheWheel();;
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
             HouseCard soldCard = retiree.sellHouseCard(currentCardIndex, spinNum);
             gameLogic.returnHouseCard(soldCard);
             currentCardIndex = currentCardIndex + 1;
-            if (currentCardIndex < numberOfHouses) { //if there are cards left to sell
+
+            //decide next action
+            if (currentCardIndex < numberOfHouses) { //if there are cards left to sell then keep going through sale sequence
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-                int curentHouseNumber = currentCardIndex + 1;
-                String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + curentHouseNumber + "/" + numberOfHouses;
+                int currentHouseNumber = currentCardIndex + 1;
+                String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
                 SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
                 gameLogic.setResponseMessage(spinRequestMessage);
             }
-            else {
+            else { //otherwise do remainder of retirement actions
                 int retirementCash = gameLogic.retireCurrentPlayer();
                 String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
+
+                //check if the game is over or we need to keep playing on
                 if (gameLogic.getNumberOfPlayers() == 0) {
                     nextState = new GameOverState();
                 }

@@ -10,7 +10,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.ShadowPlayer;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class SpinToWinGetWinnerState implements GameState {
+public class SpinToWinGetWinnerState extends GameState {
 	private static final int SPIN_TO_WIN_PRIZE_NOT_WON = -1;
 	
 	private final HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap;
@@ -22,7 +22,6 @@ public class SpinToWinGetWinnerState implements GameState {
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
 		currentPlayerSpinningTheWheelIndex = gameLogic.getCurrentPlayerIndex();
 	}
 

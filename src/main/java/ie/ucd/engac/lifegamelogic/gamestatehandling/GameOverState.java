@@ -5,11 +5,10 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class GameOverState implements GameState {
+public class GameOverState extends GameState {
 
-    private String eventMessage;
 
-    public GameOverState(){}
+    GameOverState(){}
 
     //TODO constructor with the situational event message
     public void enter(GameLogic gameLogic){

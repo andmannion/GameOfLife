@@ -18,7 +18,7 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
 
-public class HandlePlayerMoveState implements GameState {
+public class HandlePlayerMoveState extends GameState {
     private String eventMessage ;
 
 	public HandlePlayerMoveState(String eventMessage){

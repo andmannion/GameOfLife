@@ -5,10 +5,10 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class PickPlayerState implements GameState {
+public class PickPlayerState extends GameState {
     private PlayersPayActionCard playersPayActionCard;
 
-    public PickPlayerState(PlayersPayActionCard playersPayActionCard){
+    PickPlayerState(PlayersPayActionCard playersPayActionCard){
         this.playersPayActionCard = playersPayActionCard;
     }
 
@@ -33,7 +33,6 @@ public class PickPlayerState implements GameState {
     }
 
     @Override
-    @SuppressWarnings("Duplicates")
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
