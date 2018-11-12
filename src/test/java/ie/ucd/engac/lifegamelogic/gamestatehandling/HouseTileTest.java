@@ -40,7 +40,7 @@ class HouseTileTest {
 
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
 
-        // Mock messages to logic, performing pathChoiceState functionality
+        // Mock messages to logic, performing move functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 

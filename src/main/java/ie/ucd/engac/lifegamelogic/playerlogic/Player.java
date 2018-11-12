@@ -55,9 +55,9 @@ public class Player {
 
     //Retirement related
     public int computeRetirementBonuses(int numberOfRetirees){
-        int retirementBonus = (GameConfig.max_num_players -numberOfRetirees)*100*1000; //TODO refactor?
-        int actionCardBonus = getNumberOfActionCards()*100*1000;
-        int childrenBonus = getNumberOfChildren()*50*1000;
+        int retirementBonus = (GameConfig.max_num_players - numberOfRetirees)*GameConfig.ret_bonus_remaining;
+        int actionCardBonus = getNumberOfActionCards()*GameConfig.ret_bonus_action;
+        int childrenBonus = getNumberOfChildren()*GameConfig.ret_bonus_kids;
         return retirementBonus + actionCardBonus + childrenBonus;
     }
 
