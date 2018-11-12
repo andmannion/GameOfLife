@@ -7,6 +7,7 @@ public class GameConfig {
     public static int panelHeight;
     public static int max_num_players;
 
+    public static String action_card_deck_config_file_location;
     public static String house_card_deck_config_file_location;
     public static String career_card_deck_config_file_location;
     public static String college_career_card_deck_config_file_location;
@@ -29,6 +30,7 @@ public class GameConfig {
         panelHeight = Integer.parseInt(properties.getProperty("PANHEIGHT"));
         max_num_players = Integer.parseInt(properties.getProperty("MAX_NUM_PLAYERS"));
 
+        action_card_deck_config_file_location = properties.getProperty("ACTION_CARD_DECK_CONFIG_FILE_LOCATION");
         house_card_deck_config_file_location = properties.getProperty("HOUSE_CARD_DECK_CONFIG_FILE_LOCATION");
         career_card_deck_config_file_location = properties.getProperty("CAREER_CARD_DECK_CONFIG_FILE_LOCATION");
         college_career_card_deck_config_file_location = properties.getProperty("COLLEGE_CAREER_CARD_DECK_CONFIG_FILE_LOCATION");

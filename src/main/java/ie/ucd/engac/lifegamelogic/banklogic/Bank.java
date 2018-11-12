@@ -8,6 +8,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
 import com.google.gson.*;
 
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -28,9 +29,8 @@ public class Bank {
 	private void initialiseCardDecks() {
 		// TODO: ActionCardDeck requires config reading functionality implementation?
 		
-		actionCardDeck = new ActionCardDeck();
-		actionCardDeck.shuffle();	
-
+		actionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+		actionCardDeck.shuffle();
 		houseCardDeck = new HouseCardDeck(GameConfig.house_card_deck_config_file_location);
 		houseCardDeck.shuffle();
 		careerCardDeck = new OccupationCardDeck(GameConfig.career_card_deck_config_file_location);

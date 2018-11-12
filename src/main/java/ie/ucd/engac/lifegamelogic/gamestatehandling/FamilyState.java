@@ -56,7 +56,6 @@ public class FamilyState extends GameState {
 		ArrayList<BoardLocation> familyPathOptions = gameLogic.getAdjacentForwardLocations(currentBoardLocation);
 		
 		int numberOfFamilyPathChoices = familyPathOptions.size();
-		System.out.println("Parsing response for player " + gameLogic.getCurrentPlayer().getPlayerNumber());
 
 		if(numberOfFamilyPathChoices != 2) {
 			// Error

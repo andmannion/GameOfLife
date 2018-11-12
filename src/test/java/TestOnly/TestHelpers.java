@@ -53,7 +53,6 @@ public class TestHelpers {
             responseMessage = gameLogic.handleInput(ackMessage);
         }
 
-
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
 
         //set object to use the function spinner

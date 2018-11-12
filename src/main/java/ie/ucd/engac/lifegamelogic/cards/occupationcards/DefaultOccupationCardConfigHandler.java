@@ -17,7 +17,7 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 	private JsonElement overallJSONElement;
 
 	DefaultOccupationCardConfigHandler(String configPath) {
-		this.overallJSONElement = resourceToJson(configPath);
+		overallJSONElement = resourceToJson(configPath);
 	}
 
 	@Override
@@ -55,5 +55,4 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 		}
 		return jsonElement;
 	}
-
 }
