@@ -24,16 +24,20 @@ class RetirementTest {
     void testRetirement(){
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
         int ret;
-        ArrayList<Integer> maxes = new ArrayList<Integer>();
+        ArrayList<Integer> maxes = new ArrayList<>();
         for (int i=0;i<NUM_PLAYERS;i++){
             ret = setupPlayerWithItems(gameLogic);
             gameLogic.setNextPlayerToCurrent();
             maxes.add(ret);
         }
         //TODO add loans
+        System.err.println(maxes);
         ArrayList<Integer> endBalances = new ArrayList<>();
+        int max;
         for (int i=0;i<NUM_PLAYERS;i++){
-            ret = retirePlayer(gameLogic, i,maxes.get(i));
+            max = maxes.get(i);
+            System.out.println("max @ entry"+max);
+            ret = retirePlayer(gameLogic, i, max);
             endBalances.add(ret);
         }
         Collections.sort(endBalances);
@@ -79,6 +83,9 @@ class RetirementTest {
         int testCost;
         int testMoney = initMoney;
         System.out.println("max" + max);
+        System.out.println("actual max" + numActionCards + " " + numDependants);
+        System.out.println("playnum" + player.getPlayerNumber());
+        System.out.println("-----");
         for(int i=0;i<max;max--){
             //perform computation in test
             testCost = houseCards.get(i).getSpinForSalePrice(true); //true as set spin to 1
