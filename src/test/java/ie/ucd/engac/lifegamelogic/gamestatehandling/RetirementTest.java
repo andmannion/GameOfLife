@@ -62,6 +62,7 @@ class RetirementTest {
             player.addHouseCard(gameLogic.getTopHouseCard());
             player.addActionCard(gameLogic.getTopActionCard());
             player.addDependants(1);
+            gameLogic.takeOutALoan(player.getPlayerNumber());
         }
         player.setCurrentLocation(new BoardLocation(location));
         return max;
@@ -73,6 +74,7 @@ class RetirementTest {
         int initMoney = player.getCurrentMoney();
         int numActionCards = player.getNumberOfActionCards();
         int numDependants = player.getNumberOfDependants();
+        int numLoans = gameLogic.getNumberOfLoans(player.getPlayerNumber());
         ArrayList<HouseCard> houseCards = player.getHouseCards();
 
         // Mock messages to logic, performing move functionality
@@ -97,6 +99,7 @@ class RetirementTest {
         testMoney += (NUM_PLAYERS-numRetiredAlready)*GameConfig.ret_bonus_remaining;
         testMoney += numActionCards*GameConfig.ret_bonus_action;
         testMoney += (numDependants-1)*GameConfig.ret_bonus_kids;
+        testMoney -= numLoans*GameConfig.repayment_amount;
         assertEquals(testMoney,player.getCurrentMoney());
 
         //check that next player is ready to go

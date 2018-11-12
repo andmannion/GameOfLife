@@ -158,8 +158,12 @@ public class GameLogic {
         repayAllLoans(playerToRetire.getPlayerNumber());
 
         players.remove(currentPlayerIndex);
-	    retiredPlayers.add(playerToRetire);
-	    return playerToRetire.getCurrentMoney();
+        retiredPlayers.add(playerToRetire);
+
+        if(players.size()>0){ //correct the index after removal unless the game is over
+            correctCurrentPlayerIndexAfterRetirement();
+        }
+        return playerToRetire.getCurrentMoney();
     }
 
     public void correctCurrentPlayerIndexAfterRetirement(){

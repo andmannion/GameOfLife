@@ -56,7 +56,6 @@ public class RetirePlayerState extends GameState {
                     nextState = new GameOverState();
                 }
                 else {
-                    gameLogic.correctCurrentPlayerIndexAfterRetirement();
                     nextState = new EndTurnState(eventMessage);
                 }
             }
