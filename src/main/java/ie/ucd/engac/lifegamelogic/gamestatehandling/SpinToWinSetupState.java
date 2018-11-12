@@ -1,17 +1,11 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.Spinner;
+import ie.ucd.engac.messaging.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import ie.ucd.engac.lifegamelogic.Spinner;
-import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.messaging.ChooseableString;
-import ie.ucd.engac.messaging.LargeDecisionRequestMessage;
-import ie.ucd.engac.messaging.LargeDecisionResponseMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class SpinToWinSetupState extends GameState {
 

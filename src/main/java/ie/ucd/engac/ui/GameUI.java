@@ -1,7 +1,6 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;

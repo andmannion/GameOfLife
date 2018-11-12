@@ -1,10 +1,9 @@
 package ie.ucd.engac.lifegamelogic.cards.housecards;
 
-import java.util.ArrayList;
-
-import com.google.gson.JsonElement;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
+
+import java.util.ArrayList;
 
 public class HouseCardDeck extends CardDeck<HouseCard> {
 

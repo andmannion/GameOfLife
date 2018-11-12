@@ -1,8 +1,5 @@
 package ie.ucd.engac.ui;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
-import javax.swing.*;
 import java.awt.*;
 
 public class UIEventMessage implements Drawable{

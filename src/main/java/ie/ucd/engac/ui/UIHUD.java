@@ -1,7 +1,5 @@
 package ie.ucd.engac.ui;
 
-import ie.ucd.engac.GameEngine;
-
 import ie.ucd.engac.messaging.ShadowPlayer;
 
 import java.awt.*;

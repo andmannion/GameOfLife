@@ -1,6 +1,5 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
-import com.google.gson.JsonElement;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 

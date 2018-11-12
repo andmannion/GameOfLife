@@ -1,16 +1,12 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
-import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.messaging.DecisionRequestMessage;
-import ie.ucd.engac.messaging.DecisionResponseMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.*;
+
+import java.util.ArrayList;
 
 public class PathChoiceState extends GameState {
 	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;

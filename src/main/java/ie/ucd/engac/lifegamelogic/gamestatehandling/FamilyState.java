@@ -1,13 +1,9 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.messaging.ChooseableString;
-import ie.ucd.engac.messaging.DecisionRequestMessage;
-import ie.ucd.engac.messaging.DecisionResponseMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.*;
+
+import java.util.ArrayList;
 
 public class FamilyState extends GameState {
 	private static final int LIFE_PATH_MESSAGE_INDEX = 0;

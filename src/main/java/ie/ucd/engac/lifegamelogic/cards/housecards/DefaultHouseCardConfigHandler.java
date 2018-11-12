@@ -1,16 +1,14 @@
 package ie.ucd.engac.lifegamelogic.cards.housecards;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonStreamParser;
+import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonStreamParser;
-import ie.ucd.engac.lifegamelogic.banklogic.Bank;
-import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 
 public class DefaultHouseCardConfigHandler implements CardConfigHandler<HouseCard> {
 	private JsonElement jsonElement;

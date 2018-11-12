@@ -1,7 +1,5 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
@@ -17,6 +15,8 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.SpinRequestMessage;
+
+import java.util.ArrayList;
 
 public class HandlePlayerMoveState extends GameState {
     private String eventMessage ;
