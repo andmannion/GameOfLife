@@ -162,6 +162,10 @@ public class GameLogic {
 	    return playerToRetire.getCurrentMoney();
     }
 
+    public void correctCurrentPlayerIndexAfterRetirement(){
+        currentPlayerIndex = (currentPlayerIndex-1)%players.size();
+    }
+
     private int getNumberOfRetiredPlayers(){
 	    return retiredPlayers.size();
     }
