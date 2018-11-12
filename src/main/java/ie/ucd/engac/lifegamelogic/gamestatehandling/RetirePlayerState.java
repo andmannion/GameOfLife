@@ -11,17 +11,17 @@ import ie.ucd.engac.messaging.SpinRequestMessage;
 public class RetirePlayerState extends GameState {
 
     private int numberOfHouses;
-    private int currentCardIndex;
+    private int currentHouseNumber;
 
     @Override
     public void enter(GameLogic gameLogic) {
         Player player = gameLogic.getCurrentPlayer();
         numberOfHouses = player.getNumberOfHouseCards();
-        currentCardIndex = 0;
+        int currentCardIndex = 0;
 
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-        int curentHouseNumber = currentCardIndex + 1;
-        String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + curentHouseNumber + "/" + numberOfHouses;
+        currentHouseNumber = currentCardIndex + 1;
+        String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
         SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
         gameLogic.setResponseMessage(spinRequestMessage);
     }
@@ -31,15 +31,16 @@ public class RetirePlayerState extends GameState {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 
+            int currentCardIndex = 0;
             int spinNum = gameLogic.getSpinner().spinTheWheel();;
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
             HouseCard soldCard = retiree.sellHouseCard(currentCardIndex, spinNum);
             gameLogic.returnHouseCard(soldCard);
-            currentCardIndex = currentCardIndex + 1;
+            currentHouseNumber = currentHouseNumber + 1;
 
             //decide next action
-            if (currentCardIndex < numberOfHouses) { //if there are cards left to sell then keep going through sale sequence
+            if (currentHouseNumber <= numberOfHouses) { //if there are cards left to sell then keep going through sale sequence
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
                 int currentHouseNumber = currentCardIndex + 1;
                 String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;

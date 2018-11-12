@@ -22,6 +22,10 @@ public class GameConfig {
     public static int spin_to_win_prize_money;
     public static int starting_money;
 
+    public static int ret_bonus_remaining;
+    public static int ret_bonus_action;
+    public static int ret_bonus_kids;
+
 
     public GameConfig(Properties properties){
 
@@ -43,6 +47,10 @@ public class GameConfig {
         college_upfront_cost = Integer.parseInt(properties.getProperty("COLLEGE_UPFRONT_COST"));
         spin_to_win_prize_money = Integer.parseInt(properties.getProperty("SPIN_TO_WIN_PRIZE_MONEY"));
         starting_money = Integer.parseInt(properties.getProperty("STARTING_MONEY"));
+
+        ret_bonus_remaining = Integer.parseInt(properties.getProperty("RET_BONUS_REMAINING"));
+        ret_bonus_action = Integer.parseInt(properties.getProperty("RET_BONUS_ACTION"));
+        ret_bonus_kids = Integer.parseInt(properties.getProperty("RET_BONUS_KIDS"));
 
     }
 }
