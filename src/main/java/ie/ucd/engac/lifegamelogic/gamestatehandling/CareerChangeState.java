@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
@@ -61,8 +62,7 @@ public class CareerChangeState extends GameState {
 
             //call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
-
-            return new EndTurnState();
+            return new EndTurnState("Career changed!");
         }
 
         return null;

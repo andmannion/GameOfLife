@@ -52,7 +52,8 @@ public class PickPlayerState extends GameState {
             }
             gameLogic.getCurrentPlayer().addToBalance(amount);
             gameLogic.subtractFromPlayersBalance(playerIndex,amount);
-            nextState = new EndTurnState();
+            String eventMessage = "Action: Player " + gameLogic.getPlayerByIndex(playerIndex).getPlayerNumber() + "paid you "+ amount;
+            nextState = new EndTurnState(eventMessage);
         }
         return nextState;
     }

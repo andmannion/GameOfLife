@@ -251,12 +251,12 @@ public class HandlePlayerMoveState extends GameState {
             case PayTheBank:
                 PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
                 gameLogic.subtractFromCurrentPlayersBalance(payBank.getValue()); //TODO test
-                nextActionState = new EndTurnState();
+                nextActionState = new EndTurnState("Action: Paid the bank " + payBank.getValue());
                 break;
             case GetCashFromBank:
                 GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;//TODO test
                 player.addToBalance(getCash.getAmountToPay());
-                nextActionState = new EndTurnState();
+                nextActionState = new EndTurnState("Action: Received " + getCash.getAmountToPay());
                 break;
         }
         
