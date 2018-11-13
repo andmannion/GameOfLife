@@ -18,7 +18,6 @@ public class ChooseableString implements Chooseable {
         return string;
     }
 
-    // TODO: move this to a more appropriate place
     public static ArrayList<Chooseable> convertToChooseableArray(ArrayList<String> stringArray){
         ArrayList<Chooseable> chooseableArray = new ArrayList<>();
 

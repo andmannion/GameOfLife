@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ie.ucd.engac.ui.UIState.*;
 
@@ -27,9 +29,10 @@ public class GameUI implements Drawable {
     private UIActionListener uiActionListener;
     private UIEventMessage uiEventMessage;
     private UIWinner uiWinner;
+    private ArrayList<Drawable> drawables;
 
     //tracking the UI state to draw the correct items
-    private UIState uiState;
+    private volatile UIState uiState;
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
@@ -55,13 +58,16 @@ public class GameUI implements Drawable {
         panelWidth = gameEngine.getPanelWidth();
 
         uiActionListener = new UIActionListener();
-        uiBoard = new UIBoard(this);
-        uiHUD = new UIHUD(this);
-        uiInput = new UIInput(this,renderTarget);
-        uiCardChoice = new UICardChoice(this);
-        uiEventMessage = new UIEventMessage();
-        uiWinner = new UIWinner(this);
 
+        uiBoard = new UIBoard(this);
+        uiCardChoice = new UICardChoice(this);
+        uiHUD = new UIHUD(this);
+        uiWinner = new UIWinner(this);
+        uiEventMessage = new UIEventMessage();
+        uiInput = new UIInput(this,renderTarget);
+
+        drawables = new ArrayList<>();
+        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput));
         //updateCurrentUIScreen();
     }
 
@@ -203,13 +209,10 @@ public class GameUI implements Drawable {
     UIActionListener getUiActionListener() { return uiActionListener; }
 
     @Override
-    public void draw(Graphics graphics){ //TODO convert to array
-        uiHUD.draw(graphics);
-        uiBoard.draw(graphics);
-        uiInput.draw(graphics);
-        uiCardChoice.draw(graphics);
-        uiEventMessage.draw(graphics);
-        uiWinner.draw(graphics);
+    public void draw(Graphics graphics){
+        for (Drawable d:drawables){
+            d.draw(graphics);
+        }
     }
 
     /**

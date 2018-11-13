@@ -151,12 +151,7 @@ public class Player {
 		if(cardIndex >= 0) {
 			boolean bool;
 			houseCard = houseCards.get(cardIndex);
-			if (spinResult%2 == 0){ //TODO simplfy
-				bool = false;
-			}
-			else{
-				bool = true;
-			}
+			bool = !(spinResult%2 == 0);
 			addToBalance(houseCard.getSpinForSalePrice(bool));
 			houseCards.remove(cardIndex);
 		}

@@ -23,7 +23,6 @@ public class Bank {
 	}	
 
 	private void initialiseCardDecks() {
-		// TODO: ActionCardDeck requires config reading functionality implementation?
 		
 		actionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
 		actionCardDeck.shuffle();

@@ -8,6 +8,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
@@ -70,8 +71,9 @@ public class GameLogic {
         int loans = player.getTotalLoansOutstanding(this);
         int currentMoney = player.getCurrentMoney();
         int numActionCards = player.getActionCards().size();
+        GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
 
-        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
+        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards, gameBoardTile);
     }
 
     public void subtractFromCurrentPlayersBalance(int amountToSubtract){
