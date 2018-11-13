@@ -45,7 +45,7 @@ public class SpinToWinSetupState extends GameState {
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
 			// Check who this reply relates to
 			parsePlayerResponse(gameLogic,
-				    			(LargeDecisionResponseMessage) lifeGameMessage,
+				    			(DecisionResponseMessage) lifeGameMessage,
                     awaitingInfoFromPlayerIndex);
                     //gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
 			
@@ -92,7 +92,7 @@ public class SpinToWinSetupState extends GameState {
 
 	}
 
-	private void parsePlayerResponse(GameLogic gameLogic, LargeDecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
+	private void parsePlayerResponse(GameLogic gameLogic, DecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
 		// Must set what the player has chosen, and remove what they have chosen from the allowable remaining
 		// choices
 		int selectedNumber = Integer.parseInt(outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails());

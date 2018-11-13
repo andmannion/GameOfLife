@@ -36,7 +36,7 @@ public class TestHelpers {
 
             //choose a path for this player
             int choiceIndex = PathChoiceState.COLLEGE_CAREER_CHOICE_INDEX;
-            choiceMessage = new DecisionResponseMessage(choiceIndex);
+            choiceMessage = new DecisionResponseMessage(choiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
 
             responseMessage = gameLogic.handleInput(choiceMessage);
             assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());

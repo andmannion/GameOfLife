@@ -11,7 +11,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.Colle
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
-import ie.ucd.engac.messaging.LargeDecisionResponseMessage;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.RepeatedTest;
@@ -85,7 +85,7 @@ public class ActionTileTest {
         int targetPlayerInitBalance = gameLogic.getPlayerByIndex(chosenTargetIndex).getCurrentMoney();
         int playerInitBalance = gameLogic.getCurrentPlayer().getCurrentMoney();
 
-        LifeGameMessage messageToLogic = new LargeDecisionResponseMessage(choiceIndex);
+        LifeGameMessage messageToLogic = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
 
         //check transaction
@@ -101,7 +101,7 @@ public class ActionTileTest {
     private void careerChangeCardTest(GameLogic gameLogic){ //TODO duplicate code from NightSchoolSetup/Graduation
         int firstCollegeCareerCardChoice = 0;
         // Just choose the first CollegeCareerCard
-        LifeGameMessage messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice);
+        LifeGameMessage messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
 
         //check correct message was received

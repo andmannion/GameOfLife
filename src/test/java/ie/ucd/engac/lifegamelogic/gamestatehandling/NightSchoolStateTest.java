@@ -40,7 +40,7 @@ class NightSchoolStateTest {
         // Message should be requesting a choice to move to the family path or the night school path
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
         
-        messageToLogic = new DecisionResponseMessage(NightSchoolState.ATTEND_NIGHT_SCHOOL_INDEX);        
+        messageToLogic = new DecisionResponseMessage(NightSchoolState.ATTEND_NIGHT_SCHOOL_INDEX,LifeGameMessageTypes.OptionDecisionResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Assert that a new college career card has been assigned
@@ -83,7 +83,7 @@ class NightSchoolStateTest {
         // Message should be requesting a choice to move to the family path or the night school path
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
         
-        messageToLogic = new DecisionResponseMessage(NightSchoolState.KEEP_CAREER_INDEX);        
+        messageToLogic = new DecisionResponseMessage(NightSchoolState.KEEP_CAREER_INDEX,LifeGameMessageTypes.OptionDecisionResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         assertTrue(initialCollegeCareerCard.equals((CollegeCareerCard) currentPlayerUnderTest.getOccupationCard()));
@@ -117,7 +117,7 @@ class NightSchoolStateTest {
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         // Just choose the first CollegeCareerCard
-        messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice);
+        messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.AckResponse);

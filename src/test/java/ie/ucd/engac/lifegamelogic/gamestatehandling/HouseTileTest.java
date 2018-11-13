@@ -48,7 +48,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         int choiceIndex = 0; //do nothing
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
         assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.AckRequest);
@@ -96,7 +96,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -105,14 +105,14 @@ class HouseTileTest {
         //construct choice message
         int cardChoiceIndex = 0;
         //chose a card
-        initialMessage = new DecisionResponseMessage(cardChoiceIndex);
+        initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //cannot afford the house asked if we want a loan
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
 
         int loanYesNo = 0; //choose no
-        initialMessage = new DecisionResponseMessage(loanYesNo);
+        initialMessage = new DecisionResponseMessage(loanYesNo,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an end turn message
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
@@ -162,7 +162,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -171,14 +171,14 @@ class HouseTileTest {
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
         //chose a card
-        initialMessage = new DecisionResponseMessage(cardChoiceIndex);
+        initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //cannot afford the house asked if we want a loan
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
 
         int loanYesNo = 1; //choose yes
-        initialMessage = new DecisionResponseMessage(loanYesNo);
+        initialMessage = new DecisionResponseMessage(loanYesNo,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an end turn message
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
@@ -234,7 +234,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -243,7 +243,7 @@ class HouseTileTest {
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
         //chose a card
-        initialMessage = new DecisionResponseMessage(cardChoiceIndex);
+        initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an edn turn message
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
@@ -281,7 +281,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         choiceIndex = 2; //sell a house
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -289,7 +289,7 @@ class HouseTileTest {
 
         //need large decision request to choose which card. Turns out we only have one.
         choiceIndex = 0;
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //should now be spinning to choose the sale price
@@ -345,7 +345,7 @@ class HouseTileTest {
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
-        initialMessage = new LargeDecisionResponseMessage(choiceIndex);
+        initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
@@ -354,7 +354,7 @@ class HouseTileTest {
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
         //chose a card
-        initialMessage = new DecisionResponseMessage(cardChoiceIndex);
+        initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an edn turn message
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());

@@ -45,7 +45,7 @@ class FamilyStateTest {
             assertNull(gameLogic.getCurrentPlayer().getPendingBoardForkChoice());
 
             // Select the FamilyPath
-            messageToLogic = new DecisionResponseMessage(FamilyState.FAMILY_PATH_MESSAGE_INDEX);
+            messageToLogic = new DecisionResponseMessage(FamilyState.FAMILY_PATH_MESSAGE_INDEX,LifeGameMessageTypes.OptionDecisionResponse);
             messageFromLogic = gameLogic.handleInput(messageToLogic);
 
             // Should have ended the turn

@@ -33,7 +33,7 @@ public class HouseSaleState extends GameState { //TODO this entire class
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
-            LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+            DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             choiceIndex = choiceMessage.getChoiceIndex();
 

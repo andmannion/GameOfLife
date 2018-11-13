@@ -152,7 +152,17 @@ public class GameUI implements Drawable {
      * @param choice the user's choice.
      */
     private void sendDecisionResponseMessage(int choice){
-        LifeGameMessage message = new DecisionResponseMessage(choice);
+        LifeGameMessage message = new DecisionResponseMessage(choice,LifeGameMessageTypes.OptionDecisionResponse);
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
+    }
+
+    /**
+     * Send a large decision response message using the interface.
+     * @param choice the user's choice.
+     */
+    private void sendLargeDecisionResponse(int choice){
+        LifeGameMessage message = new DecisionResponseMessage(choice,LifeGameMessageTypes.LargeDecisionResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
@@ -175,16 +185,6 @@ public class GameUI implements Drawable {
         invertWasStateUpdatedD();
     }
 
-
-    /**
-     * Send a large decision response message using the interface.
-     * @param choice the user's choice.
-     */
-    private void sendLargeDecisionResponse(int choice){ //TODO Required? Probably not
-        LifeGameMessage message = new LargeDecisionResponseMessage(choice);
-        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
-        invertWasStateUpdatedD();
-    }
 
     /**
      * Returns the panel height.

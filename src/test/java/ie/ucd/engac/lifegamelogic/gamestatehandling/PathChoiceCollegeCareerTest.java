@@ -49,7 +49,7 @@ class PathChoiceCollegeCareerTest {
 		
 		// Provide mock UI response
 		int choiceIndex = PathChoiceState.COLLEGE_CAREER_CHOICE_INDEX;
-		initialMessage = new DecisionResponseMessage(choiceIndex);
+		initialMessage = new DecisionResponseMessage(choiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
 		
 		responseMessage = gameLogic.handleInput(initialMessage);		
 		assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.SpinRequest);

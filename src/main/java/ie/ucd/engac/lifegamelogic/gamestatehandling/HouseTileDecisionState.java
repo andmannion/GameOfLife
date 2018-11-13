@@ -32,7 +32,7 @@ public class HouseTileDecisionState extends GameState {
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
-            LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+            DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             int choiceIndex = choiceMessage.getChoiceIndex();
 
