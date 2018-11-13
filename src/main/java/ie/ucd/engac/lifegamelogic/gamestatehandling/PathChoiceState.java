@@ -63,7 +63,8 @@ public class PathChoiceState extends GameState {
 
 		String eventMessage = "Choose either a college or standard career path.";
 
-		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage);
+		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
+		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType);
 	}
 
 	private OccupationCardTypes parsePathChoiceResponse(DecisionResponseMessage pathChoiceMessage) {

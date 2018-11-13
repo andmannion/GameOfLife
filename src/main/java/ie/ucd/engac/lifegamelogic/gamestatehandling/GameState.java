@@ -4,6 +4,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,8 @@ public abstract class GameState {
 
         storePendingChoiceCards(validOptions);
 
-		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage);
+		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
+		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage, requestType);
 	}
 
 	protected void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){

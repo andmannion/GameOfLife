@@ -27,7 +27,8 @@ public class PickPlayerState extends GameState {
 
         String eventMessage = "Pick a player to receive 20k from";
 
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
+        LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
 
         gameLogic.setResponseMessage(replyMessage);
     }

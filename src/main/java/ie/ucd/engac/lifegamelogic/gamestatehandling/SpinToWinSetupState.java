@@ -33,8 +33,10 @@ public class SpinToWinSetupState extends GameState {
 
 		// First message with current player's number
 		int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-		LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.");
+
+		LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+		LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
+                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.", requestType);
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -76,9 +78,11 @@ public class SpinToWinSetupState extends GameState {
 
 				// First message with current player's number
                 int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-				LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
+
+                LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+				LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
                         gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(),
-                        "Player " + playerNumber + ", pick a SpinToWin number.");
+                        "Player " + playerNumber + ", pick a SpinToWin number.", requestType);
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}

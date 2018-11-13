@@ -81,7 +81,7 @@ public class GameUI implements Drawable {
                 case StartupMessage:
                     break;
                 case LargeDecisionRequest:
-                    LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
+                    DecisionRequestMessage pendingLargeDecision = (DecisionRequestMessage) lastResponse;
                     uiEventMessage.updateEventMessage(pendingLargeDecision.getEventMsg());
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;

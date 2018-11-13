@@ -88,8 +88,10 @@ public class HouseChoiceState extends GameState {
             int numLoans = (int)Math.ceil(loanTotal/GameConfig.loan_amount);
             decisionStrings.add("Take out " + numLoans + " loan(s) worth " + numLoans*GameConfig.loan_amount + ".");
             String eventMessage = "You cannot afford this house right now.";
+
+            LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
             LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(decisionStrings),
-                    gameLogic.getCurrentPlayerIndex(), eventMessage);
+                    gameLogic.getCurrentPlayerIndex(), eventMessage, requestType);
 
             gameLogic.setResponseMessage(responseMessage);
             loanRequired = true;
