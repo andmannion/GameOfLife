@@ -27,7 +27,6 @@ public class GameConfig {
     public static int ret_bonus_action;
     public static int ret_bonus_kids;
 
-
     public GameConfig(Properties properties){
 
         panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
