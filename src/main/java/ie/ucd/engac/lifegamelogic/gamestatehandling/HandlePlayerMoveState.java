@@ -57,7 +57,7 @@ public class HandlePlayerMoveState extends GameState {
             assignSpinBonusIfRequired(gameLogic.getPlayers(), tilesToMove);
 
 			// Need to alternate between moving and evaluating the tile we're on
-            endTile = tryToMove(gameLogic, gameBoard, tilesToMove, tilesMoved);
+            endTile = tryToMove(gameLogic.getCurrentPlayer(), gameBoard, tilesToMove, tilesMoved);
             
             
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
@@ -96,31 +96,31 @@ public class HandlePlayerMoveState extends GameState {
 		}
 	}
 
-	private GameBoardTile tryToMove(GameLogic gameLogic, LogicGameBoard gameBoard, int tilesToMove, int tilesMoved){
+	private GameBoardTile tryToMove(Player currentPlayer, LogicGameBoard gameBoard, int tilesToMove, int tilesMoved){
         boolean stopTileEncountered = false;
-        BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
+        BoardLocation currentBoardLocation = currentPlayer.getCurrentLocation();
         GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);
 
-        BoardLocation pendingLocation = gameLogic.getCurrentPlayer().getPendingBoardForkChoice();
+        BoardLocation pendingLocation = currentPlayer.getPendingBoardForkChoice();
         
         if(pendingLocation != null) {
         	// Move to the pending choice
-        	gameLogic.getCurrentPlayer().setCurrentLocation(pendingLocation);
-        	gameLogic.getCurrentPlayer().setPendingBoardForkChoice(null);
+            currentPlayer.setCurrentLocation(pendingLocation);
+            currentPlayer.setPendingBoardForkChoice(null);
         	tilesMoved++;
         }
         
         while (tilesMoved < tilesToMove && !stopTileEncountered) {
             tilesMoved++;
             // Go forward
-            currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
+            currentBoardLocation = currentPlayer.getCurrentLocation();
             
             ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);    
             
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
                 BoardLocation currentLocation = adjacentForwardLocations.get(0);
-                gameLogic.getCurrentPlayer().setCurrentLocation(currentLocation);
+                currentPlayer.setCurrentLocation(currentLocation);
 
                 // Need to get the tile that this boardLocation relates to
                 currentTile = gameBoard.getGameBoardTileFromID(currentLocation);
@@ -129,7 +129,7 @@ public class HandlePlayerMoveState extends GameState {
 
                 if (tilesMoved < tilesToMove && !stopTileEncountered) {
                     // Perform actions if the tile requires action when passed over
-                    performUpdateIfPassingOverTile(currentTile, gameLogic);
+                    performUpdateIfPassingOverTile(currentPlayer, currentTile);
                 }
             }
             else if(0 == adjacentForwardLocations.size()) {
@@ -148,7 +148,7 @@ public class HandlePlayerMoveState extends GameState {
                 nextState = new EndTurnState();
                 break;
             case Payday:
-            	String paydayLandedOnMessage = handlePaydayTile(gameLogic);
+            	String paydayLandedOnMessage = handlePaydayTile(gameLogic.getCurrentPlayer());
                 nextState = new EndTurnState(paydayLandedOnMessage);
                 break;
             case Action:                
@@ -277,29 +277,29 @@ public class HandlePlayerMoveState extends GameState {
         return nextState;
     }
 
-	private void performUpdateIfPassingOverTile(GameBoardTile currentTile, GameLogic gameLogic) {
+	private void performUpdateIfPassingOverTile(Player currentPlayer, GameBoardTile currentTile) {
 		if (currentTile.getGameBoardTileType() == GameBoardTileTypes.Payday) {
 			// Player should collect the salary indicated in their Career/College Career
 			// card from the Bank
-			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
+			OccupationCard currentOccupationCard = currentPlayer.getOccupationCard();
 			
 			if(currentOccupationCard != null) {
 				int currentSalary = currentOccupationCard.getSalary();
 				// Get money from the bank, increment the player's balance by that amount
-				gameLogic.getCurrentPlayer().addToBalance(currentSalary);
+                currentPlayer.addToBalance(currentSalary);
 			}
 		}
 	}
 
-	private String handlePaydayTile(GameLogic gameLogic){
+	private String handlePaydayTile(Player currentPlayer){
 		String paydayUpdateString = "";
 		
-        OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
+        OccupationCard currentOccupationCard = currentPlayer.getOccupationCard();
         
         if(currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
-            gameLogic.getCurrentPlayer().addToBalance(currentSalary + GameConfig.payday_landed_on_bonus);
-            paydayUpdateString = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you obtained " + (currentSalary + GameConfig.payday_landed_on_bonus) +
+            currentPlayer.addToBalance(currentSalary + GameConfig.payday_landed_on_bonus);
+            paydayUpdateString = "Player " + currentPlayer.getPlayerNumber() + ", you obtained " + (currentSalary + GameConfig.payday_landed_on_bonus) +
             					 " after landing on a Payday tile.";
         }
         
