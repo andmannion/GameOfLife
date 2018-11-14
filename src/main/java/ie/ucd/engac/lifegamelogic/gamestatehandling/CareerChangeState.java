@@ -54,7 +54,7 @@ public class CareerChangeState extends GameState {
     }
 
     @Override
-    public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {//TODO lots of duplicated code
+    public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
