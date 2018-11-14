@@ -5,6 +5,9 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTile;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
 import java.util.ArrayList;
@@ -20,11 +23,12 @@ public class ShadowPlayer {
     private int numLoans;
     private int bankBalance;
 
+    private GameBoardTile currentTile;
     private OccupationCard occupation;
     private int martialStatus;
     private ArrayList<HouseCard> houses;
 
-    public ShadowPlayer(int playerNumber, PlayerColour playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard>  houses, int numLoans, int loans, int bankBalance, int numActionCards){
+    public ShadowPlayer(int playerNumber, PlayerColour playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard> houses, int numLoans, int loans, int bankBalance, int numActionCards, GameBoardTile currentTile){
         this.playerNumber = playerNumber;
         this.playerColour = playerColour;
         this.martialStatus = martialStatus;
@@ -35,6 +39,7 @@ public class ShadowPlayer {
         this.loans = loans;
         this.bankBalance = bankBalance;
         this.numActionCards = numActionCards;
+        this.currentTile = currentTile;
     }
 
     public String playerColourToString(){
@@ -98,6 +103,17 @@ public class ShadowPlayer {
             string = martialStatus + " spouse and " + (numDependants -1 )+ " children";
         }
         else string = "No dependants";
+        return string;
+    }
+
+    public String currentTileToString(){
+        String string;
+        if(currentTile.getGameBoardTileType() == GameBoardTileTypes.Stop){
+            string = "On stop tile of type " + ((GameBoardStopTile)currentTile).getGameBoardStopTileType().toString();
+        }
+        else{
+            string = "On standard tile of type " + currentTile.getGameBoardTileType().toString();
+        }
         return string;
     }
 }

@@ -1,19 +1,12 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.messaging.ChooseableString;
-import ie.ucd.engac.messaging.DecisionRequestMessage;
-import ie.ucd.engac.messaging.DecisionResponseMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.*;
+
+import java.util.ArrayList;
 
 public class NightSchoolState extends GameState {
     public static final int KEEP_CAREER_INDEX = 0;
@@ -42,8 +35,9 @@ public class NightSchoolState extends GameState {
 
 			String eventMessage = "Would you like to attend night school?";
 
+			LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
 			LifeGameMessage responseMessage = new DecisionRequestMessage(pendingNightSchoolChoice,
-																		 gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
+																		 gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
 			gameLogic.setResponseMessage(responseMessage);
 		}
 	}

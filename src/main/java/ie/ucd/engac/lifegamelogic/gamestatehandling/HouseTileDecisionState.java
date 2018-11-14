@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.messaging.*;
+
 import java.util.ArrayList;
 
 public class HouseTileDecisionState extends GameState {
@@ -19,7 +20,8 @@ public class HouseTileDecisionState extends GameState {
 
         String eventMessage = "What action would you like to perform?";
 
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
+        LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.
@@ -31,7 +33,7 @@ public class HouseTileDecisionState extends GameState {
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
-            LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+            DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             int choiceIndex = choiceMessage.getChoiceIndex();
 

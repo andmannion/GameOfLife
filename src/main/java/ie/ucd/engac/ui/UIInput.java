@@ -1,14 +1,12 @@
 package ie.ucd.engac.ui;
 
+import ie.ucd.engac.messaging.Chooseable;
+
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import ie.ucd.engac.messaging.Chooseable;
 
 public class UIInput implements Drawable {
 

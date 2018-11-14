@@ -2,7 +2,10 @@ package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class ProcessStandardCareerState extends GameState {
 

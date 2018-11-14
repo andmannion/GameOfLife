@@ -1,22 +1,21 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
-import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.banklogic.Bank;
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
+
+import java.util.ArrayList;
 
 public class GameLogic {
 	private Bank bank;
@@ -72,8 +71,9 @@ public class GameLogic {
         int loans = player.getTotalLoansOutstanding(this);
         int currentMoney = player.getCurrentMoney();
         int numActionCards = player.getActionCards().size();
+        GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
 
-        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards);
+        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards, gameBoardTile);
     }
 
     public void subtractFromCurrentPlayersBalance(int amountToSubtract){

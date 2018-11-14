@@ -1,11 +1,12 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
-import java.util.ArrayList;
-
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.Chooseable;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class CareerChangeState extends GameState {
 
@@ -61,8 +62,7 @@ public class CareerChangeState extends GameState {
 
             //call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
-
-            return new EndTurnState();
+            return new EndTurnState("Career changed!");
         }
 
         return null;

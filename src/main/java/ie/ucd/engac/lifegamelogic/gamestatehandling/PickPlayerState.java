@@ -27,7 +27,8 @@ public class PickPlayerState extends GameState {
 
         String eventMessage = "Pick a player to receive 20k from";
 
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
+        LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
 
         gameLogic.setResponseMessage(replyMessage);
     }
@@ -36,7 +37,7 @@ public class PickPlayerState extends GameState {
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
         GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
-            LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+            DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             int amount = playersPayActionCard.getAmountToPay();
             int choiceIndex = choiceMessage.getChoiceIndex();
@@ -51,7 +52,8 @@ public class PickPlayerState extends GameState {
             }
             gameLogic.getCurrentPlayer().addToBalance(amount);
             gameLogic.subtractFromPlayersBalance(playerIndex,amount);
-            nextState = new EndTurnState();
+            String eventMessage = "Action: Player " + gameLogic.getPlayerByIndex(playerIndex).getPlayerNumber() + "paid you "+ amount;
+            nextState = new EndTurnState(eventMessage);
         }
         return nextState;
     }

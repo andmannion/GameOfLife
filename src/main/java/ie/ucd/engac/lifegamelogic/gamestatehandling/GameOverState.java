@@ -1,7 +1,8 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.EndGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,5 @@
 package ie.ucd.engac.ui;
 
-import ie.ucd.engac.GameEngine;
-
 import ie.ucd.engac.messaging.ShadowPlayer;
 
 import java.awt.*;
@@ -77,21 +75,17 @@ public class UIHUD implements Drawable {
                     graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
                     graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
                     graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
+                    graphics.drawString("Current Tile: " + sPlayer.currentTileToString(),firstStringX+400,firstStringY+stringLengthY*ACTION_LOC);
                 }
                 catch (Exception e){
                     System.err.println("Exception in UIHUD.draw() " + e.toString()); //TODO remove this print statement
                 }
                 break;
             case CardChoice:
-                break;
-            case Spin2WinPicking:
-                break;
-            case Spin2WinRolling:
-                break;
-            case BabyAcquisition:
-                break;
-            case Wedding:
-                break;
+            case LargeChoice:
+                if (sPlayer != null) {
+                    graphics.drawString("Current Tile: " + sPlayer.currentTileToString(), firstStringX + 400, firstStringY + stringLengthY * ACTION_LOC);
+                }
             default:
                 break;
         }

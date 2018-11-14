@@ -1,13 +1,14 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.GameEngine;
-import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.messaging.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ie.ucd.engac.ui.UIState.*;
 
@@ -28,9 +29,10 @@ public class GameUI implements Drawable {
     private UIActionListener uiActionListener;
     private UIEventMessage uiEventMessage;
     private UIWinner uiWinner;
+    private ArrayList<Drawable> drawables;
 
     //tracking the UI state to draw the correct items
-    private UIState uiState;
+    private volatile UIState uiState;
 
     //flags for edge detection of state changes
     private volatile boolean wasStateUpdatedD = false;
@@ -56,13 +58,16 @@ public class GameUI implements Drawable {
         panelWidth = gameEngine.getPanelWidth();
 
         uiActionListener = new UIActionListener();
-        uiBoard = new UIBoard(this);
-        uiHUD = new UIHUD(this);
-        uiInput = new UIInput(this,renderTarget);
-        uiCardChoice = new UICardChoice(this);
-        uiEventMessage = new UIEventMessage();
-        uiWinner = new UIWinner(this);
 
+        uiBoard = new UIBoard(this);
+        uiCardChoice = new UICardChoice(this);
+        uiHUD = new UIHUD(this);
+        uiWinner = new UIWinner(this);
+        uiEventMessage = new UIEventMessage();
+        uiInput = new UIInput(this,renderTarget);
+
+        drawables = new ArrayList<>();
+        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput));
         //updateCurrentUIScreen();
     }
 
@@ -76,7 +81,7 @@ public class GameUI implements Drawable {
                 case StartupMessage:
                     break;
                 case LargeDecisionRequest:
-                    LargeDecisionRequestMessage pendingLargeDecision = (LargeDecisionRequestMessage) lastResponse;
+                    DecisionRequestMessage pendingLargeDecision = (DecisionRequestMessage) lastResponse;
                     uiEventMessage.updateEventMessage(pendingLargeDecision.getEventMsg());
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
@@ -147,7 +152,17 @@ public class GameUI implements Drawable {
      * @param choice the user's choice.
      */
     private void sendDecisionResponseMessage(int choice){
-        LifeGameMessage message = new DecisionResponseMessage(choice);
+        LifeGameMessage message = new DecisionResponseMessage(choice,LifeGameMessageTypes.OptionDecisionResponse);
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        invertWasStateUpdatedD();
+    }
+
+    /**
+     * Send a large decision response message using the interface.
+     * @param choice the user's choice.
+     */
+    private void sendLargeDecisionResponse(int choice){
+        LifeGameMessage message = new DecisionResponseMessage(choice,LifeGameMessageTypes.LargeDecisionResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }
@@ -172,16 +187,6 @@ public class GameUI implements Drawable {
 
 
     /**
-     * Send a large decision response message using the interface.
-     * @param choice the user's choice.
-     */
-    private void sendLargeDecisionResponse(int choice){ //TODO Required? Probably not
-        LifeGameMessage message = new LargeDecisionResponseMessage(choice);
-        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
-        invertWasStateUpdatedD();
-    }
-
-    /**
      * Returns the panel height.
      * @return the panel height as an integer.
      */
@@ -204,13 +209,10 @@ public class GameUI implements Drawable {
     UIActionListener getUiActionListener() { return uiActionListener; }
 
     @Override
-    public void draw(Graphics graphics){ //TODO convert to array
-        uiHUD.draw(graphics);
-        uiBoard.draw(graphics);
-        uiInput.draw(graphics);
-        uiCardChoice.draw(graphics);
-        uiEventMessage.draw(graphics);
-        uiWinner.draw(graphics);
+    public void draw(Graphics graphics){
+        for (Drawable d:drawables){
+            d.draw(graphics);
+        }
     }
 
     /**

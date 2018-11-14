@@ -27,6 +27,9 @@ public class GameConfig {
     public static int ret_bonus_action;
     public static int ret_bonus_kids;
 
+    public static int players_pay_amount;
+
+
     public GameConfig(Properties properties){
 
         panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
@@ -52,6 +55,8 @@ public class GameConfig {
         ret_bonus_remaining = Integer.parseInt(properties.getProperty("RET_BONUS_REMAINING"));
         ret_bonus_action = Integer.parseInt(properties.getProperty("RET_BONUS_ACTION"));
         ret_bonus_kids = Integer.parseInt(properties.getProperty("RET_BONUS_KIDS"));
+
+        players_pay_amount = Integer.parseInt(properties.getProperty("PLAYERS_PAY_COST"));
 
     }
 }

@@ -30,7 +30,6 @@ class RetirementTest {
             gameLogic.setNextPlayerToCurrent();
             maxes.add(ret);
         }
-        //TODO add loans
         ArrayList<Integer> endBalances = new ArrayList<>();
         int max;
         for (int i=0;i<NUM_PLAYERS;i++){

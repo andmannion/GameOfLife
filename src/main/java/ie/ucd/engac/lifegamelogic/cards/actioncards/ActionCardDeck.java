@@ -1,7 +1,5 @@
 package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
-import java.util.ArrayList;
-
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 

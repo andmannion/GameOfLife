@@ -21,7 +21,9 @@ public class HouseSaleState extends GameState { //TODO this entire class
             choices.add( (Chooseable) houseCard );
         }
         String eventMessage = "Which house would you like to sell?";
-        LifeGameMessage replyMessage = new LargeDecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage);
+
+        LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.
@@ -33,7 +35,7 @@ public class HouseSaleState extends GameState { //TODO this entire class
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
-            LargeDecisionResponseMessage choiceMessage = (LargeDecisionResponseMessage) lifeGameMessage;
+            DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
             choiceIndex = choiceMessage.getChoiceIndex();
 

@@ -1,17 +1,11 @@
 package ie.ucd.engac.lifegamelogic.gamestatehandling;
 
+import ie.ucd.engac.lifegamelogic.Spinner;
+import ie.ucd.engac.messaging.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import ie.ucd.engac.lifegamelogic.Spinner;
-import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.messaging.ChooseableString;
-import ie.ucd.engac.messaging.LargeDecisionRequestMessage;
-import ie.ucd.engac.messaging.LargeDecisionResponseMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
 
 public class SpinToWinSetupState extends GameState {
 
@@ -39,8 +33,10 @@ public class SpinToWinSetupState extends GameState {
 
 		// First message with current player's number
 		int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-		LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
-                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.");
+
+		LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+		LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
+                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.", requestType);
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -51,7 +47,7 @@ public class SpinToWinSetupState extends GameState {
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
 			// Check who this reply relates to
 			parsePlayerResponse(gameLogic,
-				    			(LargeDecisionResponseMessage) lifeGameMessage,
+				    			(DecisionResponseMessage) lifeGameMessage,
                     awaitingInfoFromPlayerIndex);
                     //gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
 			
@@ -82,9 +78,11 @@ public class SpinToWinSetupState extends GameState {
 
 				// First message with current player's number
                 int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-				LifeGameMessage replyMessage = new LargeDecisionRequestMessage(outgoingChoices,
+
+                LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+				LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
                         gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(),
-                        "Player " + playerNumber + ", pick a SpinToWin number.");
+                        "Player " + playerNumber + ", pick a SpinToWin number.", requestType);
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}
@@ -98,7 +96,7 @@ public class SpinToWinSetupState extends GameState {
 
 	}
 
-	private void parsePlayerResponse(GameLogic gameLogic, LargeDecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
+	private void parsePlayerResponse(GameLogic gameLogic, DecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
 		// Must set what the player has chosen, and remove what they have chosen from the allowable remaining
 		// choices
 		int selectedNumber = Integer.parseInt(outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails());
