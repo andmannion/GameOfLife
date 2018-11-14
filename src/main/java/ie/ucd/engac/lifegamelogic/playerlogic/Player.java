@@ -149,10 +149,12 @@ public class Player {
 	public HouseCard sellHouseCard(int cardIndex, int spinResult){
 		HouseCard houseCard = null;
 		if(cardIndex >= 0) {
-			boolean bool;
 			houseCard = houseCards.get(cardIndex);
-			bool = !(spinResult%2 == 0);
-			addToBalance(houseCard.getSpinForSalePrice(bool));
+
+			boolean oddNumberWasSpun;
+			oddNumberWasSpun = !(spinResult%2 == 0);
+
+			addToBalance(houseCard.getSpinForSalePrice(oddNumberWasSpun));
 			houseCards.remove(cardIndex);
 		}
 		return houseCard;
