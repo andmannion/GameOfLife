@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
     private Player player;
-    private final int playerNumber = 1;
 
     @BeforeEach
     void setUp() {
+        int playerNumber = 1;
         player = new Player(playerNumber);
     }
 

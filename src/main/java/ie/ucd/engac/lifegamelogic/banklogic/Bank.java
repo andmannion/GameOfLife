@@ -38,22 +38,22 @@ public class Bank {
 		bankLoanBook = new BankLoanBook();
 	}
 
-	public int takeOutALoan(int playerIndex){
+	public int takeOutALoan(int playerNumber){
         extractMoney(GameConfig.loan_amount);
-        bankLoanBook.addBorrowerLoan(playerIndex, GameConfig.loan_amount, GameConfig.repayment_amount);
+        bankLoanBook.addBorrowerLoan(playerNumber, GameConfig.loan_amount, GameConfig.repayment_amount);
         return GameConfig.loan_amount;
     }
 
-	public void repayAllLoans(int playerIndex){
-        bankLoanBook.repayAllLoans(playerIndex);
+	public void repayAllLoans(int playerNumber){
+        bankLoanBook.repayAllLoans(playerNumber);
     }
 
-    public int getNumberOfOutstandingLoans(int playerIndex) {
-        return bankLoanBook.getNumberOfOutstandingBankLoans(playerIndex);
+    public int getNumberOfOutstandingLoans(int playerNumber) {
+        return bankLoanBook.getNumberOfOutstandingBankLoans(playerNumber);
     }
 
-    public int getOutstandingLoanTotal(int playerIndex) {
-        return bankLoanBook.getOutstandingBankLoanTotal(playerIndex);
+    public int getOutstandingLoanTotal(int playerNumber) {
+        return bankLoanBook.getOutstandingBankLoanTotal(playerNumber);
     }
 
     public int getTotalMoneyExtracted() {
@@ -64,7 +64,7 @@ public class Bank {
 		setTotalMoneyExtracted(getTotalMoneyExtracted() + amountToExtract);
 	}
 
-	public void setTotalMoneyExtracted(int totalMoneyExtracted) {
+	private void setTotalMoneyExtracted(int totalMoneyExtracted) {
 		this.totalMoneyExtracted = totalMoneyExtracted;
 	}
 
