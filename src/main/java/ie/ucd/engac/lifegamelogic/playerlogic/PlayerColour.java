@@ -1,10 +1,10 @@
 package ie.ucd.engac.lifegamelogic.playerlogic;
 
 public enum PlayerColour {
-    pink(0),
-    blue(1),
-    green(2),
-    yellow(3);
+    pink(1),
+    blue(2),
+    green(3),
+    yellow(4);
 
     private int value;
 
