@@ -2,7 +2,7 @@ package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,16 +24,6 @@ class PlayerTest {
     @AfterEach
     void tearDown() {
         player = null;
-    }
-
-    @Test
-    void getPlayerNumber() {
-        assertEquals(playerNumber,player.getPlayerNumber(), "Player number dont match");
-    }
-
-    @Test
-    void getPlayerColour() {
-        assertEquals(PlayerColour.fromInt(playerNumber),player.getPlayerColour(),"Play colour doesnt match");
     }
 
     @Test
@@ -59,27 +49,6 @@ class PlayerTest {
     }
 
     @Test
-    void setgetCurrentLocation() { //TODO setter test in more detail
-        String location = "aa";
-        player.setCurrentLocation(new BoardLocation(location));
-        BoardLocation boardLocation = player.getCurrentLocation();
-        assertEquals(location, boardLocation.getLocation(),"Location does not match");
-
-    }
-
-    @Test
-    void getNumberOfDependants() {
-        //player init with 0 dependants
-        int numberOfDependants = player.getNumberOfDependants();
-        assertEquals(0,numberOfDependants,"init dependants not zero");
-        for (int inc = 0;inc<10;inc++){
-            player.addDependants(1);
-            numberOfDependants = player.getNumberOfDependants();
-            assertEquals(inc+1,numberOfDependants,"Number of dependants not get correctly");
-        }
-    }
-
-    @Test
     void addDependants() {
         assertEquals(0,player.getNumberOfDependants(),"init with >0 dependants");
         player.addDependants(-1);
@@ -91,126 +60,22 @@ class PlayerTest {
     }
 
     @Test
-    void getCareerPath() {
-    }
-
-    @Test
-    void setCareerPath() {
-    }
-
-    @Test
-    void getOccupationCard() {
-    }
-
-    @Test
-    void setOccupationCard() {
-    }
-
-    @Test
-    void getCurrentMoney() {
-        int currentMoney = player.getCurrentMoney();
-        int incMoney = 100;
-        assertEquals(GameConfig.starting_money,currentMoney,"init money incorrect");
-        player.addToBalance(incMoney);
-        currentMoney = player.getCurrentMoney();
-        assertEquals(GameConfig.starting_money+incMoney,currentMoney,"added money incorrect");
-        player.subtractFromBalance(2*incMoney);
-        currentMoney = player.getCurrentMoney();
-        assertEquals(GameConfig.starting_money-incMoney,currentMoney,"subtracted money incorrect");
-        player.subtractFromBalance(GameConfig.starting_money-incMoney);
-        currentMoney = player.getCurrentMoney();
-        assertEquals(0,currentMoney,"zero money incorrect");
-    }
-
-    @Test
-    void addToBalance() {
-    }
-
-    @Test
-    void subtractFromBalance() {
-    }
-
-    @Test
-    void getNumberOfLoans() {
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
-        int loansDue = gameLogic.getNumberOfLoans(playerNumber);
-        assertEquals(0,loansDue, "loans erroneously due at init");
-
-        Random random = new Random(System.nanoTime());
-        int max = random.nextInt(10);
-        for(int inc = 0;inc<max;inc++){
-            int expectedLoanNumber = (inc+1);
-            gameLogic.takeOutALoan(playerNumber);
-            loansDue = gameLogic.getNumberOfLoans(playerNumber);
-            assertEquals(expectedLoanNumber,loansDue,"predicted number of loans doesnt match");
-        }
-    }
-
-    @Test
-    void getTotalLoansOutstanding() {
-        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
-        int loansDue = gameLogic.getTotalOutstandingLoans(playerNumber);
-        assertEquals(0,loansDue, "loans erroneously due at init");
-
-        Random random = new Random(System.nanoTime());
-        int max = random.nextInt(10);
-        for(int inc = 0;inc<max;inc++){
-            int expectedLoanValue = (inc+1)*GameConfig.loan_amount;
-            gameLogic.takeOutALoan(playerNumber);
-            loansDue = gameLogic.getTotalOutstandingLoans(playerNumber);
-            assertEquals(expectedLoanValue,loansDue,"predicted loan amount doesnt match");
-        }
-    }
-
-    @Test
-    void addActionCard() {
-    }
-
-    @Test
-    void getActionCards() {
-    }
-
-    @Test
-    void getNumberOfActionCards() {
-    }
-
-    @Test
-    void getHouseCards() {
-    }
-
-    @Test
-    void addHouseCard() {
-    }
-
-    @Test
-    void getNumberOfHouseCards() {
-    }
-
-    @Test
     void sellHouseCard() {
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
+        HouseCard houseCard = gameLogic.getTopHouseCard();
+        int initMoney = player.getCurrentMoney();
+        //test sale of odd number
+        player.addHouseCard(houseCard);
+        player.sellHouseCard(0,1);
+        assertEquals(0,player.getNumberOfHouseCards(),"player still has house card");
+        int expectedMoney = initMoney+houseCard.getSpinForSalePrice(true);
+        assertEquals(expectedMoney,player.getCurrentMoney(),"odd: incorrect money");
+        //test sale of even number
+        player.addHouseCard(houseCard);
+        player.sellHouseCard(0,2);
+        assertEquals(0,player.getNumberOfHouseCards(),"player still has house card");
+        expectedMoney = expectedMoney+houseCard.getSpinForSalePrice(false);
+        assertEquals(expectedMoney,player.getCurrentMoney(),"even: incorrect money");
     }
 
-    @Test
-    void setMaritalStatus() {
-    }
-
-    @Test
-    void getMaritalStatus() {
-    }
-
-    @Test
-    void getPendingBoardForkChoice() {
-    }
-
-    @Test
-    void setPendingBoardForkChoice() {
-    }
-
-    @Test
-    void getMovesRemaining() {
-    }
-
-    @Test
-    void setMovesRemaining() {
-    }
 }
