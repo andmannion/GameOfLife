@@ -81,6 +81,13 @@ class PlayerTest {
 
     @Test
     void addDependants() {
+        assertEquals(0,player.getNumberOfDependants(),"init with >0 dependants");
+        player.addDependants(-1);
+        assertEquals(0,player.getNumberOfDependants(),"added negative number erroneously");
+        player.addDependants(1);
+        assertEquals(1,player.getNumberOfDependants(),"init with >0 dependants");
+        player.addDependants(3);
+        assertEquals(4,player.getNumberOfDependants(),"init with >0 dependants");
     }
 
     @Test
@@ -125,10 +132,34 @@ class PlayerTest {
 
     @Test
     void getNumberOfLoans() {
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
+        int loansDue = gameLogic.getNumberOfLoans(playerNumber);
+        assertEquals(0,loansDue, "loans erroneously due at init");
+
+        Random random = new Random(System.nanoTime());
+        int max = random.nextInt(10);
+        for(int inc = 0;inc<max;inc++){
+            int expectedLoanNumber = (inc+1);
+            gameLogic.takeOutALoan(playerNumber);
+            loansDue = gameLogic.getNumberOfLoans(playerNumber);
+            assertEquals(expectedLoanNumber,loansDue,"predicted number of loans doesnt match");
+        }
     }
 
     @Test
     void getTotalLoansOutstanding() {
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
+        int loansDue = gameLogic.getTotalOutstandingLoans(playerNumber);
+        assertEquals(0,loansDue, "loans erroneously due at init");
+
+        Random random = new Random(System.nanoTime());
+        int max = random.nextInt(10);
+        for(int inc = 0;inc<max;inc++){
+            int expectedLoanValue = (inc+1)*GameConfig.loan_amount;
+            gameLogic.takeOutALoan(playerNumber);
+            loansDue = gameLogic.getTotalOutstandingLoans(playerNumber);
+            assertEquals(expectedLoanValue,loansDue,"predicted loan amount doesnt match");
+        }
     }
 
     @Test

@@ -76,7 +76,9 @@ public class Player {
 	}
 
 	public void addDependants(int numberOfNewDependants) {
-		numberOfDependants += numberOfNewDependants;
+		if(numberOfNewDependants >= 0) {
+			numberOfDependants += numberOfNewDependants;
+		}
 	}
 
 	private int getNumberOfChildren(){
