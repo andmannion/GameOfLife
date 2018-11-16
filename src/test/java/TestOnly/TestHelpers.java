@@ -5,8 +5,8 @@ import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
-import ie.ucd.engac.lifegamelogic.gamestatehandling.GameLogic;
-import ie.ucd.engac.lifegamelogic.gamestatehandling.PathChoiceState;
+import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
