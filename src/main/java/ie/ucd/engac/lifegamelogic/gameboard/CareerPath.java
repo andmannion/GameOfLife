@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.gameboardlogic;
+package ie.ucd.engac.lifegamelogic.gameboard;
 
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.messaging.Chooseable;

@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.gameboardlogic;
+package ie.ucd.engac.lifegamelogic.gameboard;
 
 public class BoardLocation {
 	private String locationIdentifier;

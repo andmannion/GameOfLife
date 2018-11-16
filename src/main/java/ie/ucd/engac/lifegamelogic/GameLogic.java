@@ -5,9 +5,9 @@ import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -25,7 +25,7 @@ public class GameLogic {
 	private ArrayList<Player> retiredPlayers;
 	private LogicGameBoard gameBoard;
 	private int currentPlayerIndex;
-	private int numberOfUnconfiguredPlayers;
+	private int numberOfUnConfiguredPlayers;
 	private LifeGameMessage currentLifeGameMessageResponse;
 	
 	private GameState currentState;
@@ -96,7 +96,7 @@ public class GameLogic {
             players.add(new Player(playerIndex+1));
         }
         // All of these players require the user to set some initial characteristics
-        numberOfUnconfiguredPlayers = numPlayers;
+        numberOfUnConfiguredPlayers = numPlayers;
     }
 
     public ArrayList<Player> getPlayers(){
@@ -134,12 +134,12 @@ public class GameLogic {
     }
     
     public int getNumberOfUninitialisedPlayers() {
-        return numberOfUnconfiguredPlayers;
+        return numberOfUnConfiguredPlayers;
     }
 
     public void decrementNumberOfUninitialisedPlayers() {
-        if(numberOfUnconfiguredPlayers > 0) {
-            numberOfUnconfiguredPlayers--;
+        if(numberOfUnConfiguredPlayers > 0) {
+            numberOfUnConfiguredPlayers--;
         }
     }
 
@@ -167,7 +167,7 @@ public class GameLogic {
         return playerToRetire.getCurrentMoney();
     }
 
-    public void correctCurrentPlayerIndexAfterRetirement(){
+    private void correctCurrentPlayerIndexAfterRetirement(){
         currentPlayerIndex = (currentPlayerIndex-1)%players.size();
     }
 
@@ -212,7 +212,7 @@ public class GameLogic {
         return bank.getNumberOfOutstandingLoans(playerNumber);
     }
 
-    public void repayAllLoans(int playerNumber){
+    private void repayAllLoans(int playerNumber){
         bank.repayAllLoans(playerNumber);
     }
 
@@ -232,7 +232,6 @@ public class GameLogic {
     public void setResponseMessage(LifeGameMessage lifeGameMessage) {
         currentLifeGameMessageResponse = lifeGameMessage;
     }
-
 
     // Occupation card related
     public OccupationCard getTopStandardCareerCard() {

@@ -1,6 +1,6 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.gameboardlogic.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.gamestates.GameLogicInterface;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;

@@ -4,12 +4,12 @@ import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTile;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTileTypes;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTileTypes;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.messaging.*;
 import org.junit.jupiter.api.Test;
 

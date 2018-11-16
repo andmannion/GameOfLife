@@ -3,7 +3,7 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.CareerPath;
+import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
 
