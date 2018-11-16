@@ -1,7 +1,5 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards;
 
-// TODO: Specification indicates that this is an incomplete list; apparently there
-// should be 12 CollegeCareerCards
 public enum CollegeCareerTypes {
 	Doctor,
 	Lawyer,
@@ -10,5 +8,9 @@ public enum CollegeCareerTypes {
 	Teacher,
 	Scientist,
 	SecretAgent,
-	FashionDesigner	
+	FashionDesigner,
+	Agronomist,
+	Priest,
+	Economist,
+	SocialWorker
 }
