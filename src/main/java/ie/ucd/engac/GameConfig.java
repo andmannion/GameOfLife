@@ -29,7 +29,6 @@ public class GameConfig {
 
     public static int players_pay_amount;
 
-
     public GameConfig(Properties properties){
 
         panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));

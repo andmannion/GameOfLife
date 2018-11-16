@@ -18,15 +18,15 @@ class AssertCorrectPopTopCardAndInsertCardAtBottom {
 		
 		ActionCardDeck actionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
 		
-		assertEquals(55, actionCardDeck.getRemainingCards());	
+		assertEquals(55, actionCardDeck.getNumberOfRemainingCards());
 		
 		ActionCard actionCard = (ActionCard) actionCardDeck.popTopCard();
 		
-		assertEquals(54, actionCardDeck.getRemainingCards());
+		assertEquals(54, actionCardDeck.getNumberOfRemainingCards());
 		
 		actionCardDeck.addCardToBottom(actionCard);
 		
-		assertEquals(55, actionCardDeck.getRemainingCards());
+		assertEquals(55, actionCardDeck.getNumberOfRemainingCards());
 	}
 
 }

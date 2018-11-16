@@ -32,5 +32,4 @@ class BankTest {
         assertEquals(1, bank.getNumberOfOutstandingLoans(playerNumber));
         assertEquals(GameConfig.repayment_amount, bank.getOutstandingLoanTotal(playerNumber));
     }
-
 }
