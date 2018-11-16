@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles;
+package ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles;
 
 public class GameBoardStartTile extends GameBoardTile {
 	public GameBoardStartTile() {

@@ -1,7 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;

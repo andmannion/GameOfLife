@@ -4,7 +4,7 @@ import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 
 import java.util.ArrayList;
@@ -55,10 +55,15 @@ public class Player {
 
     //Retirement related
     public int computeRetirementBonuses(int numberOfRetirees){
-        int retirementBonus = (GameConfig.max_num_players - numberOfRetirees)*GameConfig.ret_bonus_remaining;
-        int actionCardBonus = getNumberOfActionCards()*GameConfig.ret_bonus_action;
-        int childrenBonus = getNumberOfChildren()*GameConfig.ret_bonus_kids;
-        return retirementBonus + actionCardBonus + childrenBonus;
+		if(numberOfRetirees >= 0 && numberOfRetirees < GameConfig.max_num_players) {
+            int retirementBonus = (GameConfig.max_num_players - numberOfRetirees) * GameConfig.ret_bonus_remaining;
+            int actionCardBonus = getNumberOfActionCards() * GameConfig.ret_bonus_action;
+            int childrenBonus = getNumberOfChildren() * GameConfig.ret_bonus_kids;
+            return retirementBonus + actionCardBonus + childrenBonus;
+        }
+        else{
+            throw  new RuntimeException("Tried retiring invalid number of players.");//TODO uhh?
+        }
     }
 
     //Location related
@@ -150,11 +155,10 @@ public class Player {
 
 	public HouseCard sellHouseCard(int cardIndex, int spinResult){
 		HouseCard houseCard = null;
-		if(cardIndex >= 0) {
+		if(cardIndex >= 0 && cardIndex < houseCards.size()) {
 			houseCard = houseCards.get(cardIndex);
 
-			boolean oddNumberWasSpun;
-			oddNumberWasSpun = !(spinResult%2 == 0);
+			boolean oddNumberWasSpun = !(spinResult%2 == 0);
 
 			addToBalance(houseCard.getSpinForSalePrice(oddNumberWasSpun));
 			houseCards.remove(cardIndex);

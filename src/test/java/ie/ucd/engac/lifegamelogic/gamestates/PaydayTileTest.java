@@ -4,7 +4,7 @@ import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;

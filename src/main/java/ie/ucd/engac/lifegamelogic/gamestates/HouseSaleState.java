@@ -52,6 +52,9 @@ public class HouseSaleState extends GameState { //TODO this entire class
             int spinNum = gameLogic.getSpinner().spinTheWheel();
             Player player = gameLogic.getCurrentPlayer();
             HouseCard soldCard = player.sellHouseCard(choiceIndex,spinNum);
+            if (soldCard == null){
+                return null;
+            }
             gameLogic.returnHouseCard(soldCard);
             return new EndTurnState();
         }

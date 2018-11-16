@@ -35,6 +35,9 @@ public class RetirePlayerState extends GameState {
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
             HouseCard soldCard = retiree.sellHouseCard(currentCardIndex, spinNum);
+            if (soldCard == null){
+                return nextState;
+            }
             gameLogic.returnHouseCard(soldCard);
             currentHouseNumber = currentHouseNumber + 1;
 

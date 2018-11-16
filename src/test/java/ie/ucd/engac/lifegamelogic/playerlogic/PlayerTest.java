@@ -49,6 +49,22 @@ class PlayerTest {
     }
 
     @Test
+    void computeRetirementBonusForNonPlayer(){
+        try {
+            player.computeRetirementBonuses(-1);
+        }
+        catch (RuntimeException ex){
+            assertEquals("Tried retiring invalid number of players.",ex.getMessage());
+        }
+        try {
+            player.computeRetirementBonuses(GameConfig.max_num_players);
+        }
+        catch (RuntimeException ex){
+            assertEquals("Tried retiring invalid number of players.",ex.getMessage());
+        }
+    }
+
+    @Test
     void addDependants() {
         assertEquals(0,player.getNumberOfDependants(),"init with >0 dependants");
         player.addDependants(-1);
@@ -66,16 +82,49 @@ class PlayerTest {
         int initMoney = player.getCurrentMoney();
         //test sale of odd number
         player.addHouseCard(houseCard);
-        player.sellHouseCard(0,1);
+        HouseCard soldHouseCard = player.sellHouseCard(0,1);
         assertEquals(0,player.getNumberOfHouseCards(),"player still has house card");
+        assertEquals(houseCard,soldHouseCard,"house card sold doesnt match assigned");
+
         int expectedMoney = initMoney+houseCard.getSpinForSalePrice(true);
         assertEquals(expectedMoney,player.getCurrentMoney(),"odd: incorrect money");
         //test sale of even number
         player.addHouseCard(houseCard);
         player.sellHouseCard(0,2);
         assertEquals(0,player.getNumberOfHouseCards(),"player still has house card");
+        assertEquals(houseCard,soldHouseCard,"house card sold doesnt match assigned");
         expectedMoney = expectedMoney+houseCard.getSpinForSalePrice(false);
         assertEquals(expectedMoney,player.getCurrentMoney(),"even: incorrect money");
+    }
+
+    @Test
+    void sellInvalidHouseCard() {
+        GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
+        HouseCard houseCard = gameLogic.getTopHouseCard();
+        int initMoney = player.getCurrentMoney();
+
+        //test no cards in possession
+        int intHCards = player.getNumberOfHouseCards();
+        HouseCard soldHouseCard = player.sellHouseCard(0,1);
+        assertEquals(intHCards,player.getNumberOfHouseCards(),"player sold house card erroneously");
+        assertEquals(initMoney,player.getCurrentMoney(),"incorrect money");
+        assertNull(soldHouseCard,"sold house card not null");
+
+        //test below range
+        player.addHouseCard(houseCard);
+        intHCards = player.getNumberOfHouseCards();
+        soldHouseCard = player.sellHouseCard(-1,1);
+        assertEquals(intHCards,player.getNumberOfHouseCards(),"player sold house card erroneously");
+        assertEquals(initMoney,player.getCurrentMoney(),"incorrect money");
+        assertNull(soldHouseCard,"sold house card not null");
+
+        //test below range
+        player.addHouseCard(houseCard);
+        intHCards = player.getNumberOfHouseCards();
+        soldHouseCard = player.sellHouseCard(2,1);
+        assertEquals(intHCards,player.getNumberOfHouseCards(),"player sold house card erroneously");
+        assertEquals(initMoney,player.getCurrentMoney(),"incorrect money");
+        assertNull(soldHouseCard,"sold house card not null");
     }
 
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;

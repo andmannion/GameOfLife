@@ -5,9 +5,9 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardStopTile;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTileTypes;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
 import java.util.ArrayList;

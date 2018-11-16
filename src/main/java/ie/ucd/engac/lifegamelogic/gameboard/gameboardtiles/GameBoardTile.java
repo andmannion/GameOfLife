@@ -1,4 +1,4 @@
-package ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles;
+package ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles;
 
 public abstract class GameBoardTile {
 	protected GameBoardTileTypes gameBoardTileType;
