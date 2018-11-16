@@ -31,5 +31,6 @@ class BankTest {
         assertEquals(totalMoneyExtracted+GameConfig.loan_amount,bank.getTotalMoneyExtracted(),"Extracted money wrong");
         assertEquals(1, bank.getNumberOfOutstandingLoans(playerNumber));
         assertEquals(GameConfig.repayment_amount, bank.getOutstandingLoanTotal(playerNumber));
+
     }
 }
