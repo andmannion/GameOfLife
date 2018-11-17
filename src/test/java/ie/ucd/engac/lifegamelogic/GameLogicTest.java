@@ -2,18 +2,12 @@ package ie.ucd.engac.lifegamelogic;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.ShadowPlayer;
 import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -133,20 +127,13 @@ class GameLogicTest {
         assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees."); //TODO is this bad? - acquired indirectly via sorted list
     }
 
-
-    @TestFactory
-    Collection<DynamicTest> runSingleDynamicTest() {
-        return Collections.singletonList(
-                DynamicTest.dynamicTest("Add test",
-                        this::getShadowPlayerTest));
-    }
-
     /**
      *  other tests will ensure invalid data is not assigned to these variables
      *  just need to test that the are set correctly.
      *  these fields have not got getters, therefore must test via reflection
      */
-    private void getShadowPlayerTest(){
+    @Test
+    void getShadowPlayerTest(){
         final int numberOfPlayers = 1;
         final int fixedSpinnerValue = 1;
         gameLogic = TestHelpers.setupTestGenericPreconditions(numberOfPlayers,fixedSpinnerValue); //BeforeEach not called
@@ -171,11 +158,6 @@ class GameLogicTest {
         catch (Exception ex){
             fail(ex);
         }
-
-
-
-
-
     }
 
 }
