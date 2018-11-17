@@ -148,23 +148,27 @@ public class GameLogic {
     }
     
     // Retirement related
-    public int retireCurrentPlayer(){
-	    Player playerToRetire = players.get(currentPlayerIndex);
+    public int retireCurrentPlayer() throws RuntimeException {
+	    try{
+	        Player playerToRetire = players.get(currentPlayerIndex);
+	        int retirementBonus = playerToRetire.computeRetirementBonuses(getNumberOfRetiredPlayers());
+            playerToRetire.addToBalance(retirementBonus);
 
-        int retirementBonus = playerToRetire.computeRetirementBonuses(getNumberOfRetiredPlayers());
-        playerToRetire.addToBalance(retirementBonus);
+            int loanRepaymentCost = getTotalOutstandingLoans(playerToRetire.getPlayerNumber());
+            subtractFromCurrentPlayersBalance(loanRepaymentCost);
+            repayAllLoans(playerToRetire.getPlayerNumber());
 
-        int loanRepaymentCost = getTotalOutstandingLoans(playerToRetire.getPlayerNumber());
-        subtractFromCurrentPlayersBalance(loanRepaymentCost);
-        repayAllLoans(playerToRetire.getPlayerNumber());
+            players.remove(currentPlayerIndex);
+            retiredPlayers.add(playerToRetire);
 
-        players.remove(currentPlayerIndex);
-        retiredPlayers.add(playerToRetire);
-
-        if(players.size()>0){ //correct the index after removal unless the game is over
-            correctCurrentPlayerIndexAfterRetirement();
+            if(players.size()>0){ //correct the index after removal unless the game is over
+                correctCurrentPlayerIndexAfterRetirement();
+            }
+            return playerToRetire.getCurrentMoney();
         }
-        return playerToRetire.getCurrentMoney();
+        catch (IndexOutOfBoundsException ex){
+	        throw new RuntimeException("Attempted to retire a player that does not exist. No player at index: " + currentPlayerIndex);
+        }
     }
 
     private void correctCurrentPlayerIndexAfterRetirement(){

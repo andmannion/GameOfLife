@@ -50,18 +50,11 @@ class PlayerTest {
 
     @Test
     void computeRetirementBonusForNonPlayer(){
-        try {
-            player.computeRetirementBonuses(-1);
-        }
-        catch (RuntimeException ex){
-            assertEquals("Tried retiring invalid number of players.",ex.getMessage());
-        }
-        try {
-            player.computeRetirementBonuses(GameConfig.max_num_players);
-        }
-        catch (RuntimeException ex){
-            assertEquals("Tried retiring invalid number of players.",ex.getMessage());
-        }
+        final int negativeNumberOfPlayersAlreadyRetired = -1;
+        RuntimeException invalidNumber = assertThrows(RuntimeException.class, () -> player.computeRetirementBonuses(negativeNumberOfPlayersAlreadyRetired),"Tried retiring with negative param & it did not error.");
+
+        final int largeNumberOfPlayersAlreadyRetired = GameConfig.max_num_players;
+        invalidNumber = assertThrows(RuntimeException.class, () -> player.computeRetirementBonuses(largeNumberOfPlayersAlreadyRetired),"Tried retiring too large param & it did not error.");
     }
 
     @Test

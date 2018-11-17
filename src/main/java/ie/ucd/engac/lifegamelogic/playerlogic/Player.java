@@ -62,7 +62,7 @@ public class Player {
             return retirementBonus + actionCardBonus + childrenBonus;
         }
         else{
-            throw  new RuntimeException("Tried retiring invalid number of players.");//TODO uhh?
+            throw  new RuntimeException("Tried retiring invalid number of players. "+ numberOfRetirees + " is not a valid number of retirees");//TODO uhh?
         }
     }
 
