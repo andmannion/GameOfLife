@@ -152,78 +152,21 @@ class GameLogicTest {
         gameLogic = TestHelpers.setupTestGenericPreconditions(numberOfPlayers,fixedSpinnerValue); //BeforeEach not called
 
         int playerNumber;
-        int numDependants;
-        int numActionCards;
-        int loans;
-        int numLoans;
-        int bankBalance;
 
         Field fPlayerNumber;
-        Field fNumDependants;
-        Field fNumActionCards;
-        Field fLoans;
-        Field fNumLoans;
-        Field fBankBalance;
-
-        GameBoardTile currentTile;
-        OccupationCard occupation;
-        int martialStatus;
-        ArrayList<HouseCard> houses;
-
-        Field fCurrentTile;
-        Field fOccupation;
-        Field fMartialStatus;
-        Field fHouses;
-
-        int playerIndex = gameLogic.getCurrentPlayerIndex();
+                int playerIndex = gameLogic.getCurrentPlayerIndex();
         Player targetPlayer = gameLogic.getCurrentPlayer();
         ShadowPlayer sp = gameLogic.getShadowPlayer(playerIndex);
 
         try{
             fPlayerNumber = ShadowPlayer.class.getDeclaredField("playerNumber");
-            fNumDependants = ShadowPlayer.class.getDeclaredField("numDependants");
-            fNumActionCards = ShadowPlayer.class.getDeclaredField("numActionCards");
-            fLoans = ShadowPlayer.class.getDeclaredField("loans");
-            fNumLoans = ShadowPlayer.class.getDeclaredField("numLoans");
-            fBankBalance = ShadowPlayer.class.getDeclaredField("bankBalance");
-            fCurrentTile = ShadowPlayer.class.getDeclaredField("currentTile");
-            fOccupation = ShadowPlayer.class.getDeclaredField("occupation");
-            fMartialStatus = ShadowPlayer.class.getDeclaredField("martialStatus");
-            fHouses = ShadowPlayer.class.getDeclaredField("houses");
 
             fPlayerNumber.setAccessible(true);
-            fNumDependants.setAccessible(true);
-            fNumActionCards.setAccessible(true);
-            fLoans.setAccessible(true);
-            fNumLoans.setAccessible(true);
-            fBankBalance.setAccessible(true);
-            fCurrentTile.setAccessible(true);
-            fOccupation.setAccessible(true);
-            fMartialStatus.setAccessible(true);
-            fHouses.setAccessible(true);
 
             playerNumber = (int)fPlayerNumber.get(sp);
-            numDependants = (int)fNumDependants.get(sp);
-            numActionCards = (int)fNumActionCards.get(sp);
-            loans = (int)fLoans.get(sp);
-            numLoans = (int)fNumLoans.get(sp);
-            bankBalance = (int)fBankBalance.get(sp);
-            currentTile = (GameBoardTile)fCurrentTile.get(sp);
-            occupation = (OccupationCard)fOccupation.get(sp);
-            martialStatus = (int)fMartialStatus.get(sp);
-            houses = (ArrayList<HouseCard>)fHouses.get(sp);
 
             assertEquals(targetPlayer.getPlayerNumber(),playerNumber, "attribute mismatch");
-            assertEquals(targetPlayer.getNumberOfDependants(),numDependants, "attribute mismatch");
-            assertEquals(targetPlayer.getNumberOfActionCards(),numActionCards, "attribute mismatch");
-            assertEquals(targetPlayer.getTotalLoansOutstanding(gameLogic),loans, "attribute mismatch");
-            assertEquals(targetPlayer.getNumberOfLoans(gameLogic),numLoans, "attribute mismatch");
-            assertEquals(targetPlayer.getCurrentMoney(),bankBalance, "attribute mismatch");
 
-            assertEquals(targetPlayer.getCurrentLocation(),currentTile, "attribute mismatch");
-            assertEquals(targetPlayer.getOccupationCard(),occupation, "attribute mismatch");
-            assertEquals(targetPlayer.getMaritalStatus().toInt(),martialStatus, "attribute mismatch");
-            assertEquals(targetPlayer.getHouseCards(),houses,"attribute mismatch");
         }
         catch (Exception ex){
             fail(ex);
