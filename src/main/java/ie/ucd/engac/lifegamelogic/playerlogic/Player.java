@@ -197,4 +197,14 @@ public class Player {
 		this.movesRemaining = movesRemaining;
 	}
 
+	//overrides
+    @Override
+    public boolean equals(Object object){
+        if ( object.getClass().isAssignableFrom( this.getClass() ) ) {
+            return ((Player) object).getPlayerNumber() == this.getPlayerNumber();
+        }
+        else{
+            return false;
+        }
+	}
 }
