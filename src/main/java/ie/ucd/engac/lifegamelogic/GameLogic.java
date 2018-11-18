@@ -101,7 +101,7 @@ public class GameLogic {
      * subtract from the balance of the current player
      * @param amountToSubtract non negative amount to subtract
      */
-    public void subtractFromCurrentPlayersBalance(int amountToSubtract){ //TODO this function should not be public but is needed public for tests
+    public void subtractFromCurrentPlayersBalance(int amountToSubtract){
         subtractFromPlayersBalance(currentPlayerIndex, amountToSubtract);
     }
 
