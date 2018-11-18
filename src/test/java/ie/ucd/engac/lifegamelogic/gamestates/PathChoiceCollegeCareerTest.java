@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import org.junit.jupiter.api.Test;
 
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
-import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
@@ -26,7 +26,7 @@ class PathChoiceCollegeCareerTest {
 		
 		// Set up test
 		TestHelpers.importGameConfig();
-		LogicGameBoard gameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
+		GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
 		Spinnable testSpinner = new TestSpinner(1);
 		GameLogic gameLogic = new GameLogic(gameBoard, NUM_PLAYERS, testSpinner);
 		

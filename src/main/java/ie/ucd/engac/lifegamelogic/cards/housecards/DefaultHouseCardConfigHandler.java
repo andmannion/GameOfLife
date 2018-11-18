@@ -32,7 +32,7 @@ public class DefaultHouseCardConfigHandler implements CardConfigHandler<HouseCar
 		try {
 			jsonElement = (JsonElement) streamParser.next();
 		} catch (Exception e) {
-			System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
+			System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
 		return jsonElement;

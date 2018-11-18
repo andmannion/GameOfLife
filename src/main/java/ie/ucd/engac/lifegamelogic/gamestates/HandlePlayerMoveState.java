@@ -8,7 +8,7 @@ import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PlayersPayActionCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
@@ -44,7 +44,7 @@ public class HandlePlayerMoveState extends GameState {
 
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) { 
 			// TODO: forkchoice should be done when you land on it - that's the natural flow as the user
-			LogicGameBoard gameBoard = gameLogic.getGameBoard();
+			GameBoard gameBoard = gameLogic.getGameBoard();
 			int tilesToMove;
             int tilesMoved = 0;
             GameBoardTile endTile;
@@ -97,7 +97,7 @@ public class HandlePlayerMoveState extends GameState {
 		}
 	}
 
-	private GameBoardTile tryToMove(Player currentPlayer, LogicGameBoard gameBoard, int tilesToMove, int tilesMoved){
+	private GameBoardTile tryToMove(Player currentPlayer, GameBoard gameBoard, int tilesToMove, int tilesMoved){
         boolean stopTileEncountered = false;
         BoardLocation currentBoardLocation = currentPlayer.getCurrentLocation();
         GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);

@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LogicGameBoard {
+public class GameBoard {
 	private UDAGraph<String> boardGraph;
 	private HashMap<String, GameBoardTile> idToGameBoardTileMap;
 	private Spinner spinningWheel;
@@ -22,7 +22,7 @@ public class LogicGameBoard {
 	private InputStream boardInputStream;
 	private JsonElement overallJSONElement;
 
-	public LogicGameBoard(String jsonBoardConfigFileLocation) {
+	public GameBoard(String jsonBoardConfigFileLocation) {
 		this.jsonBoardConfigFileLocation = jsonBoardConfigFileLocation;
 		boardGraph = new UDAGraph<String>();
 		idToGameBoardTileMap = new HashMap<String, GameBoardTile>();
@@ -65,14 +65,14 @@ public class LogicGameBoard {
         try {
             overallJSONElement = (JsonElement) streamParser.next();
         } catch (Exception e) {
-            System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
+            System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
             System.exit(-1);
         }
 
 	}
 
 	private void initialiseBoard() {
-        boardInputStream = LogicGameBoard.class.getClassLoader().getResourceAsStream(jsonBoardConfigFileLocation);//FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
+        boardInputStream = GameBoard.class.getClassLoader().getResourceAsStream(jsonBoardConfigFileLocation);//FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
 		
 		initialiseParser();
 		

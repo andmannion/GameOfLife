@@ -4,7 +4,7 @@ import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.LifeGame;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -20,7 +20,7 @@ public class TestHelpers {
         //setup object with non functional spinner
 
         importGameConfig();
-        GameLogic gameLogic = new GameLogic(new LogicGameBoard(GameConfig.game_board_config_file_location), numberOfPlayers, new TestSpinner(0));
+        GameLogic gameLogic = new GameLogic(new GameBoard(GameConfig.game_board_config_file_location), numberOfPlayers, new TestSpinner(0));
 
         LifeGameMessage initialMessage;
         LifeGameMessage responseMessage;

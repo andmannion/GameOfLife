@@ -1,6 +1,6 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gamestates.GameLogicInterface;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
@@ -38,9 +38,9 @@ public class GameEngine implements Runnable {
         this.renderTarget = jPanel;
         lifeGameParent = lifeGame;
 
-        LogicGameBoard logicGameBoard = new LogicGameBoard(GameConfig.game_board_config_file_location);
+        GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
         
-        MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(logicGameBoard, numPlayers);
+        MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(gameBoard, numPlayers);
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);
         
         gameUI = new GameUI(this,renderTarget,messagingInterface);

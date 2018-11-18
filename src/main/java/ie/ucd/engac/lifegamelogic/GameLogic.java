@@ -6,7 +6,7 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.lifegamelogic.gameboard.LogicGameBoard;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
@@ -23,7 +23,7 @@ public class GameLogic {
 	private Spinnable spinner;
 	private ArrayList<Player> players;
 	private ArrayList<Player> retiredPlayers;
-	private LogicGameBoard gameBoard;
+	private GameBoard gameBoard;
 	private int currentPlayerIndex;
 	private int numberOfUnConfiguredPlayers;
 	private LifeGameMessage currentLifeGameMessageResponse;
@@ -36,7 +36,7 @@ public class GameLogic {
      * @param numPlayers the number of players
      * @param spinner spinnable object to determine player rolls
      */
-	public GameLogic(LogicGameBoard gameBoard, int numPlayers, Spinnable spinner) {
+	public GameLogic(GameBoard gameBoard, int numPlayers, Spinnable spinner) {
 		this.gameBoard = gameBoard;
 		this.spinner = spinner;
 		bank = new Bank();
@@ -130,26 +130,45 @@ public class GameLogic {
         numberOfUnConfiguredPlayers = numPlayers;
     }
 
+    /**
+     * returns an ArrayList of the players
+     */
     public ArrayList<Player> getPlayers(){
     	return players;
     }
 
+    /**
+     * gets the index of the current player
+     */
     public int getCurrentPlayerIndex(){
 	    return currentPlayerIndex;
     }
-	
+
+    /**
+     * gets the current player
+     */
 	public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
 
+    /**
+     * increment the current player index
+     */
     public void setNextPlayerToCurrent() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 
+    /**
+     * get the number of players
+     */
     public int getNumberOfPlayers() {
         return players.size();
     }
 
+    /**
+     * get the player at a certain index
+     * @param playerIndex index at which to get the player
+     */
     public Player getPlayerByIndex(int playerIndex) {
         if(playerIndex < 0 || playerIndex > players.size()) {
             return null;
@@ -157,28 +176,48 @@ public class GameLogic {
         return players.get(playerIndex);
     }
 
+    /**
+     * get the index of the next player
+     * @param playerIndex the index of the original player
+     * @return the index of the player after the current one
+     */
     public int getNextPlayerIndex(int playerIndex) {
         if(playerIndex < 0 || playerIndex > players.size()) {
             return -1;
         }
         return (playerIndex + 1) % players.size();
     }
-    
+
+    /**
+     * gets the number of player who have not had a turn yet
+     */
     public int getNumberOfUninitialisedPlayers() {
         return numberOfUnConfiguredPlayers;
     }
 
+    /**
+     * decrements the number of players that have not yet had a turn
+     */
     public void decrementNumberOfUninitialisedPlayers() {
         if(numberOfUnConfiguredPlayers > 0) {
             numberOfUnConfiguredPlayers--;
         }
     }
 
+    /**
+     * gets the current spinnable object
+     */
     public Spinnable getSpinner() {
     	return spinner;
     }
     
     // Retirement related
+
+    /**
+     * moves the current player from the active group to the retired group
+     * @return the amount of money the player had at retirement
+     * @throws RuntimeException if the player cannot be retired correctly
+     */
     public int retireCurrentPlayer() throws RuntimeException {
 	    try{
 	        Player playerToRetire = players.get(currentPlayerIndex);
@@ -210,6 +249,9 @@ public class GameLogic {
 	    return retiredPlayers.size();
     }
 
+    /**
+     * returns a list of the retired players, sorted based on their balance
+     */
     public ArrayList<Player> getRankedRetiredPlayers(){
 	    ArrayList<Player> ranked = retiredPlayers;
         ranked.sort(new PlayerMoneyComparator());
@@ -217,12 +259,20 @@ public class GameLogic {
     }
 
     // Career related
+    /**
+     * moves a player to the start tile for the college career path
+     * @param playerIndex the player to move
+     */
     public void movePlayerToInitialCollegeCareerPath(int playerIndex) {
         BoardLocation collegeCareerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(1);
 
         players.get(playerIndex).setCurrentLocation(collegeCareerPathInitialLocation);
     }
 
+    /**
+     * moves a player to the start tile for the standard career path
+     * @param playerIndex the player to move
+     */
     public void movePlayerToInitialCareerPath(int playerIndex) {
         BoardLocation careerPathInitialLocation = gameBoard.getOutboundNeighbours(new BoardLocation("a")).get(0);
 
@@ -230,31 +280,52 @@ public class GameLogic {
     }
 
     // GameBoard related
-    public LogicGameBoard getGameBoard() {
+
+    /**
+     * gets the gameboard object
+     */
+    public GameBoard getGameBoard() {
 		return gameBoard;
 	}
 
+    /**
+     * gets a list of the potential forward locations a player can move to
+     * @param currentBoardLocation the current location of the player
+     */
     public ArrayList<BoardLocation> getAdjacentForwardLocations(BoardLocation currentBoardLocation) {
         return gameBoard.getOutboundNeighbours(currentBoardLocation);
     }
 
 	// Bank related
-    public void extractMoneyFromBank(int amountToExtract) {
-        bank.extractMoney(amountToExtract);
-    }
 
+    /**
+     * gets the number of loans a player has withdrawn
+     * @param playerNumber the player's number to use as an identifier
+     */
     public int getNumberOfLoans(int playerNumber) {
         return bank.getNumberOfOutstandingLoans(playerNumber);
     }
 
+    /**
+     * repays all the loans belonging to a player
+     * @param playerNumber the player's number to use as an identifier
+     */
     private void repayAllLoans(int playerNumber){
         bank.repayAllLoans(playerNumber);
     }
 
+    /**
+     * gets the total amount of money owing by the player
+     * @param playerNumber the player's number to use as an identifier
+     */
     public int getTotalOutstandingLoans(int playerNumber) {
         return bank.getOutstandingLoanTotal(playerNumber);
     }
 
+    /**
+     * withdraws a loan
+     * @param playerNumber the player's number to use as an identifier
+     */
     public int takeOutALoan(int playerNumber){
 	    return bank.takeOutALoan(playerNumber);
     }
@@ -264,19 +335,33 @@ public class GameLogic {
         return currentLifeGameMessageResponse;
     }
 
+    /**
+     * gets the response message from the logic to the user interface
+     * @param lifeGameMessage the message to set as the response
+     */
     public void setResponseMessage(LifeGameMessage lifeGameMessage) {
         currentLifeGameMessageResponse = lifeGameMessage;
     }
 
     // Occupation card related
+    /**
+     * gets the top standard career card from the deck
+     */
     public OccupationCard getTopStandardCareerCard() {
         return bank.getTopStandardCareerCard();
     }
 
+    /**
+     * gets the top college career card from the deck
+     */
     public OccupationCard getTopCollegeCareerCard() {
         return bank.getTopCollegeCareerCard();
     }
 
+    /**
+     * returns an occupation card to the bottom of the deck
+     * @param occupationCardToBeReturned the card to return
+     */
     public void returnOccupationCard(OccupationCard occupationCardToBeReturned) {
         if(occupationCardToBeReturned.getOccupationCardType() == OccupationCardTypes.Career) {
             bank.returnStandardCareerCard(occupationCardToBeReturned);
@@ -287,15 +372,26 @@ public class GameLogic {
     }
 
     // Action card related
+    /**
+     * gets the top action card from the deck
+     */
     public ActionCard getTopActionCard() {
         return bank.getTopActionCard();
     }
 
     // House card related
+
+    /**
+     * gets the top house card from the deck
+     */
     public HouseCard getTopHouseCard() {
         return bank.getTopHouseCard();
     }
 
+    /**
+     * returns a house card to the bottom of the deck
+     * @param houseCardToBeReturned the house card to return
+     */
     public void returnHouseCard(HouseCard houseCardToBeReturned) {
         bank.returnHouseCard(houseCardToBeReturned);
     }
