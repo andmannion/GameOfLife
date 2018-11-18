@@ -29,7 +29,13 @@ public class GameLogic {
 	private LifeGameMessage currentLifeGameMessageResponse;
 	
 	private GameState currentState;
-	
+
+    /**
+     * Constructor
+     * @param gameBoard the board to use for this game
+     * @param numPlayers the number of players
+     * @param spinner spinnable object to determine player rolls
+     */
 	public GameLogic(LogicGameBoard gameBoard, int numPlayers, Spinnable spinner) {
 		this.gameBoard = gameBoard;
 		this.spinner = spinner;
@@ -43,10 +49,18 @@ public class GameLogic {
 		currentState.enter(this);
 	}
 
+    /**
+     * sets the spinnable object
+     */
     public void setSpinner(Spinnable spinner) {
         this.spinner = spinner;
     }
 
+    /**
+     * function to handle messages from the user interface and compute the response
+     * @param lifeGameMessage message from the user interface
+     * @return message from the logic to the user interface
+     */
     public LifeGameMessage handleInput(LifeGameMessage lifeGameMessage) {
 		GameState nextGameState = currentState.handleInput(this, lifeGameMessage);
 		
@@ -59,6 +73,12 @@ public class GameLogic {
 	}
 
 	// Player related
+
+    /**
+     * create a shadow player object based on a player
+     * @param playerIndex the index of the player to create the shadow player based on
+     * @return shadow player object
+     */
     public ShadowPlayer getShadowPlayer(int playerIndex){
 	    Player player = getPlayerByIndex(playerIndex);
 
@@ -77,16 +97,27 @@ public class GameLogic {
         return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards, gameBoardTile);
     }
 
-    public void subtractFromCurrentPlayersBalance(int amountToSubtract){
+    /**
+     * subtract from the balance of the current player
+     * @param amountToSubtract non negative amount to subtract
+     */
+    public void subtractFromCurrentPlayersBalance(int amountToSubtract){ //TODO this function should not be public but is needed public for tests
         subtractFromPlayersBalance(currentPlayerIndex, amountToSubtract);
     }
 
+    /**
+     * subtract from a given players balance
+     * @param playerIndex the player to deduct the money from
+     * @param amountToSubtract non negative amount to subtract
+     */
     public void subtractFromPlayersBalance(int playerIndex, int amountToSubtract){
-	    Player player = getPlayerByIndex(playerIndex);
-        while (player.getCurrentMoney() - amountToSubtract < 0){ //user has to take out loans or else they go bankrupt
-            player.addToBalance(takeOutALoan(player.getPlayerNumber()));
+        if (amountToSubtract >= 0) {
+            Player player = getPlayerByIndex(playerIndex);
+            while (player.getCurrentMoney() - amountToSubtract < 0) { // user has to take out loans or else they go bankrupt
+                player.addToBalance(takeOutALoan(player.getPlayerNumber()));
+            }
+            player.subtractFromBalance(amountToSubtract);
         }
-        player.subtractFromBalance(amountToSubtract);
     }
 
     private void initialisePlayers(int numPlayers) {
