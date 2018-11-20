@@ -77,8 +77,7 @@ public class ActionTileTest {
     }
 
     private void playersPayCardTest(GameLogic gameLogic) {
-        Random random = new Random(System.nanoTime());
-        int choiceIndex = random.nextInt(NUM_PLAYERS-1); //generate index to choose
+        int choiceIndex = 2; //generate index to choose
         int chosenTargetIndex = choiceIndex+1; //we know that the chosen player index is choice+1 as the p.u.t. is 0
 
         //save balances before

@@ -54,8 +54,7 @@ class RetirementTest {
 
     private int setupPlayerWithItems(GameLogic gameLogic){
         String location = "aaaav";
-        Random random = new Random(System.nanoTime());
-        int max = random.nextInt(4);
+        int max = 3; //give them 3 of each item
         Player player = gameLogic.getCurrentPlayer();
         for (int i=0;i<max;i++){
             player.addHouseCard(gameLogic.getTopHouseCard());

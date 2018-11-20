@@ -28,8 +28,7 @@ class PlayerTest {
 
     @Test
     void computeRetirementBonuses() {
-        Random random = new Random(System.nanoTime());
-        int max = random.nextInt(4);
+        int max = 3; //give them 3 of each item
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(1,1);
 
         for (int i=0;i<max;i++){
