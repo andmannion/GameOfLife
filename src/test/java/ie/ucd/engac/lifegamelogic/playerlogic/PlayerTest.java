@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
@@ -65,6 +63,7 @@ class PlayerTest {
         assertEquals(1,player.getNumberOfDependants(),"init with >0 dependants");
         player.addDependants(3);
         assertEquals(4,player.getNumberOfDependants(),"init with >0 dependants");
+        assertEquals(4L, 3.3, 3,"er");
     }
 
     @Test
