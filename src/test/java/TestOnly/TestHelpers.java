@@ -42,14 +42,14 @@ public class TestHelpers {
         responseMessage = gameLogic.handleInput(initialMessage);
 
         while (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
-            assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
             //choose a path for this player
             int choiceIndex = PathChoiceState.COLLEGE_CAREER_CHOICE_INDEX;
             choiceMessage = new DecisionResponseMessage(choiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
 
             responseMessage = gameLogic.handleInput(choiceMessage);
-            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
             Player player = gameLogic.getCurrentPlayer();
 
             //force player back to "a"
@@ -57,13 +57,13 @@ public class TestHelpers {
             //send back a spin response
             spinMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(spinMessage);
-            assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
             ackMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
             responseMessage = gameLogic.handleInput(ackMessage);
         }
 
-        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //set object to use the function spinner
         gameLogic.setSpinner(new TestSpinner(fixedSpinnerValue));

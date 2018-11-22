@@ -52,7 +52,7 @@ public class HolidayTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());

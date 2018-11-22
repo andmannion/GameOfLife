@@ -42,7 +42,7 @@ class RetirementTest {
         //advance to end of game to get ranked players
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
-        assertEquals(LifeGameMessageTypes.EndGameMessage, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.EndGameMessage, responseMessage.getLifeGameMessageType(),"Expected message not received");
         EndGameMessage endGameMessage = (EndGameMessage) responseMessage;
 
         //compare game rankings with test rankings, ensures final money and order is correct
@@ -87,7 +87,7 @@ class RetirementTest {
             testMoney += testCost;
 
             //perform computation in logic
-            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
             // Mock messages to logic, performing  functionality
             initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(initialMessage);
@@ -103,10 +103,10 @@ class RetirementTest {
         //check that next player is ready to go
         assertTrue(responseMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckRequest || responseMessage.getLifeGameMessageType() == LifeGameMessageTypes.EndGameMessage);
         if(responseMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckRequest){
-            assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
             initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
             responseMessage = gameLogic.handleInput(initialMessage);
-            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+            assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
         }
 
         return testMoney;

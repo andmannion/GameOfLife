@@ -47,7 +47,7 @@ class PaydayTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         int expectedBalance;
         if (playerBonusNumber == fixedSpinnerValue){
@@ -96,7 +96,7 @@ class PaydayTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         int expectedBalance;
         if (playerBonusNumber == fixedSpinnerValue){

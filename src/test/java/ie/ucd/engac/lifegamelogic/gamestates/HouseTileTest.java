@@ -42,7 +42,7 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 0; //do nothing
@@ -90,7 +90,7 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
@@ -98,7 +98,7 @@ class HouseTileTest {
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //construct choice message
         int cardChoiceIndex = 0;
@@ -107,13 +107,13 @@ class HouseTileTest {
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //cannot afford the house asked if we want a loan
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         int loanYesNo = 0; //choose no
         initialMessage = new DecisionResponseMessage(loanYesNo,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an end turn message
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //assert that player 0 has been rxed no cards
         assertEquals(player.getHouseCards().size(), 0);
@@ -156,7 +156,7 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
@@ -164,7 +164,7 @@ class HouseTileTest {
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
@@ -173,13 +173,13 @@ class HouseTileTest {
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //cannot afford the house asked if we want a loan
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         int loanYesNo = 1; //choose yes
         initialMessage = new DecisionResponseMessage(loanYesNo,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an end turn message
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //assert that player 0 has been rxed a card
         assertEquals(player.getHouseCards().size(), 1);
@@ -228,7 +228,7 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
@@ -236,7 +236,7 @@ class HouseTileTest {
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
@@ -244,7 +244,7 @@ class HouseTileTest {
         initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an edn turn message
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         HouseCard playerHouseCard = player.getHouseCards().get(0);
 
@@ -266,7 +266,7 @@ class HouseTileTest {
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         gameLogic.setNextPlayerToCurrent(); //go back to this player again
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION)); //and move him to prior tile
@@ -275,7 +275,7 @@ class HouseTileTest {
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         choiceIndex = 2; //sell a house
@@ -283,7 +283,7 @@ class HouseTileTest {
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //need large decision request to choose which card. Turns out we only have one.
         choiceIndex = 0;
@@ -291,12 +291,12 @@ class HouseTileTest {
         responseMessage = gameLogic.handleInput(initialMessage);
 
         //should now be spinning to choose the sale price
-        assertEquals(LifeGameMessageTypes.SpinRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.SpinRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
         // Mock messages to logic, performing  functionality
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
         //card should be sold so do the maths
         int houseSalePrice = houseCard.getSpinForSalePrice(true); //true for odd (we have spinner that only returns 1
         int playerEndMoney = playerInitMoney-houseCost+houseSalePrice;
@@ -339,7 +339,7 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
@@ -347,7 +347,7 @@ class HouseTileTest {
 
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //construct choice message and save the housecard for later comparison
         int cardChoiceIndex = 0;
@@ -355,7 +355,7 @@ class HouseTileTest {
         initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
         //check we got back an edn turn message
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //sssert that player 0 has been rxed a card, that it is the correct one & the correct $ deducted
         HouseCard housecard = player.getHouseCards().get(1); //get the 2nd house car

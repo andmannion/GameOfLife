@@ -70,7 +70,7 @@ public class BabyTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         assertEquals(numberOfDependants+numDependantsToAdd, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
@@ -103,12 +103,12 @@ public class BabyTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
-        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType());
+        assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //check that the correct number of kids has been added
         assertEquals(numberOfDependants+expectedDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
