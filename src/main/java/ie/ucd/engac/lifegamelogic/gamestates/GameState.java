@@ -2,6 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
+import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionRequestMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -52,5 +54,16 @@ public abstract class GameState {
 		// Only two cards at the moment, return unchosen
 		OccupationCard unchosenCareerCard = (OccupationCard) getPendingCardChoices().get((choiceIndex + 1) % 2);
 		gameLogic.returnOccupationCard(unchosenCareerCard);
+	}
+
+	static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
+		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
+		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
+		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
+
+		String eventMessage = "Choose either a college or standard career path.";
+
+		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
+		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType);
 	}
 }

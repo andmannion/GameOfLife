@@ -7,6 +7,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Player {
@@ -23,7 +24,7 @@ public class Player {
 	
 	private MaritalStatus maritalStatus;
 	
-	private PlayerColour playerColour;
+	private Color playerColour;
 
 	private BoardLocation currentBoardLocation;
 	private BoardLocation pendingBoardForkChoice;	
@@ -40,7 +41,7 @@ public class Player {
 		careerPathTaken = null;
 
 		maritalStatus = MaritalStatus.Single;
-		this.playerColour = PlayerColour.fromInt(playerNumber);
+		this.playerColour = Color.GREEN; //TODO make this not AWT
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
 		currentMoney = GameConfig.starting_money;
@@ -59,7 +60,7 @@ public class Player {
     /**
      * returns the colour of this player
      */
-    public PlayerColour getPlayerColour() {
+    public Color getPlayerColour() {
         return playerColour;
     }
 

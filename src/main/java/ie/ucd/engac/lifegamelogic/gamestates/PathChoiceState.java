@@ -57,17 +57,6 @@ public class PathChoiceState extends GameState {
 		// Must clear the sent message?
 	}
 
-	static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
-		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
-		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
-		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
-
-		String eventMessage = "Choose either a college or standard career path.";
-
-		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
-		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType);
-	}
-
 	private OccupationCardTypes parsePathChoiceResponse(DecisionResponseMessage pathChoiceMessage) {
 		int choiceIndex = pathChoiceMessage.getChoiceIndex();
 

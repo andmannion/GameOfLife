@@ -8,6 +8,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gamestates.ChoosePawnsState;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
@@ -16,6 +17,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GameLogic {
@@ -45,7 +47,7 @@ public class GameLogic {
 		
         retiredPlayers = new ArrayList<>();
 		
-		currentState = new PathChoiceState();
+		currentState = new ChoosePawnsState();
 		currentState.enter(this);
 	}
 
@@ -83,7 +85,7 @@ public class GameLogic {
 	    Player player = getPlayerByIndex(playerIndex);
 
 	    int playerNumber = player.getPlayerNumber();
-        PlayerColour playerColour = player.getPlayerColour();
+        Color playerColour = player.getPlayerColour();
         int martialStatus = player.getMaritalStatus().toInt();
         int numberOfDependants = player.getNumberOfDependants();
         OccupationCard occupationCard = player.getOccupationCard();

@@ -10,11 +10,12 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ShadowPlayer {
 
-    private PlayerColour playerColour;
+    private Color playerColour; //TODO AWT -> FX
 
     private int playerNumber;
     private int numDependants;
@@ -23,12 +24,15 @@ public class ShadowPlayer {
     private int numLoans;
     private int bankBalance;
 
+    private double xLocation;
+    private double yLocation;
+
     private GameBoardTile currentTile;
     private OccupationCard occupation;
     private int martialStatus;
     private ArrayList<HouseCard> houses;
 
-    public ShadowPlayer(int playerNumber, PlayerColour playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard> houses, int numLoans, int loans, int bankBalance, int numActionCards, GameBoardTile currentTile){
+    public ShadowPlayer(int playerNumber, Color playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard> houses, int numLoans, int loans, int bankBalance, int numActionCards, GameBoardTile currentTile){
         this.playerNumber = playerNumber;
         this.playerColour = playerColour;
         this.martialStatus = martialStatus;
@@ -40,9 +44,23 @@ public class ShadowPlayer {
         this.bankBalance = bankBalance;
         this.numActionCards = numActionCards;
         this.currentTile = currentTile;
+        this.xLocation = 0.0;
+        this.yLocation = 0.0;
     }
 
-    public String playerColourToString(){
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public double getXLocation() {
+        return xLocation;
+    }
+
+    public double getYLocation() {
+        return yLocation;
+    }
+
+    public String playerColourToString(){ //TODO this makes a horrible horrible string
         return playerColour.toString();
     }
 

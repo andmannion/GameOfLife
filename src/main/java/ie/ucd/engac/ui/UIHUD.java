@@ -63,22 +63,24 @@ public class UIHUD implements Drawable {
             case Init:
                 break;
             case WaitingForSpin: case PostSpin:
-                try{
-                    graphics.setColor(Color.darkGray);
-                    graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
-                    graphics.setColor(Color.black);
-                    graphics.drawString("Player: " + sPlayer.playerNumToString() + " Colour: " + sPlayer.playerColourToString(),    firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
-                    graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
-                    graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
-                    graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
-                    //TODO house cards need to respect border & wrap around?
-                    graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
-                    graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
-                    graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
-                    graphics.drawString("Current Tile: " + sPlayer.currentTileToString(),firstStringX+400,firstStringY+stringLengthY*ACTION_LOC);
-                }
-                catch (Exception e){
-                    System.err.println("Exception in UIHUD.draw() " + e.toString()); //TODO remove this print statement
+                if(sPlayer != null){
+                    try{
+                        graphics.setColor(Color.darkGray);
+                        graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+                        graphics.setColor(Color.black);                                     //TODO this colour "string" is horrid
+                        graphics.drawString("Player: " + sPlayer.playerNumToString() + " Colour: " + sPlayer.playerColourToString(),    firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+                        graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
+                        graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
+                        graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
+                        //TODO house cards need to respect border & wrap around?
+                        graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
+                        graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
+                        graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
+                        graphics.drawString("Current Tile: " + sPlayer.currentTileToString(),firstStringX+400,firstStringY+stringLengthY*ACTION_LOC);
+                    }
+                    catch (Exception e){
+                        System.err.println("Exception in UIHUD.draw() " + e.toString());
+                    }
                 }
                 break;
             case CardChoice:

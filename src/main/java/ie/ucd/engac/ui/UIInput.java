@@ -65,7 +65,7 @@ public class UIInput implements Drawable {
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getUiActionListener();
 
-        endTurnButton = createButton("End Turn",JCOMBO_LHS_GAP, JCOMBO_Y_POS - 50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
+        endTurnButton = createButton("OK",JCOMBO_LHS_GAP, JCOMBO_Y_POS - 50,JCOMBO_WIDTH, JCOMBO_HEIGHT, actionListener);
         renderTarget.add(endTurnButton);
 
         int spinX = panelWidth-SPIN_WIDTH-SPIN_BORDER;

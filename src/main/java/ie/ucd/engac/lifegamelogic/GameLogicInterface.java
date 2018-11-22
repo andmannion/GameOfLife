@@ -1,7 +1,5 @@
-package ie.ucd.engac.lifegamelogic.gamestates;
+package ie.ucd.engac.lifegamelogic;
 
-import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;

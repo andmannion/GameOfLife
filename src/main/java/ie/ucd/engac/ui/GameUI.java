@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static ie.ucd.engac.ui.UIState.*;
 
@@ -20,6 +21,9 @@ public class GameUI implements Drawable {
 
     //parent GameEngine
     private GameEngine gameEngine;
+
+    //pawns and board
+    HashMap<Integer,UIPawn> pawnMap;
 
     //UI sub elements
     private UIBoard uiBoard;
@@ -68,7 +72,7 @@ public class GameUI implements Drawable {
 
         drawables = new ArrayList<>();
         drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput));
-        //updateCurrentUIScreen();
+
     }
 
     /**
@@ -113,6 +117,13 @@ public class GameUI implements Drawable {
                     uiState = EndGame;
                     uiEventMessage.updateEventMessage("Game Over.");
                     break;
+                case UIConfigMessage:
+                    UIConfigMessage uiConfigMessage = (UIConfigMessage) lastResponse;
+                    handleConfigMessage(uiConfigMessage);
+                    uiState = WaitingForAck;
+                    uiEventMessage.updateEventMessage(uiConfigMessage.getEventMsg());
+                    uiInput.setEnableEndTurnButton(true);
+                    break;
                 default:
                     System.err.println("A message needs handling code written, or was null:");
                     System.err.println(lastResponse.getLifeGameMessageType());
@@ -121,6 +132,21 @@ public class GameUI implements Drawable {
             }
         }
         wasStateUpdatedQ = wasStateUpdatedD;
+    }
+
+    private void handleConfigMessage(UIConfigMessage uiConfigMessage){
+        ArrayList<Pawn> pawns = uiConfigMessage.getPawns();
+        pawnMap = new HashMap<>();
+
+        for(Pawn pawn:pawns){
+            pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn));
+        }
+    }
+
+    private void updatePawns(ShadowPlayer shadowPlayer){
+        Pawn pawn = pawnMap.get(shadowPlayer.getPlayerNumber());
+        pawn.setXLocation(shadowPlayer.getXLocation());
+        pawn.setYLocation(shadowPlayer.getYLocation());
     }
 
     /**
@@ -242,7 +268,7 @@ public class GameUI implements Drawable {
                     uiInput.setEnableSubmitButton(false);
                     sendLargeDecisionResponse(uiInput.getSpinnerIndex());
                     break;
-                case "End Turn":
+                case "OK":
                     uiInput.setEnableEndTurnButton(false);
                     sendAckResponseMessage();
                     break;
