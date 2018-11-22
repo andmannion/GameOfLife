@@ -23,7 +23,7 @@ public class GameUI implements Drawable {
     private GameEngine gameEngine;
 
     //pawns and board
-    HashMap<Integer,UIPawn> pawnMap;
+    private HashMap<Integer,UIPawn> pawnMap;
 
     //UI sub elements
     private UIBoard uiBoard;

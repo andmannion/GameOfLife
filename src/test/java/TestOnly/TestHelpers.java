@@ -31,6 +31,16 @@ public class TestHelpers {
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
         responseMessage = gameLogic.handleInput(initialMessage);
 
+        for(int inc=0;inc<numberOfPlayers;inc++){
+            assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
+            initialMessage = new DecisionResponseMessage(0,LifeGameMessageTypes.LargeDecisionResponse);
+            responseMessage = gameLogic.handleInput(initialMessage);
+        }
+
+        assertEquals(LifeGameMessageTypes.UIConfigMessage,responseMessage.getLifeGameMessageType(),"Expected message not received");
+        initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(initialMessage);
+
         while (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
             assertEquals(LifeGameMessageTypes.OptionDecisionRequest, responseMessage.getLifeGameMessageType());
 

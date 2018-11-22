@@ -45,6 +45,16 @@ class PathChoiceCollegeCareerTest {
 		// Mock messages to logic, performing pathChoiceState functionality
 		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
 		LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+
+		for(int inc=0;inc<NUM_PLAYERS;inc++){
+			assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
+			initialMessage = new DecisionResponseMessage(0,LifeGameMessageTypes.LargeDecisionResponse);
+			responseMessage = gameLogic.handleInput(initialMessage);
+		}
+
+		assertEquals(LifeGameMessageTypes.UIConfigMessage,responseMessage.getLifeGameMessageType(),"Expected message not received");
+		initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+		responseMessage = gameLogic.handleInput(initialMessage);
 		
 		assertEquals(responseMessage.getLifeGameMessageType(), LifeGameMessageTypes.OptionDecisionRequest);
 		

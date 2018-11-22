@@ -80,9 +80,9 @@ class GameLogicTest {
      */
     @Test
     void retireCurrentPlayerGeqTwoRemain(){
-        //override @BeforeEach
-        final int numberOfPlayers = 2;
-        final int fixedSpinnerValue = 1;
+        gameLogic = null;
+        int numberOfPlayers = 2;
+        int fixedSpinnerValue = 1;
         gameLogic = TestHelpers.setupTestGenericPreconditions(numberOfPlayers,fixedSpinnerValue);
 
         //setup player
