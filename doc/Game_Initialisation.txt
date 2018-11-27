@@ -10,6 +10,8 @@ activate GameUI
 GameEngine->GameLogic:Create\n[new GameLogicInterface]
 activate GameLogic
 GameUI->GameLogic:Initial startup message\n[sendStartupMessage()]
+GameLogic->GameUI:Send objects for UI setup
+GameUI->GameLogic:Acknowledge receipt of data
 GameLogic-->GameUI:Send response requesting\ncareer choice (DecisionRequestMessage)
 GameUI->GameUI:Display career path choice
 Actor->GameUI:Choose career path
