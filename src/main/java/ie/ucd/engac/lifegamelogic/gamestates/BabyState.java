@@ -12,9 +12,8 @@ public class BabyState extends GameState {
 		// Request a spin from the current player to determine how many babies they had
 		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
-																 gameLogic.getCurrentPlayerIndex(),
-																 babyEventMessage);
+		LifeGameMessage responseMessage = new SpinRequestMessage(babyEventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
+		);
 		gameLogic.setResponseMessage(responseMessage);
 	}
 

@@ -21,7 +21,7 @@ public class RetirePlayerState extends GameState {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         currentHouseNumber = currentCardIndex + 1;
         String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
         gameLogic.setResponseMessage(spinRequestMessage);
     }
 
@@ -46,7 +46,7 @@ public class RetirePlayerState extends GameState {
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
                 int currentHouseNumber = currentCardIndex + 1;
                 String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
-                SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
+                SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
                 gameLogic.setResponseMessage(spinRequestMessage);
             }
             else { //otherwise do remainder of retirement actions

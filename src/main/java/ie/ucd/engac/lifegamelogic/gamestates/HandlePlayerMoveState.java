@@ -34,7 +34,7 @@ public class HandlePlayerMoveState extends GameState {
         if (eventMessage == null){
             eventMessage = "Player " + playNum + "'s turn.";
         }
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()), playNum, eventMessage);
+        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
 

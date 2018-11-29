@@ -28,9 +28,8 @@ public class GetMarriedState extends GameState {
 		
 		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
-																 gameLogic.getCurrentPlayer().getPlayerNumber(),
-																 eventMsg);
+		LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
+		);
 		gameLogic.setResponseMessage(responseMessage);
 	}
 	
@@ -76,9 +75,8 @@ public class GetMarriedState extends GameState {
 			else {
 				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 				
-				LifeGameMessage responseMessage = new SpinRequestMessage(gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()),
-						 gameLogic.getCurrentPlayer().getPlayerNumber(),
-						 eventMsg);
+				LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
+				);
 				gameLogic.setResponseMessage(responseMessage);
                 nextState = null;
 			}
