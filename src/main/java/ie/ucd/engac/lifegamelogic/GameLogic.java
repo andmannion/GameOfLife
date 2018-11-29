@@ -8,16 +8,13 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
-import ie.ucd.engac.lifegamelogic.gamestates.ChoosePawnsState;
+import ie.ucd.engac.lifegamelogic.gamestates.GameSetupState;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
-import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class GameLogic {
@@ -47,7 +44,7 @@ public class GameLogic {
 		
         retiredPlayers = new ArrayList<>();
 		
-		currentState = new ChoosePawnsState();
+		currentState = new GameSetupState();
 		currentState.enter(this);
 	}
 

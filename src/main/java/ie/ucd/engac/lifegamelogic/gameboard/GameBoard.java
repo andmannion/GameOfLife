@@ -37,7 +37,7 @@ public class GameBoard {
 	}
 	
 	public ArrayList<BoardLocation> getOutboundNeighbours(BoardLocation boardLocation) {
-		ArrayList<BoardLocation> outboundLocations = new ArrayList<BoardLocation>();
+		ArrayList<BoardLocation> outboundLocations = new ArrayList<>();
 		
 		for(String locationID : boardGraph.outboundNeighbours(boardLocation.getLocation())) {
 			if(locationID != null) {
@@ -66,7 +66,7 @@ public class GameBoard {
         overallJSONElement = null;
 
         try {
-            overallJSONElement = (JsonElement) streamParser.next();
+            overallJSONElement = streamParser.next();
         } catch (Exception e) {
             System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
             System.exit(-1);
@@ -75,7 +75,7 @@ public class GameBoard {
 	}
 
 	private void initialiseBoard() {
-        boardInputStream = GameBoard.class.getClassLoader().getResourceAsStream(jsonBoardConfigFileLocation);//FileUtilities.GetEntireContentsAsString(jsonBoardConfigFileLocation);
+        boardInputStream = GameBoard.class.getClassLoader().getResourceAsStream(jsonBoardConfigFileLocation);
 		
 		initialiseParser();
 		

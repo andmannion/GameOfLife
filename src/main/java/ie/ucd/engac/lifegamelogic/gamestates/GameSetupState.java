@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class ChoosePawnsState extends GameState {
+public class GameSetupState extends GameState {
 
     private ArrayList<Pawn> pawns;
     private HashSet<String> remainingColourChoices;
@@ -32,7 +32,6 @@ public class ChoosePawnsState extends GameState {
             awaitingInfoFromPlayerIndex = gameLogic.getCurrentPlayerIndex();
             initialPlayerIndex = awaitingInfoFromPlayerIndex;
 
-            //TODO remove hard coded colours?
             setupColours();
 
             outgoingChoices = getRemainingChooseableStrings();

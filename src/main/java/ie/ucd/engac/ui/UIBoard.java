@@ -6,7 +6,6 @@ import ie.ucd.engac.messaging.Tile;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class UIBoard implements Drawable {
 

@@ -13,7 +13,8 @@ public class UITile extends Tile implements Drawable{
     }
 
     @Override
-    public void draw(Graphics graphics) { graphics.setColor(Color.CYAN);
+    public void draw(Graphics graphics){
+        graphics.setColor(Color.CYAN);
         graphics.fillRect((int) getXLocation(), (int)getYLocation(), dimension, dimension);
     }
 }
