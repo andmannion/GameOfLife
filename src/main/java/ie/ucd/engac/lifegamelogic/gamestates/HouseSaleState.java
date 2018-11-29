@@ -24,7 +24,7 @@ public class HouseSaleState extends GameState { //TODO this entire class
         String eventMessage = "Which house would you like to sell?";
 
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
-        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
+        LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType, gameLogic.getCurrentShadowPlayer());
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
         // and push the unchosen one to the bottom of the correct deck.

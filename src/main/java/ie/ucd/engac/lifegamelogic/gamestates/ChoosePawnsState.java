@@ -42,7 +42,7 @@ public class ChoosePawnsState extends GameState {
 
             LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
             LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                    playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType);
+                    playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType, null); //ShadowPlayer not ready yet
             gameLogic.setResponseMessage(replyMessage);
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse){
@@ -52,7 +52,7 @@ public class ChoosePawnsState extends GameState {
                 int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
 
                 if (nextPlayer == initialPlayerIndex) {
-                    LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!");
+                    LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!",null);  //ShadowPlayer not ready yet.
                     gameLogic.setResponseMessage(replyMessage);
                 }
                 else{
@@ -64,12 +64,12 @@ public class ChoosePawnsState extends GameState {
 
                     LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
                     LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                            playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType);
+                            playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType, null); //ShadowPlayer not ready yet.
                     gameLogic.setResponseMessage(replyMessage);
                 }
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse){
-            LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+            LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), null); //ShadowPlayer not ready yet.
             gameLogic.setResponseMessage(replyMessage);
             nextState = new PathChoiceState();
         }

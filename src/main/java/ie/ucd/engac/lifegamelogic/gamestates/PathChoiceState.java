@@ -3,11 +3,8 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.*;
-
-import java.util.ArrayList;
 
 public class PathChoiceState extends GameState {
 	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
@@ -26,7 +23,7 @@ public class PathChoiceState extends GameState {
 		 * same message until we get the desired response type.
 		 */
 		if (lifeGameMessage.getLifeGameMessageType() != LifeGameMessageTypes.OptionDecisionResponse) {
-			LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+			LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), gameLogic.getCurrentShadowPlayer());
 			gameLogic.setResponseMessage(replyMessage);
 		} 
 		else {

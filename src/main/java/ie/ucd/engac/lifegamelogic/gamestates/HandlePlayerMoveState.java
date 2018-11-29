@@ -69,7 +69,7 @@ public class HandlePlayerMoveState extends GameState {
 
             if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
                 // Must send a message to choose a career path, etc.
-                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), gameLogic.getCurrentShadowPlayer());
                 gameLogic.setResponseMessage(replyMessage);
 
                 return new PathChoiceState();

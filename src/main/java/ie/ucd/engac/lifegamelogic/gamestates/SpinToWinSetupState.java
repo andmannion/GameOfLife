@@ -37,7 +37,7 @@ public class SpinToWinSetupState extends GameState {
 
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
 		LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.", requestType);
+                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.", requestType, gameLogic.getCurrentShadowPlayer());
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -83,7 +83,7 @@ public class SpinToWinSetupState extends GameState {
                 LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
 				LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
                         gameLogic.getPlayerByIndex(initialPlayerIndex).getPlayerNumber(),
-                        "Player " + playerNumber + ", pick a SpinToWin number.", requestType);
+                        "Player " + playerNumber + ", pick a SpinToWin number.", requestType, gameLogic.getCurrentShadowPlayer());
 				gameLogic.setResponseMessage(replyMessage);
 			}
 		}

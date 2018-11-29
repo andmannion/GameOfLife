@@ -45,8 +45,10 @@ public class ShadowPlayer {
         this.bankBalance = player.getCurrentMoney();
         this.numActionCards = player.getNumberOfActionCards();
         this.currentTile = gameBoardTile;
-        this.xLocation = gameBoardTile.getXLocation();
-        this.yLocation = gameBoardTile.getYLocation();
+        if(gameBoardTile != null) {
+            this.xLocation = gameBoardTile.getXLocation();
+            this.yLocation = gameBoardTile.getYLocation();
+        }
     }
 
     public int getPlayerNumber() {

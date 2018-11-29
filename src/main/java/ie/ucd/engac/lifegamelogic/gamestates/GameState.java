@@ -4,10 +4,7 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
-import ie.ucd.engac.messaging.Chooseable;
-import ie.ucd.engac.messaging.DecisionRequestMessage;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
@@ -30,7 +27,8 @@ public abstract class GameState {
     }
 
 	protected LifeGameMessage setupChoiceAndMessage(int relatedPlayerIndex, Chooseable firstOption,
-                                                    Chooseable secondOption, String eventMessage) {
+													Chooseable secondOption, String eventMessage,
+													ShadowPlayer shadowPlayer) {
         // Need to store both choices so that we can assign the chosen one to the
         // correct player, and push the unchosen one to the bottom of the correct deck.
 
@@ -42,7 +40,7 @@ public abstract class GameState {
         storePendingChoiceCards(validOptions);
 
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
-		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage, requestType);
+		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage, requestType, shadowPlayer);
 	}
 
 	protected void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
@@ -56,7 +54,7 @@ public abstract class GameState {
 		gameLogic.returnOccupationCard(unchosenCareerCard);
 	}
 
-	static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber) {
+	static LifeGameMessage constructPathChoiceMessage(int relatedPlayerNumber, ShadowPlayer shadowPlayer) {
 		ArrayList<Chooseable> validPathChoices = new ArrayList<>();
 		validPathChoices.add(new CareerPath(OccupationCardTypes.Career));
 		validPathChoices.add(new CareerPath(OccupationCardTypes.CollegeCareer));
@@ -64,6 +62,6 @@ public abstract class GameState {
 		String eventMessage = "Choose either a college or standard career path.";
 
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
-		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType);
+		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType, shadowPlayer);
 	}
 }

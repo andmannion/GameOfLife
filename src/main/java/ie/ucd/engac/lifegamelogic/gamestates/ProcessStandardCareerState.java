@@ -23,7 +23,7 @@ public class ProcessStandardCareerState extends GameState {
 		LifeGameMessage replyMessage = setupChoiceAndMessage(
 				gameLogic.getCurrentPlayer().getPlayerNumber(),
 				firstCareerCardChoice, secondCareerCardChoice,
-				"Choose career card");
+				"Choose career card", gameLogic.getCurrentShadowPlayer());
 
 		// Need to store both choices so that we can assign the chosen one to the
 		// correct player,

@@ -37,8 +37,8 @@ public class NightSchoolState extends GameState {
 			String eventMessage = "Would you like to attend night school?";
 
 			LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
-			LifeGameMessage responseMessage = new DecisionRequestMessage(pendingNightSchoolChoice,
-																		 gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType);
+			LifeGameMessage responseMessage = new DecisionRequestMessage(pendingNightSchoolChoice, gameLogic.getCurrentPlayer().getPlayerNumber(),
+					                                                    eventMessage, requestType, gameLogic.getCurrentShadowPlayer());
 			gameLogic.setResponseMessage(responseMessage);
 		}
 	}

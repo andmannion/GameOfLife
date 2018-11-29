@@ -23,7 +23,7 @@ public class GraduationState extends GameState {
             gameLogic.getCurrentPlayer().getPlayerNumber(),
             (Chooseable) firstCollegeCareerCard,
             (Chooseable) secondCollegeCareerCard,
-            "Choose new college career card");
+            "Choose new college career card", gameLogic.getCurrentShadowPlayer());
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,

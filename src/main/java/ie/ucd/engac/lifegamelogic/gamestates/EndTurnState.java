@@ -21,7 +21,7 @@ public class EndTurnState extends GameState {
             eventMessage = "Player " + playNum + "'s turn is over.";
 
         }
-        LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage);
+        LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage, null);
         gameLogic.setResponseMessage(ackRequestMessage);
     }
 
@@ -31,12 +31,11 @@ public class EndTurnState extends GameState {
             gameLogic.setNextPlayerToCurrent();
             if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
                 // Must send a message to choose a career path, etc.
-                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber());
+                LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), gameLogic.getCurrentShadowPlayer());
                 gameLogic.setResponseMessage(replyMessage);
 
                 return new PathChoiceState();
             }
-            //noinspection SpellCheckingInspection
             return new HandlePlayerMoveState(); // didnt receive the correct message, looping
             // TODO figure out if this condition is correct
         }

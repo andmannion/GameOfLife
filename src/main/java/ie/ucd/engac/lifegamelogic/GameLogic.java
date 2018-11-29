@@ -92,6 +92,14 @@ public class GameLogic {
     }
 
     /**
+     * create a shadow player object based on the current player
+     * @return shadow player object
+     */
+    public ShadowPlayer getCurrentShadowPlayer(){
+        return getShadowPlayer(currentPlayerIndex);
+    }
+
+    /**
      * subtract from the balance of the current player
      * @param amountToSubtract non negative amount to subtract
      */

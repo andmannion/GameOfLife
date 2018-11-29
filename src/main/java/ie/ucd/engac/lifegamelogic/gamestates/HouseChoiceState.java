@@ -25,7 +25,7 @@ public class HouseChoiceState extends GameState {
 
         // Construct a message with these choices
         LifeGameMessage replyMessage = setupChoiceAndMessage(gameLogic.getCurrentPlayer().getPlayerNumber(),
-                firstCardChoice, secondCardChoice, "Choose a house to purchase");
+                firstCardChoice, secondCardChoice, "Choose a house to purchase", gameLogic.getCurrentShadowPlayer());
 
         gameLogic.setResponseMessage(replyMessage);
 
@@ -91,8 +91,9 @@ public class HouseChoiceState extends GameState {
             String eventMessage = "You cannot afford this house right now.";
 
             LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
+            ShadowPlayer shadowPlayer = gameLogic.getCurrentShadowPlayer();
             LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(decisionStrings),
-                    gameLogic.getCurrentPlayerIndex(), eventMessage, requestType);
+                    gameLogic.getCurrentPlayerIndex(), eventMessage, requestType, shadowPlayer);
 
             gameLogic.setResponseMessage(responseMessage);
             loanRequired = true;

@@ -21,8 +21,9 @@ public class FamilyState extends GameState {
 		
 		// Generate response for the player to choose between the choices provided
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
+		ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
 		LifeGameMessage responseMessage = new DecisionRequestMessage(ChooseableString.convertToChooseableArray(familyPathChoices),
-					gameLogic.getCurrentPlayerIndex(), "Choose either the Life or Family path.", requestType);
+					gameLogic.getCurrentPlayerIndex(), "Choose either the Life or Family path.", requestType, sp);
 		
 		gameLogic.setResponseMessage(responseMessage);
 	}

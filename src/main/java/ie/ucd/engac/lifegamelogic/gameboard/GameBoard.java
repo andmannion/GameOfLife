@@ -48,12 +48,14 @@ public class GameBoard {
 
 	// Need to be able to get a tile from an id
 	public GameBoardTile getGameBoardTileFromID(BoardLocation boardLocation) {
-		String id = boardLocation.getLocation();
-		
-		if(idToGameBoardTileMap.containsKey(id)) {
-			return idToGameBoardTileMap.get(id);
+		if (boardLocation != null) {
+			String id = boardLocation.getLocation();
+
+			if (idToGameBoardTileMap.containsKey(id)) {
+				return idToGameBoardTileMap.get(id);
+			}
+			return  null;
 		}
-		
 		return null;
 	}
 
