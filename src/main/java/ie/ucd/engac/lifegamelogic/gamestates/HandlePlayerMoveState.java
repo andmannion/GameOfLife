@@ -15,7 +15,7 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class HandlePlayerMoveState extends GameState {
         if (eventMessage == null){
             eventMessage = "Player " + playNum + "'s turn.";
         }
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+        LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
         gameLogic.setResponseMessage(spinRequestMessage);
 	}
 

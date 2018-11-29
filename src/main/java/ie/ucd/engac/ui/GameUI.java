@@ -92,7 +92,7 @@ public class GameUI implements Drawable {
                     uiInput.setEnableSubmitButton(true);
                     break;
                 case SpinRequest:
-                    SpinRequestMessage spinRequest = (SpinRequestMessage) lastResponse;
+                    LifeGameRequestMessage spinRequest = (LifeGameRequestMessage) lastResponse;
                     uiState = WaitingForSpin;
                     uiEventMessage.updateEventMessage(spinRequest.getEventMsg());
                     uiInput.setEnableSpinButton(true);

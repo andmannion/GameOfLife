@@ -42,7 +42,7 @@ public class HouseSaleState extends GameState { //TODO this entire class
 
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             String eventMessage = "Player " + playNum + ", spin to determine sale price.";
-            SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+            LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
             gameLogic.setResponseMessage(spinRequestMessage);
 
             choseCard = true;

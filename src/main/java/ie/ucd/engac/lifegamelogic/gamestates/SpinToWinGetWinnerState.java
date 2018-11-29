@@ -4,7 +4,7 @@ import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class SpinToWinGetWinnerState extends GameState {
 				String eventMsg = "You won 200K, player " + gameLogic.getPlayerByIndex(winningPlayerIndex).getPlayerNumber() +
 						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() +
 					    "'s turn is over.";
-				LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex)
+				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex)
 				);
 				gameLogic.setResponseMessage(responseMessage);
 				
@@ -54,7 +54,7 @@ public class SpinToWinGetWinnerState extends GameState {
 				// No one won this turn
 				int playerNumber = gameLogic.getPlayerByIndex(currentPlayerSpinningTheWheelIndex).getPlayerNumber();
 				String eventMsg = "Spin the wheel to determine the winner";
-				LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex)
+				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex)
 				);
 				gameLogic.setResponseMessage(responseMessage);
 			}

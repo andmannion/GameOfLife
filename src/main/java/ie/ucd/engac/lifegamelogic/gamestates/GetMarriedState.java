@@ -5,7 +5,7 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
 
 public class GetMarriedState extends GameState {
 	
@@ -28,7 +28,7 @@ public class GetMarriedState extends GameState {
 		
 		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 		
-		LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
+		LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
 		);
 		gameLogic.setResponseMessage(responseMessage);
 	}
@@ -75,7 +75,7 @@ public class GetMarriedState extends GameState {
 			else {
 				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 				
-				LifeGameMessage responseMessage = new SpinRequestMessage(eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
+				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
 				);
 				gameLogic.setResponseMessage(responseMessage);
                 nextState = null;

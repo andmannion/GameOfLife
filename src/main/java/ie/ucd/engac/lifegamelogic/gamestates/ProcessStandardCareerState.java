@@ -6,7 +6,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
 
 public class ProcessStandardCareerState extends GameState {
 
@@ -46,7 +46,7 @@ public class ProcessStandardCareerState extends GameState {
 			// Need to set the reply message to SpinRequest
 			int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
 			String eventMessage = "Player " + playNum + "'s turn.";
-			SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+			LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
 			gameLogic.setResponseMessage(spinRequestMessage);
 
 			gameLogic.decrementNumberOfUninitialisedPlayers();

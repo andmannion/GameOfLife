@@ -5,7 +5,7 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.SpinRequestMessage;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;;
 
 public class RetirePlayerState extends GameState {
 
@@ -21,7 +21,7 @@ public class RetirePlayerState extends GameState {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
         currentHouseNumber = currentCardIndex + 1;
         String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
-        SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+        LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
         gameLogic.setResponseMessage(spinRequestMessage);
     }
 
@@ -46,7 +46,7 @@ public class RetirePlayerState extends GameState {
                 int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
                 int currentHouseNumber = currentCardIndex + 1;
                 String eventMessage = "Player " + playNum + ", spin to determine sale price for house: " + currentHouseNumber + "/" + numberOfHouses;
-                SpinRequestMessage spinRequestMessage = new SpinRequestMessage(eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+                LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
                 gameLogic.setResponseMessage(spinRequestMessage);
             }
             else { //otherwise do remainder of retirement actions
