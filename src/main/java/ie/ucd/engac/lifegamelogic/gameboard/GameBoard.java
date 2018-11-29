@@ -100,7 +100,7 @@ public class GameBoard {
         return tiles;
     }
 
-    private ArrayList<Tile> initialiseLayout(){
+    private ArrayList<Tile> initialiseLayout(){ //TODO delete this
 	    ArrayList<Tile> tiles = new ArrayList<>();
         JsonArray verticesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("vertices");
 
@@ -122,10 +122,9 @@ public class GameBoard {
         for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
 			String id = ((JsonObject) vertexAsJsonObj).get("id").getAsString();
 			JsonElement tileAsJsonObject = ((JsonObject) vertexAsJsonObj).get("gameBoardTile");
-
 			GameBoardTile gameBoardTile = gson.fromJson(tileAsJsonObject, GameBoardTile.class);
 
-			idToGameBoardTileMap.put(id, gameBoardTile);
+			idToGameBoardTileMap.put(id,gameBoardTile);
 		}
 	}
 

@@ -2,6 +2,8 @@
 	"vertices": [
 		{
 			"id": "a",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Start"
@@ -9,6 +11,8 @@
 		},
 		{
 			"id": "b",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Start"
@@ -16,6 +20,8 @@
 		},		
 		{
 			"id": "c",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Payday"
@@ -23,6 +29,8 @@
 		},		
 		{
 			"id": "d",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -30,6 +38,8 @@
 		},		
 		{
 			"id": "e",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -37,6 +47,8 @@
 		},
 		{
 			"id": "f",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Start"
@@ -44,6 +56,8 @@
 		},
 		{
 			"id": "g",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -51,6 +65,8 @@
 		},
 		{
 			"id": "h",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -58,6 +74,8 @@
 		},
 		{
 			"id": "i",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -65,6 +83,8 @@
 		},
 		{
 			"id": "j",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -72,6 +92,8 @@
 		},
 		{
 			"id": "k",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -79,6 +101,8 @@
 		},
 		{
 			"id": "l",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -86,6 +110,8 @@
 		},
 		{
 			"id": "m",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -93,6 +119,8 @@
 		},
 		{
 			"id": "n",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -100,6 +128,8 @@
 		},
 		{
 			"id": "o",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -107,6 +137,8 @@
 		},
 		{
 			"id": "p",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardStopTile",
 				"gameBoardTileType": "Stop",
@@ -115,6 +147,8 @@
 		},
 		{
 			"id": "q",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -122,6 +156,8 @@
 		},
 		{
 			"id": "r",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -129,6 +165,8 @@
 		},
 		{
 			"id": "s",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -136,6 +174,8 @@
 		},
 		{
 			"id": "t",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -143,6 +183,8 @@
 		},
 		{
 			"id": "u",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Payday"
@@ -150,6 +192,8 @@
 		},
 		{
 			"id": "v",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Holiday"
@@ -157,6 +201,8 @@
 		},
 		{
 			"id": "w",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "SpinToWin"
@@ -164,6 +210,8 @@
 		},
 		{
 			"id": "x",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -171,6 +219,8 @@
 		},
 		{
 			"id": "y",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -178,6 +228,8 @@
 		},
 		{
 			"id": "z",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Payday"
@@ -185,6 +237,8 @@
 		},
 		{
 			"id": "aa",
+			"xLocation": "0.0",
+			"yLocation": "0.0",
 			"gameBoardTile": {
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Action"
@@ -192,7 +246,9 @@
 		},
 		{
         "id": "ab",
-        "gameBoardTile": {
+        "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
             "tileMovementType": "GameBoardStopTile",
             "gameBoardTileType": "Stop",
             "gameBoardStopTileType": "GetMarried"
@@ -200,84 +256,108 @@
         },
         {
           "id": "ac",
-          "gameBoardTile": {
+          "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
             "tileMovementType": "GameBoardContinueTile",
 			"gameBoardTileType": "Action"
           }
         },
 		{
 		  "id": "ad",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ae",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "af",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ag",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ah",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "ai",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aj",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "ak",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "al",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "am",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "an",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "NightSchool"
@@ -285,203 +365,261 @@
 		},
 		{
 		  "id": "ao",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ap",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aq",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "ar",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "as",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "at",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "au",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "av",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aw",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ax",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "ay",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "az",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaa",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aab",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aac",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aad",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aae",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaf",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aag",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aah",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aai",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Twins"
 		  }
 		},
 		{
 		  "id": "aaj",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aak",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "aal",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "aam",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aan",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aao",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aap",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaq",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Family"
@@ -489,56 +627,72 @@
 		},
 		{
 		  "id": "aar",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aas",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "aat",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aau",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aav",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaw",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aax",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aay",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Baby"
@@ -546,126 +700,162 @@
 		},
 		{
 		  "id": "aaz",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaa",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Twins"
 		  }
 		},
 		{
 		  "id": "aaab",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aaac",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
 		  }
 		},
 		{
 		  "id": "aaad",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Twins"
 		  }
 		},
 		{
 		  "id": "aaae",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "aaaf",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
 		  }
 		},
 		{
 		  "id": "aaag",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
 		  }
 		},
 		{
 		  "id": "aaah",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaai",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "aaaj",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaak",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaal",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
 		  }
 		},
 		{
 		  "id": "aaam",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaan",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aaao",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aaap",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
 		  }
 		},
 		{
 		  "id": "aaaq",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Holiday"
@@ -673,224 +863,288 @@
 		},
 		{
 		  "id": "aaar",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaas",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "aaat",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaau",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaav",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaw",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aaax",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaay",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aaaz",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaaa",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaab",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaac",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaad",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaae",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Holiday"
 		  }
 		},
 		{
 		  "id": "aaaaf",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaag",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaah",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aaaai",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaaj",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "aaaak",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaal",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaam",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "House"
 		  }
 		},
 		{
 		  "id": "aaaan",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Payday"
 		  }
 		},
 		{
 		  "id": "aaaao",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaap",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaaq",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaar",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaas",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaat",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaau",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "SpinToWin"
 		  }
 		},
 		{
 		  "id": "aaaav",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
 		  "id": "aaaaw",
-		  "gameBoardTile": {
+		  "xLocation": "0.0",
+			"yLocation": "0.0",
+			"gameBoardTile": {
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Retire"

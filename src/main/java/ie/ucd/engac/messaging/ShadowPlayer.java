@@ -129,6 +129,10 @@ public class ShadowPlayer {
 
     public String currentTileToString(){
         String string;
+        if (currentTile == null) {
+            return ""; //TODO
+        }
+
         if(currentTile.getGameBoardTileType() == GameBoardTileTypes.Stop){
             string = "On stop tile of type " + ((GameBoardStopTile)currentTile).getGameBoardStopTileType().toString();
         }

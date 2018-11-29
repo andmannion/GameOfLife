@@ -22,9 +22,6 @@ public class GameUI implements Drawable {
     //parent GameEngine
     private GameEngine gameEngine;
 
-    //pawns and board
-    private HashMap<Integer,UIPawn> pawnMap;
-
     //UI sub elements
     private UIBoard uiBoard;
     private UIHUD uiHUD;
@@ -97,7 +94,7 @@ public class GameUI implements Drawable {
                     uiState = WaitingForSpin;
                     uiEventMessage.updateEventMessage(spinRequest.getEventMsg());
                     uiInput.setEnableSpinButton(true);
-                    uiHUD.updateFields(spinRequest.getShadowPlayer());
+                    handleShadowPlayer(spinRequest.getShadowPlayer());
                     break;
                 case OptionDecisionRequest:
                     DecisionRequestMessage pendingDecision = (DecisionRequestMessage) lastResponse;
@@ -105,14 +102,14 @@ public class GameUI implements Drawable {
                     uiEventMessage.updateEventMessage(pendingDecision.getEventMsg());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
-                    uiHUD.updateFields(pendingDecision.getShadowPlayer());
+                    handleShadowPlayer(pendingDecision.getShadowPlayer());
                     break;
                 case AckRequest:
                     LifeGameRequestMessage ackRequest = (LifeGameRequestMessage) lastResponse;
                     uiState = WaitingForAck;
                     uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
-                    uiHUD.updateFields(ackRequest.getShadowPlayer());
+                    handleShadowPlayer(ackRequest.getShadowPlayer());
                     break;
                 case EndGameMessage:
                     EndGameMessage endGameMessage = (EndGameMessage) lastResponse;
@@ -139,17 +136,24 @@ public class GameUI implements Drawable {
 
     private void handleConfigMessage(UIConfigMessage uiConfigMessage){
         ArrayList<Pawn> pawns = uiConfigMessage.getPawns();
-        pawnMap = new HashMap<>();
+        ArrayList<Tile> tiles = uiConfigMessage.getBoard().getTiles();
+        ArrayList<UITile> uiTiles = new ArrayList<>();
+        HashMap<Integer,UIPawn> pawnMap = new HashMap<>();
+
+        for(Tile tile:tiles){
+            uiTiles.add(new UITile(tile));
+        }
+        uiBoard.setLayout(uiTiles);
 
         for(Pawn pawn:pawns){
             pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn));
         }
+        uiBoard.setPawnMap(pawnMap);
     }
 
-    private void updatePawns(ShadowPlayer shadowPlayer){
-        Pawn pawn = pawnMap.get(shadowPlayer.getPlayerNumber());
-        pawn.setXLocation(shadowPlayer.getXLocation());
-        pawn.setYLocation(shadowPlayer.getYLocation());
+    private void handleShadowPlayer(ShadowPlayer shadowPlayer){
+        uiBoard.updatePawns(shadowPlayer.getPlayerNumber(),shadowPlayer.getXLocation(),shadowPlayer.getYLocation());
+        uiHUD.updateFields(shadowPlayer);
     }
 
     /**
