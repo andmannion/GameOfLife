@@ -51,8 +51,4 @@ public class HouseTileDecisionState extends GameState {
         return null;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // Must clear the sent message?
-    }
 }

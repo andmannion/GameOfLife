@@ -37,13 +37,9 @@ public class EndTurnState extends GameState {
                 return new PathChoiceState();
             }
             return new HandlePlayerMoveState(); // didnt receive the correct message, looping
-            // TODO figure out if this condition is correct
         }
 
         return null;
     }
 
-    public void exit(GameLogic gameLogic){
-
-    }
 }

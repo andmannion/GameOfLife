@@ -26,12 +26,6 @@ public class BabyState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private GameState handleSpinForBabyState(GameLogic gameLogic, int spinResult) {
 		String babyResultMessage = "Player 1, you had ";
 		

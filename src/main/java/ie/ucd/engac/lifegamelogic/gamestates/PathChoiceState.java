@@ -49,11 +49,6 @@ public class PathChoiceState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// Must clear the sent message?
-	}
-
 	private OccupationCardTypes parsePathChoiceResponse(DecisionResponseMessage pathChoiceMessage) {
 		int choiceIndex = pathChoiceMessage.getChoiceIndex();
 

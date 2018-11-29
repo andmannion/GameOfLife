@@ -21,7 +21,7 @@ public class NightSchoolState extends GameState {
 		
 		// Can't change career if don't already have one...
 		if(gameLogic.getCurrentPlayer().getOccupationCard() == null) {
-            throw new RuntimeException("Invalid board configuration, night school before graduation"); //TODO test
+            throw new RuntimeException("Invalid board configuration, night school before graduation");
 		}
 		else
 		{
@@ -51,12 +51,7 @@ public class NightSchoolState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		
-	}
-	
-	private GameState parsePendingNightSchoolDecision(GameLogic gameLogic, int choiceIndex) {
+    private GameState parsePendingNightSchoolDecision(GameLogic gameLogic, int choiceIndex) {
 		if(choiceIndex == ATTEND_NIGHT_SCHOOL_INDEX) {
 			// Player wishes to attend night school:			
 			gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);

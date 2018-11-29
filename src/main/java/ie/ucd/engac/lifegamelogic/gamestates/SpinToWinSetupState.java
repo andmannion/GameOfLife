@@ -91,12 +91,6 @@ public class SpinToWinSetupState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-
-	}
-
 	private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
 		// Must set what the player has chosen, and remove what they have chosen from the allowable remaining
 		// choices

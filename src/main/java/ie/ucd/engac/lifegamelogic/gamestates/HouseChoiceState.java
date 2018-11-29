@@ -33,7 +33,7 @@ public class HouseChoiceState extends GameState {
 
     @Override
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-	    GameState nextState = null; //TODO
+	    GameState nextState = null;
         Player player = gameLogic.getCurrentPlayer();
         if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse && !loanRequired) {
             DecisionResponseMessage careerCardChoiceMessage = (DecisionResponseMessage) lifeGameMessage;
@@ -74,12 +74,7 @@ public class HouseChoiceState extends GameState {
         return nextState;
     }
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// Must clear the sent message?
-	}
-
-	private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
+    private GameState purchaseHouse(@NotNull Player player, int housePrice, GameLogic gameLogic, HouseCard chosenCard){
 	    GameState nextState;
         if(player.getCurrentMoney() < housePrice){ //player cannot afford and is prompted for a loan
             ArrayList<String> decisionStrings = new ArrayList<>();

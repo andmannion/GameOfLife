@@ -8,11 +8,10 @@ import java.util.ArrayList;
 
 public class FamilyState extends GameState {
 	private static final int LIFE_PATH_MESSAGE_INDEX = 0;
-	public static final int FAMILY_PATH_MESSAGE_INDEX = 1;
+	static final int FAMILY_PATH_MESSAGE_INDEX = 1;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
 		ArrayList<String> familyPathChoices = new ArrayList<>();
 		String familyPathMessage = "Take the family path";
 		familyPathChoices.add(familyPathMessage);
@@ -30,7 +29,6 @@ public class FamilyState extends GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO Auto-generated method stub
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
 			// Must set the path for the next turn in the board
 			return parseFamilyStopResponse(gameLogic, (DecisionResponseMessage) lifeGameMessage);
@@ -39,13 +37,7 @@ public class FamilyState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private GameState parseFamilyStopResponse(GameLogic gameLogic, DecisionResponseMessage decisionResponseMessage) {
+    private GameState parseFamilyStopResponse(GameLogic gameLogic, DecisionResponseMessage decisionResponseMessage) {
 		int choiceIndex = decisionResponseMessage.getChoiceIndex(); 
 		
 		/* Must ensure that the current tile has two adjacent forward locations; otherwise,

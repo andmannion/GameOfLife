@@ -42,8 +42,7 @@ public class HandlePlayerMoveState extends GameState {
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 	    GameState nextState = null;
 
-		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) { 
-			// TODO: forkchoice should be done when you land on it - that's the natural flow as the user
+		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			GameBoard gameBoard = gameLogic.getGameBoard();
 			int tilesToMove;
             int tilesMoved = 0;
@@ -81,12 +80,7 @@ public class HandlePlayerMoveState extends GameState {
         }
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-	}
-
-	private void assignSpinBonusIfRequired(ArrayList<Player> players, int spinResult) {
+    private void assignSpinBonusIfRequired(ArrayList<Player> players, int spinResult) {
 		for(Player player : players) {
 			OccupationCard occupationCard = player.getOccupationCard();
 			if(occupationCard != null) {
@@ -135,10 +129,9 @@ public class HandlePlayerMoveState extends GameState {
             }
             else if(0 == adjacentForwardLocations.size()) {
                 // Must initiate retirement procedure
-                System.err.println("No spaces remaining ahead"); //TODO this should now be unreachable
+                System.err.println("No spaces remaining ahead. [tryToMove()]");
             }
         }
-
         return currentTile;
     }
 
@@ -181,8 +174,7 @@ public class HandlePlayerMoveState extends GameState {
             	nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
                 break;
             default:
-                // There's no console to print to...
-                // TODO: use some utility log file class to write the errors of the program to
+                System.err.println("Tile type not found. [evaluateTile()]");
                 break;
         }
         return nextState;
@@ -218,7 +210,7 @@ public class HandlePlayerMoveState extends GameState {
                 break;
             default:
                 nextState = new EndTurnState();
-                System.err.println("Player has landed on an unhandled stop tile.");
+                System.err.println("Player has landed on an unhandled stop tile. [evaluateStopTile()]");
                 break;
         }
         return nextState;
@@ -234,7 +226,7 @@ public class HandlePlayerMoveState extends GameState {
         switch (thisAction.getActionCardType()){
             case CareerChange:
                 if(player.getOccupationCard() != null) {
-                    nextActionState = new CareerChangeState(); //TODO test
+                    nextActionState = new CareerChangeState();
                 }
                 else{
                     String eventMessage = "CareerChange: Cannot change career before graduation.";
@@ -246,19 +238,21 @@ public class HandlePlayerMoveState extends GameState {
                 	nextActionState = new EndTurnState("PlayersPay: No players remaining to pick");
                 }
                 else {
-                	nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction); ///TODO test
+                	nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction);
                 }
                 break;
             case PayTheBank:
                 PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
-                gameLogic.subtractFromCurrentPlayersBalance(payBank.getValue()); //TODO test
+                gameLogic.subtractFromCurrentPlayersBalance(payBank.getValue());
                 nextActionState = new EndTurnState("Action: Paid the bank " + payBank.getValue());
                 break;
             case GetCashFromBank:
-                GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;//TODO test
+                GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;
                 player.addToBalance(getCash.getAmountToPay());
                 nextActionState = new EndTurnState("Action: Received " + getCash.getAmountToPay());
                 break;
+            default:
+                System.err.println("Unhandled action card type. [evaluateActionTile()]");
         }
         
         return nextActionState;
@@ -321,7 +315,7 @@ public class HandlePlayerMoveState extends GameState {
             }
         }
         else {
-            nextState = new RetirePlayerState(); //TODO test
+            nextState = new RetirePlayerState();
         }
         return nextState;
     }

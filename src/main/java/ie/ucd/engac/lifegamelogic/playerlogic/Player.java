@@ -291,7 +291,7 @@ public class Player {
 
     /**
      * sets the pending for choice
-     */ //TODO Andrew please write this javadoc
+     */
 	public void setPendingBoardForkChoice(BoardLocation pendingBoardForkChoice) {
 		this.pendingBoardForkChoice = pendingBoardForkChoice;
 	}

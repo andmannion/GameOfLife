@@ -84,9 +84,4 @@ public class GetMarriedState extends GameState {
 		return nextState;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-		
-	}
 }

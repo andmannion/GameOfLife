@@ -59,8 +59,4 @@ public class PickPlayerState extends GameState {
         return nextState;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // Must clear the sent message?
-    }
 }

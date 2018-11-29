@@ -7,7 +7,7 @@ import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
-public class HouseSaleState extends GameState { //TODO this entire class
+public class HouseSaleState extends GameState {
 
     private int choiceIndex;
     private boolean choseCard = false;
@@ -19,7 +19,7 @@ public class HouseSaleState extends GameState { //TODO this entire class
         ArrayList<HouseCard> cards = gameLogic.getCurrentPlayer().getHouseCards();
         ArrayList<Chooseable> choices = new ArrayList<>();
         for (HouseCard houseCard:cards){
-            choices.add( (Chooseable) houseCard );
+            choices.add(houseCard );
         }
         String eventMessage = "Which house would you like to sell?";
 
@@ -61,8 +61,4 @@ public class HouseSaleState extends GameState { //TODO this entire class
         return null;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // Must clear the sent message?
-    }
 }

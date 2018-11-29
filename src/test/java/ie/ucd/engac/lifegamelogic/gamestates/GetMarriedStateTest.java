@@ -73,8 +73,6 @@ class GetMarriedStateTest {
         }
 	}
 	
-	// TODO: Test this functionality with more than one other player.
-	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
 		Spinnable spinner = new TestSpinner(1);
 		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);

@@ -65,6 +65,4 @@ public class RetirePlayerState extends GameState {
         return nextState;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {}
 }

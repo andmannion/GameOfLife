@@ -76,11 +76,6 @@ public class GameSetupState extends GameState {
         }
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-
-    }
-
     private LifeGameRequestMessage createColourChoiceMessage(int playerNumber){
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
         return new DecisionRequestMessage(outgoingChoices,

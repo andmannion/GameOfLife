@@ -26,7 +26,7 @@ public class SpinToWinGetWinnerState extends GameState {
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-		// TODO test for >2 players
+
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Must keep track of the player that is currently spinning
 
@@ -63,13 +63,7 @@ public class SpinToWinGetWinnerState extends GameState {
 		return null;
 	}
 
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private int parseSpinToWinAction(int numberSpun) {
+    private int parseSpinToWinAction(int numberSpun) {
 		// Must check the values in the hash map
 		for(HashMap.Entry<Integer,ArrayList<Integer>> kvps : playerNumberChoiceMap.entrySet()) {
 			if(kvps.getValue().contains(numberSpun)) {

@@ -97,7 +97,7 @@ public class ActionTileTest {
     }
 
 
-    private void careerChangeCardTest(GameLogic gameLogic){ //TODO duplicate code from NightSchoolSetup/Graduation
+    private void careerChangeCardTest(GameLogic gameLogic){
         int firstCollegeCareerCardChoice = 0;
         // Just choose the first CollegeCareerCard
         LifeGameMessage messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);

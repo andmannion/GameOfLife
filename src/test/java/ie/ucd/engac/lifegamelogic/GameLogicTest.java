@@ -42,7 +42,7 @@ class GameLogicTest {
         ArrayList<Player> retiredPlayers = gameLogic.getRankedRetiredPlayers();
 
         assertEquals(0, currentPlayerListSize, "Player not removed from ArrayList of players.");
-        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees."); //TODO is this bad? - acquired indirectly via sorted list
+        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees.");
 
         Player retiredPlayer = retiredPlayers.get(0);
 
@@ -68,7 +68,7 @@ class GameLogicTest {
         ArrayList<Player> retiredPlayers = gameLogic.getRankedRetiredPlayers();
 
         assertEquals(0, currentPlayerListSize, "Player not removed from ArrayList of players.");
-        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees."); //TODO is this bad? - acquired indirectly via sorted list
+        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees.");
 
         Player retiredPlayer = retiredPlayers.get(0);
 
@@ -101,7 +101,7 @@ class GameLogicTest {
         ArrayList<Player> retiredPlayers = gameLogic.getRankedRetiredPlayers();
 
         assertEquals(numberOfPlayers-1, currentPlayerListSize, "Incorrect number of players removed from ArrayList of players.");
-        assertEquals(numberOfPlayers-1, retiredPlayers.size(), "Incorrect number of players added to ArrayList of retirees."); //TODO is this bad? - acquired indirectly via sorted list
+        assertEquals(numberOfPlayers-1, retiredPlayers.size(), "Incorrect number of players added to ArrayList of retirees.");
 
         Player retiredPlayer = retiredPlayers.get(0);
 
@@ -124,7 +124,7 @@ class GameLogicTest {
 
         ArrayList<Player> retiredPlayers = gameLogic.getRankedRetiredPlayers();
         assertEquals(0, currentPlayerListSize, "Player not removed from ArrayList of players.");
-        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees."); //TODO is this bad? - acquired indirectly via sorted list
+        assertEquals(1, retiredPlayers.size(), "Player not added to ArrayList of retirees.");
     }
 
     /**

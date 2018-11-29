@@ -16,8 +16,6 @@ public abstract class GameState {
 
 	public abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
 
-	public abstract void exit(GameLogic gameLogic);
-
     protected void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
@@ -45,7 +43,6 @@ public abstract class GameState {
 
 	protected void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
 		// Need to assign the chosen card to the relevant player
-		//ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices(); //TODO remove
 		OccupationCard chosenCareerCard = (OccupationCard) getPendingCardChoices().get(choiceIndex);
 		gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
 

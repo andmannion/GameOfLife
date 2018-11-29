@@ -25,7 +25,7 @@ public class CareerChangeState extends GameState {
         OccupationCard secondCareerCardChoice;
 
         // Get the two top CareerCards
-        switch (careerPathType) { //TODO
+        switch (careerPathType) { //TODO potentially remove this
             case CollegeCareer:
                 firstCareerCardChoice = gameLogic.getTopCollegeCareerCard();
                 secondCareerCardChoice = gameLogic.getTopCollegeCareerCard();
@@ -66,8 +66,4 @@ public class CareerChangeState extends GameState {
         return null;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // TODO Auto-generated method stub
-    }
 }

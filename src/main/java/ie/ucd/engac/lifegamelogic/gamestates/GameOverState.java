@@ -25,7 +25,4 @@ public class GameOverState extends GameState {
         return null;
     }
 
-    public void exit(GameLogic gameLogic){
-
-    }
 }
