@@ -9,24 +9,24 @@ import java.util.HashMap;
 
 public class UIBoard implements Drawable {
 
-    private int panelHeight;
-    private int panelWidth;
+    private int boardAreaHeight;
+    private int boardAreaWidth;
     private int tileDimension;
 
     //pawns and board
     private HashMap<Integer,UIPawn> pawnMap;
     private ArrayList<UITile> uiTiles;
 
-    UIBoard(GameUI gameUI){
-        panelHeight = gameUI.getPanelHeight();
-        panelWidth = gameUI.getPanelWidth();
+    UIBoard(int boardAreaHeight, int boardAreaWidth){
+        this.boardAreaHeight = boardAreaHeight;
+        this.boardAreaWidth = boardAreaWidth;
         uiTiles = new ArrayList<>();
-        tileDimension = (int)Math.floor(0.05*panelWidth);
+        tileDimension = (int)Math.floor(0.05* boardAreaWidth);
     }
 
     void setLayout(ArrayList<Tile> tiles) {
         for(Tile tile:tiles){
-            uiTiles.add(new UITile(tile, tile.getXLocation()*panelWidth,tile.getYLocation()*panelHeight, tileDimension));
+            uiTiles.add(new UITile(tile, tile.getXLocation()* boardAreaWidth,tile.getYLocation()* boardAreaHeight, tileDimension));
         }
     }
 
@@ -34,10 +34,11 @@ public class UIBoard implements Drawable {
         this.pawnMap = pawnMap;
     }
 
-    void updatePawns(int playerNumber, int xPos, int yPos){
+    void updatePawns(int playerNumber, int xPos, int yPos, int numDependants){
         Pawn pawn = pawnMap.get(playerNumber);
         pawn.setXLocation(xPos);
         pawn.setYLocation(yPos);
+        pawn.setNumDependants(numDependants);
     }
 
     @Override

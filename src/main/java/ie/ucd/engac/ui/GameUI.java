@@ -149,7 +149,7 @@ public class GameUI implements Drawable {
 
     private void handleShadowPlayer(ShadowPlayer shadowPlayer){
         if(shadowPlayer != null) {
-            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), (int) shadowPlayer.getXLocation(), (int) shadowPlayer.getYLocation());
+            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), (int) shadowPlayer.getXLocation(), (int) shadowPlayer.getYLocation(), shadowPlayer.getNumDependants());
             uiHUD.updateFields(shadowPlayer);
         }
     }

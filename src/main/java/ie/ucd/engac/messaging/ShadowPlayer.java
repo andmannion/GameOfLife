@@ -51,6 +51,10 @@ public class ShadowPlayer {
         }
     }
 
+    public int getNumDependants(){
+        return numDependants;
+    }
+
     public int getPlayerNumber() {
         return playerNumber;
     }
