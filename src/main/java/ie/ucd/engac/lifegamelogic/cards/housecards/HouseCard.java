@@ -25,8 +25,8 @@ public class HouseCard extends Card implements Chooseable {
      * @param bool true if an odd number was spun, false if even
      * @return the sale price as an integer
      */
-	public int getSpinForSalePrice(boolean bool) {
-		if(bool) {
+	public int getSpinForSalePrice(boolean oddNumberWasSpun) {
+		if(oddNumberWasSpun) {
             return spinForSalePriceOddNum;
         }
         else{

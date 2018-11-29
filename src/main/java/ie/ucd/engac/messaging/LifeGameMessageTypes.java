@@ -10,5 +10,6 @@ public enum LifeGameMessageTypes {
 	OptionDecisionResponse,
 	AckRequest,
 	AckResponse,
-	EndGameMessage
+	EndGameMessage,
+	UIConfigMessage
 }

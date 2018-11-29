@@ -1,0 +1,283 @@
+{
+	"CareerChange" : [
+		{
+			"actionCardSubtype": "CareerChangeActionCard",
+			"actionCardType": "CareerChange"
+		},
+		{
+			"actionCardSubtype": "CareerChangeActionCard",
+			"actionCardType": "CareerChange"			
+		},
+		{
+			"actionCardSubtype": "CareerChangeActionCard",
+			"actionCardType": "CareerChange"						
+		},
+		{
+			"actionCardSubtype": "CareerChangeActionCard",
+			"actionCardType": "CareerChange"						
+		},
+		{
+			"actionCardSubtype": "CareerChangeActionCard",
+			"actionCardType": "CareerChange"						
+		}	
+	],
+	
+	"PlayersPay": [
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "PlayersPayActionCard",
+			"actionCardType": "PlayersPay",
+			"amountToPay": "20000"
+		}
+	],
+	
+	"PayTheBank": [
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "10000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "10000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "10000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "10000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "20000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "20000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "20000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "20000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "30000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "30000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "30000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "30000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "40000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "40000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "40000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "40000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "50000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "50000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "50000"
+		},
+		{
+			"actionCardSubtype": "PayTheBankActionCard",
+			"actionCardType": "PayTheBank",
+			"value": "50000"
+		}
+	],
+	"GetCashFromBank":[
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "10000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "10000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "10000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "10000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "20000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "30000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "30000"
+
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "30000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "30000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "40000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "40000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "40000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "40000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "50000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "50000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "50000"
+		},
+		{
+			"actionCardSubtype": "GetCashFromBankActionCard",
+			"actionCardType": "GetCashFromBank",
+			"amountToPay": "50000"
+		}
+	]
+}

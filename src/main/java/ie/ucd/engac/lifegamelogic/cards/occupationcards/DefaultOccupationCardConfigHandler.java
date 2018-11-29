@@ -1,23 +1,20 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
 import com.google.gson.*;
-
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
-import ie.ucd.engac.lifegamelogic.banklogic.Bank;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
-import ie.ucd.engac.lifegamelogic.gameboardlogic.gameboardtiles.GameBoardTile;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class DefaultOccupationCardConfigHandler implements CardConfigHandler<OccupationCard> {
 	private JsonElement overallJSONElement;
 
 	DefaultOccupationCardConfigHandler(String configPath) {
-		this.overallJSONElement = resourceToJson(configPath);
+		overallJSONElement = resourceToJson(configPath);
 	}
 
 	@Override
@@ -50,10 +47,9 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 		try {
 			jsonElement = (JsonElement) streamParser.next();
 		} catch (Exception e) {
-			System.err.println("Exception in LogicGameBoard...initialiseParser(): \n" + e.toString());
+			System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);
 		}
 		return jsonElement;
 	}
-
 }

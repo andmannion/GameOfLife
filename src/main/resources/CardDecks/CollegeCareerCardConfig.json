@@ -1,64 +1,96 @@
 	[{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "Doctor",
-	 "salary": "130000",
-	 "bonusNumber": "10",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "Doctor",
+		 "salary": "130000",
+		 "bonusNumber": "10",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "Lawyer",
-	 "salary": "120000",
-	 "bonusNumber": "9",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "Lawyer",
+		 "salary": "120000",
+		 "bonusNumber": "9",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "VideoGameDesigner",
-	 "salary": "110000",
-	 "bonusNumber": "8",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "VideoGameDesigner",
+		 "salary": "110000",
+		 "bonusNumber": "8",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "Vet",
-	 "salary": "100000",
-	 "bonusNumber": "7",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "Vet",
+		 "salary": "100000",
+		 "bonusNumber": "7",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "Teacher",
-	 "salary": "100000",
-	 "bonusNumber": "6",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "Teacher",
+		 "salary": "100000",
+		 "bonusNumber": "6",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "Scientist",
-	 "salary": "100000",
-	 "bonusNumber": "9",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "Scientist",
+		 "salary": "100000",
+		 "bonusNumber": "9",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "SecretAgent",
-	 "salary": "100000",
-	 "bonusNumber": "8",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "SecretAgent",
+		 "salary": "100000",
+		 "bonusNumber": "8",
+		 "bonusPaymentAmount": "20000"
 	},
 	{
-	 "occupationSubtype": "CollegeCareerCard",
-	 "occupationCardType": "CollegeCareer",
-	 "collegeCareerType": "FashionDesigner",
-	 "salary": "80000",
-	 "bonusNumber": "7",
-	 "bonusPaymentAmount": "20000"
+		 "occupationSubtype": "CollegeCareerCard",
+		 "occupationCardType": "CollegeCareer",
+		 "collegeCareerType": "FashionDesigner",
+		 "salary": "80000",
+		 "bonusNumber": "7",
+		 "bonusPaymentAmount": "20000"
+	},
+	{
+		"occupationSubtype": "CollegeCareerCard",
+		"occupationCardType": "CollegeCareer",
+		"collegeCareerType": "Agronomist",
+		"salary": "100000",
+		"bonusNumber": "6",
+		"bonusPaymentAmount": "20000"
+	},
+	{
+		"occupationSubtype": "CollegeCareerCard",
+		"occupationCardType": "CollegeCareer",
+		"collegeCareerType": "Priest",
+		"salary": "20000",
+		"bonusNumber": "5",
+		"bonusPaymentAmount": "20000"
+	},
+	{
+		"occupationSubtype": "CollegeCareerCard",
+		"occupationCardType": "CollegeCareer",
+		"collegeCareerType": "Economist",
+		"salary": "120000",
+		"bonusNumber": "4",
+		"bonusPaymentAmount": "20000"
+	},
+	{
+		"occupationSubtype": "CollegeCareerCard",
+		"occupationCardType": "CollegeCareer",
+		"collegeCareerType": "SocialWorker",
+		"salary": "60000",
+		"bonusNumber": "3",
+		"bonusPaymentAmount": "20000"
 	}]

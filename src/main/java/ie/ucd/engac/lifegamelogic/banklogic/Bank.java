@@ -1,16 +1,12 @@
 package ie.ucd.engac.lifegamelogic.banklogic;
 
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.fileutilities.FileUtilities;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.*;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardDeck;
-import com.google.gson.*;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class Bank {
 	private ActionCardDeck actionCardDeck;
@@ -27,11 +23,9 @@ public class Bank {
 	}	
 
 	private void initialiseCardDecks() {
-		// TODO: ActionCardDeck requires config reading functionality implementation?
 		
-		actionCardDeck = new ActionCardDeck();
-		actionCardDeck.shuffle();	
-
+		actionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+		actionCardDeck.shuffle();
 		houseCardDeck = new HouseCardDeck(GameConfig.house_card_deck_config_file_location);
 		houseCardDeck.shuffle();
 		careerCardDeck = new OccupationCardDeck(GameConfig.career_card_deck_config_file_location);
@@ -44,22 +38,22 @@ public class Bank {
 		bankLoanBook = new BankLoanBook();
 	}
 
-	public int takeOutALoan(int playerIndex){
+	public int takeOutALoan(int playerNumber){
         extractMoney(GameConfig.loan_amount);
-        bankLoanBook.addBorrowerLoan(playerIndex, GameConfig.loan_amount, GameConfig.repayment_amount);
+        bankLoanBook.addBorrowerLoan(playerNumber, GameConfig.loan_amount, GameConfig.repayment_amount);
         return GameConfig.loan_amount;
     }
 
-	public void repayAllLoans(int playerIndex){
-        bankLoanBook.repayAllLoans(playerIndex);
+	public void repayAllLoans(int playerNumber){
+        bankLoanBook.repayAllLoans(playerNumber);
     }
 
-    public int getNumberOfOutstandingLoans(int playerIndex) {
-        return bankLoanBook.getNumberOfOutstandingBankLoans(playerIndex);
+    public int getNumberOfOutstandingLoans(int playerNumber) {
+        return bankLoanBook.getNumberOfOutstandingBankLoans(playerNumber);
     }
 
-    public int getOutstandingLoanTotal(int playerIndex) {
-        return bankLoanBook.getOutstandingBankLoanTotal(playerIndex);
+    public int getOutstandingLoanTotal(int playerNumber) {
+        return bankLoanBook.getOutstandingBankLoanTotal(playerNumber);
     }
 
     public int getTotalMoneyExtracted() {
@@ -70,7 +64,7 @@ public class Bank {
 		setTotalMoneyExtracted(getTotalMoneyExtracted() + amountToExtract);
 	}
 
-	public void setTotalMoneyExtracted(int totalMoneyExtracted) {
+	private void setTotalMoneyExtracted(int totalMoneyExtracted) {
 		this.totalMoneyExtracted = totalMoneyExtracted;
 	}
 
@@ -86,7 +80,7 @@ public class Bank {
         return collegeCareerCardDeck.popTopCard();
     }
 
-   public void returnCollegeCareerCard(OccupationCard collegeCareerCardToBeReturned) {
+    public void returnCollegeCareerCard(OccupationCard collegeCareerCardToBeReturned) {
     	collegeCareerCardDeck.addCardToBottom(collegeCareerCardToBeReturned);
     }
 

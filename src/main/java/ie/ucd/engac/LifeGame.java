@@ -1,12 +1,13 @@
 package ie.ucd.engac;
 
+import ie.ucd.engac.ui.MainMenu;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.InputStream;
 import java.util.Properties;
-
-import ie.ucd.engac.ui.*;
 
 public class LifeGame implements WindowListener{
 

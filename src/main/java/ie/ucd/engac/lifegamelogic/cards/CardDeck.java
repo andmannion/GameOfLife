@@ -12,7 +12,10 @@ public abstract class CardDeck<T extends Card> {
 	}
 
 	public T popTopCard() {
-		return cards.pop();
+		if(cards.size() > 0){
+			return cards.pop();
+		}
+		return null;
 	}
 
 	public void addCardToBottom(T card) {
@@ -28,7 +31,7 @@ public abstract class CardDeck<T extends Card> {
 		}
 	}
 
-	public int getRemainingCards() {
+	public int getNumberOfRemainingCards() {
 		return cards.size();
 	}
 }
