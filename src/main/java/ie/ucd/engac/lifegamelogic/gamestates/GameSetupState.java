@@ -29,44 +29,12 @@ public class GameSetupState extends GameState {
         GameState nextState = null;
 
         if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.StartupMessage){
-            awaitingInfoFromPlayerIndex = gameLogic.getCurrentPlayerIndex();
-            initialPlayerIndex = awaitingInfoFromPlayerIndex;
-
-            setupColours();
-
-            outgoingChoices = getRemainingChooseableStrings();
-
-            // First message with current player's number
-            int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-
-            LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
-            LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                    playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType, null); //ShadowPlayer not ready yet
-            gameLogic.setResponseMessage(replyMessage);
+            respondToSetupMessage(gameLogic);
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse){
-                // Check who this reply relates to
-                parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
-
-                int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
-
-                if (nextPlayer == initialPlayerIndex) {
-                    Board board = new Board(gameLogic.getGameBoard().getLayout());
-                    LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!",null, board);  //ShadowPlayer not ready yet.
-                    gameLogic.setResponseMessage(replyMessage);
-                }
-                else{
-                    awaitingInfoFromPlayerIndex = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
-                    outgoingChoices = getRemainingChooseableStrings();
-
-                    // First message with current player's number
-                    int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
-
-                    LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
-                    LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                            playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType, null); //ShadowPlayer not ready yet.
-                    gameLogic.setResponseMessage(replyMessage);
-                }
+            // Check who this reply relates to
+            parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
+            decideNextMessage(gameLogic);
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse){
             LifeGameMessage replyMessage = constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), null); //ShadowPlayer not ready yet.
@@ -77,8 +45,46 @@ public class GameSetupState extends GameState {
         return nextState;
     }
 
+    private void respondToSetupMessage(GameLogic gameLogic) {
+        awaitingInfoFromPlayerIndex = gameLogic.getCurrentPlayerIndex();
+        initialPlayerIndex = awaitingInfoFromPlayerIndex;
+
+        setupColours();
+
+        outgoingChoices = getRemainingChooseableStrings();
+
+        // First message with current player's number
+        int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
+        gameLogic.setResponseMessage(createColourChoiceMessage(playerNumber));
+    }
+
+    private void decideNextMessage(GameLogic gameLogic) {
+        int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
+
+        if (nextPlayer == initialPlayerIndex) {
+            Board board = new Board(gameLogic.getGameBoard().getLayout());
+            LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!",null, board);  //ShadowPlayer not ready yet.
+            gameLogic.setResponseMessage(replyMessage);
+        }
+        else{
+            awaitingInfoFromPlayerIndex = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
+            outgoingChoices = getRemainingChooseableStrings();
+
+            // First message with current player's number
+            int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
+            gameLogic.setResponseMessage(createColourChoiceMessage(playerNumber));
+        }
+    }
+
     @Override
     public void exit(GameLogic gameLogic) {
+
+    }
+
+    private LifeGameRequestMessage createColourChoiceMessage(int playerNumber){
+        LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+        return new DecisionRequestMessage(outgoingChoices,
+                playerNumber, "Player "+playerNumber+", pick a pawn colour.", requestType, null); //ShadowPlayer not ready yet
 
     }
 

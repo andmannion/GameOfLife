@@ -25,7 +25,7 @@ public class CareerChangeState extends GameState {
         OccupationCard secondCareerCardChoice;
 
         // Get the two top CareerCards
-        switch (careerPathType) {
+        switch (careerPathType) { //TODO
             case CollegeCareer:
                 firstCareerCardChoice = gameLogic.getTopCollegeCareerCard();
                 secondCareerCardChoice = gameLogic.getTopCollegeCareerCard();
@@ -40,7 +40,6 @@ public class CareerChangeState extends GameState {
         }
 
         // Set the response message to "CardChoice"
-
         LifeGameMessage replyMessage = setupChoiceAndMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
@@ -64,11 +63,8 @@ public class CareerChangeState extends GameState {
             actOnOccupationCardChoice(gameLogic, choiceIndex);
             return new EndTurnState("Career changed!");
         }
-
         return null;
     }
-
-
 
     @Override
     public void exit(GameLogic gameLogic) {
