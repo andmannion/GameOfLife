@@ -7,6 +7,8 @@ import ie.ucd.engac.lifegamelogic.Spinner;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardContinueTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.messaging.Tile;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,14 +20,13 @@ public class GameBoard {
 	private HashMap<String, GameBoardTile> idToGameBoardTileMap;
 	private Spinner spinningWheel;
 	private String jsonBoardConfigFileLocation;
-	private String jsonBoardConfigFileContent;
 	private InputStream boardInputStream;
 	private JsonElement overallJSONElement;
 
 	public GameBoard(String jsonBoardConfigFileLocation) {
 		this.jsonBoardConfigFileLocation = jsonBoardConfigFileLocation;
-		boardGraph = new UDAGraph<String>();
-		idToGameBoardTileMap = new HashMap<String, GameBoardTile>();
+		boardGraph = new UDAGraph<>();
+		idToGameBoardTileMap = new HashMap<>();
 		spinningWheel = new Spinner();
 		
 		initialiseBoard();
@@ -81,19 +82,44 @@ public class GameBoard {
 		initialiseConnectivity();	
 		
 		initialiseTiles();
+
 	}
+
+    /**
+     * Get the board's layout
+     * @return the layout of the board
+     */
+	public ArrayList<Tile> getLayout(){
+	    ArrayList<Tile> tiles = null;
+	    try {
+            tiles = initialiseLayout();
+        }
+        catch (Exception e){
+	        System.err.println("Could not get board locations from config file. " + e.toString());
+        }
+        return tiles;
+    }
+
+    private ArrayList<Tile> initialiseLayout(){
+	    ArrayList<Tile> tiles = new ArrayList<>();
+        JsonArray verticesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("vertices");
+
+        for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
+            JsonElement innerElement  = ((JsonObject) vertexAsJsonObj).get("gameBoardTile");
+            String type = ((JsonObject) innerElement).get("gameBoardTileType").getAsString();
+            double xLocation = ((JsonObject) vertexAsJsonObj).get("xLocation").getAsDouble();
+            double yLocation = ((JsonObject) vertexAsJsonObj).get("yLocation").getAsDouble();
+            tiles.add(new Tile(type,xLocation,yLocation));
+        }
+        return tiles;
+    }
 
 	private void initialiseTiles() {
 		JsonArray verticesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("vertices");
-		
-		RuntimeTypeAdapterFactory<GameBoardTile> tileAdapterFactory = RuntimeTypeAdapterFactory.of(GameBoardTile.class,	"tileMovementType");
 
-		tileAdapterFactory.registerSubtype(GameBoardContinueTile.class);
-		tileAdapterFactory.registerSubtype(GameBoardStopTile.class);
+        Gson gson = getGson();
 
-		Gson gson = new GsonBuilder().registerTypeAdapterFactory(tileAdapterFactory).create();
-
-		for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
+        for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
 			String id = ((JsonObject) vertexAsJsonObj).get("id").getAsString();
 			JsonElement tileAsJsonObject = ((JsonObject) vertexAsJsonObj).get("gameBoardTile");
 
@@ -102,8 +128,19 @@ public class GameBoard {
 			idToGameBoardTileMap.put(id, gameBoardTile);
 		}
 	}
-	
-	private void initialiseConnectivity() {
+
+    @NotNull
+    private Gson getGson() {
+        RuntimeTypeAdapterFactory<GameBoardTile> tileAdapterFactory =
+                RuntimeTypeAdapterFactory.of(GameBoardTile.class, "tileMovementType");
+
+        tileAdapterFactory.registerSubtype(GameBoardContinueTile.class);
+        tileAdapterFactory.registerSubtype(GameBoardStopTile.class);
+
+        return new GsonBuilder().registerTypeAdapterFactory(tileAdapterFactory).create();
+    }
+
+    private void initialiseConnectivity() {
 		JsonArray edgesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("edges");
 
 		for (JsonElement edgeAsJsonObj : edgesAsJsonArray) {

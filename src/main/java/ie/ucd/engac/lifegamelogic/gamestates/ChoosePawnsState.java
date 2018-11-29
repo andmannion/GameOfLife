@@ -52,7 +52,8 @@ public class ChoosePawnsState extends GameState {
                 int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
 
                 if (nextPlayer == initialPlayerIndex) {
-                    LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!",null);  //ShadowPlayer not ready yet.
+                    Board board = new Board(gameLogic.getGameBoard().getLayout());
+                    LifeGameMessage replyMessage = new UIConfigMessage(pawns, "Game Ready!",null, board);  //ShadowPlayer not ready yet.
                     gameLogic.setResponseMessage(replyMessage);
                 }
                 else{

@@ -80,7 +80,7 @@ public class GameUI implements Drawable {
      */
     public void updateCurrentUIScreen(){
 
-        if (wasStateUpdatedD != wasStateUpdatedQ){// || wasStateUpdatedQ == wasStateUpdatedQQ) {
+        if (wasStateUpdatedD != wasStateUpdatedQ){
             switch (lastResponse.getLifeGameMessageType()) {
                 case StartupMessage:
                     break;
@@ -90,6 +90,7 @@ public class GameUI implements Drawable {
                     uiInput.setSpinnerOptions(pendingLargeDecision.getChoices());
                     uiState = LargeChoice;
                     uiInput.setEnableSubmitButton(true);
+                    uiHUD.updateFields(pendingLargeDecision.getShadowPlayer());
                     break;
                 case SpinRequest:
                     LifeGameRequestMessage spinRequest = (LifeGameRequestMessage) lastResponse;
@@ -104,12 +105,14 @@ public class GameUI implements Drawable {
                     uiEventMessage.updateEventMessage(pendingDecision.getEventMsg());
                     uiCardChoice.setChoices(pendingDecision.getChoices());
                     uiInput.setEnableCardChoice(true);
+                    uiHUD.updateFields(pendingDecision.getShadowPlayer());
                     break;
                 case AckRequest:
                     LifeGameRequestMessage ackRequest = (LifeGameRequestMessage) lastResponse;
                     uiState = WaitingForAck;
                     uiEventMessage.updateEventMessage(ackRequest.getEventMsg());
                     uiInput.setEnableEndTurnButton(true);
+                    uiHUD.updateFields(ackRequest.getShadowPlayer());
                     break;
                 case EndGameMessage:
                     EndGameMessage endGameMessage = (EndGameMessage) lastResponse;
