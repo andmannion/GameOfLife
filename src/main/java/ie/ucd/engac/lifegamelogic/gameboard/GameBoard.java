@@ -92,7 +92,7 @@ public class GameBoard {
 	public ArrayList<Tile> getLayout(){
 	    ArrayList<Tile> tiles = null;
 	    try {
-            tiles = initialiseLayout();
+            tiles = convertGameBoardTilesToMessageTiles();
         }
         catch (Exception e){
 	        System.err.println("Could not get board locations from config file. " + e.toString());
@@ -100,16 +100,10 @@ public class GameBoard {
         return tiles;
     }
 
-    private ArrayList<Tile> initialiseLayout(){ //TODO delete this
+    private ArrayList<Tile> convertGameBoardTilesToMessageTiles(){
 	    ArrayList<Tile> tiles = new ArrayList<>();
-        JsonArray verticesAsJsonArray = ((JsonObject) overallJSONElement).getAsJsonArray("vertices");
-
-        for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
-            JsonElement innerElement  = ((JsonObject) vertexAsJsonObj).get("gameBoardTile");
-            String type = ((JsonObject) innerElement).get("gameBoardTileType").getAsString();
-            double xLocation = 0.0;
-            double yLocation = 0.0;
-            tiles.add(new Tile(type,xLocation,yLocation));
+        for (GameBoardTile gameBoardTile:idToGameBoardTileMap.values()){
+            tiles.add(new Tile(gameBoardTile));
         }
         return tiles;
     }

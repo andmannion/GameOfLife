@@ -1,5 +1,7 @@
 package ie.ucd.engac.messaging;
 
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+
 public class Tile {
     private String type;
     private double xLocation;
@@ -9,6 +11,12 @@ public class Tile {
         this.type = type;
         this.xLocation = xLocation;
         this.yLocation = yLocation;
+    }
+
+    public Tile(GameBoardTile gameBoardTile){
+        this.type = gameBoardTile.getGameBoardTileType().toString();
+        this.xLocation = gameBoardTile.getXLocation();
+        this.yLocation = gameBoardTile.getYLocation();
     }
 
     public String getType() {

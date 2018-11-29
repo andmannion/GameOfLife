@@ -6,6 +6,7 @@ import ie.ucd.engac.messaging.Tile;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class UIBoard implements Drawable {
 
@@ -21,7 +22,7 @@ public class UIBoard implements Drawable {
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
         uiTiles = new ArrayList<>();
-        tileDimension = (int)Math.floor(0.1*panelWidth);
+        tileDimension = (int)Math.floor(0.05*panelWidth);
     }
 
     void setLayout(ArrayList<Tile> tiles) {
@@ -46,6 +47,11 @@ public class UIBoard implements Drawable {
             for (UITile uiTile : uiTiles) {
                 uiTile.draw(graphics);
                 }
+        }
+        if(pawnMap != null){
+            for (UIPawn pawnEntry:pawnMap.values()){
+                pawnEntry.draw(graphics);
+            }
         }
     }
 }
