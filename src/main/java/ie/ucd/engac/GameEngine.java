@@ -121,7 +121,6 @@ public class GameEngine implements Runnable {
                     excessFrameTime -= FRAME_TIME;
                 }
             }
-
         } //end of while(running)
     } //end of run()
 

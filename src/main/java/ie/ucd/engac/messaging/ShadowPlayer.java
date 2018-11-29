@@ -8,6 +8,7 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.Colle
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
 import java.awt.*;
@@ -32,20 +33,20 @@ public class ShadowPlayer {
     private int martialStatus;
     private ArrayList<HouseCard> houses;
 
-    public ShadowPlayer(int playerNumber, Color playerColour, int martialStatus, int numDependants, OccupationCard occupation, ArrayList<HouseCard> houses, int numLoans, int loans, int bankBalance, int numActionCards, GameBoardTile currentTile){
-        this.playerNumber = playerNumber;
-        this.playerColour = playerColour;
-        this.martialStatus = martialStatus;
-        this.numDependants = numDependants;
-        this.occupation = occupation;
-        this.houses = houses;
+    public ShadowPlayer(Player player,int numLoans, int loans, GameBoardTile gameBoardTile){
+        this.playerNumber = player.getPlayerNumber();
+        this.playerColour = player.getPlayerColour();
+        this.martialStatus = player.getMaritalStatus().toInt();
+        this.numDependants = player.getNumberOfDependants();
+        this.occupation = player.getOccupationCard();
+        this.houses = player.getHouseCards();
         this.numLoans = numLoans;
         this.loans = loans;
-        this.bankBalance = bankBalance;
-        this.numActionCards = numActionCards;
-        this.currentTile = currentTile;
-        this.xLocation = 0.0;
-        this.yLocation = 0.0;
+        this.bankBalance = player.getCurrentMoney();
+        this.numActionCards = player.getNumberOfActionCards();
+        this.currentTile = gameBoardTile;
+        this.xLocation = gameBoardTile.getXLocation();
+        this.yLocation = gameBoardTile.getYLocation();
     }
 
     public int getPlayerNumber() {

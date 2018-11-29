@@ -3,16 +3,24 @@ title Game Initialisation
 actor Actor
 Actor->LifeGame:Set number of players
 Actor->LifeGame:Start the game
-LifeGame->GameEngine:Create and initialise the GameEngine\nusing initialisation parameters\n[initialiseGame()]
+LifeGame->GameEngine:Create and initialise the GameEngine\n using initialisation parameters\n[initialiseGame()]
 activate GameEngine
 GameEngine->GameUI:Create\n[new GameUI()]
 activate GameUI
 GameEngine->GameLogic:Create\n[new GameLogicInterface]
 activate GameLogic
 GameUI->GameLogic:Initial startup message\n[sendStartupMessage()]
+
+loop while not all players have picked a colour
+   GameLogic->GameUI: request colour choice  [setResponseMessage()]
+   Actor->GameUI: choose colour
+   GameUI->GameLogic: Decision response [handleInput()]
+   GameLogic->GameLogic: Set player's colour &\n increment player index\n   [player.setColour()]
+end
+
 GameLogic->GameUI:Send objects for UI setup
 GameUI->GameLogic:Acknowledge receipt of data
-GameLogic-->GameUI:Send response requesting\ncareer choice (DecisionRequestMessage)
+GameLogic-->GameUI:Send response requesting\n career choice (DecisionRequestMessage)
 GameUI->GameUI:Display career path choice
 Actor->GameUI:Choose career path
 GameUI->GameLogic:Kick off PathChoice handling

@@ -84,19 +84,11 @@ public class GameLogic {
     public ShadowPlayer getShadowPlayer(int playerIndex){
 	    Player player = getPlayerByIndex(playerIndex);
 
-	    int playerNumber = player.getPlayerNumber();
-        Color playerColour = player.getPlayerColour();
-        int martialStatus = player.getMaritalStatus().toInt();
-        int numberOfDependants = player.getNumberOfDependants();
-        OccupationCard occupationCard = player.getOccupationCard();
-        ArrayList<HouseCard> houseCards = player.getHouseCards();
         int numLoans = player.getNumberOfLoans(this);
         int loans = player.getTotalLoansOutstanding(this);
-        int currentMoney = player.getCurrentMoney();
-        int numActionCards = player.getActionCards().size();
         GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
 
-        return new ShadowPlayer(playerNumber,playerColour, martialStatus, numberOfDependants, occupationCard, houseCards, numLoans, loans, currentMoney, numActionCards, gameBoardTile);
+        return new ShadowPlayer(player,numLoans,loans,gameBoardTile);
     }
 
     /**
