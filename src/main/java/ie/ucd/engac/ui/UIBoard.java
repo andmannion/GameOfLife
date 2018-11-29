@@ -1,6 +1,8 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.messaging.Pawn;
+import ie.ucd.engac.messaging.Tile;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ public class UIBoard implements Drawable {
 
     private int panelHeight;
     private int panelWidth;
+    private int tileDimension;
 
     //pawns and board
     private HashMap<Integer,UIPawn> pawnMap;
@@ -17,10 +20,14 @@ public class UIBoard implements Drawable {
     UIBoard(GameUI gameUI){
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
+        uiTiles = new ArrayList<>();
+        tileDimension = (int)Math.floor(0.1*panelWidth);
     }
 
-    void setLayout(ArrayList<UITile> uiTiles) {
-        this.uiTiles = uiTiles;
+    void setLayout(ArrayList<Tile> tiles) {
+        for(Tile tile:tiles){
+            uiTiles.add(new UITile(tile, tile.getXLocation()*panelWidth,tile.getYLocation()*panelHeight, tileDimension));
+        }
     }
 
     void setPawnMap(HashMap<Integer,UIPawn> pawnMap){
@@ -37,9 +44,8 @@ public class UIBoard implements Drawable {
     public void draw(Graphics graphics){
         if (uiTiles != null) {
             for (UITile uiTile : uiTiles) {
-                graphics.setColor(Color.CYAN);
-                graphics.drawRect((int) uiTile.getxLocation() * panelWidth, (int) uiTile.getyLocation() * panelHeight, 10, 10);
-            }
+                uiTile.draw(graphics);
+                }
         }
     }
 }

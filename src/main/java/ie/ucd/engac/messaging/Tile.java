@@ -15,11 +15,11 @@ public class Tile {
         return type;
     }
 
-    public double getxLocation() {
+    public double getXLocation() {
         return xLocation;
     }
 
-    public double getyLocation() {
+    public double getYLocation() {
         return yLocation;
     }
 }

@@ -107,8 +107,8 @@ public class GameBoard {
         for (JsonElement vertexAsJsonObj : verticesAsJsonArray) {
             JsonElement innerElement  = ((JsonObject) vertexAsJsonObj).get("gameBoardTile");
             String type = ((JsonObject) innerElement).get("gameBoardTileType").getAsString();
-            double xLocation = ((JsonObject) vertexAsJsonObj).get("xLocation").getAsDouble();
-            double yLocation = ((JsonObject) vertexAsJsonObj).get("yLocation").getAsDouble();
+            double xLocation = 0.0;
+            double yLocation = 0.0;
             tiles.add(new Tile(type,xLocation,yLocation));
         }
         return tiles;

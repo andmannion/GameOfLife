@@ -137,13 +137,9 @@ public class GameUI implements Drawable {
     private void handleConfigMessage(UIConfigMessage uiConfigMessage){
         ArrayList<Pawn> pawns = uiConfigMessage.getPawns();
         ArrayList<Tile> tiles = uiConfigMessage.getBoard().getTiles();
-        ArrayList<UITile> uiTiles = new ArrayList<>();
         HashMap<Integer,UIPawn> pawnMap = new HashMap<>();
 
-        for(Tile tile:tiles){
-            uiTiles.add(new UITile(tile));
-        }
-        uiBoard.setLayout(uiTiles);
+        uiBoard.setLayout(tiles);
 
         for(Pawn pawn:pawns){
             pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn));
@@ -152,8 +148,10 @@ public class GameUI implements Drawable {
     }
 
     private void handleShadowPlayer(ShadowPlayer shadowPlayer){
-        uiBoard.updatePawns(shadowPlayer.getPlayerNumber(),shadowPlayer.getXLocation(),shadowPlayer.getYLocation());
-        uiHUD.updateFields(shadowPlayer);
+        if(shadowPlayer != null) {
+            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), (int) shadowPlayer.getXLocation(), (int) shadowPlayer.getYLocation());
+            uiHUD.updateFields(shadowPlayer);
+        }
     }
 
     /**
