@@ -5,7 +5,11 @@ import ie.ucd.engac.messaging.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class UIBoard implements Drawable {
@@ -16,6 +20,7 @@ public class UIBoard implements Drawable {
 
     private GameUI gameUI;
     private BufferedImage boardImage;
+    private BufferedImage blurredBoardImage;
     private Graphics boardGraphics;
 
     //pawns and board
@@ -33,13 +38,18 @@ public class UIBoard implements Drawable {
         boardGraphics = boardImage.getGraphics();
         boardGraphics.setColor(Color.lightGray);
         boardGraphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
+        blurredBoardImage = new BufferedImage(boardAreaWidth,boardAreaHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics blurredGraphics = blurredBoardImage.getGraphics();
+        blurredGraphics.setColor(Color.lightGray);
+        blurredGraphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
     }
 
     void setLayout(ArrayList<Tile> tiles) {
         for(Tile tile:tiles){
             uiTiles.add(new UITile(tile, tile.getXLocation()* boardAreaWidth,tile.getYLocation()* boardAreaHeight, tileDimension));
         }
-        drawBoard(boardGraphics);
+        drawBoard();
+        drawBlurredBoard();
     }
 
     void setPawnMap(HashMap<Integer,UIPawn> pawnMap){
@@ -62,11 +72,13 @@ public class UIBoard implements Drawable {
                 break;
             case CardChoice:
             case LargeChoice:
-                //graphics.drawImage(boardImage,0,0, null);
+            case EndGame:
+            case WaitingForAck:
+                graphics.drawImage(blurredBoardImage,0,0, null);
                 //drawPawns(graphics);
-                //break;
+                break;
             case WaitingForSpin: case PostSpin:
-                graphics.drawImage(boardImage,0,0, null);
+                graphics.drawImage(boardImage,-8,0, null);
                 drawPawns(graphics);
                 break;
             default:
@@ -82,15 +94,42 @@ public class UIBoard implements Drawable {
         }
     }
 
-    private void drawBoard(Graphics graphics){
-        graphics.setColor(Color.LIGHT_GRAY);
-        graphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
+    private void drawBoard(){
+        boardGraphics.setColor(Color.LIGHT_GRAY);
+        boardGraphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
         if (uiTiles != null) {
             for (UITile uiTile : uiTiles) {
-                uiTile.draw(graphics);
-                System.err.println("doot");
+                uiTile.draw(boardGraphics);
             }
         }
+    }
+
+    private void drawBlurredBoard(){
+        BufferedImage temp;
+        int kernelSize = 5;
+        float[] kernelValues = new float[kernelSize*kernelSize];
+        Arrays.fill(kernelValues, 1F/(kernelSize*kernelSize));
+        Kernel kernel = new Kernel(kernelSize, kernelSize,kernelValues);
+        /*
+        begin http://www.informit.com/articles/article.aspx?p=1013851&seqNum=5
+         */
+        int xOffset = (kernelSize - 1);
+        int yOffset = (kernelSize - 1);
+        BufferedImage paddedImage = new BufferedImage(
+                boardImage.getWidth() + 2*kernelSize - 1,
+                boardImage.getHeight() + 2*kernelSize - 1,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = paddedImage.createGraphics();
+        g2.setColor(Color.lightGray);
+        g2.fillRect(0,0,paddedImage.getWidth(),paddedImage.getHeight());
+        g2.drawImage(boardImage, xOffset, yOffset, null);
+        g2.dispose();
+        /*
+        end http://www.informit.com/articles/article.aspx?p=1013851&seqNum=5
+         */
+        BufferedImageOp op = new ConvolveOp(kernel);
+        temp = op.filter(paddedImage, null);
+        op.filter(temp, blurredBoardImage);
     }
 }
 
