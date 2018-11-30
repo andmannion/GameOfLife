@@ -11,8 +11,8 @@ import java.util.Properties;
 
 public class LifeGame implements WindowListener{
 
-    private int panelWidth = 1280;
-    private int panelHeight = 720;
+    private int panelWidth;
+    private int panelHeight;
     private JFrame jFrame;
     private JPanel playPanel;
     private MainMenu mainMenu;

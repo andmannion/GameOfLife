@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class UIBoard implements Drawable {
 
+    private int KERNEL_SIZE = 5;
     private int boardAreaHeight;
     private int boardAreaWidth;
     private int tileDimension;
@@ -78,7 +79,7 @@ public class UIBoard implements Drawable {
                 //drawPawns(graphics);
                 break;
             case WaitingForSpin: case PostSpin:
-                graphics.drawImage(boardImage,-8,0, null);
+                graphics.drawImage(boardImage,0,0, null);
                 drawPawns(graphics);
                 break;
             default:
@@ -106,10 +107,11 @@ public class UIBoard implements Drawable {
 
     private void drawBlurredBoard(){
         BufferedImage temp;
-        int kernelSize = 5;
+        int kernelSize = KERNEL_SIZE;
         float[] kernelValues = new float[kernelSize*kernelSize];
         Arrays.fill(kernelValues, 1F/(kernelSize*kernelSize));
         Kernel kernel = new Kernel(kernelSize, kernelSize,kernelValues);
+
         /*
         begin http://www.informit.com/articles/article.aspx?p=1013851&seqNum=5
          */
@@ -127,6 +129,7 @@ public class UIBoard implements Drawable {
         /*
         end http://www.informit.com/articles/article.aspx?p=1013851&seqNum=5
          */
+
         BufferedImageOp op = new ConvolveOp(kernel);
         temp = op.filter(paddedImage, null);
         op.filter(temp, blurredBoardImage);
