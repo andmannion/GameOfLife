@@ -1,15 +1,14 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.messaging.ShadowPlayer;
+import ie.ucd.engac.messaging.Tile;
 
 import java.awt.*;
 
 public class UIHUD implements Drawable {
 
     private ShadowPlayer sPlayer;
-
     private GameUI gameUI;
-
     private Rectangle rectangle;
 
     private final static int PLAYER_LOC = 0;
@@ -34,7 +33,7 @@ public class UIHUD implements Drawable {
     private int stringLengthX;// = 100;
     private int stringLengthY;// = 30;
 
-    private int HOUSETEXTSKIP = 15;
+    private int cropAvoidance;
 
     UIHUD(GameUI gameUI, int hudStartY){
         this.gameUI = gameUI;
@@ -47,10 +46,11 @@ public class UIHUD implements Drawable {
         boxStartX = 0;
         boxLengthX = panelWidth;
 
-        firstStringX = 0;
+        firstStringX = 5; //gap
         firstStringY = boxStartY+Math.round(0.08f*boxLengthY);
         stringLengthX = Math.round(0.1f*boxLengthX);
         stringLengthY = Math.round(0.125f*boxLengthY);
+        cropAvoidance = panelHeight/10;
 
         rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
     }
@@ -65,8 +65,10 @@ public class UIHUD implements Drawable {
             case WaitingForSpin: case PostSpin:
                 if(sPlayer != null){
                     try{
-                        graphics.setColor(Color.darkGray);
-                        graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+                        graphics.setColor(UIColours.HUD_AREA_COLOUR);
+                        graphics.fillRoundRect(rectangle.x-cropAvoidance,rectangle.y,(rectangle.width/2)+cropAvoidance,rectangle.height+cropAvoidance,rectangle.height/4, rectangle.height/4);
+                        graphics.setColor(Color.black);
+                        graphics.drawRoundRect(rectangle.x-cropAvoidance,rectangle.y,(rectangle.width/2)+cropAvoidance,rectangle.height+cropAvoidance,rectangle.height/4, rectangle.height/4);
                         graphics.setColor(sPlayer.getPlayerColour());
                         graphics.drawString("Player " + sPlayer.playerNumToString(),firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
                         graphics.setColor(Color.black);                                     //TODO this colour "string" is horrid

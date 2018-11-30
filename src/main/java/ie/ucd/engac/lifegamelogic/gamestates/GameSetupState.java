@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
 import java.awt.*;
@@ -33,7 +34,7 @@ public class GameSetupState extends GameState {
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse){
             // Check who this reply relates to
-            parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
+            parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic);
             decideNextMessage(gameLogic);
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse){
@@ -83,12 +84,15 @@ public class GameSetupState extends GameState {
 
     }
 
-    private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, int relatedPlayerNumber) {
+    private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, GameLogic gameLogic) {
         // Must set what the player has chosen, and remove what they have chosen from the allowable remaining
         // choices
         String selectedColourName = outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails();
         Color colour = colourMap.get(selectedColourName);
+        Player relatedPlayer =  gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex);
+        int relatedPlayerNumber = relatedPlayer.getPlayerNumber();
         if(colour != null) {
+            relatedPlayer.setPlayerColour(colour);
             pawns.add(new Pawn(0.0, 0.0, colour, relatedPlayerNumber, 0));
 
             // Remove the selected number from the set of allowable numbers
