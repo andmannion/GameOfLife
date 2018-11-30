@@ -1397,8 +1397,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.0",
-				"yLocation": "0.0",
+				"xLocation": "0.9",
+				"yLocation": "0.9",
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Retire"

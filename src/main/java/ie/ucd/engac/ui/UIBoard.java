@@ -5,9 +5,6 @@ import ie.ucd.engac.messaging.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ConvolveOp;
-import java.awt.image.Kernel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -91,6 +88,7 @@ public class UIBoard implements Drawable {
         if (uiTiles != null) {
             for (UITile uiTile : uiTiles) {
                 uiTile.draw(graphics);
+                System.err.println("doot");
             }
         }
     }
