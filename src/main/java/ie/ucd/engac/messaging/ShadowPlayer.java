@@ -16,23 +16,23 @@ import java.util.ArrayList;
 
 public class ShadowPlayer {
 
-    private Color playerColour; //TODO AWT -> FX
+    private Color playerColour;
 
     private int playerNumber;
+
     private int numDependants;
     private int numActionCards;
     private int loans;
     private int numLoans;
     private int bankBalance;
-
     private double xLocation;
-    private double yLocation;
 
+    private double yLocation;
     private GameBoardTile currentTile;
+
     private OccupationCard occupation;
     private int martialStatus;
     private ArrayList<HouseCard> houses;
-
     public ShadowPlayer(Player player,int numLoans, int loans, GameBoardTile gameBoardTile){
         this.playerNumber = player.getPlayerNumber();
         this.playerColour = player.getPlayerColour();
@@ -53,6 +53,10 @@ public class ShadowPlayer {
 
     public int getNumDependants(){
         return numDependants;
+    }
+
+    public Color getPlayerColour() {
+        return playerColour;
     }
 
     public int getPlayerNumber() {
@@ -82,13 +86,15 @@ public class ShadowPlayer {
             return "No house cards.";
         }
         else{
-            String string = "";//TODO test that this obeys boundaries (it wont)
-            int i = 0;
+            String returnString = "";
             for(HouseCard house:houses){
-                string.concat(house.displayChoiceDetails());
+                String string = house.displayChoiceDetails();
+                String[] split = string.split("\n");
+                returnString = returnString.concat(split[0]);
             }
-            return string;
+            return returnString;
         }
+
     }
 
     public String actionCardsToString(){

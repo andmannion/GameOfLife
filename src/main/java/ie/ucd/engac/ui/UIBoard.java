@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class UIBoard implements Drawable {
 
-    private int KERNEL_SIZE = 5;
+    private int KERNEL_SIZE = 11;
     private int boardAreaHeight;
     private int boardAreaWidth;
     private int tileDimension;
@@ -132,6 +132,7 @@ public class UIBoard implements Drawable {
 
         BufferedImageOp op = new ConvolveOp(kernel);
         temp = op.filter(paddedImage, null);
+        //temp = op.filter(temp, null);
         op.filter(temp, blurredBoardImage);
     }
 }

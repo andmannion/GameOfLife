@@ -11,7 +11,7 @@ public class UITile extends Tile implements Drawable{
     UITile(Tile tile,double xLocation, double yLocation ,int dimension){
         super(tile.getType(),xLocation,yLocation);
         this.dimension = dimension;
-        tileColour = TileColours.getColour(tile.getType());
+        tileColour = UIColours.getColour(tile.getType());
     }
 
     @Override

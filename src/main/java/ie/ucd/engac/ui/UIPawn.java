@@ -6,15 +6,18 @@ import java.awt.*;
 
 public class UIPawn extends Pawn implements Drawable {
     private static final int PER_ROW = 2;
-    private int width = 10;
-    private int height = 20; //TODO
-    private int dependantRadius = (int)Math.floor(width/3.0);
+    private int width;
+    private int height;
+    private int dependantRadius;
 
     private int currentX;
     private int currentY;
 
-    UIPawn(Pawn pawn){
+    UIPawn(Pawn pawn, int dimension){
         super(pawn.getXLocation(),pawn.getYLocation(),pawn.getColour(),pawn.getPlayerNumber(),pawn.getNumDependants());
+        this.width = dimension;
+        this.height = dimension*2;
+        dependantRadius = (int)Math.floor(width/3.0);
     }
 
     @Override
@@ -25,14 +28,13 @@ public class UIPawn extends Pawn implements Drawable {
         graphics.fillRect(currentX,currentY,width,height);
         graphics.setColor(Color.black);
         graphics.drawRect(currentX,currentY,width,height);
-        graphics.setColor(Color.black);
         drawDependants(graphics);
     }
 
     private void drawDependants(Graphics graphics){
-        for(int inc=0;inc<numDependants;inc++){
-            int xPos = currentX + (int)(width * 0.333) * (1 + (inc % PER_ROW)) - dependantRadius/2;
-            int yPos = currentY + (int)(height * 0.25) * (1 + (inc/PER_ROW)) - dependantRadius/2;
+        for(int inc=0;inc<(numDependants+1);inc++){
+            int xPos = currentX + (width/3) * (1 + (inc%PER_ROW)) - dependantRadius/2;
+            int yPos = currentY + (height/4) * (1 + (inc/PER_ROW)) - dependantRadius/2;
             drawDependant(graphics,xPos,yPos);
         }
     }

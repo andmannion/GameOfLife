@@ -64,7 +64,11 @@ public class Player {
         return playerColour;
     }
 
-    //Retirement related
+	public void setPlayerColour(Color playerColour) {
+		this.playerColour = playerColour;
+	}
+
+	//Retirement related
 
     /**
      * returns the bonus applicable to this player on retirement

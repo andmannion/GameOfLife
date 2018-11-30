@@ -21,7 +21,7 @@ public class UIInput implements Drawable {
     private static final int CARD_CHOICE_WIDTH = 192;
     private static final int CARD_CHOICE_HEIGHT = 36;
     private static final int CARD_CHOICE_LHS_GAP = 326;
-    private static final int CARD_CHOICE_INTER_GAP = 227;
+    private static final int CARD_CHOICE_INTER_GAP = 240;
     private static final int CARD_CHOICE_Y_POS = 504;
 
     private static final int JCOMBO_WIDTH = 164;

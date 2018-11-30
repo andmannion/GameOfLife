@@ -64,7 +64,7 @@ public class GameUI implements Drawable {
 
         uiHUD = new UIHUD(this, hudStartY);
         uiBoard = new UIBoard(this, hudStartY, panelWidth);
-        uiCardChoice = new UICardChoice(this);
+        uiCardChoice = new UICardChoice(this,hudStartY);
         uiWinner = new UIWinner(this);
         uiEventMessage = new UIEventMessage();
         uiInput = new UIInput(this,renderTarget);
@@ -144,7 +144,7 @@ public class GameUI implements Drawable {
         uiBoard.setLayout(tiles);
 
         for(Pawn pawn:pawns){
-            pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn));
+            pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn,10)); //TODO magic number
         }
         uiBoard.setPawnMap(pawnMap);
     }

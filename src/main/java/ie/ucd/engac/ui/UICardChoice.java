@@ -7,18 +7,26 @@ import java.util.ArrayList;
 
 public class UICardChoice implements Drawable {
 
-    private static final int CARD_CHOICE_LHS_GAP = 326;
-    private static final int CARD_CHOICE_INTER_GAP = 419;
-    private static final int CHOICE_Y_POS = 216;
-    private static final int CHOICE_Y_GAP = 15;
+    private final int choiceYCentre;
+    private final int choiceYGap;
+    private final int choiceCentre;
+    private final int cardWidth;
+    private final int cardHeight;
 
     private GameUI gameUI;
 
     private volatile String[] option1Split;
     private volatile String[] option2Split;
 
-    UICardChoice(GameUI gameUI){
+    UICardChoice(GameUI gameUI,int bottomBoundary){
         this.gameUI = gameUI;
+        int panelWidth = gameUI.getPanelWidth();
+        int panelHeight = gameUI.getPanelHeight();
+        choiceCentre = (panelWidth/3);
+        cardWidth = (panelWidth/6);
+        cardHeight = (int)Math.floor(cardWidth*1.618);
+        choiceYGap = (panelHeight/48);
+        choiceYCentre = (bottomBoundary/2);
     }
 
     void setChoices(ArrayList<Chooseable> options){
@@ -32,8 +40,12 @@ public class UICardChoice implements Drawable {
 
     private void drawOption(Graphics graphics, String[] option, int xPos, int yPos){
         int inc = 0;
+        graphics.setColor(UIColours.CARD_COLOUR);
+        graphics.fillRoundRect(xPos,yPos,cardWidth,cardHeight,(cardWidth/4),(cardWidth/4));
+        graphics.setColor(Color.black);
+        graphics.drawRoundRect(xPos,yPos,cardWidth,cardHeight,(cardWidth/4),(cardWidth/4));
         for (String string:option){
-            graphics.drawString(string,xPos,yPos+inc*CHOICE_Y_GAP);
+            graphics.drawString(string,xPos+10,yPos+(cardWidth/4)+inc*choiceYGap);
             inc++;
         }
     }
@@ -42,8 +54,8 @@ public class UICardChoice implements Drawable {
     public void draw(Graphics graphics) {
         if(gameUI.getUIState() == UIState.CardChoice){
             graphics.setColor(Color.black);
-            drawOption(graphics, option1Split, CARD_CHOICE_LHS_GAP, CHOICE_Y_POS);
-            drawOption(graphics, option2Split, CARD_CHOICE_LHS_GAP+CARD_CHOICE_INTER_GAP, CHOICE_Y_POS);
+            drawOption(graphics, option1Split, choiceCentre -(cardWidth/2), choiceYCentre-(cardHeight/2));
+            drawOption(graphics, option2Split, 2* choiceCentre -(cardWidth/2), choiceYCentre-(cardHeight/2));
         }
         //else do nothing
 
