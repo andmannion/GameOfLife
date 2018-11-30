@@ -58,11 +58,13 @@ public class GameUI implements Drawable {
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
 
+        int hudStartY = Math.round(((0.7f)*panelHeight));
+
         uiActionListener = new UIActionListener();
 
-        uiBoard = new UIBoard(this);
+        uiHUD = new UIHUD(this, hudStartY);
+        uiBoard = new UIBoard(this, hudStartY, panelWidth);
         uiCardChoice = new UICardChoice(this);
-        uiHUD = new UIHUD(this);
         uiWinner = new UIWinner(this);
         uiEventMessage = new UIEventMessage();
         uiInput = new UIInput(this,renderTarget);

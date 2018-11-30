@@ -36,13 +36,13 @@ public class UIHUD implements Drawable {
 
     private int HOUSETEXTSKIP = 15;
 
-    UIHUD(GameUI gameUI){
+    UIHUD(GameUI gameUI, int hudStartY){
         this.gameUI = gameUI;
 
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
 
-        boxStartY = Math.round(((0.7f)*panelHeight));
+        boxStartY = hudStartY;
         boxLengthY = panelHeight-boxStartY;
         boxStartX = 0;
         boxLengthX = panelWidth;
