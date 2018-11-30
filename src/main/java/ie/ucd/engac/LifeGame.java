@@ -30,13 +30,14 @@ public class LifeGame implements WindowListener{
             inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");//new FileInputStream("src/main/resources/config.properties");
 
             properties.load(inputStream);
-            panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
-            panelHeight = Integer.parseInt(properties.getProperty("PANHEIGHT"));
+            new GameConfig(properties);
+            panelWidth = GameConfig.panelWidth;
+            panelHeight = GameConfig.panelHeight;
         }
         catch(Exception exception){
             System.err.println("config.properties not found.");
+            System.exit(-1);
         }
-        new GameConfig(properties);
         Dimension dimensions = new Dimension(panelWidth,panelHeight);
         constructUI();
         jFrame.addWindowListener(this);

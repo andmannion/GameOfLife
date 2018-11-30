@@ -11,8 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameEngine implements Runnable {
-    private int panelWidth = GameConfig.panelWidth; //TODO what is the best way to manage the window size?
-    private int panelHeight = GameConfig.panelHeight; //TODO make this work on computers that have window borders
+    private int panelWidth;
+    private int panelHeight;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -35,8 +35,10 @@ public class GameEngine implements Runnable {
      * @param numPlayers    Number of players in the game.
      */
     GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
-        this.renderTarget = jPanel;
+        renderTarget = jPanel;
         lifeGameParent = lifeGame;
+        panelWidth = jPanel.getWidth();
+        panelHeight = jPanel.getHeight();
 
         GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
         
