@@ -71,10 +71,6 @@ public class ShadowPlayer {
         return yLocation;
     }
 
-    public String playerColourToString(){ //TODO this makes a horrible horrible string
-        return playerColour.toString();
-    }
-
     public String playerNumToString(){
         Integer playerNumber = this.playerNumber;
         return playerNumber.toString();
@@ -144,10 +140,10 @@ public class ShadowPlayer {
         }
 
         if(currentTile.getGameBoardTileType() == GameBoardTileTypes.Stop){
-            string = "On stop tile of type " + ((GameBoardStopTile)currentTile).getGameBoardStopTileType().toString();
+            string = "On stop tile of type: " + ((GameBoardStopTile)currentTile).getGameBoardStopTileType().toString();
         }
         else{
-            string = "On standard tile of type " + currentTile.getGameBoardTileType().toString();
+            string = "On standard tile of type: " + currentTile.getGameBoardTileType().toString();
         }
         return string;
     }

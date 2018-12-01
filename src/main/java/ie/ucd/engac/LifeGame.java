@@ -27,7 +27,7 @@ public class LifeGame implements WindowListener{
         InputStream inputStream;
         Properties properties = new Properties();
         try{
-            inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");//new FileInputStream("src/main/resources/config.properties");
+            inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");
 
             properties.load(inputStream);
             new GameConfig(properties);
@@ -72,11 +72,11 @@ public class LifeGame implements WindowListener{
         playPanel = new JPanel();
         playPanel.setVisible(false);
         playPanel.setBackground(Color.white);
-        playPanel.setPreferredSize( new Dimension(panelWidth, panelHeight));
+        playPanel.setSize( new Dimension(container.getWidth(), container.getHeight()));
         playPanel.setLayout(null);
         JTextField textField = new JTextField("Error: Rendering error");
         playPanel.add(textField);
-        container.add(playPanel);
+        container.add(playPanel,BorderLayout.CENTER);
 
         gameEngine = new GameEngine(this,playPanel,numPlayers);
         mainMenu.setVisible(false);
@@ -128,5 +128,7 @@ public class LifeGame implements WindowListener{
     public void windowClosed(WindowEvent window_event) {}
     @Override
     public void windowOpened(WindowEvent window_event) {}
+
+
 
 }

@@ -55,6 +55,10 @@ public class UIHUD implements Drawable {
         rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
     }
 
+    private int getStringWidth(String string,Graphics graphics){
+        return graphics.getFontMetrics().stringWidth(string); //centring
+    }
+
     void updateFields(ShadowPlayer shadowPlayer){
         this.sPlayer = shadowPlayer;
     }
@@ -70,16 +74,17 @@ public class UIHUD implements Drawable {
                         graphics.setColor(Color.black);
                         graphics.drawRoundRect(rectangle.x-cropAvoidance,rectangle.y,(rectangle.width/2)+cropAvoidance,rectangle.height+cropAvoidance,rectangle.height/4, rectangle.height/4);
                         graphics.setColor(sPlayer.getPlayerColour());
-                        graphics.drawString("Player " + sPlayer.playerNumToString(),firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
-                        graphics.setColor(Color.black);                                     //TODO this colour "string" is horrid
-                        //+ " (" + sPlayer.playerColourToString() + ") " + sPlayer.currentTileToString(),    firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+                        String string = "Player " + sPlayer.playerNumToString();
+                        graphics.drawString(string,firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+                        graphics.setColor(Color.black);
+                        graphics.drawString(" " +  sPlayer.currentTileToString(),firstStringX+(getStringWidth(string,graphics)), firstStringY+stringLengthY*PLAYER_LOC);
+                        //+ "" + sPlayer.currentTileToString()
                         graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
                         graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
                         graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
                         graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
                         graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
                         graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
-                        //graphics.drawString("Current Tile: " + ,panelWidth/2,firstStringY+stringLengthY*ACTION_LOC);
                     }
                     catch (Exception e){
                         System.err.println("Exception in UIHUD.draw() " + e.toString());
@@ -88,8 +93,14 @@ public class UIHUD implements Drawable {
                 break;
             case CardChoice:
             case LargeChoice:
-                if (sPlayer != null) {
-                    graphics.drawString("Current Tile: " + sPlayer.currentTileToString(), firstStringX + 400, firstStringY + stringLengthY * ACTION_LOC);
+                if(sPlayer != null){
+                    try{
+                        graphics.setColor(sPlayer.getPlayerColour());
+                        graphics.drawString("Player " + sPlayer.playerNumToString(),firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+                    }
+                    catch (Exception e){
+                        System.err.println("Exception in UIHUD.draw() " + e.toString());
+                    }
                 }
             default:
                 break;

@@ -1,7 +1,5 @@
 package ie.ucd.engac.ui;
 
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
-
 import java.awt.*;
 
 public class UIColours {
@@ -13,7 +11,7 @@ public class UIColours {
     public static final Color BABY_COLOUR = new Color(167,179,242);
     public static final Color HOUSE_COLOUR = new Color(238,160,213);
     public static final Color CARD_COLOUR = new Color(224,216,188);
-    public static final Color HUD_AREA_COLOUR = new Color(107,99,84);
+    public static final Color HUD_AREA_COLOUR = new Color(208,214,222	);
 
     static Color getTileColour(String type){
         switch (type){
