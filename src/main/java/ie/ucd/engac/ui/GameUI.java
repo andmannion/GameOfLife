@@ -207,7 +207,7 @@ public class GameUI implements Drawable {
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         SpinResultMessage spinResultMessage = (SpinResultMessage) lastResponse;
-        //uiSpinner.setSpinResult = spinResultMessage.getSpinResult();
+        uiHUD.setSpinResult(spinResultMessage.getSpinResult());
         message = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
