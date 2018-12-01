@@ -132,10 +132,6 @@ public class UIInput implements Drawable {
         return button;
     }
 
-    private int getStringWidth(String string,Graphics graphics){
-        return graphics.getFontMetrics().stringWidth(string); //centring
-    }
-
     void setSpinnerOptions(ArrayList<Chooseable> choices){
         spinnerValues = new ArrayList<>();
         for(Chooseable choice:choices) {
