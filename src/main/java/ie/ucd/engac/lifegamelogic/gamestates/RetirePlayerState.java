@@ -5,7 +5,9 @@ import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.LifeGameRequestMessage;;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
+
+;
 
 public class RetirePlayerState extends GameState {
 

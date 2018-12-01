@@ -9,7 +9,6 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.playerlogic.PlayerColour;
 
 import java.awt.*;
 import java.util.ArrayList;

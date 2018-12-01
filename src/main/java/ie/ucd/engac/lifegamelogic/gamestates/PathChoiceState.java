@@ -4,7 +4,9 @@ import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class PathChoiceState extends GameState {
 	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;

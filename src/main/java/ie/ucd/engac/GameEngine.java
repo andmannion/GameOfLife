@@ -1,7 +1,7 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.GameLogicInterface;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
 import ie.ucd.engac.messaging.MessagingInterface;

@@ -1,11 +1,11 @@
 package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.lifegamelogic.GameLogic;
 
 import java.awt.*;
 import java.util.ArrayList;

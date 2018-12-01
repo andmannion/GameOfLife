@@ -1,7 +1,6 @@
 package ie.ucd.engac.ui;
 
 import ie.ucd.engac.messaging.ShadowPlayer;
-import ie.ucd.engac.messaging.Tile;
 
 import java.awt.*;
 

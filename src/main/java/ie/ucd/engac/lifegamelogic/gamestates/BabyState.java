@@ -3,7 +3,9 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.LifeGameRequestMessage;;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
+
+;
 
 public class BabyState extends GameState {
 
