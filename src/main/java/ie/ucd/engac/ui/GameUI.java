@@ -70,7 +70,7 @@ public class GameUI implements Drawable {
         uiInput = new UIInput(this,renderTarget);
 
         drawables = new ArrayList<>();
-        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput));
+        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput)); //
 
     }
 

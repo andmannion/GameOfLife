@@ -24,7 +24,7 @@ public class UICardChoice implements Drawable {
         int panelHeight = gameUI.getPanelHeight();
         choiceCentre = (panelWidth/3);
         cardWidth = (panelWidth/6);
-        cardHeight = (int)Math.floor(cardWidth*1.618);
+        cardHeight = (int)(cardWidth*1.618);
         choiceYGap = (panelHeight/48);
         choiceYCentre = (bottomBoundary/2);
     }

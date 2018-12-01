@@ -8,13 +8,26 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UIInput implements Drawable {
+public class TestInput implements Drawable {
 
     private static final int SPIN_WIDTH = 192;
+    private static final int SPIN_HEIGHT = 36;
+    private static final int SPIN_BORDER = 13;
+
     private static final int QUIT_WIDTH = 128;
-    private static final int OK_WIDTH = 128;
+    private static final int QUIT_HEIGHT = 36;
+    private static final int QUIT_BORDER = 13;
+
     private static final int CARD_CHOICE_WIDTH = 192;
-    private static final int JCOMBO_WIDTH = 164*2;
+    private static final int CARD_CHOICE_HEIGHT = 36;
+    private static final int CARD_CHOICE_LHS_GAP = 326;
+    private static final int CARD_CHOICE_INTER_GAP = 240;
+    private static final int CARD_CHOICE_Y_POS = 504;
+
+    private static final int JCOMBO_WIDTH = 164;
+    private static final int JCOMBO_HEIGHT = 30;
+    private static final int JCOMBO_LHS_GAP = 568;
+    private static final int JCOMBO_Y_POS = 345;
 
     private final int panelHeight;
     private final int panelWidth;
@@ -29,6 +42,8 @@ public class UIInput implements Drawable {
     private JButton endTurnButton;
     private JButton chooseLeftCardButton;
     private JButton chooseRightCardButton;
+    private JPanel panel1;
+    private JTextArea textArea1;
 
     private ActionListener actionListener;
 
@@ -36,104 +51,49 @@ public class UIInput implements Drawable {
 
     private GameUI gameUIParent;
 
-    UIInput(GameUI gameUI, JPanel renderTarget){
+    private void setupButton(String string, JButton jButton, ActionListener actionListener){
+        //JButton button = new JButton(string);
+        jButton.setActionCommand(string);
+        //button.setBounds(xPos,yPos,width,height);
+        jButton.setVisible(false);
+        jButton.addActionListener(actionListener);
+    }
+
+    TestInput(GameUI gameUI, JPanel renderTarget){
         this.gameUIParent = gameUI;
         this.renderTarget = renderTarget;
         panelHeight = gameUI.getPanelHeight();
         panelWidth = gameUI.getPanelWidth();
         actionListener = gameUI.getUiActionListener();
 
-        createEndButton(renderTarget);
-        createSpinButton(renderTarget);
-        createQuitButton(renderTarget);
-        createMultiChoice(renderTarget);
-        createCardChoice(renderTarget);
-    }
+        setupButton("OK",endTurnButton, actionListener);
+        renderTarget.add(endTurnButton);
 
-    private void createCardChoice(JPanel renderTarget) {
-        int xOffset = panelWidth/3;
-        int leftX = xOffset - CARD_CHOICE_WIDTH/2;
-        int rightX = 2*xOffset - CARD_CHOICE_WIDTH/2;
+        setupButton("Spin The Wheel",spinButton,actionListener);
+        renderTarget.add(spinButton);
 
-        int cardChoiceHeight = (int)(CARD_CHOICE_WIDTH/1.618)/3;
-        int bothY = panelHeight/2 - cardChoiceHeight/2;
+        setupButton("Submit Choice",submitChoice, actionListener);
+        renderTarget.add(submitChoice);
 
-        String string;
-        string = "Choose Left Option";
-        chooseLeftCardButton = createButton(string,leftX, bothY,CARD_CHOICE_WIDTH, cardChoiceHeight, actionListener);
+        setupButton("Quit Game",quitButton, actionListener);
+        quitButton.setVisible(true);
+        renderTarget.add(quitButton);
+
+        setupButton("Choose Left Option",chooseLeftCardButton, actionListener);
         renderTarget.add(chooseLeftCardButton);
 
-        string = "Choose Right Option";
-        chooseRightCardButton = createButton(string,rightX, bothY,CARD_CHOICE_WIDTH, cardChoiceHeight, actionListener);
+        setupButton("Choose Right Option",chooseRightCardButton, actionListener);
         renderTarget.add(chooseRightCardButton);
-    }
-
-    private void createMultiChoice(JPanel renderTarget) {
-        int comboX = (panelWidth-JCOMBO_WIDTH)/2;
-        int comboHeight = (int)(JCOMBO_WIDTH/1.618)/6;
-        int comboY = panelHeight/2-(int)(comboHeight*1.5);
-
-        int submitWidth = JCOMBO_WIDTH/2;
-        int submitX = (panelWidth-submitWidth)/2;
-        int submitHeight = (int)(submitWidth/1.618)/3;
-        int submitY = panelHeight/2+(int)(submitHeight*1.5);
-
-        String string = "Submit Choice";
 
         String[] placeholder = { ".","." };
         SpinnerModel model = new SpinnerListModel(Arrays.asList(placeholder));
-        reducingChoice = new JSpinner();
+        //reducingChoice = new JSpinner();
         reducingChoice.setModel(model);
         reducingChoice.addChangeListener(e -> setSpinnerIndex());
         reducingChoice.setVisible(false);
         ((JSpinner.DefaultEditor) reducingChoice.getEditor()).getTextField().setEditable(false);
-        reducingChoice.setBounds(comboX,comboY,JCOMBO_WIDTH,comboHeight);
+        //reducingChoice.setBounds(JCOMBO_LHS_GAP,JCOMBO_Y_POS,JCOMBO_WIDTH,JCOMBO_HEIGHT);
         renderTarget.add(reducingChoice);
-
-        submitChoice = createButton(string,submitX, submitY,submitWidth, submitHeight, actionListener);
-        renderTarget.add(submitChoice);
-    }
-
-    private void createEndButton(JPanel renderTarget) {
-        int endX = (panelWidth-OK_WIDTH)/2;
-        int endHeight = (int)(OK_WIDTH/1.618)/3;
-        int endY = (panelHeight-endHeight)/2;
-        endTurnButton = createButton("OK",endX, endY,OK_WIDTH, endHeight, actionListener);
-        renderTarget.add(endTurnButton);
-    }
-
-    private void createQuitButton(JPanel renderTarget) {
-        String string;
-        string = "Quit Game";
-        int quitHeight = (int)(QUIT_WIDTH/1.618)/3;
-        int quitBorder = QUIT_WIDTH/10;
-        int quitX = panelWidth-QUIT_WIDTH-quitBorder;
-        quitButton = createButton(string,quitX, quitBorder,QUIT_WIDTH, quitHeight, actionListener);
-        quitButton.setVisible(true);
-        renderTarget.add(quitButton);
-    }
-
-    private void createSpinButton(JPanel renderTarget) {
-        String string = "Spin The Wheel";
-        int spinHeight = (int)(SPIN_WIDTH/1.618)/4;
-        int spinBorder = SPIN_WIDTH/10;
-        int spinX = panelWidth-SPIN_WIDTH-spinBorder;
-        int spinY = panelHeight-spinHeight-spinBorder;
-        spinButton = createButton(string,spinX, spinY,SPIN_WIDTH, spinHeight, actionListener);
-        renderTarget.add(spinButton);
-    }
-
-    private JButton createButton(String string,int xPos, int yPos, int width, int height, ActionListener actionListener){
-        JButton button = new JButton(string);
-        button.setActionCommand(string);
-        button.setBounds(xPos,yPos,width,height);
-        button.setVisible(false);
-        button.addActionListener(actionListener);
-        return button;
-    }
-
-    private int getStringWidth(String string,Graphics graphics){
-        return graphics.getFontMetrics().stringWidth(string); //centring
     }
 
     void setSpinnerOptions(ArrayList<Chooseable> choices){

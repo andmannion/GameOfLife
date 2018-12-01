@@ -19,39 +19,29 @@ public class UIHUD implements Drawable {
     private final static int ACTION_LOC = 6;
 
 
-    private final int panelHeight;
-    private final int panelWidth;
-
-    private int boxStartX;
-    private int boxStartY;// = 504;
-    private int boxLengthX;// = 1280;
-    private int boxLengthY;// = 216;
-
-    private int firstStringX;// = 0;
-    private int firstStringY;// = 520;
-    private int stringLengthX;// = 100;
-    private int stringLengthY;// = 30;
+    private int firstStringX;
+    private int firstStringY;
+    private int stringLengthX;
+    private int stringLengthY;
 
     private int cropAvoidance;
 
     UIHUD(GameUI gameUI, int hudStartY){
         this.gameUI = gameUI;
 
-        panelHeight = gameUI.getPanelHeight();
-        panelWidth = gameUI.getPanelWidth();
+        int panelHeight = gameUI.getPanelHeight();
+        int panelWidth = gameUI.getPanelWidth();
 
-        boxStartY = hudStartY;
-        boxLengthY = panelHeight-boxStartY;
-        boxStartX = 0;
-        boxLengthX = panelWidth;
+        int boxLengthY = panelHeight - hudStartY;
+        int boxStartX = 0;
 
         firstStringX = 5; //gap
-        firstStringY = boxStartY+Math.round(0.08f*boxLengthY);
-        stringLengthX = Math.round(0.1f*boxLengthX);
-        stringLengthY = Math.round(0.125f*boxLengthY);
+        firstStringY = hudStartY +Math.round(0.08f* boxLengthY);
+        stringLengthX = Math.round(0.1f* panelWidth);
+        stringLengthY = Math.round(0.125f* boxLengthY);
         cropAvoidance = panelHeight/10;
 
-        rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
+        rectangle = new Rectangle(boxStartX, hudStartY, panelWidth, boxLengthY);
     }
 
     private int getStringWidth(String string,Graphics graphics){
