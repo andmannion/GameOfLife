@@ -11,5 +11,6 @@ public enum LifeGameMessageTypes {
 	AckRequest,
 	AckResponse,
 	EndGameMessage,
-	UIConfigMessage
+	UIConfigMessage,
+	SpinResult
 }

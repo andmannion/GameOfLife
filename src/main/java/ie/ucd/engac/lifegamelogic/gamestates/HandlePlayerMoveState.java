@@ -16,11 +16,16 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 import java.util.ArrayList;
 
 public class HandlePlayerMoveState extends GameState {
     private String eventMessage ;
+    private boolean spinComplete = false;
+    private boolean turnComplete = false;
+    int tilesToMove = 0;
+    int tilesMoved = 0;
 
 	public HandlePlayerMoveState(String eventMessage){
         this.eventMessage = eventMessage;
@@ -43,11 +48,6 @@ public class HandlePlayerMoveState extends GameState {
 	    GameState nextState = null;
 
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
-			GameBoard gameBoard = gameLogic.getGameBoard();
-			int tilesToMove;
-            int tilesMoved = 0;
-            GameBoardTile endTile;
-
             // Need to spin the spinner
             tilesToMove = gameLogic.getSpinner().spinTheWheel();
             
@@ -55,18 +55,27 @@ public class HandlePlayerMoveState extends GameState {
 			*  based on the bonus number on their current OccupationCard.	
 		    */            
             assignSpinBonusIfRequired(gameLogic.getPlayers(), tilesToMove);
+            LifeGameMessage replyMessage = new SpinResultMessage(tilesToMove);
+            gameLogic.setResponseMessage(replyMessage);
+            spinComplete = true;
+		}
+        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete){
+            GameBoard gameBoard = gameLogic.getGameBoard();
 
-			// Need to alternate between moving and evaluating the tile we're on
+            GameBoardTile endTile;
+
+            // Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic.getCurrentPlayer(), gameBoard, tilesToMove, tilesMoved);
             
             
 			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
             nextState = evaluateTile(gameLogic, endTile);
+            turnComplete = true;
 		}
 
         if (nextState == null) {
 
-            if (gameLogic.getNumberOfUninitialisedPlayers() > 0) {
+            if (gameLogic.getNumberOfUninitialisedPlayers() > 0 && turnComplete) {
                 // Must send a message to choose a career path, etc.
                 LifeGameMessage replyMessage = PathChoiceState.constructPathChoiceMessage(gameLogic.getCurrentPlayer().getPlayerNumber(), gameLogic.getCurrentShadowPlayer());
                 gameLogic.setResponseMessage(replyMessage);
