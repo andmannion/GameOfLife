@@ -46,6 +46,10 @@ class GetMarriedStateTest {
         // Provide mock UI response
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Assert the current player is still the same, and they are being asked to spin again
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
