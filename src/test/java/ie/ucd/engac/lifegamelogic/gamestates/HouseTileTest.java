@@ -316,6 +316,10 @@ class HouseTileTest {
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
         //card should be sold so do the maths
         int houseSalePrice = houseCard.getSpinForSalePrice(true); //true for odd (we have spinner that only returns 1

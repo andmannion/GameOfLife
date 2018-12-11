@@ -16,6 +16,8 @@ public class SpinToWinGetWinnerState extends GameState {
 	
 	private final HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap;
 	private int currentPlayerSpinningTheWheelIndex;
+	private int numberSpun = 0;
+	private boolean spinComplete = false;
 	
 	SpinToWinGetWinnerState(HashMap<Integer, ArrayList<Integer>> playerNumberChoiceMap) {
 		this.playerNumberChoiceMap = playerNumberChoiceMap; 
@@ -32,7 +34,13 @@ public class SpinToWinGetWinnerState extends GameState {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Must keep track of the player that is currently spinning
 
-			int numberSpun = gameLogic.getSpinner().spinTheWheel();
+			numberSpun = gameLogic.getSpinner().spinTheWheel();
+			LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,"", gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+			gameLogic.setResponseMessage(spinRequestMessage);
+			spinComplete = true;
+			return null;
+		}
+		else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete) {
 			
 			int winningPlayerIndex = parseSpinToWinAction(numberSpun);
 			

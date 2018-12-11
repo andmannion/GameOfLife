@@ -11,6 +11,7 @@ public class HouseSaleState extends GameState {
 
     private int choiceIndex;
     private boolean choseCard = false;
+    private int spinNum = 0;
 
     @Override
     public void enter(GameLogic gameLogic) {
@@ -48,8 +49,13 @@ public class HouseSaleState extends GameState {
             choseCard = true;
             return null;
         }
-        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse && choseCard) {
-            int spinNum = gameLogic.getSpinner().spinTheWheel();
+        else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse && choseCard) {
+            spinNum = gameLogic.getSpinner().spinTheWheel();
+            LifeGameMessage replyMessage = new SpinResultMessage(spinNum);
+            gameLogic.setResponseMessage(replyMessage);
+            return null;
+            }
+        else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && choseCard) {
             Player player = gameLogic.getCurrentPlayer();
             HouseCard soldCard = player.sellHouseCard(choiceIndex,spinNum);
             if (soldCard == null){

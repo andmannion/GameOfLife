@@ -6,6 +6,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 public class GetMarriedState extends GameState {
 	
@@ -14,7 +15,9 @@ public class GetMarriedState extends GameState {
 	private int playerToSpinIndex;
 	private int playerToSpinNumber;
 	private int playerGettingMarriedNumber;
-	
+	private int spinResult = 0;
+	private boolean spinComplete = false;
+
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// Update the current player to have a spouse			
@@ -38,10 +41,16 @@ public class GetMarriedState extends GameState {
 	    GameState nextState = null;
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 			// Spin the wheel for the next player
+			spinResult = gameLogic.getSpinner().spinTheWheel();
+
+            LifeGameMessage replyMessage = new SpinResultMessage(spinResult);
+            gameLogic.setResponseMessage(replyMessage);
+
+            spinComplete = true;
+            nextState = null;
+		}
+    	else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete){
 			String paymentMsg;
-
-    		int spinResult = gameLogic.getSpinner().spinTheWheel();
-
 			int getMarriedPayment;
 			
 			//compute payment
@@ -73,6 +82,7 @@ public class GetMarriedState extends GameState {
                 nextState = new HandlePlayerMoveState(eventMsg);
 			}
 			else {
+				spinComplete = false;
 				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
 				
 				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())

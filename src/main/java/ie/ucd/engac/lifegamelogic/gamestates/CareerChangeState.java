@@ -44,7 +44,7 @@ public class CareerChangeState extends GameState {
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
                 (Chooseable) secondCareerCardChoice,
-                "Choose career card.", gameLogic.getCurrentShadowPlayer());
+                "Action - Career Change: Choose career card.", gameLogic.getCurrentShadowPlayer());
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,

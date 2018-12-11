@@ -4,10 +4,10 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
-
-;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 public class BabyState extends GameState {
+	private int spinResult = 0;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -22,7 +22,12 @@ public class BabyState extends GameState {
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
-			int spinResult = gameLogic.getSpinner().spinTheWheel();
+			spinResult = gameLogic.getSpinner().spinTheWheel();
+			LifeGameMessage replyMessage = new SpinResultMessage(spinResult);
+			gameLogic.setResponseMessage(replyMessage);
+			return null;
+		}
+		else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse) {
             return handleSpinForBabyState(gameLogic, spinResult);			
 		}
 		return null;
