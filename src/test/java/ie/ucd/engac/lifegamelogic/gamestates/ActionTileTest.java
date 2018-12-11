@@ -46,6 +46,10 @@ public class ActionTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         LifeGameMessageTypes lifeGameMessageType = responseMessage.getLifeGameMessageType();
 
         assertTrue(lifeGameMessageType == LifeGameMessageTypes.AckRequest || lifeGameMessageType == LifeGameMessageTypes.LargeDecisionRequest || lifeGameMessageType == LifeGameMessageTypes.OptionDecisionRequest);

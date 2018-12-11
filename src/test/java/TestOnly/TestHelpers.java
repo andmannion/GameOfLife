@@ -57,6 +57,11 @@ public class TestHelpers {
             //send back a spin response
             spinMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(spinMessage);
+
+            assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+            spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            responseMessage = gameLogic.handleInput(spinMessage);
+
             assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
             ackMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
