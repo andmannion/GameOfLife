@@ -5,6 +5,7 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.SpinResultMessage;;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,8 +36,8 @@ public class SpinToWinGetWinnerState extends GameState {
 			// Must keep track of the player that is currently spinning
 
 			numberSpun = gameLogic.getSpinner().spinTheWheel();
-			LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,"", gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
-			gameLogic.setResponseMessage(spinRequestMessage);
+            LifeGameMessage replyMessage = new SpinResultMessage(numberSpun);
+            gameLogic.setResponseMessage(replyMessage);
 			spinComplete = true;
 			return null;
 		}
