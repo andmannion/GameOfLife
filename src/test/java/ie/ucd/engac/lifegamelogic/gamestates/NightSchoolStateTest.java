@@ -37,6 +37,10 @@ class NightSchoolStateTest {
 		
 		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Message should be requesting a choice to move to the family path or the night school path
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
@@ -57,7 +61,11 @@ class NightSchoolStateTest {
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
-        messageFromLogic = gameLogic.handleInput(messageToLogic);        
+        messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Assert that the player has been moved to the night school board path
         assertEquals(NIGHT_SCHOOL_INITIAL_TILE, currentPlayerUnderTest.getCurrentLocation().getLocation());
@@ -80,6 +88,10 @@ class NightSchoolStateTest {
 		
 		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+		assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+		LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+		messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Message should be requesting a choice to move to the family path or the night school path
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
@@ -99,7 +111,11 @@ class NightSchoolStateTest {
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
-        messageFromLogic = gameLogic.handleInput(messageToLogic);        
+        messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Assert that the player has been moved to the night school board path
         assertEquals(LIFE_PATH_INITIAL_TILE, currentPlayerUnderTest.getCurrentLocation().getLocation());
@@ -116,6 +132,10 @@ class NightSchoolStateTest {
 		
 		LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Just choose the first CollegeCareerCard
         messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);

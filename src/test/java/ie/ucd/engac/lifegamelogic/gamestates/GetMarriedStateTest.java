@@ -35,7 +35,11 @@ class GetMarriedStateTest {
 		// Mock messages to logic, performing pathChoiceState functionality
         LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
-        
+
+		assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+		LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+		messageFromLogic = gameLogic.handleInput(spinMessage);
+
         // Now the current player is on the GetMarriedTile - other players have to be queried to spin
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         

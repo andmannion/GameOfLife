@@ -39,6 +39,10 @@ class FamilyStateTest {
             messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             messageFromLogic = gameLogic.handleInput(messageToLogic);
 
+            assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+            LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            messageFromLogic = gameLogic.handleInput(spinMessage);
+
             // Should have a choice to make now
             assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
 
@@ -74,6 +78,9 @@ class FamilyStateTest {
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         // Assert players have been moved off the tile
         assertEquals(INITIAL_FAMILY_PATH_TILE, gameLogic.getCurrentPlayer().getCurrentLocation().getLocation());
     }
