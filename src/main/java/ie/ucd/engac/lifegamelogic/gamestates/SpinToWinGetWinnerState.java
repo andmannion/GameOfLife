@@ -33,6 +33,8 @@ public class SpinToWinGetWinnerState extends GameState {
 			// Must keep track of the player that is currently spinning
 
 			numberSpun = gameLogic.getSpinner().spinTheWheel();
+			LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,"", gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+			gameLogic.setResponseMessage(spinRequestMessage);
 			spinComplete = true;
 			return null;
 		}

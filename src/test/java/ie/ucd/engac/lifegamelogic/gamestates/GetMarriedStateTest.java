@@ -79,6 +79,7 @@ class GetMarriedStateTest {
         	int invalidBalanceDelta = currentBalance - playerUnderTestInitialBalance;        	
         	fail("Player's balance was changed by an invalid amount (" + invalidBalanceDelta + ") when they got married.");
         }
+
 	}
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
