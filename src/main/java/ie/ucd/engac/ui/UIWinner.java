@@ -33,8 +33,11 @@ public class UIWinner implements Drawable{
     }
 
     @Override
-    public void draw(Graphics graphics) {//TODO finish this
+    public void draw(Graphics graphics) {
         if(gameUIParent.getUIState() == UIState.EndGame) {
+            Font oldFont = graphics.getFont();
+            Font newFont = oldFont.deriveFont(oldFont.getSize() * 2.5F);
+            graphics.setFont(newFont); //want to use a bigger font
 
             graphics.setColor(UIColours.HUD_AREA_COLOUR);
             graphics.fillRoundRect(rectX,rectY,rectWidth,rectHeight,rectWidth/4,rectHeight/4);
@@ -42,14 +45,20 @@ public class UIWinner implements Drawable{
             graphics.drawRoundRect(rectX,rectY,rectWidth,rectHeight,rectWidth/4,rectHeight/4);
             graphics.setColor(Color.black);
             String title = "Results:";
-            int titleX = getStringWidth("Results:",graphics);
-            int titleY = rectY-rectHeight/6;
+            int titleX = rectX+(rectWidth-getStringWidth("Results:",graphics))/2;
+            int titleY = rectY+rectHeight/6;
             graphics.drawString(title, titleX, titleY);
             int playerNum;
+            int stringX;
+            int inc = 1;
             for (Player player : rankedPlayers) {
                 playerNum = player.getPlayerNumber();
-                graphics.drawString("Player " + playerNum + " has " + player.getCurrentMoney(), 100, 100 + playerNum * 12);
+                String string = "Player " + playerNum + " has " + player.getCurrentMoney();
+                stringX = rectX+(rectWidth-getStringWidth(string,graphics))/2;
+                graphics.drawString(string, stringX, titleY + inc * (rectHeight/6));
+                inc++;
             }
+            graphics.setFont(oldFont); //reset font
         }
     }
 }

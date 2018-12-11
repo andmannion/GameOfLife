@@ -37,7 +37,7 @@ class RetirementTest {
             ret = retirePlayer(gameLogic, i, max);
             endBalances.add(ret);
         }
-        Collections.sort(endBalances);
+        endBalances.sort(Collections.reverseOrder());
 
         //advance to end of game to get ranked players
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);

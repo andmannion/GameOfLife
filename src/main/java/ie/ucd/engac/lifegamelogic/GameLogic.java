@@ -11,7 +11,7 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gamestates.GameSetupState;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
+import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparatorDescending;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
@@ -253,7 +253,7 @@ public class GameLogic {
      */
     public ArrayList<Player> getRankedRetiredPlayers(){
 	    ArrayList<Player> ranked = retiredPlayers;
-        ranked.sort(new PlayerMoneyComparator());
+        ranked.sort(new PlayerMoneyComparatorDescending());
         return ranked;
     }
 
