@@ -2,16 +2,17 @@ package ie.ucd.engac.ui;
 
 import java.awt.*;
 
-public class UIColours {
-    public static final Color STOP_COLOUR = new Color(240,170,117);
-    public static final Color ACTION_COLOUR = new Color(211,210,130);
-    public static final Color PAYDAY_COLOUR = new Color(149,220,142);
-    public static final Color HOLIDAY_COLOUR = new Color(112,224,193);
-    public static final Color S2W_COLOUR = new Color(85,220,225);
-    public static final Color BABY_COLOUR = new Color(167,179,242);
-    public static final Color HOUSE_COLOUR = new Color(238,160,213);
-    public static final Color CARD_COLOUR = new Color(224,216,188);
-    public static final Color HUD_AREA_COLOUR = new Color(208,214,222	);
+class UIColours {
+    static final Color STOP_COLOUR = new Color(240,170,117);
+    static final Color ACTION_COLOUR = new Color(211,210,130);
+    static final Color PAYDAY_COLOUR = new Color(149,220,142);
+    static final Color HOLIDAY_COLOUR = new Color(112,224,193);
+    static final Color S2W_COLOUR = new Color(85,220,225);
+    static final Color BABY_COLOUR = new Color(167,179,242);
+    static final Color HOUSE_COLOUR = new Color(238,160,213);
+    static final Color CARD_COLOUR = new Color(224,216,188);
+    static final Color HUD_AREA_COLOUR = new Color(208,214,222	);
+    static final Color START_COLOUR = new Color(206,214,180);
 
     static Color getTileColour(String type){
         switch (type){
@@ -29,6 +30,8 @@ public class UIColours {
                 return BABY_COLOUR;
             case "House":
                 return HOUSE_COLOUR;
+            case "Start":
+                return START_COLOUR;
             default:
                 return Color.lightGray;
 

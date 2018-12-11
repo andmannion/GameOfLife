@@ -47,7 +47,8 @@ public class UIBoard implements Drawable {
 
     void setLayout(ArrayList<Tile> tiles) {
         for(Tile tile:tiles){
-            uiTiles.add(new UITile(tile, tile.getXLocation()* boardAreaWidth,tile.getYLocation()* boardAreaHeight, tileDimension));
+            uiTiles.add(new UITile(tile, tile.getXLocation()*boardAreaWidth,tile.getYLocation()*boardAreaHeight,
+                    tile.getXDimension()*boardAreaWidth,tile.getYDimension()*boardAreaHeight) );
         }
         drawBoard();
         drawBlurredBoard();

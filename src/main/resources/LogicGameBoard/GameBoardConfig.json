@@ -29,6 +29,8 @@
 			"gameBoardTile": {
 				"xLocation": "0.0",
 				"yLocation": "0.0",
+                "xDimension": "0.1",
+                "yDimension": "0.1",
 				"tileMovementType": "GameBoardContinueTile",
 				"gameBoardTileType": "Payday"
 			}

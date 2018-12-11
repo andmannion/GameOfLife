@@ -64,7 +64,6 @@ public class GameEngine implements Runnable {
         renderingThread.start();
     } // end of beginGame()
 
-    // TODO: if these values are static and final, why are you using a getter method? - will they always be? (c)
     /**
      * Returns the panel height.
      * @return  integer height of the panel.
