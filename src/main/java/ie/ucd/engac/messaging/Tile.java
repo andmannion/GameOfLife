@@ -21,7 +21,6 @@ public class Tile {
         this.type = gameBoardTile.getGameBoardTileType().toString();
         this.xLocation = gameBoardTile.getXLocation();
         this.yLocation = gameBoardTile.getYLocation();
-        System.err.println(gameBoardTile.getXDimension());
         this.xDimension = gameBoardTile.getXDimension();
         this.yDimension = gameBoardTile.getYDimension();
     }
