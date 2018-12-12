@@ -58,5 +58,4 @@ public class PickPlayerState extends GameState {
         }
         return nextState;
     }
-
 }
