@@ -4,6 +4,7 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.ShadowPlayer;
 
 public class EndTurnState extends GameState {
 
@@ -20,7 +21,8 @@ public class EndTurnState extends GameState {
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             eventMessage = "Player " + playNum + "'s turn is over.";
         }
-        LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage, null);
+        ShadowPlayer shadowPlayer = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
+        LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage, shadowPlayer);
         gameLogic.setResponseMessage(ackRequestMessage);
     }
 

@@ -3,6 +3,8 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerTypes;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -37,15 +39,14 @@ public class GraduationState extends GameState {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
 		    int choiceIndex = ((DecisionResponseMessage) lifeGameMessage).getChoiceIndex();
 
-            //call static method in superclass to set/return card
+            // Call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
 
-			OccupationCardTypes type = gameLogic.getCurrentPlayer().getOccupationCard().getOccupationCardType();
-			String graduationStateEndMessage = "You chose the " + type + " card.";
+			CollegeCareerTypes collegeCareerType = ((CollegeCareerCard) gameLogic.getCurrentPlayer().getOccupationCard()).getCareerType();
+			String graduationStateEndMessage = "You chose the " + collegeCareerType + " card.";
 			
 			return new EndTurnState(graduationStateEndMessage);
 		}		
 		return null;
 	}
-
 }

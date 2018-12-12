@@ -36,8 +36,12 @@ public class SpinToWinSetupState extends GameState {
 		int playerNumber = gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber();
 
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
+
 		LifeGameMessage replyMessage = new DecisionRequestMessage(outgoingChoices,
-                playerNumber, "Player "+playerNumber+", pick a SpinToWin number.", requestType, gameLogic.getCurrentShadowPlayer());
+																    playerNumber,
+														"Player " + playerNumber + ", pick a SpinToWin number.",
+																	requestType,
+																	gameLogic.getCurrentShadowPlayer());
 		gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -47,11 +51,13 @@ public class SpinToWinSetupState extends GameState {
 		// Send out a LargeDecisionRequestMessage for each other player
 		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
 			// Check who this reply relates to
-			parsePlayerResponse(
-					(DecisionResponseMessage) lifeGameMessage,
+			boolean validResponse = parsePlayerResponse((DecisionResponseMessage) lifeGameMessage,
                     awaitingInfoFromPlayerIndex);
-                    //gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
-			
+
+			if(!validResponse){
+				return null;
+			}
+
 			int nextPlayer = gameLogic.getNextPlayerIndex(awaitingInfoFromPlayerIndex);
 			
 			if (!sendSecondFromInitialPlayer) {
@@ -91,9 +97,16 @@ public class SpinToWinSetupState extends GameState {
 		return null;
 	}
 
-	private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
+	private boolean parsePlayerResponse(DecisionResponseMessage lifeGameMessage, int relatedPlayerIndex) {
 		// Must set what the player has chosen, and remove what they have chosen from the allowable remaining
 		// choices
+
+		int selectedIndex = lifeGameMessage.getChoiceIndex();
+
+		if(selectedIndex > outgoingChoices.size() - 1){
+			return false;
+		}
+
 		int selectedNumber = Integer.parseInt(outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails());
 
 		if(!playerIndexChoiceMap.containsKey(relatedPlayerIndex)) {
@@ -106,6 +119,8 @@ public class SpinToWinSetupState extends GameState {
 		
 		// Remove the selected number from the set of allowable numbers
 		remainingNumberChoices.remove(selectedNumber);
+
+		return true;
 	}
 
 	private ArrayList<Chooseable> getRemainingChooseableNumberChoices() {
