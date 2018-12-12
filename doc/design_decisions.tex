@@ -1,0 +1,51 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+
+\usepackage{enumitem}
+\usepackage{calc}
+\usepackage{amsmath}
+
+\usepackage{amssymb}
+\usepackage{courier}
+\usepackage{eurosym}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+\DeclareMathOperator*{\argmin}{\textbf{argmin}}
+\DeclareMathOperator*{\sign}{\textbf{sgn}}
+\DeclareMathOperator{\dom}{\textbf{dom}}
+\DeclareMathOperator{\sgn}{\textbf{sgn}}
+\newcommand{\epi}{\operatorname{epi}}
+
+\lstset{language=Matlab,%
+	%basicstyle=\color{red},
+	breaklines=true,%
+	morekeywords={matlab2tikz},
+	keywordstyle=\color{blue},%
+	morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+	identifierstyle=\color{black},%
+	stringstyle=\color{mylilas},
+	commentstyle=\color{mygreen},%
+	showstringspaces=false,%without this there will be a symbol in the places where there is a space
+	numbers=left,%
+	numberstyle={\tiny \color{black}},% size of the numbers
+	numbersep=9pt, % this defines how far the numbers are from the text
+	emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+	%emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+\title{Design Decisions}
+\begin{document}
+	\maketitle
+	\subsection*{Architecture}
+	\subsection*{Messaging Interface}
+	\subsection*{State Machine}
+	\subsection*{UI}
+	
+\end{document}
