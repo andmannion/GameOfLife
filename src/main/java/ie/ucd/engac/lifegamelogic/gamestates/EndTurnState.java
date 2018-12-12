@@ -19,7 +19,6 @@ public class EndTurnState extends GameState {
         if (eventMessage == null){
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             eventMessage = "Player " + playNum + "'s turn is over.";
-
         }
         LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage, null);
         gameLogic.setResponseMessage(ackRequestMessage);
