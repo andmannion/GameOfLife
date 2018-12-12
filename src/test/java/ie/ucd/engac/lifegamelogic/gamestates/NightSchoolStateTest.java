@@ -125,7 +125,6 @@ class NightSchoolStateTest {
 		String priorToGraduateTileLocation = "o";
 		int firstCollegeCareerCardChoice = 0;
 
-
 		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 
 		gameLogic.getCurrentPlayer().setCurrentLocation(new BoardLocation(priorToGraduateTileLocation));
@@ -138,7 +137,7 @@ class NightSchoolStateTest {
         messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Just choose the first CollegeCareerCard
-        messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);
+        messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice, LifeGameMessageTypes.OptionDecisionResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
         
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
