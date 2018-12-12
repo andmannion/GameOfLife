@@ -80,12 +80,14 @@ public class GameLogic {
      */
     public ShadowPlayer getShadowPlayer(int playerIndex){
 	    Player player = getPlayerByIndex(playerIndex);
+        if (player != null) {
+          int numLoans = player.getNumberOfLoans(this);
+          int loans = player.getTotalLoansOutstanding(this);
+          GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
 
-        int numLoans = player.getNumberOfLoans(this);
-        int loans = player.getTotalLoansOutstanding(this);
-        GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
-
-        return new ShadowPlayer(player,numLoans,loans,gameBoardTile);
+          return new ShadowPlayer(player, numLoans, loans, gameBoardTile);
+        }
+        return null;
     }
 
     /**

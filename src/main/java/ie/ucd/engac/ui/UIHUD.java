@@ -58,6 +58,7 @@ public class UIHUD implements Drawable {
     void updateFields(ShadowPlayer shadowPlayer){
         this.sPlayer = shadowPlayer;
     }
+
     public void draw(Graphics graphics){
         switch(gameUI.getUIState()){
             case Init:
