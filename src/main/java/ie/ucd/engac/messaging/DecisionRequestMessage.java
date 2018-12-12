@@ -7,9 +7,12 @@ public class DecisionRequestMessage extends LifeGameRequestMessage {
 	private final int relatedPlayerIndex;
 	private final ArrayList<Chooseable> choices;
 	
-	public DecisionRequestMessage(ArrayList<Chooseable> choices, int relatedPlayerIndex, String eventMessage,
-								  LifeGameMessageTypes requestType, ShadowPlayer shadowPlayer) {
-		super(requestType,eventMessage, shadowPlayer);
+	public DecisionRequestMessage(ArrayList<Chooseable> choices,
+								  int relatedPlayerIndex,
+								  String eventMessage,
+								  LifeGameMessageTypes requestType,
+								  ShadowPlayer shadowPlayer) {
+		super(requestType, eventMessage, shadowPlayer);
 		this.relatedPlayerIndex = relatedPlayerIndex;
 		this.choices = choices;
 	}

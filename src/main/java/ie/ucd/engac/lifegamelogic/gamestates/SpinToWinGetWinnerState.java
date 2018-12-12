@@ -50,11 +50,18 @@ public class SpinToWinGetWinnerState extends GameState {
 				// Set the next state to HandlePlayerMoveState, 
 				// Set the message to a SpinRequest, shadow player is the one that won the game
 
-				String eventMsg = "You won 200K, player " + gameLogic.getPlayerByIndex(winningPlayerIndex).getPlayerNumber() +
+				int spinToWinPrizeMoneyThousands = GameConfig.spin_to_win_prize_money / 1000;
+
+				String eventMsg = "You won " + spinToWinPrizeMoneyThousands + "K," +
+						" player " + gameLogic.getPlayerByIndex(winningPlayerIndex).getPlayerNumber() +
 						". Player " + gameLogic.getCurrentPlayer().getPlayerNumber() +
 					    "'s turn is over.";
-				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex)
-				);
+				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,
+						eventMsg,
+						gameLogic.getShadowPlayer(currentPlayerSpinningTheWheelIndex));
+
+				// The below message is never sent, as you enter EndTurnState,
+				// and overwrite this responseMessage before returning...
 				gameLogic.setResponseMessage(responseMessage);
 				
 				return new EndTurnState(eventMsg);
@@ -74,9 +81,9 @@ public class SpinToWinGetWinnerState extends GameState {
 
     private int parseSpinToWinAction(int numberSpun) {
 		// Must check the values in the hash map
-		for(HashMap.Entry<Integer,ArrayList<Integer>> kvps : playerNumberChoiceMap.entrySet()) {
-			if(kvps.getValue().contains(numberSpun)) {
-				return kvps.getKey();
+		for(HashMap.Entry<Integer,ArrayList<Integer>> kvp : playerNumberChoiceMap.entrySet()) {
+			if(kvp.getValue().contains(numberSpun)) {
+				return kvp.getKey();
 			}
 		}
 		
