@@ -3,7 +3,7 @@ package ie.ucd.engac.ui;
 import java.awt.*;
 
 class UIColours {
-    static final Color STOP_COLOUR = new Color(240,170,117);
+    static final Color STOP_COLOUR = new Color(255,100,100);
     static final Color ACTION_COLOUR = new Color(211,210,130);
     static final Color PAYDAY_COLOUR = new Color(149,220,142);
     static final Color HOLIDAY_COLOUR = new Color(112,224,193);
