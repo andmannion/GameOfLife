@@ -42,6 +42,7 @@ public class GameUI implements Drawable {
     // ...
     private int panelHeight;
     private int panelWidth;
+    private int hudStartY;
 
     /**
      * Constructor for GameUI.
@@ -58,7 +59,7 @@ public class GameUI implements Drawable {
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
 
-        int hudStartY = Math.round(((0.7f)*panelHeight));
+        hudStartY = Math.round(((0.7f)*panelHeight));
 
         uiActionListener = new UIActionListener();
 
@@ -144,14 +145,16 @@ public class GameUI implements Drawable {
         uiBoard.setLayout(tiles);
 
         for(Pawn pawn:pawns){
-            pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn,10)); //TODO magic number
+            UIPawn uiPawn = new UIPawn(pawn,panelWidth/128);
+            uiPawn.setScalingFactors(panelWidth,hudStartY);
+            pawnMap.put(pawn.getPlayerNumber(), uiPawn);
         }
         uiBoard.setPawnMap(pawnMap);
     }
 
     private void handleShadowPlayer(ShadowPlayer shadowPlayer){
         if(shadowPlayer != null) {
-            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), (int) shadowPlayer.getXLocation(), (int) shadowPlayer.getYLocation(), shadowPlayer.getNumDependants());
+            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), shadowPlayer.getXLocation(), shadowPlayer.getYLocation(), shadowPlayer.getNumDependants());
             uiHUD.updateFields(shadowPlayer);
         }
     }

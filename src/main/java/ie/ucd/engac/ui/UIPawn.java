@@ -8,6 +8,8 @@ public class UIPawn extends Pawn implements Drawable {
     private static final int PER_ROW = 2;
     private int width;
     private int height;
+    private int xScaleFactor;
+    private int yScaleFactor;
     private int dependantRadius;
 
     private int currentX;
@@ -17,13 +19,20 @@ public class UIPawn extends Pawn implements Drawable {
         super(pawn.getXLocation(),pawn.getYLocation(),pawn.getColour(),pawn.getPlayerNumber(),pawn.getNumDependants());
         this.width = dimension;
         this.height = dimension*2;
+        this.xScaleFactor = 0;
+        this.yScaleFactor = 0;
         dependantRadius = (int)Math.floor(width/3.0);
     }
 
+    void setScalingFactors(int xScaleFactor, int yScaleFactor){
+        this.xScaleFactor = xScaleFactor;
+        this.yScaleFactor = yScaleFactor;
+
+    }
     @Override
     public void draw(Graphics graphics) {
-        currentX = (int) (xLocation+(1.45*playerNumber-1)*width);
-        currentY = (int) (yLocation+10);
+        currentX = (int) ((xLocation*xScaleFactor)+(1.45*playerNumber-1)*width);
+        currentY = (int) ((yLocation*yScaleFactor)+10);
         graphics.setColor(colour);
         graphics.fillRect(currentX,currentY,width,height);
         graphics.setColor(Color.black);

@@ -58,7 +58,7 @@ public class UIBoard implements Drawable {
         this.pawnMap = pawnMap;
     }
 
-    void updatePawns(int playerNumber, int xPos, int yPos, int numDependants){
+    void updatePawns(int playerNumber, double xPos, double yPos, int numDependants){
         Pawn pawn = pawnMap.get(playerNumber);
         pawn.setXLocation(xPos);
         pawn.setYLocation(yPos);
