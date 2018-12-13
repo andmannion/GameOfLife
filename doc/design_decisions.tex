@@ -59,20 +59,24 @@
 	
 	\subsubsection*{Messages}
 	Twelve messages have been implemented mostly in pairs, which represent a message from the logic and the corresponding response from the user. Where possible these messages are created using the same class and varying an enumerable message type, however some messages are of a variation on the format and require separate classes to represent them. The types of messages are denoted below along with their relationship structure.
-	\begin{itemize} %TODO formatting
-		\item StartupMessage\\
-		\item SpinRequest\\
-		\item SpinResponse\\
-		\item LargeDecisionRequest\\
-		\item LargeDecisionResponse\\
-		\item OptionDecisionRequest\\
-		\item OptionDecisionResponse\\
-		\item AckRequest\\
-		\item AckResponse\\
-		\item EndGameMessage\\
-		\item UIConfigMessage\\
-		\item SpinResult\\	
-	\end{itemize}
+	\begin{table}[!ht]
+		\begin{flushleft} 
+			\begin{tabular}{l} 
+				StartupMessage\\
+				SpinRequest\\
+				SpinResponse\\
+				LargeDecisionRequest\\
+				LargeDecisionResponse\\
+				OptionDecisionRequest\\
+				OptionDecisionResponse\\
+				AckRequest\\
+				AckResponse\\
+				EndGameMessage\\
+				UIConfigMessage\\
+				SpinResult\\	
+			\end{tabular}
+		\end{flushleft}
+	\end{table}
 	%TODO UML for messages
 	\subsubsection*{ShadowPlayer}
 	\texttt{ShadowPlayer} is how the messaging system represents the attributes relating to the player object that are of interest to the person controlling that pawn, such as bank balance or the current career card.
@@ -84,5 +88,8 @@
 	
 	\subsection*{State Machine}
 	\subsection*{UI}
+	As previously mentioned the UI runs in two threads. One thread uses backbuffering to draw/render the various UI screens at a fixed frame rate. All interaction is handled by an action listener attached to the various buttons on the display. Depending on which button is activated the UI sends a message to the UI using the messaging system and awaits a response. Depending on this response the UI's state is mutated to represent this information.\\
+	For example if the logic sends a message requesting that the user select one career card from two options the selection screen is displayed to the user alongside the relevant buttons and clicking either of these will send a \texttt{DecisionResponse} message as a response to the logic.\\
+	Sending a message from the User Interface is a blocking activity in that thread and prevents the user from doing anything until a response has been received from the user.
 	
 \end{document}
