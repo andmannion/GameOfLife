@@ -6,7 +6,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.03448275862068961",
+				"yLocation": "0.032608695652173836",
 				"xDimension": "0.1",
 				"yDimension": "0.08695652173913043",
 				"tileMovementType": "GameBoardContinueTile",
@@ -19,7 +19,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -32,7 +32,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.1",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -45,7 +45,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.1",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -58,7 +58,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.15",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -71,7 +71,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.44000000000000006",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -84,7 +84,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.10344827586206895",
+				"yLocation": "0.11956521739130443",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -97,7 +97,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.13793103448275867",
+				"yLocation": "0.16304347826086962",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -110,7 +110,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -123,7 +123,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -136,7 +136,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -149,7 +149,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -162,7 +162,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -175,7 +175,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -188,7 +188,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -201,7 +201,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.54",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -214,7 +214,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardStopTile",
@@ -228,7 +228,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.44000000000000006",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -241,7 +241,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.44000000000000006",
-				"yLocation": "0.13793103448275867",
+				"yLocation": "0.16304347826086962",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -254,7 +254,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.44000000000000006",
-				"yLocation": "0.10344827586206895",
+				"yLocation": "0.11956521739130443",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -267,7 +267,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -280,7 +280,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.33999999999999997",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -293,7 +293,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.29",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -306,7 +306,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.24",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -319,7 +319,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -332,7 +332,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.13999999999999999",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -345,7 +345,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.09",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -358,7 +358,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.06896551724137934",
+				"yLocation": "0.07608695652173902",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 				"tileMovementType": "GameBoardContinueTile",
@@ -371,7 +371,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.10344827586206895",
+				"yLocation": "0.11956521739130443",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
             "tileMovementType": "GameBoardStopTile",
@@ -385,7 +385,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.13793103448275867",
+				"yLocation": "0.16304347826086962",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
             "tileMovementType": "GameBoardContinueTile",
@@ -398,7 +398,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.1724137931034483",
+				"yLocation": "0.2065217391304348",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -411,7 +411,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.2068965517241379",
+				"yLocation": "0.25",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -424,7 +424,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.24137931034482762",
+				"yLocation": "0.2934782608695652",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -437,7 +437,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.27586206896551724",
+				"yLocation": "0.3369565217391305",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -450,7 +450,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.31034482758620685",
+				"yLocation": "0.3804347826086957",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -463,7 +463,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -476,7 +476,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -489,7 +489,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.4137931034482759",
+				"yLocation": "0.5108695652173914",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -502,7 +502,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.04",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -515,7 +515,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.09",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.1",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -528,7 +528,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardStopTile",
@@ -542,7 +542,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.48275862068965514",
+				"yLocation": "0.5978260869565217",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -555,7 +555,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.08695652173913043",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -568,7 +568,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.24",
-				"yLocation": "0.5517241379310345",
+				"yLocation": "0.6847826086956522",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -581,7 +581,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.29",
-				"yLocation": "0.5517241379310345",
+				"yLocation": "0.6847826086956522",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -594,7 +594,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.33999999999999997",
-				"yLocation": "0.5517241379310345",
+				"yLocation": "0.6847826086956522",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -607,7 +607,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.5517241379310345",
+				"yLocation": "0.6847826086956522",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -620,7 +620,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -633,7 +633,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.4137931034482759",
+				"yLocation": "0.5108695652173914",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -646,7 +646,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -659,7 +659,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.19",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -672,7 +672,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.24",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -685,7 +685,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.29",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -698,7 +698,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.33999999999999997",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -711,7 +711,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -724,7 +724,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.08695652173913043",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -737,7 +737,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.39",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.08695652173913043",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -750,7 +750,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.44000000000000006",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -763,7 +763,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -776,7 +776,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.48275862068965514",
+				"yLocation": "0.5978260869565217",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -789,7 +789,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -802,7 +802,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.4137931034482759",
+				"yLocation": "0.5108695652173914",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -815,7 +815,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -828,7 +828,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -841,7 +841,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.31034482758620685",
+				"yLocation": "0.3804347826086957",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -854,7 +854,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.49000000000000005",
-				"yLocation": "0.27586206896551724",
+				"yLocation": "0.3369565217391305",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -867,7 +867,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.54",
-				"yLocation": "0.27586206896551724",
+				"yLocation": "0.3369565217391305",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -880,7 +880,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.27586206896551724",
+				"yLocation": "0.3369565217391305",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -893,7 +893,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.31034482758620685",
+				"yLocation": "0.3804347826086957",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -906,7 +906,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardStopTile",
@@ -920,7 +920,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -933,7 +933,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.4137931034482759",
+				"yLocation": "0.5108695652173914",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -946,7 +946,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -959,7 +959,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -972,7 +972,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -985,7 +985,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -998,7 +998,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.1",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1011,7 +1011,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.4482758620689655",
+				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardStopTile",
@@ -1025,7 +1025,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1038,7 +1038,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1051,7 +1051,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1064,7 +1064,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1077,7 +1077,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1090,7 +1090,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.3448275862068966",
+				"yLocation": "0.42391304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1103,7 +1103,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.3793103448275862",
+				"yLocation": "0.46739130434782605",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1116,7 +1116,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.4137931034482759",
+				"yLocation": "0.5108695652173914",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1129,7 +1129,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.48275862068965514",
+				"yLocation": "0.5978260869565217",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1142,7 +1142,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1155,7 +1155,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1168,7 +1168,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1181,7 +1181,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1194,7 +1194,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1207,7 +1207,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1220,7 +1220,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.5172413793103448",
+				"yLocation": "0.6413043478260869",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1233,7 +1233,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.5517241379310345",
+				"yLocation": "0.6847826086956522",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1246,7 +1246,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.5862068965517242",
+				"yLocation": "0.7282608695652174",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardStopTile",
@@ -1260,7 +1260,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1273,7 +1273,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1286,7 +1286,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1299,7 +1299,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1312,7 +1312,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1325,7 +1325,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1338,7 +1338,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.6206896551724138",
+				"yLocation": "0.7717391304347826",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1351,7 +1351,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.6551724137931034",
+				"yLocation": "0.8152173913043479",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1364,7 +1364,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.6896551724137931",
+				"yLocation": "0.8586956521739131",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1377,7 +1377,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.89",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1390,7 +1390,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.8400000000000001",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1403,7 +1403,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.79",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1416,7 +1416,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1429,7 +1429,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.7586206896551724",
+				"yLocation": "0.9456521739130435",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1442,7 +1442,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.74",
-				"yLocation": "0.7931034482758621",
+				"yLocation": "0.9891304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1455,7 +1455,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.6900000000000001",
-				"yLocation": "0.7931034482758621",
+				"yLocation": "0.9891304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1468,7 +1468,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.7931034482758621",
+				"yLocation": "0.9891304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1481,7 +1481,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.7586206896551724",
+				"yLocation": "0.9456521739130435",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1494,7 +1494,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.64",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1507,7 +1507,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.5900000000000001",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1520,7 +1520,7 @@
 			
 			"gameBoardTile": {
 				"xLocation": "0.54",
-				"yLocation": "0.7241379310344828",
+				"yLocation": "0.9021739130434783",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1532,8 +1532,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.7241379310344828",
+				"xLocation": "0.54",
+				"yLocation": "0.9456521739130435",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1545,8 +1545,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.7586206896551724",
+				"xLocation": "0.54",
+				"yLocation": "0.9891304347826086",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1558,8 +1558,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.7931034482758621",
+				"xLocation": "0.54",
+				"yLocation": "1.0326086956521738",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1571,8 +1571,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.8275862068965517",
+				"xLocation": "0.54",
+				"yLocation": "1.0760869565217392",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1584,8 +1584,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.8620689655172413",
+				"xLocation": "0.54",
+				"yLocation": "1.1195652173913044",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1597,8 +1597,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.896551724137931",
+				"xLocation": "0.54",
+				"yLocation": "1.1630434782608696",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1610,8 +1610,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.49000000000000005",
-				"yLocation": "0.9310344827586207",
+				"xLocation": "0.5900000000000001",
+				"yLocation": "1.1630434782608696",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1623,8 +1623,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.54",
-				"yLocation": "0.9310344827586207",
+				"xLocation": "0.64",
+				"yLocation": "1.1630434782608696",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1636,8 +1636,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.5900000000000001",
-				"yLocation": "0.9310344827586207",
+				"xLocation": "0.6900000000000001",
+				"yLocation": "1.1630434782608696",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1649,8 +1649,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.64",
-				"yLocation": "0.9310344827586207",
+				"xLocation": "0.74",
+				"yLocation": "1.1630434782608696",
 				"xDimension": "0.05",
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
@@ -1662,8 +1662,8 @@
 		  
 			
 			"gameBoardTile": {
-				"xLocation": "0.6900000000000001",
-				"yLocation": "0.8620689655172413",
+				"xLocation": "0.79",
+				"yLocation": "1.0760869565217392",
 				"xDimension": "0.1",
 				"yDimension": "0.21739130434782608",
 		    "tileMovementType": "GameBoardStopTile",
