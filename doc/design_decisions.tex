@@ -44,7 +44,7 @@
 \begin{document}
 	\maketitle
 	\subsection*{Architecture}
-	Once we were given the assignment we spent considerable time hashing out a plan for our system's architecture. Given the mention of extensibility in the assignment brief we opted for a design that would involve a significant degree of decoupling between the user interface we chose and the implementation of the game's logic. This would allow the development of either aspect of the game without any implementation details of either main portion being known by the other, tied together via the core game mechanics and a messaging system.
+	Once we were given the assignment we spent considerable time hashing out a plan for our system's architecture. Given the mention of extensibility in the assignment brief we opted for a design that would involve a significant degree of decoupling between the User Interface and the implementation of the game's logic. This would allow the development of either aspect of the game without any implementation details of either main part being known by the other, tied together via the core game mechanics and a messaging system.
 	\subsection*{High Level Concept}
 	On a high level the architecture is as follows. Due to the turn based nature of this game and the relatively linear flow of a turn with a limited set of very basic interactions with the user we decided to implement the logic as a state machine. This state machine uses the messages sent by the UI as its stimuli and mutates the logic classes based on the current state and received information.\par 
 	\noindent The UI then runs in a pair of threads. The first of these is responsible for the rendering/drawing of the current UI `screen' and runs to a set frame rate. The second thread is the action listener that reacts to button presses. This thread is responsible for changing the state of the UI based on the response messages it receives from the game logic.\par 
@@ -75,7 +75,10 @@
 	\end{itemize}
 	%TODO UML for messages
 	\subsubsection*{ShadowPlayer}
-	\texttt{ShadowPlayer} is how the messaging system represents the fields relating to the player object that maybe be of interest to the person controlling that character. In order to abide by the decoupling principle the player object is not directly accessed or sent to the interface, however a representation of this data is sent instead that as far as the UI is concerned only outputs a series of strings corresponding to each piece of information. The logic is able to construct these based on the player objects and send them as an attachment to messages when required.
+	\texttt{ShadowPlayer} is how the messaging system represents the attributes relating to the player object that are of interest to the person controlling that pawn, such as bank balance or the current career card.
+	In order to abide by the decoupling principle the player object is not directly accessed or sent to the interface, however a representation of this data is sent instead that hides the implementation details.
+	As far as the UI is concerned this \texttt{ShadowPlayer} outputs a series of strings corresponding to each piece of information.
+	The logic is able to construct a \texttt{ShadowPlayer} based on the player objects and send them as an attachment to messages when required.
 	\subsubsection*{Tile/Pawn}
 	\texttt{Tile} and \texttt{Pawn} are the simplest part of this interface, used only when the game is being set up in order to send the coordinates, sizes, types of the tiles and the colours of the respective players to the interface so that they can be drawn.
 	
