@@ -32,7 +32,7 @@ public class UIPawn extends Pawn implements Drawable {
     @Override
     public void draw(Graphics graphics) {
         currentX = (int) ((xLocation*xScaleFactor)+(1.45*playerNumber-1)*width);
-        currentY = (int) ((yLocation*yScaleFactor)+10);
+        currentY = (int) ((yLocation*yScaleFactor)+3);
         graphics.setColor(colour);
         graphics.fillRect(currentX,currentY,width,height);
         graphics.setColor(Color.black);
