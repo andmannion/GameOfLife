@@ -122,7 +122,7 @@ public class GameSetupState extends GameState {
         colourMap.put("Pink",Color.PINK);
         remainingColourChoices.add("Pink");
 
-        colourMap.put("Blue",Color.BLUE);
+        colourMap.put("Blue",Color.CYAN);
         remainingColourChoices.add("Blue");
 
         colourMap.put("Green",Color.GREEN);
