@@ -17,7 +17,6 @@ public class UIBoard implements Drawable {
     private int KERNEL_SIZE = 11;
     private int boardAreaHeight;
     private int boardAreaWidth;
-    private int tileDimension;
 
     private GameUI gameUI;
     private BufferedImage boardImage;
@@ -33,7 +32,7 @@ public class UIBoard implements Drawable {
         this.boardAreaHeight = boardAreaHeight;
         this.boardAreaWidth = boardAreaWidth;
         uiTiles = new ArrayList<>();
-        tileDimension = (int)Math.floor(0.05* boardAreaWidth);
+        int tileDimension = (int) Math.floor(0.05 * boardAreaWidth);
 
         boardImage = new BufferedImage(boardAreaWidth,panelHeight, BufferedImage.TYPE_INT_RGB);
         boardGraphics = boardImage.getGraphics();
