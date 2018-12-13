@@ -28,21 +28,21 @@ public class UIBoard implements Drawable {
     private HashMap<Integer,UIPawn> pawnMap;
     private ArrayList<UITile> uiTiles;
 
-    UIBoard(GameUI gameUI, int boardAreaHeight, int boardAreaWidth){
+    UIBoard(GameUI gameUI, int boardAreaHeight, int boardAreaWidth, int panelHeight){
         this.gameUI = gameUI;
         this.boardAreaHeight = boardAreaHeight;
         this.boardAreaWidth = boardAreaWidth;
         uiTiles = new ArrayList<>();
         tileDimension = (int)Math.floor(0.05* boardAreaWidth);
 
-        boardImage = new BufferedImage(boardAreaWidth,boardAreaHeight, BufferedImage.TYPE_INT_RGB);
+        boardImage = new BufferedImage(boardAreaWidth,panelHeight, BufferedImage.TYPE_INT_RGB);
         boardGraphics = boardImage.getGraphics();
         boardGraphics.setColor(Color.lightGray);
-        boardGraphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
-        blurredBoardImage = new BufferedImage(boardAreaWidth,boardAreaHeight, BufferedImage.TYPE_INT_RGB);
+        boardGraphics.fillRect(0,0,boardAreaWidth,panelHeight);
+        blurredBoardImage = new BufferedImage(boardAreaWidth,panelHeight, BufferedImage.TYPE_INT_RGB);
         Graphics blurredGraphics = blurredBoardImage.getGraphics();
         blurredGraphics.setColor(Color.lightGray);
-        blurredGraphics.fillRect(0,0,boardAreaWidth,boardAreaHeight);
+        blurredGraphics.fillRect(0,0,boardAreaWidth,panelHeight);
     }
 
     void setLayout(ArrayList<Tile> tiles) {
