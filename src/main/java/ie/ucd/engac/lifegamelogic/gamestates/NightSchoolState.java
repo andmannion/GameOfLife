@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 public class NightSchoolState extends GameState {
     public static final int KEEP_CAREER_INDEX = 0;
-
     public static final int ATTEND_NIGHT_SCHOOL_INDEX = 1;
+    public static final String KEEP_CAREER_MSG = "Keep your current career";
+	public static final String ATTEND_NIGHT_SCHOOL_MSG = "Attend night school";
 	
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -28,11 +29,8 @@ public class NightSchoolState extends GameState {
             ArrayList<Chooseable> pendingNightSchoolChoice = new ArrayList<>();
 			
 			// Must give the player the choice to either keep their current job or go to night school			
-            String keepCareerMsg = "Keep your current career";
-            pendingNightSchoolChoice.add(new ChooseableString(keepCareerMsg));
-
-            String attendNightSchoolMsg = "Attend night school";
-            pendingNightSchoolChoice.add(new ChooseableString(attendNightSchoolMsg));
+            pendingNightSchoolChoice.add(new ChooseableString(KEEP_CAREER_MSG));
+            pendingNightSchoolChoice.add(new ChooseableString(ATTEND_NIGHT_SCHOOL_MSG));
 
 			String eventMessage = "Would you like to attend night school?";
 

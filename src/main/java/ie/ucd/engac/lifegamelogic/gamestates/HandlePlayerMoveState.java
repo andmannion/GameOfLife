@@ -21,57 +21,59 @@ import ie.ucd.engac.messaging.SpinResultMessage;
 import java.util.ArrayList;
 
 public class HandlePlayerMoveState extends GameState {
-    private String eventMessage ;
-    private boolean spinComplete = false;
-    private boolean turnComplete = false;
-    int tilesToMove = 0;
-    int tilesMoved = 0;
+    private String eventMessage;
+    private boolean spinComplete;
+    private boolean turnComplete;
+    int tilesToMove;
+    int tilesMoved;
 
-	public HandlePlayerMoveState(String eventMessage){
+    public HandlePlayerMoveState(String eventMessage) {
         this.eventMessage = eventMessage;
+        spinComplete = false;
+        turnComplete = false;
+        tilesToMove = 0;
+        tilesMoved = 0;
     }
 
-	public HandlePlayerMoveState() {}
-	
-	@Override
-	public void enter(GameLogic gameLogic) {
+    public HandlePlayerMoveState() {
+    }
+
+    @Override
+    public void enter(GameLogic gameLogic) {
         int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
-        if (eventMessage == null){
+        if (eventMessage == null) {
             eventMessage = "Player " + playNum + "'s turn.";
         }
-        LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
+        LifeGameRequestMessage spinRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest, eventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
         gameLogic.setResponseMessage(spinRequestMessage);
-	}
+    }
 
-	@Override
-	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-	    GameState nextState = null;
+    @Override
+    public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
+        GameState nextState = null;
 
-		if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
+        if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
             // Need to spin the spinner
             tilesToMove = gameLogic.getSpinner().spinTheWheel();
-            
+
             /* Must give the bonus salary to the player(s) depending with the value has been spun
-			*  based on the bonus number on their current OccupationCard.	
-		    */            
+             *  based on the bonus number on their current OccupationCard.
+             */
             assignSpinBonusIfRequired(gameLogic.getPlayers(), tilesToMove);
             LifeGameMessage replyMessage = new SpinResultMessage(tilesToMove);
             gameLogic.setResponseMessage(replyMessage);
             spinComplete = true;
-		}
-        else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete){
+        } else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete) {
             GameBoard gameBoard = gameLogic.getGameBoard();
-
             GameBoardTile endTile;
 
             // Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic.getCurrentPlayer(), gameBoard, tilesToMove, tilesMoved);
-            
-            
-			// At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
+
+            // At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
             nextState = evaluateTile(gameLogic, endTile);
             turnComplete = true;
-		}
+        }
 
         if (nextState == null) {
 
@@ -83,44 +85,44 @@ public class HandlePlayerMoveState extends GameState {
                 return new PathChoiceState();
             }
             return null;
-        }
-        else {
+        } else {
             return nextState;
         }
-	}
+    }
 
     private void assignSpinBonusIfRequired(ArrayList<Player> players, int spinResult) {
-		for(Player player : players) {
-			OccupationCard occupationCard = player.getOccupationCard();
-			if(occupationCard != null) {
-				if(occupationCard.getBonusNumber() == spinResult) {
-					player.addToBalance(occupationCard.getBonusPaymentAmount());
-				}
-			}
-		}
-	}
+        for (Player player : players) {
+            OccupationCard occupationCard = player.getOccupationCard();
+            if (occupationCard != null) {
+                if (occupationCard.getBonusNumber() == spinResult) {
+                    player.addToBalance(occupationCard.getBonusPaymentAmount());
+                }
+            }
+        }
+    }
 
-	private GameBoardTile tryToMove(Player currentPlayer, GameBoard gameBoard, int tilesToMove, int tilesMoved){
+    private GameBoardTile tryToMove(Player currentPlayer, GameBoard gameBoard, int tilesToMove, int tilesMoved) {
         boolean stopTileEncountered = false;
         BoardLocation currentBoardLocation = currentPlayer.getCurrentLocation();
         GameBoardTile currentTile = gameBoard.getGameBoardTileFromID(currentBoardLocation);
 
         BoardLocation pendingLocation = currentPlayer.getPendingBoardForkChoice();
-        
-        if(pendingLocation != null) {
-        	// Move to the pending choice
+
+        if (pendingLocation != null) {
+            // Move to the pending choice
             currentPlayer.setCurrentLocation(pendingLocation);
+            currentTile = gameBoard.getGameBoardTileFromID(pendingLocation);
             currentPlayer.setPendingBoardForkChoice(null);
-        	tilesMoved++;
+            tilesMoved++;
         }
-        
+
         while (tilesMoved < tilesToMove && !stopTileEncountered) {
             tilesMoved++;
             // Go forward
             currentBoardLocation = currentPlayer.getCurrentLocation();
-            
-            ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);    
-            
+
+            ArrayList<BoardLocation> adjacentForwardLocations = gameBoard.getOutboundNeighbours(currentBoardLocation);
+
             // For the moment, no tiles other than stop tiles have branches
             if (1 == adjacentForwardLocations.size()) {
                 BoardLocation currentLocation = adjacentForwardLocations.get(0);
@@ -135,8 +137,7 @@ public class HandlePlayerMoveState extends GameState {
                     // Perform actions if the tile requires action when passed over
                     performUpdateIfPassingOverTile(currentPlayer, currentTile);
                 }
-            }
-            else if(0 == adjacentForwardLocations.size()) {
+            } else if (0 == adjacentForwardLocations.size()) {
                 // Must initiate retirement procedure
                 System.err.println("No spaces remaining ahead. [tryToMove()]");
             }
@@ -144,31 +145,31 @@ public class HandlePlayerMoveState extends GameState {
         return currentTile;
     }
 
-	private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile){
-	    GameState nextState = null;
+    private GameState evaluateTile(GameLogic gameLogic, GameBoardTile currentTile) {
+        GameState nextState = null;
         switch (currentTile.getGameBoardTileType()) {
             case Start:
                 nextState = new EndTurnState();
                 break;
             case Payday:
-            	String paydayLandedOnMessage = handlePaydayTile(gameLogic.getCurrentPlayer());
+                String paydayLandedOnMessage = handlePaydayTile(gameLogic.getCurrentPlayer());
                 nextState = new EndTurnState(paydayLandedOnMessage);
                 break;
-            case Action:                
+            case Action:
                 nextState = evaluateActionTile(gameLogic);
                 break;
-            case Holiday:  
-            	String holidayMessage = "You are on holiday, so do nothing for this turn.";
+            case Holiday:
+                String holidayMessage = "You are on holiday, so do nothing for this turn.";
                 nextState = new EndTurnState(holidayMessage);
                 break;
             case SpinToWin:
                 nextState = new SpinToWinSetupState();
                 break;
             case Baby:
-            	gameLogic.getCurrentPlayer().addDependants(1);
+                gameLogic.getCurrentPlayer().addDependants(1);
                 int currentPlayerIndex = gameLogic.getCurrentPlayerIndex();
-            	String babyNonStopTileMessage = "Player " + gameLogic.getPlayerByIndex(currentPlayerIndex).getPlayerNumber() + ", you have had a baby.";
-                nextState = new EndTurnState(babyNonStopTileMessage); 
+                String babyNonStopTileMessage = "Player " + gameLogic.getPlayerByIndex(currentPlayerIndex).getPlayerNumber() + ", you have had a baby.";
+                nextState = new EndTurnState(babyNonStopTileMessage);
                 break;
             case Twins:
                 gameLogic.getCurrentPlayer().addDependants(2);
@@ -180,7 +181,7 @@ public class HandlePlayerMoveState extends GameState {
                 nextState = new HouseTileDecisionState();
                 break;
             case Stop:
-            	nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
+                nextState = evaluateStopTile(gameLogic, (GameBoardStopTile) currentTile);
                 break;
             default:
                 System.err.println("Tile type not found. [evaluateTile()]");
@@ -188,11 +189,11 @@ public class HandlePlayerMoveState extends GameState {
         }
         return nextState;
     }
-	
-	private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) { 
+
+    private GameState evaluateStopTile(GameLogic gameLogic, GameBoardStopTile currentTile) {
         GameState nextState = null;
-        
-        switch(currentTile.getGameBoardStopTileType()) {
+
+        switch (currentTile.getGameBoardStopTileType()) {
             case Graduation:
                 nextState = new GraduationState();
                 break;
@@ -205,13 +206,13 @@ public class HandlePlayerMoveState extends GameState {
                 nextState = new NightSchoolState();
                 break;
             case Family:
-                nextState = new FamilyState(); 
+                nextState = new FamilyState();
                 break;
             case Baby:
-                nextState = new BabyState(); 
+                nextState = new BabyState();
                 break;
             case Holiday:
-            	String holidayMessage = "You are on holiday, so do nothing for this turn.";
+                String holidayMessage = "You are on holiday, so do nothing for this turn.";
                 nextState = new EndTurnState(holidayMessage);
                 break;
             case Retire:
@@ -223,31 +224,29 @@ public class HandlePlayerMoveState extends GameState {
                 break;
         }
         return nextState;
-	}
+    }
 
-	private GameState evaluateActionTile(GameLogic gameLogic) {
-		ActionCard thisAction = gameLogic.getTopActionCard();
+    private GameState evaluateActionTile(GameLogic gameLogic) {
+        ActionCard thisAction = gameLogic.getTopActionCard();
         Player player = gameLogic.getCurrentPlayer();
         player.addActionCard(thisAction);
-        
+
         GameState nextActionState = null;
-        
-        switch (thisAction.getActionCardType()){
+
+        switch (thisAction.getActionCardType()) {
             case CareerChange:
-                if(player.getOccupationCard() != null) {
+                if (player.getOccupationCard() != null) {
                     nextActionState = new CareerChangeState();
-                }
-                else{
+                } else {
                     String eventMessage = "CareerChange: Cannot change career before graduation.";
                     nextActionState = new EndTurnState(eventMessage);
                 }
                 break;
             case PlayersPay:
-                if(gameLogic.getNumberOfPlayers() == 1){
-                	nextActionState = new EndTurnState("PlayersPay: No players remaining to pick");
-                }
-                else {
-                	nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction);
+                if (gameLogic.getNumberOfPlayers() == 1) {
+                    nextActionState = new EndTurnState("PlayersPay: No players remaining to pick");
+                } else {
+                    nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction);
                 }
                 break;
             case PayTheBank:
@@ -263,67 +262,64 @@ public class HandlePlayerMoveState extends GameState {
             default:
                 System.err.println("Unhandled action card type. [evaluateActionTile()]");
         }
-        
+
         return nextActionState;
-	}
-	
-	private GameState handleGetMarriedTile(int currentNumberOfPlayers, int currentPlayerNumber){
-	    GameState nextState;
-        if(1 == currentNumberOfPlayers){
+    }
+
+    private GameState handleGetMarriedTile(int currentNumberOfPlayers, int currentPlayerNumber) {
+        GameState nextState;
+        if (1 == currentNumberOfPlayers) {
 
             String eventMsg = "You got married, player " + currentPlayerNumber + ", so take an extra turn.";
 
             nextState = new HandlePlayerMoveState(eventMsg);
-        }
-        else {
+        } else {
             nextState = new GetMarriedState();
         }
         return nextState;
     }
 
-	private void performUpdateIfPassingOverTile(Player currentPlayer, GameBoardTile currentTile) {
-		if (currentTile.getGameBoardTileType() == GameBoardTileTypes.Payday) {
-			// Player should collect the salary indicated in their Career/College Career
-			// card from the Bank
-			OccupationCard currentOccupationCard = currentPlayer.getOccupationCard();
-			
-			if(currentOccupationCard != null) {
-				int currentSalary = currentOccupationCard.getSalary();
-				// Get money from the bank, increment the player's balance by that amount
-                currentPlayer.addToBalance(currentSalary);
-			}
-		}
-	}
+    private void performUpdateIfPassingOverTile(Player currentPlayer, GameBoardTile currentTile) {
+        if (currentTile.getGameBoardTileType() == GameBoardTileTypes.Payday) {
+            // Player should collect the salary indicated in their Career/College Career
+            // card from the Bank
+            OccupationCard currentOccupationCard = currentPlayer.getOccupationCard();
 
-	private String handlePaydayTile(Player currentPlayer){
-		String paydayUpdateString = "";
-		
+            if (currentOccupationCard != null) {
+                int currentSalary = currentOccupationCard.getSalary();
+                // Get money from the bank, increment the player's balance by that amount
+                currentPlayer.addToBalance(currentSalary);
+            }
+        }
+    }
+
+    private String handlePaydayTile(Player currentPlayer) {
+        String paydayUpdateString = "";
+
         OccupationCard currentOccupationCard = currentPlayer.getOccupationCard();
-        
-        if(currentOccupationCard != null) {
+
+        if (currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
             currentPlayer.addToBalance(currentSalary + GameConfig.payday_landed_on_bonus);
             paydayUpdateString = "Player " + currentPlayer.getPlayerNumber() + ", you obtained " + (currentSalary + GameConfig.payday_landed_on_bonus) +
-            					 " after landing on a Payday tile.";
+                    " after landing on a Payday tile.";
         }
-        
+
         return paydayUpdateString;
     }
 
-    private GameState retireThisPlayer(GameLogic gameLogic){
+    private GameState retireThisPlayer(GameLogic gameLogic) {
         GameState nextState = null;
         Player retiree = gameLogic.getCurrentPlayer(); //TODO this code appears in 2 states
-        if (retiree.getNumberOfHouseCards() == 0){ //if they have houses need to sell them
+        if (retiree.getNumberOfHouseCards() == 0) { //if they have houses need to sell them
             int retirementCash = gameLogic.retireCurrentPlayer();
             String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
             if (gameLogic.getNumberOfPlayers() == 0) {
                 nextState = new GameOverState();
-            }
-            else {
+            } else {
                 nextState = new EndTurnState(eventMessage);
             }
-        }
-        else {
+        } else {
             nextState = new RetirePlayerState();
         }
         return nextState;
