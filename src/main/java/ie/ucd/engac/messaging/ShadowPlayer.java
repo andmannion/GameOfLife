@@ -83,7 +83,7 @@ public class ShadowPlayer {
         else{
             String returnString = "";
             for(HouseCard house:houses){
-                String string = house.displayChoiceDetails();
+               String string = house.displayChoiceDetails();
                 String[] split = string.split("\n");
                 returnString = returnString.concat(split[0]);
             }
