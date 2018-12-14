@@ -7,16 +7,16 @@ import ie.ucd.engac.messaging.*;
 import java.util.ArrayList;
 
 public class FamilyState extends GameState {
-	private static final int LIFE_PATH_MESSAGE_INDEX = 0;
+	static final int LIFE_PATH_MESSAGE_INDEX = 0;
 	static final int FAMILY_PATH_MESSAGE_INDEX = 1;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
 		ArrayList<String> familyPathChoices = new ArrayList<>();
-		String familyPathMessage = "Take the family path";
-		familyPathChoices.add(familyPathMessage);
 		String lifePathMessage = "Take the life path";
 		familyPathChoices.add(lifePathMessage);
+		String familyPathMessage = "Take the family path";
+		familyPathChoices.add(familyPathMessage);
 		
 		// Generate response for the player to choose between the choices provided
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
@@ -54,6 +54,15 @@ public class FamilyState extends GameState {
 			System.exit(-1);
 		}
 
+		if(LIFE_PATH_MESSAGE_INDEX == choiceIndex) {
+			BoardLocation lifePathTile = familyPathOptions.get(LIFE_PATH_MESSAGE_INDEX);
+			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(lifePathTile);
+
+			String endTurnMessageLifePath = "you have chosen the Life path.";
+			String endTurnEventMessage = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", " + endTurnMessageLifePath;
+
+			return new EndTurnState(endTurnEventMessage);
+		}
 
 		if(FAMILY_PATH_MESSAGE_INDEX == choiceIndex) {
 			BoardLocation familyPathTile = familyPathOptions.get(FAMILY_PATH_MESSAGE_INDEX);
@@ -62,16 +71,6 @@ public class FamilyState extends GameState {
 			String endTurnMessageFamilyPath = "you have chosen the Family path.";
 			String endTurnEventMessage = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", " + endTurnMessageFamilyPath;
 			
-			return new EndTurnState(endTurnEventMessage);
-		}
-
-		if(LIFE_PATH_MESSAGE_INDEX == choiceIndex) {
-			BoardLocation lifePathTile = familyPathOptions.get(LIFE_PATH_MESSAGE_INDEX);
-			gameLogic.getCurrentPlayer().setPendingBoardForkChoice(lifePathTile);
-
-			String endTurnMessageLifePath = "you have chosen the Life path.";
-			String endTurnEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + endTurnMessageLifePath;
-						
 			return new EndTurnState(endTurnEventMessage);
 		}
 			

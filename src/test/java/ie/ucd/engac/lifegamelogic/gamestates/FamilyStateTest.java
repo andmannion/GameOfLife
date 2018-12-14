@@ -20,9 +20,10 @@ class FamilyStateTest {
     private final String PRIOR_TILE_LOCATION = "aap";
     private final String FAMILY_PATH_TILE = "aaq";
     private final String INITIAL_FAMILY_PATH_TILE = "aaz";
+    private final String INITIAL_LIFE_PATH_TILE = "aar";
 
     @Test
-    void testWithTwoPlayers() {
+    void testFamilyPathWithTwoPlayers() {
         int playerUnderTestNumber = 1;
         GameLogic gameLogic = configureFamilyStateTestGameLogic();
 
@@ -56,6 +57,79 @@ class FamilyStateTest {
             // Should have ended the turn
             assertEquals(LifeGameMessageTypes.AckRequest, messageFromLogic.getLifeGameMessageType());
 
+            // Assert getting the right message
+            assertEquals("Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you have chosen the Family path.",
+                    ((LifeGameRequestMessage)messageFromLogic).getEventMsg());
+
+            // The player should be on the FamilyPathTile
+            BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
+            GameBoardTile currentTile = gameLogic.getGameBoard().getGameBoardTileFromID(currentBoardLocation);
+
+            assertEquals(GameBoardTileTypes.Stop, currentTile.getGameBoardTileType());
+            assertEquals(GameBoardStopTileTypes.Family, ((GameBoardStopTile) currentTile).getGameBoardStopTileType());
+
+            // Make sure there is a pending path choice for next turn
+            assertNotNull(gameLogic.getCurrentPlayer().getPendingBoardForkChoice());
+
+            // Send back an ACK response to end the turn
+            messageToLogic = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+            playerUnderTestNumber++;
+        }
+
+        assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
+
+        messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
+        messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
+
+        // Assert players have been moved off the tile
+        assertEquals(INITIAL_FAMILY_PATH_TILE, gameLogic.getCurrentPlayer().getCurrentLocation().getLocation());
+    }
+
+    @SuppressWarnings("Duplicates")
+    @Test
+    void testLifePathWithTwoPlayers() {
+        int playerUnderTestNumber = 1;
+        GameLogic gameLogic = configureFamilyStateTestGameLogic();
+
+        LifeGameMessage messageToLogic;
+        LifeGameMessage messageFromLogic = null;
+
+        while (playerUnderTestNumber <= NUM_PLAYERS) {
+            Player currentPlayerUnderTest = gameLogic.getCurrentPlayer();
+
+            assertEquals(playerUnderTestNumber, currentPlayerUnderTest.getPlayerNumber());
+            currentPlayerUnderTest.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
+
+            messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
+            messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+            assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+            LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            messageFromLogic = gameLogic.handleInput(spinMessage);
+
+            // Should have a choice to make now
+            assertEquals(LifeGameMessageTypes.OptionDecisionRequest, messageFromLogic.getLifeGameMessageType());
+
+            // Make sure there is no initial pendingBoardForkChoice
+            assertNull(gameLogic.getCurrentPlayer().getPendingBoardForkChoice());
+
+            // Select the FamilyPath
+            messageToLogic = new DecisionResponseMessage(FamilyState.LIFE_PATH_MESSAGE_INDEX, LifeGameMessageTypes.OptionDecisionResponse);
+            messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+            // Should have ended the turn
+            assertEquals(LifeGameMessageTypes.AckRequest, messageFromLogic.getLifeGameMessageType());
+
+            // Assert getting the right message
+            assertEquals("Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you have chosen the Life path.",
+                    ((LifeGameRequestMessage)messageFromLogic).getEventMsg());
+
             // The player should be on the FamilyPathTile
             BoardLocation currentBoardLocation = gameLogic.getCurrentPlayer().getCurrentLocation();
             GameBoardTile currentTile = gameLogic.getGameBoard().getGameBoardTileFromID(currentBoardLocation);
@@ -82,8 +156,9 @@ class FamilyStateTest {
         LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         messageFromLogic = gameLogic.handleInput(spinMessage);
         // Assert players have been moved off the tile
-        assertEquals(INITIAL_FAMILY_PATH_TILE, gameLogic.getCurrentPlayer().getCurrentLocation().getLocation());
+        assertEquals(INITIAL_LIFE_PATH_TILE, gameLogic.getCurrentPlayer().getCurrentLocation().getLocation());
     }
+
 
     private static GameLogic configureFamilyStateTestGameLogic() {
         Spinnable spinner = new TestSpinner(1);
