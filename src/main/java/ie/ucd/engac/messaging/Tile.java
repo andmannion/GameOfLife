@@ -1,6 +1,8 @@
 package ie.ucd.engac.messaging;
 
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
+import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 
 public class Tile {
     private String type;
@@ -18,7 +20,12 @@ public class Tile {
     }
 
     public Tile(GameBoardTile gameBoardTile){
-        this.type = gameBoardTile.getGameBoardTileType().toString();
+        if (gameBoardTile.getGameBoardTileType() == GameBoardTileTypes.Stop) {
+            this.type = ((GameBoardStopTile)gameBoardTile).getGameBoardStopTileType().toString();
+        }
+        else{
+            this.type = gameBoardTile.getGameBoardTileType().toString();
+        }
         this.xLocation = gameBoardTile.getXLocation();
         this.yLocation = gameBoardTile.getYLocation();
         this.xDimension = gameBoardTile.getXDimension();

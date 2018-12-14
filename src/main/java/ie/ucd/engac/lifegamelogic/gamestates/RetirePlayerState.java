@@ -6,6 +6,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.ShadowPlayer;
 
 ;
 
@@ -52,6 +53,7 @@ public class RetirePlayerState extends GameState {
                 gameLogic.setResponseMessage(spinRequestMessage);
             }
             else { //otherwise do remainder of retirement actions
+                ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()); //need to do this before retirement
                 int retirementCash = gameLogic.retireCurrentPlayer();
                 String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
 
@@ -60,7 +62,7 @@ public class RetirePlayerState extends GameState {
                     nextState = new GameOverState();
                 }
                 else {
-                    nextState = new EndTurnState(eventMessage);
+                    nextState = new EndTurnState(eventMessage,sp);
                 }
             }
         }

@@ -13,10 +13,7 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.LifeGameMessage;
-import ie.ucd.engac.messaging.LifeGameMessageTypes;
-import ie.ucd.engac.messaging.LifeGameRequestMessage;
-import ie.ucd.engac.messaging.SpinResultMessage;
+import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
 
@@ -314,13 +311,14 @@ public class HandlePlayerMoveState extends GameState {
         GameState nextState = null;
         Player retiree = gameLogic.getCurrentPlayer(); //TODO this code appears in 2 states
         if (retiree.getNumberOfHouseCards() == 0){ //if they have houses need to sell them
+            ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
             int retirementCash = gameLogic.retireCurrentPlayer();
             String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
             if (gameLogic.getNumberOfPlayers() == 0) {
                 nextState = new GameOverState();
             }
             else {
-                nextState = new EndTurnState(eventMessage);
+                nextState = new EndTurnState(eventMessage,sp);
             }
         }
         else {

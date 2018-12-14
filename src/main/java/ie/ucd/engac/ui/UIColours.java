@@ -33,7 +33,7 @@ class UIColours {
             case "Start":
                 return START_COLOUR;
             default:
-                return Color.lightGray;
+                return STOP_COLOUR;
 
         }
     }

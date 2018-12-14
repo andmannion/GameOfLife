@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends JPanel implements ActionListener {
 
-    private static final int PANWIDTH = 640;
-    private static final int PANHEIGHT = 480;
+    private static final int PANEL_WIDTH = 640;
+    private static final int PANEL_HEIGHT = 480;
 
     private LifeGame lifeGameParent;
 
@@ -19,14 +19,15 @@ public class MainMenu extends JPanel implements ActionListener {
     private JButton quitGameButton;
     private JButton playButton;
     private JComboBox jCombo;
+    private JTextArea jTextArea;
 
     private int numPlayers = 2;
 
     public MainMenu(LifeGame lifeGame){
         super();
         lifeGameParent = lifeGame;
-        setBackground(Color.gray);
-        Dimension sizePreferences = new Dimension(PANWIDTH,PANHEIGHT);
+        setBackground(Color.lightGray);
+        Dimension sizePreferences = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
         setPreferredSize(sizePreferences);
         setFocusable(true);
         requestFocus();
@@ -71,6 +72,17 @@ public class MainMenu extends JPanel implements ActionListener {
         playButton.addActionListener(this);
         add(playButton,playButtonConstraints);
 
+        GridBagConstraints textConstraints = new GridBagConstraints();
+        textConstraints.fill = GridBagConstraints.HORIZONTAL;
+        textConstraints.gridx = 1;
+        textConstraints.gridy = 1;
+        String text = "Number of players:";
+        jTextArea = new JTextArea(text);
+        jTextArea.setBackground(Color.lightGray);
+        jTextArea.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jTextArea.setVisible(false);
+        add(jTextArea,textConstraints);
+
         GridBagConstraints jComboConstraints = new GridBagConstraints();
         jComboConstraints.fill = GridBagConstraints.HORIZONTAL;
         jComboConstraints.gridx = 1;
@@ -101,6 +113,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
     private void setVisibilityNumPlayers(boolean bool){
         jCombo.setVisible(bool);
+        jTextArea.setVisible(bool);
         playButton.setVisible(bool);
     }
 
