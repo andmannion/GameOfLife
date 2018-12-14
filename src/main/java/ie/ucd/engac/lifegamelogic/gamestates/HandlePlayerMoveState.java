@@ -2,10 +2,7 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.GetCashFromBankActionCard;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.PayTheBankActionCard;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.PlayersPayActionCard;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.*;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
@@ -235,13 +232,14 @@ public class HandlePlayerMoveState extends GameState {
                 if (player.getOccupationCard() != null) {
                     nextActionState = new CareerChangeState();
                 } else {
-                    String eventMessage = "CareerChange: Cannot change career before graduation.";
+                    String eventMessage = ActionCardTypes.CareerChange + " Action: Cannot change career before graduation.";
                     nextActionState = new EndTurnState(eventMessage);
                 }
                 break;
             case PlayersPay:
                 if (gameLogic.getNumberOfPlayers() == 1) {
-                    nextActionState = new EndTurnState("PlayersPay: No players remaining to pick");
+                    String eventMessage = ActionCardTypes.PlayersPay + " Action: No players remaining to pick.";
+                    nextActionState = new EndTurnState(eventMessage);
                 } else {
                     nextActionState = new PickPlayerState((PlayersPayActionCard) thisAction);
                 }
@@ -249,12 +247,14 @@ public class HandlePlayerMoveState extends GameState {
             case PayTheBank:
                 PayTheBankActionCard payBank = (PayTheBankActionCard) thisAction;
                 gameLogic.subtractFromCurrentPlayersBalance(payBank.getValue());
-                nextActionState = new EndTurnState("Action: Paid the bank " + payBank.getValue());
+                String eventMessage = ActionCardTypes.PayTheBank + " Action: you paid the bank " + payBank.getValue() + ".";
+                nextActionState = new EndTurnState(eventMessage);
                 break;
             case GetCashFromBank:
                 GetCashFromBankActionCard getCash = (GetCashFromBankActionCard) thisAction;
                 player.addToBalance(getCash.getAmountToPay());
-                nextActionState = new EndTurnState("Action: Received " + getCash.getAmountToPay());
+                eventMessage = ActionCardTypes.GetCashFromBank + " Action: you received " + getCash.getAmountToPay() + ".";
+                nextActionState = new EndTurnState(eventMessage);
                 break;
             default:
                 System.err.println("Unhandled action card type. [evaluateActionTile()]");
@@ -295,8 +295,8 @@ public class HandlePlayerMoveState extends GameState {
         if (currentOccupationCard != null) {
             int currentSalary = currentOccupationCard.getSalary();
             currentPlayer.addToBalance(currentSalary + GameConfig.payday_landed_on_bonus);
-            paydayUpdateString = "Player " + currentPlayer.getPlayerNumber() + ", you obtained " + (currentSalary + GameConfig.payday_landed_on_bonus) +
-                    " after landing on a Payday tile.";
+            paydayUpdateString = "Player " + currentPlayer.getPlayerNumber() + ", you earned " + (currentSalary + GameConfig.payday_landed_on_bonus) +
+                    " after landing on a Payday tile!";
         }
 
         return paydayUpdateString;

@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardTypes;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.messaging.Chooseable;
@@ -15,9 +16,10 @@ public class CareerChangeState extends GameState {
         // Must send a message to transition to processStandardCareer
         CareerPathTypes careerPathType = gameLogic.getCurrentPlayer().getCareerPath();
 
-        //must return the old career card to the bottom of the deck
+        // Must return the old career card to the bottom of the deck
         OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-        if (currentOccupationCard != null){ //shouldnt be null, but just in case
+        if (currentOccupationCard != null){
+            // Shouldn't be null, but just in case
             gameLogic.returnOccupationCard(currentOccupationCard);
         }
 
@@ -39,12 +41,15 @@ public class CareerChangeState extends GameState {
                 secondCareerCardChoice = null;
         }
 
+        String eventMessage = ActionCardTypes.CareerChange + " Action: Choose a new career.";
+
         // Set the response message to "CardChoice"
         LifeGameMessage replyMessage = setupChoiceAndMessage(
                 gameLogic.getCurrentPlayer().getPlayerNumber(),
                 (Chooseable) firstCareerCardChoice,
                 (Chooseable) secondCareerCardChoice,
-                "Action - Career Change: Choose career card.", gameLogic.getCurrentShadowPlayer());
+                eventMessage,
+                gameLogic.getCurrentShadowPlayer());
 
         // Need to store both choices so that we can assign the chosen one to the
         // correct player,
@@ -59,7 +64,7 @@ public class CareerChangeState extends GameState {
 
             int choiceIndex = careerCardChoiceMessage.getChoiceIndex();
 
-            //call static method in superclass to set/return card
+            // Call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
             return new EndTurnState("Career changed!");
         }

@@ -77,7 +77,7 @@ public class NightSchoolState extends GameState {
 		}
 		
 		// Send same message either way
-		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", you get to spin again.";
+		String eventMsg = "Player " + gameLogic.getCurrentPlayer().getPlayerNumber() + ", take an extra spin!";
 				
 		return new HandlePlayerMoveState(eventMsg);
 	}
