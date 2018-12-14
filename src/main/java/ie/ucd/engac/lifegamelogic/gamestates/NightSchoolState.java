@@ -3,7 +3,10 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
+import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
@@ -53,9 +56,11 @@ public class NightSchoolState extends GameState {
 		if(choiceIndex == ATTEND_NIGHT_SCHOOL_INDEX) {
 			// Player wishes to attend night school:			
 			gameLogic.subtractFromCurrentPlayersBalance(GameConfig.night_school_tuition_fees);
+			gameLogic.getCurrentPlayer().setCareerPath(CareerPathTypes.CollegeCareer);
 
 			OccupationCard currentOccupationCard = gameLogic.getCurrentPlayer().getOccupationCard();
-			if (currentOccupationCard != null){ //shouldnt be null, but just in case
+			// Shouldn't be null, but just in case
+			if (currentOccupationCard != null){
 				gameLogic.returnOccupationCard(currentOccupationCard);
 			}
 
