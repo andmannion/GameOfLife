@@ -65,5 +65,4 @@ public class CareerChangeState extends GameState {
         }
         return null;
     }
-
 }

@@ -8,8 +8,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import java.util.ArrayList;
 
 public class GameOverState extends GameState {
-
-
     GameOverState(){}
 
     //TODO constructor with the situational event message

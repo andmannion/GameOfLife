@@ -21,8 +21,6 @@ public class GameSetupState extends GameState {
     @Override
     public void enter(GameLogic gameLogic) {
         // Must set the response message to a choice between possible colours
-
-
     }
 
     @Override
@@ -131,5 +129,4 @@ public class GameSetupState extends GameState {
         colourMap.put("Yellow",Color.YELLOW);
         remainingColourChoices.add("Yellow");
     }
-
 }

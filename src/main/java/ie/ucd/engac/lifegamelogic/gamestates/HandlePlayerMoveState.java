@@ -24,15 +24,15 @@ public class HandlePlayerMoveState extends GameState {
     private String eventMessage;
     private boolean spinComplete;
     private boolean turnComplete;
-    int tilesToMove;
-    int tilesMoved;
+    private int tilesToMove;
+    private int tilesMoved;
 
-    public HandlePlayerMoveState(String eventMessage) {
-        this.eventMessage = eventMessage;
-        spinComplete = false;
-        turnComplete = false;
-        tilesToMove = 0;
-        tilesMoved = 0;
+	public HandlePlayerMoveState(String eventMessage){
+	    this.eventMessage = eventMessage;
+	    spinComplete = false;
+	    turnComplete = false;
+	    tilesToMove = 0;
+	    tilesMoved = 0;
     }
 
     public HandlePlayerMoveState() {
@@ -56,7 +56,7 @@ public class HandlePlayerMoveState extends GameState {
             // Need to spin the spinner
             tilesToMove = gameLogic.getSpinner().spinTheWheel();
 
-            /* Must give the bonus salary to the player(s) depending with the value has been spun
+            /*  Must give the bonus salary to the player(s) depending with the value has been spun
              *  based on the bonus number on their current OccupationCard.
              */
             assignSpinBonusIfRequired(gameLogic.getPlayers(), tilesToMove);
@@ -69,8 +69,8 @@ public class HandlePlayerMoveState extends GameState {
 
             // Need to alternate between moving and evaluating the tile we're on
             endTile = tryToMove(gameLogic.getCurrentPlayer(), gameBoard, tilesToMove, tilesMoved);
-
-            // At this point, we have landed on a tile, either through the number of goes running out, or by encountering a stop tile.
+            
+			// At this point, we have landed on a tile, either through the number of turns running out, or by encountering a stop tile.
             nextState = evaluateTile(gameLogic, endTile);
             turnComplete = true;
         }
@@ -262,16 +262,13 @@ public class HandlePlayerMoveState extends GameState {
             default:
                 System.err.println("Unhandled action card type. [evaluateActionTile()]");
         }
-
         return nextActionState;
     }
 
     private GameState handleGetMarriedTile(int currentNumberOfPlayers, int currentPlayerNumber) {
         GameState nextState;
         if (1 == currentNumberOfPlayers) {
-
             String eventMsg = "You got married, player " + currentPlayerNumber + ", so take an extra turn.";
-
             nextState = new HandlePlayerMoveState(eventMsg);
         } else {
             nextState = new GetMarriedState();

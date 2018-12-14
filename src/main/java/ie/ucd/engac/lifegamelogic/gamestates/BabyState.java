@@ -12,10 +12,12 @@ public class BabyState extends GameState {
 	@Override
 	public void enter(GameLogic gameLogic) {
 		// Request a spin from the current player to determine how many babies they had
-		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " + "you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
+		String babyEventMessage = "Player " + gameLogic.getCurrentPlayerIndex() + ", " +
+				"you landed on the Baby Stop. {1-3} : 0, {4-6} : 1, {7-8} : 2, {9-10} : 3.";
 		
-		LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,babyEventMessage, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
-		);
+		LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,
+																	 babyEventMessage,
+																	 gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
 		gameLogic.setResponseMessage(responseMessage);
 	}
 
@@ -27,9 +29,11 @@ public class BabyState extends GameState {
 			gameLogic.setResponseMessage(replyMessage);
 			return null;
 		}
+		// TODO: The below line needs some sort of flag to avoid responding to an erroneous AckResponse
 		else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse) {
             return handleSpinForBabyState(gameLogic, spinResult);			
 		}
+		// Other message types are ignored and we wait for either of the above are received
 		return null;
 	}
 

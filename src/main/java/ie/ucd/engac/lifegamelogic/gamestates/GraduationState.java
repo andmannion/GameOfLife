@@ -28,9 +28,10 @@ public class GraduationState extends GameState {
             (Chooseable) secondCollegeCareerCard,
             "Choose new college career card", gameLogic.getCurrentShadowPlayer());
 
-        // Need to store both choices so that we can assign the chosen one to the
-        // correct player,
-        // and push the unchosen one to the bottom of the correct deck.
+        /* Need to store both choices so that we can assign the chosen one to the
+           correct player,
+           and push the unchosen one to the bottom of the correct deck.
+        */
         gameLogic.setResponseMessage(replyMessage);
 	}
 

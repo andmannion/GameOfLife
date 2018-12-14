@@ -29,10 +29,11 @@ public class GetMarriedState extends GameState {
         playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
 		playersLeftToSpin = gameLogic.getNumberOfPlayers() - 1;
 		
-		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
+		String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the marriage gift to give.";
 		
-		LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
-		);
+		LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,
+																	 eventMsg,
+																	 gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()));
 		gameLogic.setResponseMessage(responseMessage);
 	}
 	
@@ -50,10 +51,11 @@ public class GetMarriedState extends GameState {
             nextState = null;
 		}
     	else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete){
+    		// Spin result information has been successfully sent, can begin payment procedure for a given other player
 			String paymentMsg;
 			int getMarriedPayment;
 			
-			//compute payment
+			// Compute payment to the person getting married based on the number spun
 			if(spinResult % 2 == 0) {
 				// Current spinner must give the player getting married 100K
                 getMarriedPayment = GameConfig.get_married_even_payment;
@@ -62,7 +64,7 @@ public class GetMarriedState extends GameState {
                 getMarriedPayment = GameConfig.get_married_odd_payment;
 			}
 
-			//make payment
+			// Make payment to the player getting married
             gameLogic.subtractFromPlayersBalance(playerToSpinIndex, getMarriedPayment);
             gameLogic.getCurrentPlayer().addToBalance(getMarriedPayment);
 
@@ -76,14 +78,16 @@ public class GetMarriedState extends GameState {
             playerToSpinNumber = gameLogic.getPlayerByIndex(playerToSpinIndex).getPlayerNumber();
 			
 			if(playersLeftToSpin == 0) {
+				// All players have had their contribution deducted and applied
 				String eventMsg = paymentMsg + 
 						"You got married, player " + playerGettingMarriedNumber + ", so take an extra turn.";
 
                 nextState = new HandlePlayerMoveState(eventMsg);
 			}
 			else {
+				// Prompt the next player to spin so that their contribution can be applied
 				spinComplete = false;
-				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the gift to give.";
+				String eventMsg = "Player " + playerToSpinNumber + ", spin the wheel to decide the marriage gift to give.";
 				
 				LifeGameMessage responseMessage = new LifeGameRequestMessage(LifeGameMessageTypes.SpinRequest,eventMsg, gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex())
 				);
@@ -93,5 +97,4 @@ public class GetMarriedState extends GameState {
 		}
 		return nextState;
 	}
-
 }

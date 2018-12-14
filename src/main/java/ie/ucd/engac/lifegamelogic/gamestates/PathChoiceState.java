@@ -13,9 +13,7 @@ public class PathChoiceState extends GameState {
 	public static final int COLLEGE_CAREER_CHOICE_INDEX = 1;
 
 	@Override
-	public void enter(GameLogic gameLogic) {
-
-	}
+	public void enter(GameLogic gameLogic) {}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
