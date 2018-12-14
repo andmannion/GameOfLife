@@ -87,6 +87,16 @@
 	\texttt{Tile} and \texttt{Pawn} are the simplest part of this interface, used only when the game is being set up in order to send the coordinates, sizes, types of the tiles and the colours of the respective players to the interface so that they can be drawn.
 	
 	\subsection*{State Machine}
+	As previously mentioned due to the turn based nature of this game and the relatively linear flow of a turn with a limited set of very basic interactions with the user we decided to implement the logic as a state machine. This state machine uses the messages sent by the UI as its stimuli and mutates the logic classes based on the current state and received information. The original state transition diagram can bee seen in Figure \ref{fig:state_machine}.\\
+	The idea we had in mind essentially as a pair of state machines with one inside the other. The outside one would handle the overall game state, with actions such as handling the turns, spinning, movement etc. The inner state machine then would be called into action only when we needed to handle more complex turn logic, such as the spin-to-win tile or the acquisition of houses.\\
+	The way in which we managed this was as follows:\\
+	When the player had spun the wheel at the start of their turn the logic then enters \textit{Handle Player Move State}. Once in this state the logic establishes, depending on the tile landed on, what the next state must be. If the state is not complex we handle the turn interaction in \textit{Handle Player Move State} itself. However if the state is more complicated the state machine then transitions into a state corresponding to that tile's action, which takes over the handling of user input until the tile action sequence has been completed.
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=.4]{highlevel_state_diagram}
+		\caption{State Machine Design Doc.}
+		\label{fig:state_machine}
+	\end{figure}
 	\subsection*{UI}
 	As previously mentioned the UI runs in two threads. One thread uses backbuffering to draw/render the various UI screens at a fixed frame rate. All interaction is handled by an action listener attached to the various buttons on the display. Depending on which button is activated the UI sends a message to the UI using the messaging system and awaits a response. Depending on this response the UI's state is mutated to represent this information.\\
 	For example if the logic sends a message requesting that the user select one career card from two options the selection screen is displayed to the user alongside the relevant buttons and clicking either of these will send a \texttt{DecisionResponse} message as a response to the logic.\\
