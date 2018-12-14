@@ -9,6 +9,7 @@ import ie.ucd.engac.messaging.ShadowPlayer;
 public class EndTurnState extends GameState {
 
     private String eventMessage;
+    private ShadowPlayer shadowPlayer;
 
     public EndTurnState(){}
 
@@ -16,12 +17,19 @@ public class EndTurnState extends GameState {
         this.eventMessage = eventMessage;
     }
 
+    public EndTurnState(String eventMessage, ShadowPlayer shadowPlayer){
+        this.eventMessage = eventMessage;
+        this.shadowPlayer = shadowPlayer;
+    }
+
     public void enter(GameLogic gameLogic){
         if (eventMessage == null){
             int playNum = gameLogic.getCurrentPlayer().getPlayerNumber();
             eventMessage = "Player " + playNum + "'s turn is over.";
         }
-        ShadowPlayer shadowPlayer = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
+        if (shadowPlayer == null) {
+            shadowPlayer = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
+        }
         LifeGameRequestMessage ackRequestMessage = new LifeGameRequestMessage(LifeGameMessageTypes.AckRequest, eventMessage, shadowPlayer);
         gameLogic.setResponseMessage(ackRequestMessage);
     }

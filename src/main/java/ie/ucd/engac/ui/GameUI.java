@@ -64,10 +64,10 @@ public class GameUI implements Drawable {
         uiActionListener = new UIActionListener();
 
         uiHUD = new UIHUD(this, hudStartY);
-        uiBoard = new UIBoard(this, hudStartY, panelWidth,panelHeight);
-        uiCardChoice = new UICardChoice(this,hudStartY);
+        uiBoard = new UIBoard(this, hudStartY, panelWidth, panelHeight);
+        uiCardChoice = new UICardChoice(this, hudStartY);
         uiWinner = new UIWinner(this);
-        uiEventMessage = new UIEventMessage();
+        uiEventMessage = new UIEventMessage(panelWidth);
         uiInput = new UIInput(this,renderTarget);
 
         drawables = new ArrayList<>();

@@ -1,6 +1,7 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
@@ -91,7 +92,9 @@ public class GameSetupState extends GameState {
         int relatedPlayerNumber = relatedPlayer.getPlayerNumber();
         if(colour != null) {
             relatedPlayer.setPlayerColour(colour);
-            pawns.add(new Pawn(0.0, 0.0, colour, relatedPlayerNumber, 0));
+            double initX = gameLogic.getGameBoard().getGameBoardTileFromID(new BoardLocation("a")).getXLocation();
+            double initY = gameLogic.getGameBoard().getGameBoardTileFromID(new BoardLocation("a")).getYLocation();
+            pawns.add(new Pawn(initX, initY, colour, relatedPlayerNumber, 0));
 
             // Remove the selected number from the set of allowable numbers
             remainingColourChoices.remove(selectedColourName);
