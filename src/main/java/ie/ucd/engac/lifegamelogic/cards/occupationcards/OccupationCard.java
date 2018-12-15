@@ -1,8 +1,6 @@
 package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
-import ie.ucd.engac.lifegamelogic.cards.Card;
-
-public abstract class OccupationCard extends Card {
+public abstract class OccupationCard {
 	protected OccupationCardTypes occupationCardType;
 	
 	public OccupationCardTypes getOccupationCardType() {

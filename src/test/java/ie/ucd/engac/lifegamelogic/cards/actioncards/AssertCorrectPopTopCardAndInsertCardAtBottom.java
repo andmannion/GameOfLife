@@ -7,7 +7,7 @@ import ie.ucd.engac.GameConfig;
 import org.junit.jupiter.api.Test;
 
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
-import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardDeck;
+import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 
 
 class AssertCorrectPopTopCardAndInsertCardAtBottom {
@@ -16,11 +16,11 @@ class AssertCorrectPopTopCardAndInsertCardAtBottom {
 	void assertDeckCreated() {
 		TestHelpers.importGameConfig();
 		
-		ActionCardDeck actionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+		CardDeck<ActionCard> actionCardDeck = new CardDeck<ActionCard>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 		
 		assertEquals(55, actionCardDeck.getNumberOfRemainingCards());
 		
-		ActionCard actionCard = (ActionCard) actionCardDeck.popTopCard();
+		ActionCard actionCard = actionCardDeck.popTopCard();
 		
 		assertEquals(54, actionCardDeck.getNumberOfRemainingCards());
 		

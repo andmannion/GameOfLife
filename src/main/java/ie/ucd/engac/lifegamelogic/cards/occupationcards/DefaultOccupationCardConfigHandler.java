@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DefaultOccupationCardConfigHandler implements CardConfigHandler<OccupationCard> {
 	private JsonElement overallJSONElement;
 
-	DefaultOccupationCardConfigHandler(String configPath) {
+	public DefaultOccupationCardConfigHandler(String configPath) {
 		overallJSONElement = resourceToJson(configPath);
 	}
 

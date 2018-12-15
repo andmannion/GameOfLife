@@ -1,9 +1,8 @@
 package ie.ucd.engac.lifegamelogic.cards.housecards;
 
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.messaging.Chooseable;
 
-public class HouseCard extends Card implements Chooseable {
+public class HouseCard implements Chooseable {
 	private final HouseTypes houseType;				// Values are final as their value should not change after having been initialised to some value
 	
 	public HouseTypes getHouseType() {
