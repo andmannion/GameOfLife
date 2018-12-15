@@ -51,7 +51,13 @@
 	\noindent The messaging interface is the decoupling intermediary between the two. It defines the communication system and handles the passing of messages without requiring any knowledge of implementation.
 	
 	\subsection*{GameEngine.java}
-	This class is responsible for the management of the three main components in this design (UI, Logic, MessagingInterface). %TODO image of UML
+	This class is responsible for the management of the three main components in this design (UI, Logic, MessagingInterface). 
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=.45]{uml/messaging_system_uml}
+		\caption{High Level UML.}
+		\label{fig:high_level_uml}
+	\end{figure}
 	When the game begins the Interface is instantiated first, followed by the other two components which have a reference to the messaging system passed to it.
 		
 	\subsection*{Messaging Interface}
@@ -77,7 +83,12 @@
 			\end{tabular}
 		\end{flushleft}
 	\end{table}
-	%TODO UML for messages
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=.125]{uml/messaging_internals_uml}
+		\caption{Messaging System Internals.}
+		\label{fig:messages_uml}
+	\end{figure}
 	\subsubsection*{ShadowPlayer}
 	\texttt{ShadowPlayer} is how the messaging system represents the attributes relating to the player object that are of interest to the person controlling that pawn, such as bank balance or the current career card.
 	In order to abide by the decoupling principle the player object is not directly accessed or sent to the interface, however a representation of this data is sent instead that hides the implementation details.
@@ -97,9 +108,21 @@
 		\caption{State Machine Design Doc.}
 		\label{fig:state_machine}
 	\end{figure}
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=.1]{state_machine_high_level}
+		\caption{State Machine Design as Implemented.}
+		\label{fig:state_machine_actual}
+	\end{figure}
 	\subsection*{UI}
 	As previously mentioned the UI runs in two threads. One thread uses backbuffering to draw/render the various UI screens at a fixed frame rate. All interaction is handled by an action listener attached to the various buttons on the display. Depending on which button is activated the UI sends a message to the UI using the messaging system and awaits a response. Depending on this response the UI's state is mutated to represent this information.\\
 	For example if the logic sends a message requesting that the user select one career card from two options the selection screen is displayed to the user alongside the relevant buttons and clicking either of these will send a \texttt{DecisionResponse} message as a response to the logic.\\
 	Sending a message from the User Interface is a blocking activity in that thread and prevents the user from doing anything until a response has been received from the user.
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=.35]{uml/ui_uml}
+		\caption{UI Internals.}
+		\label{fig:ui_uml}
+	\end{figure}
 	
 \end{document}
