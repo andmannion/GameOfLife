@@ -1,0 +1,22 @@
+title Handle Player Move
+
+UI->logic: spin message [handleInput()]
+logic->tile logic: get spin result [spinTheWheel()]
+tile logic->logic: return spin result
+logic-->UI: report number spun
+logic->logic: check for spin bonus [assignSpinBonus()]
+loop while tiles moved < spin result
+    logic->tile logic: move forward 1 [tryToMove()]
+    tile logic->tile logic: check for stop/payday [performUpdateIfPassingOver()]
+    tile logic->logic: decrement moves
+end
+logic->tile logic: [evaluateEndTile()]
+logic->UI: tell user what end tile is [setResponseMessage()]
+alt simple action
+    tile logic->logic: manipulate objects [evaluateEndTile()]
+else complex
+    tile logic->tile logic: [case specific seq. diagram]
+end
+logic->UI: turn over/status update [setResponseMessage()]
+UI->logic: ack. message [handleInput()]
+logic->logic: next player [logic.setNextPlayerToCurrent()]
