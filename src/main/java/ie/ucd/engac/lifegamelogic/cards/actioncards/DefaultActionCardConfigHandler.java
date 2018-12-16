@@ -3,7 +3,6 @@ package ie.ucd.engac.lifegamelogic.cards.actioncards;
 import com.google.gson.*;
 import ie.ucd.engac.gsonExtender.RuntimeTypeAdapterFactory;
 import ie.ucd.engac.lifegamelogic.cards.CardConfigHandler;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.DefaultOccupationCardConfigHandler;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,7 +50,7 @@ public class DefaultActionCardConfigHandler implements CardConfigHandler<ActionC
 
     private JsonElement resourceToJson(String path){
 
-        InputStream boardInputStream = DefaultOccupationCardConfigHandler.class.getClassLoader().getResourceAsStream(path);
+        InputStream boardInputStream = DefaultActionCardConfigHandler.class.getClassLoader().getResourceAsStream(path);
         JsonStreamParser streamParser = new JsonStreamParser(new InputStreamReader(boardInputStream));
         JsonElement jsonElement = null;
 
