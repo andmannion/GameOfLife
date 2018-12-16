@@ -44,22 +44,22 @@ public class BabyState extends GameState {
 			case 1:
 			case 2:
 			case 3:
-				babyResultMessage += "0 babies.";
+				babyResultMessage += "no babies.";
 				break;
 			case 4:
 			case 5:
 			case 6:
-				babyResultMessage += "1 baby.";
+				babyResultMessage += "a baby!";
 				gameLogic.getCurrentPlayer().addDependants(1);
 				break;
 			case 7:
 			case 8:
-				babyResultMessage += "2 babies.";
+				babyResultMessage += "2 babies!";
 				gameLogic.getCurrentPlayer().addDependants(2);
 				break;
 			case 9:
 			case 10:
-				babyResultMessage += "3 babies.";
+				babyResultMessage += "3 babies!";
 				gameLogic.getCurrentPlayer().addDependants(3);
 				break;
 			default:

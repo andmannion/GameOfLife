@@ -19,7 +19,7 @@ public class HouseTileDecisionState extends GameState {
             choices.add(new ChooseableString("Sell a house"));
         }
 
-        String eventMessage = "What action would you like to perform?";
+        String eventMessage = "HouseTile: What action would you like to perform?";
 
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
         LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType, gameLogic.getCurrentShadowPlayer());
