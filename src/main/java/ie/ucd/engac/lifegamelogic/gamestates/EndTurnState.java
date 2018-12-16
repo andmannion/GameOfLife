@@ -45,7 +45,7 @@ public class EndTurnState extends GameState {
 
                 return new PathChoiceState();
             }
-            return new HandlePlayerMoveState(); // didnt receive the correct message, looping
+            return new HandlePlayerMoveState(); // Didn't receive the correct message, looping
         }
 
         return null;

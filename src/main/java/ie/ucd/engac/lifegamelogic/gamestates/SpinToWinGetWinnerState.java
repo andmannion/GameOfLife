@@ -5,12 +5,10 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
-import ie.ucd.engac.messaging.SpinResultMessage;;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-;
 
 public class SpinToWinGetWinnerState extends GameState {
 	private static final int SPIN_TO_WIN_PRIZE_NOT_WON = -1;

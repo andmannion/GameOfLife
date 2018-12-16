@@ -2,7 +2,6 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerTypes;
 import ie.ucd.engac.messaging.Chooseable;

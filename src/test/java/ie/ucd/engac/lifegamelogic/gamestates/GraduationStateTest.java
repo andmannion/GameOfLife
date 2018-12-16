@@ -3,8 +3,6 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerTypes;
-import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.DecisionResponseMessage;

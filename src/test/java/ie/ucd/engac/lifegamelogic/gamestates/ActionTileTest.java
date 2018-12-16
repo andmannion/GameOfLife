@@ -16,8 +16,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.RepeatedTest;
 
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ActionTileTest {

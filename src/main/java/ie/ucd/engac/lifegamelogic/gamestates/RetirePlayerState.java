@@ -8,8 +8,6 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import ie.ucd.engac.messaging.LifeGameRequestMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
-;
-
 public class RetirePlayerState extends GameState {
 
     private int numberOfHouses;
@@ -34,7 +32,7 @@ public class RetirePlayerState extends GameState {
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse) {
 
             int currentCardIndex = 0;
-            int spinNum = gameLogic.getSpinner().spinTheWheel();;
+            int spinNum = gameLogic.getSpinner().spinTheWheel();
             Player retiree = gameLogic.getCurrentPlayer();
             //sell the card and move on to the next
             HouseCard soldCard = retiree.sellHouseCard(currentCardIndex, spinNum);
