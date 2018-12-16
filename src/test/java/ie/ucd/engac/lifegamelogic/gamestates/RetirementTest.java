@@ -94,6 +94,9 @@ class RetirementTest {
             // Mock messages to logic, performing  functionality
             initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(initialMessage);
+            assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+            initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            responseMessage = gameLogic.handleInput(initialMessage);
         }
         assertEquals(0,player.getNumberOfHouseCards());
         //card should be sold by no so do the maths on the players money

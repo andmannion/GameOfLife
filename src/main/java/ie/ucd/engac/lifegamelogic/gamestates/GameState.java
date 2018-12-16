@@ -16,15 +16,15 @@ public abstract class GameState {
 
 	public abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
 
-    protected void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
+    private void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
 
-    protected ArrayList<Chooseable> getPendingCardChoices(){
+    ArrayList<Chooseable> getPendingCardChoices(){
         return pendingCardChoices;
     }
 
-	protected LifeGameMessage setupChoiceAndMessage(int relatedPlayerIndex, Chooseable firstOption,
+	LifeGameMessage setupChoiceAndMessage(int relatedPlayerIndex, Chooseable firstOption,
 													Chooseable secondOption, String eventMessage,
 													ShadowPlayer shadowPlayer) {
         // Need to store both choices so that we can assign the chosen one to the
@@ -41,7 +41,7 @@ public abstract class GameState {
 		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage, requestType, shadowPlayer);
 	}
 
-	protected void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
+	void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
 		// Need to assign the chosen card to the relevant player
 		OccupationCard chosenCareerCard = (OccupationCard) getPendingCardChoices().get(choiceIndex);
 		gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);

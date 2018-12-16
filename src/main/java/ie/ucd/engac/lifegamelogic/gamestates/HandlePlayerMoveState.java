@@ -16,14 +16,14 @@ import java.util.ArrayList;
 
 public class HandlePlayerMoveState extends GameState {
     private String eventMessage;
-    private boolean spinComplete;
+    private boolean spinResultAvailable;
     private boolean turnComplete;
     private int tilesToMove;
     private int tilesMoved;
 
 	public HandlePlayerMoveState(String eventMessage){
 	    this.eventMessage = eventMessage;
-	    spinComplete = false;
+	    spinResultAvailable = false;
 	    turnComplete = false;
 	    tilesToMove = 0;
 	    tilesMoved = 0;
@@ -56,8 +56,8 @@ public class HandlePlayerMoveState extends GameState {
             assignSpinBonusIfRequired(gameLogic.getPlayers(), tilesToMove);
             LifeGameMessage replyMessage = new SpinResultMessage(tilesToMove);
             gameLogic.setResponseMessage(replyMessage);
-            spinComplete = true;
-        } else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinComplete) {
+            spinResultAvailable = true;
+        } else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spinResultAvailable) {
             GameBoard gameBoard = gameLogic.getGameBoard();
             GameBoardTile endTile;
 

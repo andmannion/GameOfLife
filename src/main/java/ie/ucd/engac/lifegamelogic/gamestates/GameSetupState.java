@@ -14,7 +14,7 @@ public class GameSetupState extends GameState {
 
     private ArrayList<Pawn> pawns;
     private HashSet<String> remainingColourChoices;
-    private HashMap<String,Color>  colourMap; //TODO AWT colours
+    private HashMap<String,Color>  colourMap;
     private ArrayList<Chooseable> outgoingChoices;
     private int initialPlayerIndex;
     private int awaitingInfoFromPlayerIndex;

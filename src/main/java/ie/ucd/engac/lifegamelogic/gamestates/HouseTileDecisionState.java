@@ -39,16 +39,16 @@ public class HouseTileDecisionState extends GameState {
             int choiceIndex = choiceMessage.getChoiceIndex();
 
             if (choiceIndex == 0){ //do nothing, turn ends
-                return new EndTurnState();
+                nextState = new EndTurnState();
             }
             else if (choiceIndex == 1){ //if they wish to buy
-                return new HouseChoiceState();
+                nextState = new HouseChoiceState();
             }
             else { //if they wish to sell
-                return new HouseSaleState();
+                nextState = new HouseSaleState();
             }
         }
-        return null;
+        return nextState;
     }
 
 }

@@ -16,12 +16,8 @@ public class HouseSaleState extends GameState {
     @Override
     public void enter(GameLogic gameLogic) {
         // Get the CareerCards owned by this player
-
         ArrayList<HouseCard> cards = gameLogic.getCurrentPlayer().getHouseCards();
-        ArrayList<Chooseable> choices = new ArrayList<>();
-        for (HouseCard houseCard:cards){
-            choices.add(houseCard );
-        }
+        ArrayList<Chooseable> choices = new ArrayList<>(cards);
         String eventMessage = "Which house would you like to sell?";
 
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
@@ -35,7 +31,7 @@ public class HouseSaleState extends GameState {
 
     @Override
     public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
-
+        GameState nextState = null;
         if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse) {
             DecisionResponseMessage choiceMessage = (DecisionResponseMessage) lifeGameMessage;
 
@@ -47,24 +43,25 @@ public class HouseSaleState extends GameState {
             gameLogic.setResponseMessage(spinRequestMessage);
 
             choseCard = true;
-            return null;
+            nextState = null;
         }
         else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.SpinResponse && choseCard) {
             spinNum = gameLogic.getSpinner().spinTheWheel();
             LifeGameMessage replyMessage = new SpinResultMessage(spinNum);
             gameLogic.setResponseMessage(replyMessage);
-            return null;
-            }
+            nextState = null;
+        }
         else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && choseCard) {
             Player player = gameLogic.getCurrentPlayer();
             HouseCard soldCard = player.sellHouseCard(choiceIndex,spinNum);
             if (soldCard == null){
-                return null;
+                nextState = null;
+            } else {
+                gameLogic.returnHouseCard(soldCard);
+                nextState = new EndTurnState();
             }
-            gameLogic.returnHouseCard(soldCard);
-            return new EndTurnState();
         }
-        return null;
+        return nextState;
     }
 
 }
