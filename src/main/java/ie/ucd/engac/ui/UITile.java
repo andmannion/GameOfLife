@@ -23,7 +23,9 @@ public class UITile extends Tile implements Drawable{
 
         String typeString = getTypeString();
         int tileXPos = (int)getXLocation() + ((int)xDimension - graphics.getFontMetrics().stringWidth(typeString))/2;
-        int tileYPos = (int)getYLocation() + ((int)yDimension + (int)(0.9*graphics.getFontMetrics().getHeight()))/2 ;
-        graphics.drawString(typeString,tileXPos, tileYPos);
+        int tileYPos = (int)getYLocation() + ((int)yDimension + (int)(0.9*graphics.getFontMetrics().getHeight()))/2;
+        if (!typeString.equals("Action")) {
+            graphics.drawString(typeString, tileXPos, tileYPos);
+        }
     }
 }
