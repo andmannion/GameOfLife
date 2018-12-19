@@ -99,7 +99,7 @@ class RetirementTest {
             responseMessage = gameLogic.handleInput(initialMessage);
         }
         assertEquals(0,player.getNumberOfHouseCards());
-        //card should be sold by no so do the maths on the players money
+        //card should be sold by now so do the maths on the players money, adding the relevant bonuses
         testMoney += (NUM_PLAYERS-numRetiredAlready)*GameConfig.ret_bonus_remaining;
         testMoney += numActionCards*GameConfig.ret_bonus_action;
         testMoney += (numDependants-1)*GameConfig.ret_bonus_kids;

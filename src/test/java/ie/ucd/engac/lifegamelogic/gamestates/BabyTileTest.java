@@ -78,6 +78,7 @@ public class BabyTileTest {
 
         assertEquals(numberOfDependants+numDependantsToAdd, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
+        // Check preconditions
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
@@ -125,6 +126,7 @@ public class BabyTileTest {
         //check that the correct number of kids has been added
         assertEquals(numberOfDependants+expectedDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
+        // Check preconditions
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
