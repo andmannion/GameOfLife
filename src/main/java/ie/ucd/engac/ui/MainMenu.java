@@ -47,14 +47,14 @@ public class MainMenu extends JPanel implements ActionListener {
         GridBagConstraints menuConstraints = new GridBagConstraints();
         menuConstraints.fill = GridBagConstraints.VERTICAL;
         menuConstraints.gridx = 1;
-        menuConstraints.gridy = 2;
+        menuConstraints.gridy = 0;
         add(pictureLabel,menuConstraints);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.lightGray);
         constructButtonArea(buttonPanel);
         menuConstraints.gridx = 1;
-        menuConstraints.gridy = 0;
+        menuConstraints.gridy = 2;
         add(buttonPanel,menuConstraints);
     }
 
