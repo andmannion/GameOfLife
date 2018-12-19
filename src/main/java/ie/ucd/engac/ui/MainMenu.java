@@ -18,7 +18,7 @@ public class MainMenu extends JPanel implements ActionListener {
     private JButton newGameButton;
     private JButton quitGameButton;
     private JButton playButton;
-    private JComboBox jCombo;
+    private JComboBox<String> jCombo;
     private JTextArea jTextArea;
 
     private int numPlayers = 2;
@@ -88,9 +88,9 @@ public class MainMenu extends JPanel implements ActionListener {
         jComboConstraints.gridx = 1;
         jComboConstraints.gridy = 2;
         String[] numPlayersList = { "2", "3", "4"};
-        jCombo = new JComboBox(numPlayersList);
+        jCombo = new JComboBox<>(numPlayersList);
         jCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        jCombo.addActionListener(this);
+        jCombo.addActionListener(this::setNumPlayers);
         jCombo.setSelectedIndex(0);
         jCombo.setVisible(false);
         add(jCombo,jComboConstraints);
@@ -105,7 +105,6 @@ public class MainMenu extends JPanel implements ActionListener {
         setVisibilityNumPlayers(false);
     }
 
-    //todo do I need these visibility functions to exist?
     private void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
         quitGameButton.setVisible(bool);
@@ -119,7 +118,7 @@ public class MainMenu extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JComponent source = (JComponent) e.getSource(); //TODO this actionlistener better (anon class for jcombo?)
+        JComponent source = (JComponent) e.getSource();
         if (source instanceof JButton){
             switch (((JButton) source).getActionCommand()){
                 case "New Game": newGame(); break;
@@ -127,11 +126,12 @@ public class MainMenu extends JPanel implements ActionListener {
                 case "Play":     lifeGameParent.initialiseGame(numPlayers);
             }
         }
-        else if (e.getSource() instanceof JComboBox){
-            JComboBox comboBox = (JComboBox)e.getSource();
-            numPlayers = comboBox.getSelectedIndex()+2;
-        }
         else
             System.err.println("Error, unhandled action event" + e.getSource());
+    }
+
+    private void setNumPlayers(ActionEvent e) {
+        JComboBox comboBox = (JComboBox)e.getSource();
+        numPlayers = comboBox.getSelectedIndex()+2;
     }
 }

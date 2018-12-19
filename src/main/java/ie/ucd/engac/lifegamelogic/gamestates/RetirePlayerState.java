@@ -65,19 +65,8 @@ public class RetirePlayerState extends GameState {
             gameLogic.setResponseMessage(spinRequestMessage);
         }
         else { //otherwise do remainder of retirement actions
-            ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex()); //need to do this before retirement
-            int retirementCash = gameLogic.retireCurrentPlayer();
-            String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
-
-            //check if the game is over or we need to keep playing on
-            if (gameLogic.getNumberOfPlayers() == 0) {
-                nextState = new GameOverState();
-            }
-            else {
-                nextState = new EndTurnState(eventMessage,sp);
-            }
+            nextState = GameState.retirePlayer(gameLogic, retiree);
         }
         return nextState;
     }
-
 }

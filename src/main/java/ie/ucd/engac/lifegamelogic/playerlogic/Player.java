@@ -41,7 +41,7 @@ public class Player {
 		careerPathTaken = null;
 
 		maritalStatus = MaritalStatus.Single;
-		this.playerColour = Color.GREEN; //TODO make this not AWT
+		this.playerColour = Color.GREEN;
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
 		currentMoney = GameConfig.starting_money;
@@ -82,7 +82,7 @@ public class Player {
             return retirementBonus + actionCardBonus + childrenBonus;
         }
         else{
-            throw  new RuntimeException("Tried retiring invalid number of players. "+ numberOfRetirees + " is not a valid number of retirees");//TODO uhh?
+            throw  new RuntimeException("Tried retiring invalid number of players. "+ numberOfRetirees + " is not a valid number of retirees");
         }
     }
 
@@ -198,7 +198,7 @@ public class Player {
      * @param gameLogic GameLogic object which is an interface to the loan provider
      * @return the total money outstanding
      */
-    public int getTotalLoansOutstanding(GameLogic gameLogic){ //TODO remove this method
+    public int getTotalLoansOutstanding(GameLogic gameLogic){
         return gameLogic.getTotalOutstandingLoans(playerNumber);
     }
 

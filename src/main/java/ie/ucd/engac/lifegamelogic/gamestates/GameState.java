@@ -4,7 +4,9 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public abstract class GameState {
 
     private ArrayList<Chooseable> pendingCardChoices;
 
-	public abstract void enter(GameLogic gameLogic);
+    public abstract void enter(GameLogic gameLogic);
 
 	public abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
 
@@ -61,4 +63,17 @@ public abstract class GameState {
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
 		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType, shadowPlayer);
 	}
+
+	static GameState retirePlayer(GameLogic gameLogic, Player retiree) {
+        GameState nextState;
+        ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
+        int retirementCash = gameLogic.retireCurrentPlayer();
+        String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
+        if (gameLogic.getNumberOfPlayers() == 0) {
+            nextState = new GameOverState();            }
+        else {
+            nextState = new EndTurnState(eventMessage,sp);
+        }
+        return nextState;
+    }
 }

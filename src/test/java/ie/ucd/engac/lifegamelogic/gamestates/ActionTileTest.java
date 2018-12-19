@@ -27,6 +27,7 @@ public class ActionTileTest {
         String priorTile = "c";
         String actionTile = "d";
 
+        // Set up test
         Player player = gameLogic.getCurrentPlayer();
         player.setCurrentLocation(new BoardLocation(priorTile));
 
@@ -37,7 +38,7 @@ public class ActionTileTest {
         int numberOfActionCards = player.getNumberOfActionCards();
         int initMoney = player.getCurrentMoney();
 
-        //assert preconditions
+        // Assert preconditions
         assertEquals(0, numberOfActionCards);
 
         // Mock messages to logic, performing turn functionality
@@ -50,6 +51,7 @@ public class ActionTileTest {
 
         LifeGameMessageTypes lifeGameMessageType = responseMessage.getLifeGameMessageType();
 
+        // Check the tile action
         assertTrue(lifeGameMessageType == LifeGameMessageTypes.AckRequest || lifeGameMessageType == LifeGameMessageTypes.LargeDecisionRequest || lifeGameMessageType == LifeGameMessageTypes.OptionDecisionRequest);
         switch (lifeGameMessageType){
             case AckRequest: //simple type
@@ -65,7 +67,6 @@ public class ActionTileTest {
                 CollegeCareerCard newCard = ((CollegeCareerCard)gameLogic.getPlayerByIndex(0).getOccupationCard());
 
                 assertNotSame(oldCard, newCard, "did not assign new career card");
-
                 break;
             case LargeDecisionRequest:
                 playersPayCardTest(gameLogic);

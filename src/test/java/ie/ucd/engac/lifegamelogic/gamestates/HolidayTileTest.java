@@ -58,6 +58,7 @@ public class HolidayTileTest {
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
+        // Check that nothing untoward has happened
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
@@ -68,5 +69,6 @@ public class HolidayTileTest {
         assertEquals(maritalStatus, gameLogic.getPlayerByIndex(0).getMaritalStatus());
         assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
         assertEquals(playerMoney, gameLogic.getPlayerByIndex(0).getCurrentMoney());
+        assertEquals(numberOfDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
     }
 }
