@@ -9,7 +9,7 @@ public class UIConfigMessage extends LifeGameRequestMessage {
 
 
     public UIConfigMessage(ArrayList<Pawn> pawns, String eventMessage, ShadowPlayer shadowPlayer, Board board){
-        super(LifeGameMessageTypes.UIConfigMessage,eventMessage, shadowPlayer); //TODO uhh?
+        super(LifeGameMessageTypes.UIConfigMessage,eventMessage, shadowPlayer);
         this.pawns = pawns;
         this.board = board;
     }

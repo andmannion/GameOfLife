@@ -135,7 +135,7 @@ public class ShadowPlayer {
     public String currentTileToString(){
         String string;
         if (currentTile == null) {
-            return ""; //TODO
+            return ""; //don't display anything
         }
 
         if(currentTile.getGameBoardTileType() == GameBoardTileTypes.Stop){

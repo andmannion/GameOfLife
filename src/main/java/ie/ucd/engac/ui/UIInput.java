@@ -107,8 +107,7 @@ public class UIInput implements Drawable {
         string = "Quit Game";
         int quitHeight = (int)(QUIT_WIDTH/1.618)/3;
         int quitBorder = QUIT_WIDTH/20;
-        int quitX = quitBorder;
-        quitButton = createButton(string,quitX, quitBorder,QUIT_WIDTH, quitHeight, actionListener);
+        quitButton = createButton(string, quitBorder, quitBorder,QUIT_WIDTH, quitHeight, actionListener);
         quitButton.setVisible(true);
         renderTarget.add(quitButton);
     }
@@ -151,7 +150,7 @@ public class UIInput implements Drawable {
                 index++;
             }
         }
-        catch (Exception error){ //TODO fix this
+        catch (Exception error){
             System.err.println("Error in spinner values: "+ error.toString());
         }
     }

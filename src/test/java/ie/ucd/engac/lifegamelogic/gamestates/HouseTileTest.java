@@ -216,7 +216,6 @@ class HouseTileTest {
     }
 
     @Test
-    //TODO many duplicate lines of code here
     void testHousePurchaseNoLoanAndSale(){
         // Set up test
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
