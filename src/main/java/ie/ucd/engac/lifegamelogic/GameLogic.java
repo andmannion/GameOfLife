@@ -10,6 +10,7 @@ import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gamestates.GameSetupState;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
+import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparatorDescending;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -345,6 +346,21 @@ public class GameLogic {
     }
 
     // Occupation card related
+    public OccupationCard getTopRelevantOccupationCard(CareerPathTypes careerPathType) {
+        OccupationCard topRelevantCard;
+        switch (careerPathType) {
+            case CollegeCareer:
+                topRelevantCard = getTopCollegeCareerCard();
+                break;
+            case StandardCareer:
+                topRelevantCard = getTopStandardCareerCard();
+                break;
+            default:
+                topRelevantCard = null;
+        }
+        return topRelevantCard;
+    }
+
     /**
      * gets the top standard career card from the deck
      */
@@ -371,8 +387,8 @@ public class GameLogic {
             bank.returnCollegeCareerCard(occupationCardToBeReturned);
         }
     }
-
     // Action card related
+
     /**
      * gets the top action card from the deck
      */

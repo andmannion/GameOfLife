@@ -27,19 +27,8 @@ public class CareerChangeState extends GameState {
         OccupationCard secondCareerCardChoice;
 
         // Get the two top CareerCards
-        switch (careerPathType) { //TODO potentially remove this
-            case CollegeCareer:
-                firstCareerCardChoice = gameLogic.getTopCollegeCareerCard();
-                secondCareerCardChoice = gameLogic.getTopCollegeCareerCard();
-                break;
-            case StandardCareer:
-                firstCareerCardChoice = gameLogic.getTopStandardCareerCard();
-                secondCareerCardChoice = gameLogic.getTopStandardCareerCard();
-                break;
-            default:
-                firstCareerCardChoice = null;
-                secondCareerCardChoice = null;
-        }
+        firstCareerCardChoice = gameLogic.getTopRelevantOccupationCard(careerPathType);
+        secondCareerCardChoice = gameLogic.getTopRelevantOccupationCard(careerPathType);
 
         String eventMessage = ActionCardTypes.CareerChange + " Action: Choose a new career.";
 

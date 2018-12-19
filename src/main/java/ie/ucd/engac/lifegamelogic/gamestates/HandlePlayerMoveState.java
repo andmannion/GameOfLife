@@ -304,16 +304,9 @@ public class HandlePlayerMoveState extends GameState {
 
     private GameState retireThisPlayer(GameLogic gameLogic) {
         GameState nextState = null;
-        Player retiree = gameLogic.getCurrentPlayer(); //TODO this code appears in 2 states
+        Player retiree = gameLogic.getCurrentPlayer();
         if (retiree.getNumberOfHouseCards() == 0){ //if they have houses need to sell them
-            ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
-            int retirementCash = gameLogic.retireCurrentPlayer();
-            String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
-            if (gameLogic.getNumberOfPlayers() == 0) {
-                nextState = new GameOverState();            }
-            else {
-                nextState = new EndTurnState(eventMessage,sp);
-            }
+            nextState = GameState.retirePlayer(gameLogic, retiree);
         } else {
             nextState = new RetirePlayerState();
         }

@@ -18,7 +18,7 @@ public class MainMenu extends JPanel implements ActionListener {
     private JButton newGameButton;
     private JButton quitGameButton;
     private JButton playButton;
-    private JComboBox jCombo;
+    private JComboBox<String> jCombo;
     private JTextArea jTextArea;
 
     private int numPlayers = 2;
@@ -88,7 +88,7 @@ public class MainMenu extends JPanel implements ActionListener {
         jComboConstraints.gridx = 1;
         jComboConstraints.gridy = 2;
         String[] numPlayersList = { "2", "3", "4"};
-        jCombo = new JComboBox(numPlayersList);
+        jCombo = new JComboBox<>(numPlayersList);
         jCombo.setAlignmentX(Component.CENTER_ALIGNMENT);
         jCombo.addActionListener(this);
         jCombo.setSelectedIndex(0);
@@ -105,7 +105,6 @@ public class MainMenu extends JPanel implements ActionListener {
         setVisibilityNumPlayers(false);
     }
 
-    //todo do I need these visibility functions to exist?
     private void setVisibilityMainScreen(boolean bool){
         newGameButton.setVisible(bool);
         quitGameButton.setVisible(bool);

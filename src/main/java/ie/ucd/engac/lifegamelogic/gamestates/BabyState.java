@@ -8,6 +8,7 @@ import ie.ucd.engac.messaging.SpinResultMessage;
 
 public class BabyState extends GameState {
 	private int spinResult = 0;
+	private boolean spun;
 
 	@Override
 	public void enter(GameLogic gameLogic) {
@@ -27,10 +28,10 @@ public class BabyState extends GameState {
 			spinResult = gameLogic.getSpinner().spinTheWheel();
 			LifeGameMessage replyMessage = new SpinResultMessage(spinResult);
 			gameLogic.setResponseMessage(replyMessage);
+			spun = true;
 			return null;
 		}
-		// TODO: The below line needs some sort of flag to avoid responding to an erroneous AckResponse
-		else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse) {
+		else if (lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse && spun) {
             return handleSpinForBabyState(gameLogic, spinResult);			
 		}
 		// Other message types are ignored and we wait for either of the above are received
