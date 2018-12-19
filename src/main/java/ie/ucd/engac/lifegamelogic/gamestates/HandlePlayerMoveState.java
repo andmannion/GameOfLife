@@ -157,7 +157,19 @@ public class HandlePlayerMoveState extends GameState {
                 nextState = new EndTurnState(holidayMessage);
                 break;
             case SpinToWin:
-                nextState = new SpinToWinSetupState();
+                if(gameLogic.getNumberOfPlayers() == 1){
+                    // Don't need to spin any wheels, there's only 1
+                    // player, so just give them the prize.
+                    gameLogic.getCurrentPlayer().addToBalance(GameConfig.spin_to_win_prize_money);
+                    int spinToWinPrizeMoneyThousands = GameConfig.spin_to_win_prize_money/1000;
+                    String eventMessage = "You won the " + spinToWinPrizeMoneyThousands + "K " +
+                            "SpinToWin prize, as you're the last player.";
+                    nextState = new EndTurnState(eventMessage);
+                }
+                else{
+                    nextState = new SpinToWinSetupState();
+                }
+
                 break;
             case Baby:
                 gameLogic.getCurrentPlayer().addDependants(1);
