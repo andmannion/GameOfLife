@@ -1013,7 +1013,7 @@
 				"xLocation": "0.89",
 				"yLocation": "0.5543478260869565",
 				"xDimension": "0.05",
-				"yDimension": "0.043478260869565216",
+				"yDimension": "0.08695652173913043",
 		    "tileMovementType": "GameBoardStopTile",
 		    "gameBoardTileType": "Stop",
 			"gameBoardStopTileType": "Baby"
@@ -1121,19 +1121,6 @@
 				"yDimension": "0.043478260869565216",
 		    "tileMovementType": "GameBoardContinueTile",
 		    "gameBoardTileType": "Baby"
-		  }
-		},
-		{
-		  "id": "aaah",
-		  
-			
-			"gameBoardTile": {
-				"xLocation": "0.89",
-				"yLocation": "0.5978260869565217",
-				"xDimension": "0.05",
-				"yDimension": "0.043478260869565216",
-		    "tileMovementType": "GameBoardContinueTile",
-		    "gameBoardTileType": "Action"
 		  }
 		},
 		{
@@ -2022,10 +2009,6 @@
     },
 	{
       "source": "aaag",
-      "target": "aaah"
-    },
-	{
-      "source": "aaah",
       "target": "aay"
     },
 	{
