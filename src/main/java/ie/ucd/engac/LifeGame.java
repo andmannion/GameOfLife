@@ -46,8 +46,6 @@ public class LifeGame implements WindowListener{
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         jFrame.setIgnoreRepaint(true);
-
-
     } // end of Main (constructor)
 
     /**
@@ -57,10 +55,8 @@ public class LifeGame implements WindowListener{
         container = jFrame.getContentPane();
 
         mainMenu = new MainMenu(this);
-
         container.removeAll();
         container.add(mainMenu);
-
     } // end of constructUI
 
     /**
@@ -79,6 +75,7 @@ public class LifeGame implements WindowListener{
         container.add(playPanel,BorderLayout.CENTER);
 
         gameEngine = new GameEngine(this,playPanel,numPlayers);
+
         mainMenu.setVisible(false);
         playPanel.setVisible(true);
         gameEngine.beginGame();

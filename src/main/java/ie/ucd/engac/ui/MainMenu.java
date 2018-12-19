@@ -2,11 +2,13 @@ package ie.ucd.engac.ui;
 
 import ie.ucd.engac.LifeGame;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class MainMenu extends JPanel implements ActionListener {
 
@@ -34,13 +36,29 @@ public class MainMenu extends JPanel implements ActionListener {
 
         GridBagLayout mainMenuManager = new GridBagLayout();
         setLayout(mainMenuManager);
-        GridBagConstraints buttonAreaConstraints = new GridBagConstraints();
-        buttonAreaConstraints.gridx = 1;
-        buttonAreaConstraints.gridy = 1;
-        constructButtonArea();
+        BufferedImage splashImage = null;
+        try {
+            splashImage = ImageIO.read(Objects.requireNonNull(LifeGame.class.getClassLoader().getResource("splash_header.jpg")));
+        } catch (Exception exception) {
+            System.err.println("Title image failed to load.\n" + exception.toString());
+        }
+
+        JLabel pictureLabel = new JLabel(new ImageIcon(splashImage));
+        GridBagConstraints menuConstraints = new GridBagConstraints();
+        menuConstraints.fill = GridBagConstraints.VERTICAL;
+        menuConstraints.gridx = 1;
+        menuConstraints.gridy = 2;
+        add(pictureLabel,menuConstraints);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.lightGray);
+        constructButtonArea(buttonPanel);
+        menuConstraints.gridx = 1;
+        menuConstraints.gridy = 0;
+        add(buttonPanel,menuConstraints);
     }
 
-    private void constructButtonArea(){
+    private void constructButtonArea(JPanel buttonPanel){
         GridBagConstraints newGameButtonConstraints = new GridBagConstraints();
         newGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
         newGameButtonConstraints.gridx = 1;
@@ -49,7 +67,7 @@ public class MainMenu extends JPanel implements ActionListener {
         newGameButton.setActionCommand("New Game");
         newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newGameButton.addActionListener(this);
-        add(newGameButton,newGameButtonConstraints);
+        buttonPanel.add(newGameButton,newGameButtonConstraints);
 
         GridBagConstraints quitGameButtonConstraints = new GridBagConstraints();
         quitGameButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -59,7 +77,7 @@ public class MainMenu extends JPanel implements ActionListener {
         quitGameButton.setActionCommand("Exit");
         quitGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         quitGameButton.addActionListener(this);
-        add(quitGameButton,quitGameButtonConstraints);
+        buttonPanel.add(quitGameButton,quitGameButtonConstraints);
 
 
         GridBagConstraints playButtonConstraints = new GridBagConstraints();
@@ -70,18 +88,18 @@ public class MainMenu extends JPanel implements ActionListener {
         playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         playButton.setVisible(false);
         playButton.addActionListener(this);
-        add(playButton,playButtonConstraints);
+        buttonPanel.add(playButton,playButtonConstraints);
 
         GridBagConstraints textConstraints = new GridBagConstraints();
         textConstraints.fill = GridBagConstraints.HORIZONTAL;
         textConstraints.gridx = 1;
-        textConstraints.gridy = 1;
+        textConstraints.gridy = 2;
         String text = "Number of players:";
         jTextArea = new JTextArea(text);
         jTextArea.setBackground(Color.lightGray);
         jTextArea.setAlignmentX(Component.CENTER_ALIGNMENT);
         jTextArea.setVisible(false);
-        add(jTextArea,textConstraints);
+        buttonPanel.add(jTextArea,textConstraints);
 
         GridBagConstraints jComboConstraints = new GridBagConstraints();
         jComboConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -93,7 +111,7 @@ public class MainMenu extends JPanel implements ActionListener {
         jCombo.addActionListener(this::setNumPlayers);
         jCombo.setSelectedIndex(0);
         jCombo.setVisible(false);
-        add(jCombo,jComboConstraints);
+        buttonPanel.add(jCombo,jComboConstraints);
     }
 
     private void newGame(){
