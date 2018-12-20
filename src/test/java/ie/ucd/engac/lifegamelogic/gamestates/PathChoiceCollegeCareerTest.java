@@ -37,12 +37,12 @@ class PathChoiceCollegeCareerTest {
 		assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
 		assertNull(gameLogic.getPlayerByIndex(0).getCurrentLocation());
 		assertNull(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice());
-		assertEquals(gameLogic.getPlayerByIndex(0).getNumberOfActionCards(), 0);
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getNumberOfActionCards());
 		assertNull(gameLogic.getPlayerByIndex(0).getCareerPath());
-		assertEquals(gameLogic.getPlayerByIndex(0).getHouseCards().size(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getMaritalStatus(), MaritalStatus.Single);
-		assertEquals(gameLogic.getPlayerByIndex(0).getMovesRemaining(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getHouseCards().size());
+		assertEquals(MaritalStatus.Single, gameLogic.getPlayerByIndex(0).getMaritalStatus());
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getMovesRemaining());
+		assertEquals(GameConfig.starting_money, gameLogic.getPlayerByIndex(0).getCurrentMoney());
 		
 		// Mock messages to logic, performing pathChoiceState functionality
 		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);
