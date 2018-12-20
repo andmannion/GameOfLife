@@ -1,12 +1,18 @@
 package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.cards.CardDeck;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ActionCardDeckTest {
     @Test

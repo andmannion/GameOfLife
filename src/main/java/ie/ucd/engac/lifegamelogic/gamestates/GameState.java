@@ -6,7 +6,6 @@ import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 

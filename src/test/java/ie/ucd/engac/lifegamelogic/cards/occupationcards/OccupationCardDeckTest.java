@@ -2,9 +2,9 @@ package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerTypes;
-import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerTypes;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OccupationCardDeckTest {
     @Test

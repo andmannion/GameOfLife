@@ -1,21 +1,20 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
-import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
-import org.junit.jupiter.api.Test;
-
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PathChoiceCollegeCareerTest {
 	private final int NUM_PLAYERS = 2;

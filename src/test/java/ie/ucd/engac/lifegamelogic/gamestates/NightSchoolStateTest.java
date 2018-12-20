@@ -1,16 +1,15 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.messaging.*;
-import org.junit.jupiter.api.Test;
-
-import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
+import ie.ucd.engac.messaging.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class NightSchoolStateTest {
     private static final int NUM_PLAYERS = 2;
