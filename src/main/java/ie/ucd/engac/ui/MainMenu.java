@@ -37,18 +37,24 @@ public class MainMenu extends JPanel implements ActionListener {
         GridBagLayout mainMenuManager = new GridBagLayout();
         setLayout(mainMenuManager);
         BufferedImage splashImage = null;
+
+        GridBagConstraints menuConstraints = new GridBagConstraints();
+        menuConstraints.fill = GridBagConstraints.VERTICAL;
+        menuConstraints.gridx = 1;
+        menuConstraints.gridy = 0;
+
         try {
             splashImage = ImageIO.read(Objects.requireNonNull(LifeGame.class.getClassLoader().getResource("splash_header.jpg")));
         } catch (Exception exception) {
             System.err.println("Title image failed to load.\n" + exception.toString());
         }
 
-        JLabel pictureLabel = new JLabel(new ImageIcon(splashImage));
-        GridBagConstraints menuConstraints = new GridBagConstraints();
-        menuConstraints.fill = GridBagConstraints.VERTICAL;
-        menuConstraints.gridx = 1;
-        menuConstraints.gridy = 0;
-        add(pictureLabel,menuConstraints);
+        JLabel pictureLabel = null;
+        if (splashImage != null) {
+            pictureLabel = new JLabel(new ImageIcon(splashImage));
+
+            add(pictureLabel,menuConstraints);
+        }
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.lightGray);
