@@ -22,11 +22,9 @@ public class UIHUD implements Drawable {
 
     private int firstStringX;
     private int firstStringY;
-    private int stringLengthX;
     private int stringLengthY;
 
     private int cropAvoidance;
-    private final int spinResultX;
 
     UIHUD(GameUI gameUI, int hudStartY){
         this.gameUI = gameUI;
@@ -39,13 +37,13 @@ public class UIHUD implements Drawable {
 
         firstStringX = 5; //gap
         firstStringY = hudStartY +Math.round(0.08f* boxLengthY);
-        stringLengthX = Math.round(0.1f* panelWidth);
+        int stringLengthX = Math.round(0.1f * panelWidth);
         stringLengthY = Math.round(0.125f* boxLengthY);
         cropAvoidance = panelHeight/10;
 
         rectangle = new Rectangle(boxStartX, hudStartY, panelWidth, boxLengthY);
 
-        spinResultX = panelWidth-3*cropAvoidance;
+        int spinResultX = panelWidth - 3 * cropAvoidance;
     }
 
     private int getStringWidth(String string,Graphics graphics){

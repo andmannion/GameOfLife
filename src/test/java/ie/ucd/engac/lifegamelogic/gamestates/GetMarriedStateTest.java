@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@SuppressWarnings("FieldCanBeLocal")
 class GetMarriedStateTest {
 	private final String PRIOR_TILE_LOCATION = "aa";
 	private static final int NUM_PLAYERS = 2;

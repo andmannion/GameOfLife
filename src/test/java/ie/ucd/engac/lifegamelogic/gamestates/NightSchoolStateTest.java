@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 class NightSchoolStateTest {
     private static final int NUM_PLAYERS = 2;
     private final String PRIOR_TILE_LOCATION = "am";

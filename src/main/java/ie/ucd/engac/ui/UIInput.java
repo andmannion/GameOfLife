@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class UIInput implements Drawable {
 
     private static final int SPIN_WIDTH = 192;

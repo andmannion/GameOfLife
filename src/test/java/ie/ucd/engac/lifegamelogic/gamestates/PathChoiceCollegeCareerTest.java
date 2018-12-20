@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings("FieldCanBeLocal")
 class PathChoiceCollegeCareerTest {
 	private final int NUM_PLAYERS = 2;
 	@Test
