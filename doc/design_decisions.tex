@@ -91,7 +91,7 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 			\end{tabular}
 		\end{flushleft}
 	\end{table}
-	\begin{figure}[!h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=.125]{uml/messaging_internals_uml}
 		\caption{Messaging System Internals.}
@@ -123,7 +123,7 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 		\caption{State Machine Design Doc.}
 		\label{fig:state_machine}
 	\end{figure}
-	\begin{figure}[!h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=.1]{state_machine_high_level}
 		\caption{State Machine Design as Implemented.}
@@ -135,7 +135,7 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 	For example if the logic sends a message requesting that the user select one career card from two options the selection screen is displayed to the user alongside the relevant buttons and clicking either of these will send a \texttt{DecisionResponse} message as a response to the logic.
 	
 	Sending a message from the User Interface is a blocking activity in that thread and prevents the user from doing anything until a response has been received from the user.
-	\begin{figure}[!h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=.35]{uml/ui_uml}
 		\caption{UI Internals.}
@@ -143,10 +143,20 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 	\end{figure}
 	
 	\subsection*{Board}
-	The GameBoard object itself uses a unidirectional acyclic graph to represent the layout of the tiles on the board relative to each other. The layout of this board is at present specified in a \texttt{JSON} configuration file. This configuration file consists of to
+	The \texttt{GameBoard} object itself uses a unidirectional acyclic graph to represent the layout of the tiles on the board relative to each other. The layout of this board is at present specified in a \texttt{JSON} configuration file. This configuration file consists of two lists:
+	\begin{itemize}
+	\item List of the tiles, with each element specifying the tile type, position in the UI, and a unique tile identifier (i.e. the vertices of the graph).
+	\item A list of the edges of the graph, each element having a source and destination tile. The tiles are referenced using their unique identifier.
+	\end{itemize}
+	
+	The graph object, and the ID-to-tile hashmap are initialised using an object that handles the \texttt{JSON} parsing itself. This is an application of the \textit{Fa\c{c}ade} design pattern, from GoF.
+	
+	\subsection*{Card Decks}
+	The initialisation of each of the \texttt{CardDeck}s is handled using a similar approach to the \texttt{GameBoard} initialisation. The \texttt{JSON} parsing itself is handled by a \textit{Fa\c{c}ade} object, which outputs a list of the cards of each deck. This list can then be used to construct the internal \texttt{LinkedList} used to represent the Deck data structure in our implementation.
 	
 	\subsection*{Testing}
-	\textit{JUnit} was the unit and integration testing framework used for our software system.
+	\textit{JUnit} was the unit and integration testing framework used for our software system. We created unit tests for some of the simpler classes, like the various Deck objects, and the \texttt{Bank} functionality.
+	Integration tests (i.e. tests that test behaviour involving communication between multiple classes) for asserting the correct behaviour for each tile type were created. These integration tests are specific to the particular layout of the board that we have created ourselves.
 	
 	
 \end{document}
