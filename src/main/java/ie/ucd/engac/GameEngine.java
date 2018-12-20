@@ -1,6 +1,7 @@
 package ie.ucd.engac;
 
 import ie.ucd.engac.lifegamelogic.GameLogicInterface;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
@@ -40,7 +41,7 @@ public class GameEngine implements Runnable {
         panelWidth = jPanel.getWidth();
         panelHeight = jPanel.getHeight();
 
-        GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
+        GameBoard gameBoard = new GameBoard(new DefaultBoardConfigHandler(GameConfig.game_board_config_file_location));
         
         MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(gameBoard, numPlayers);
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);

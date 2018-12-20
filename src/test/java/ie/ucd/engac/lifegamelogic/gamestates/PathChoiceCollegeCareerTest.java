@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class PathChoiceCollegeCareerTest {
 		
 		// Set up test
 		TestHelpers.importGameConfig();
-		GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
+		GameBoard gameBoard = new GameBoard(new DefaultBoardConfigHandler(GameConfig.game_board_config_file_location));
 		Spinnable testSpinner = new TestSpinner(1);
 		GameLogic gameLogic = new GameLogic(gameBoard, NUM_PLAYERS, testSpinner);
 		
