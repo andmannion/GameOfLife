@@ -3,10 +3,10 @@ package ie.ucd.engac.lifegamelogic.cards;
 import java.util.LinkedList;
 
 public abstract class Deck<T> {
-	protected LinkedList<T> items;
+	LinkedList<T> items;
 
 	public Deck() {
-		items = new LinkedList<T>();
+		items = new LinkedList<>();
 	}
 
 	public T popTopCard() {
