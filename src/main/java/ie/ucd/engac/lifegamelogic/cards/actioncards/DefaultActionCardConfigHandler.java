@@ -55,7 +55,7 @@ public class DefaultActionCardConfigHandler implements CardConfigHandler<ActionC
         JsonElement jsonElement = null;
 
         try {
-            jsonElement = (JsonElement) streamParser.next();
+            jsonElement = streamParser.next();
         } catch (Exception e) {
             System.err.println("Exception in ActionCardDeck...resourceToJson(): \n" + e.toString());
             System.exit(-1);

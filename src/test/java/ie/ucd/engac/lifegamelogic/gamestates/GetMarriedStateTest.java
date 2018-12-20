@@ -85,8 +85,7 @@ class GetMarriedStateTest {
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
 		Spinnable spinner = new TestSpinner(1);
-		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
-		
-		return gameLogic;
+
+        return TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 	}
 }

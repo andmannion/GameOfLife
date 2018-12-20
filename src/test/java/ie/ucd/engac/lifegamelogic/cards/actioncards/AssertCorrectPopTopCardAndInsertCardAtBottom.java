@@ -14,7 +14,7 @@ class AssertCorrectPopTopCardAndInsertCardAtBottom {
 	void assertDeckCreated() {
 		TestHelpers.importGameConfig();
 		
-		CardDeck<ActionCard> actionCardDeck = new CardDeck<ActionCard>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
+		CardDeck<ActionCard> actionCardDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 		
 		assertEquals(55, actionCardDeck.getNumberOfRemainingCards());
 		

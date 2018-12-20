@@ -104,9 +104,9 @@ public class ShadowPlayer {
         else{
             switch(occupation.getOccupationCardType()){
                 case Career:
-                    return ((CareerCard) occupation).displayChoiceDetails();
+                    return occupation.displayChoiceDetails();
                 case CollegeCareer:
-                    return ((CollegeCareerCard) occupation).displayChoiceDetails();
+                    return occupation.displayChoiceDetails();
                 default:
                     return null;
             }

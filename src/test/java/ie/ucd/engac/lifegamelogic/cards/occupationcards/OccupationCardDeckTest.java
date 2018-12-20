@@ -22,7 +22,7 @@ class OccupationCardDeckTest {
 
         TestHelpers.importGameConfig();
 
-        CardDeck<OccupationCard> testCollegeCareerCardDeck = new CardDeck<OccupationCard>(new DefaultOccupationCardConfigHandler(GameConfig.college_career_card_deck_config_file_location));
+        CardDeck<OccupationCard> testCollegeCareerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.college_career_card_deck_config_file_location));
 
         // Must assert that the 12 unique CollegeCareerCards are present
         HashMap<CollegeCareerTypes, CollegeCareerCard> collegeCareerCardHashSet = new HashMap<>();
@@ -67,7 +67,7 @@ class OccupationCardDeckTest {
 
         TestHelpers.importGameConfig();
 
-        CardDeck<OccupationCard> testStandardCareerCardDeck = new CardDeck<OccupationCard>(new DefaultOccupationCardConfigHandler(GameConfig.career_card_deck_config_file_location));
+        CardDeck<OccupationCard> testStandardCareerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.career_card_deck_config_file_location));
 
         // Must assert that the 8 unique CareerCards are present
         HashMap<CareerTypes, CareerCard> careerCardHashSet = new HashMap<>();

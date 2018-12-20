@@ -15,6 +15,7 @@ import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SuppressWarnings("FieldCanBeLocal")
 class PathChoiceCollegeCareerTest {
@@ -33,11 +34,11 @@ class PathChoiceCollegeCareerTest {
 		
 		// Assert preconditions
 		assertEquals(gameLogic.getNumberOfUninitialisedPlayers(), NUM_PLAYERS);
-		assertEquals(gameLogic.getPlayerByIndex(0).getOccupationCard(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentLocation(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice(), null);
+		assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
+		assertNull(gameLogic.getPlayerByIndex(0).getCurrentLocation());
+		assertNull(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice());
 		assertEquals(gameLogic.getPlayerByIndex(0).getNumberOfActionCards(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCareerPath(), null);
+		assertNull(gameLogic.getPlayerByIndex(0).getCareerPath());
 		assertEquals(gameLogic.getPlayerByIndex(0).getHouseCards().size(), 0);
 		assertEquals(gameLogic.getPlayerByIndex(0).getMaritalStatus(), MaritalStatus.Single);
 		assertEquals(gameLogic.getPlayerByIndex(0).getMovesRemaining(), 0);

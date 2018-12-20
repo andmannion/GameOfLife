@@ -47,7 +47,7 @@ class NightSchoolStateTest {
         messageFromLogic = gameLogic.handleInput(messageToLogic);
 
         // Assert that a new college career card has been assigned
-        assertFalse(initialCollegeCareerCard.equals((CollegeCareerCard) currentPlayerUnderTest.getOccupationCard()));
+        assertNotEquals(initialCollegeCareerCard, (CollegeCareerCard) currentPlayerUnderTest.getOccupationCard());
 
         // Assert that night school fees have been deducted from the current player's balance
         int balanceDelta = initialBalance - currentPlayerUnderTest.getCurrentMoney();
@@ -106,7 +106,7 @@ class NightSchoolStateTest {
         messageToLogic = new DecisionResponseMessage(NightSchoolState.KEEP_CAREER_INDEX, LifeGameMessageTypes.OptionDecisionResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
 
-        assertTrue(initialCollegeCareerCard.equals((CollegeCareerCard) currentPlayerUnderTest.getOccupationCard()));
+        assertEquals(initialCollegeCareerCard, (CollegeCareerCard) currentPlayerUnderTest.getOccupationCard());
 
         // Assert that night school fees have been deducted from the current player's balance
         int balanceDelta = initialBalance - currentPlayerUnderTest.getCurrentMoney();

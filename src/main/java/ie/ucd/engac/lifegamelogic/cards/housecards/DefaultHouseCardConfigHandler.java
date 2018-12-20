@@ -30,7 +30,7 @@ public class DefaultHouseCardConfigHandler implements CardConfigHandler<HouseCar
 		JsonElement jsonElement = null;
 
 		try {
-			jsonElement = (JsonElement) streamParser.next();
+			jsonElement = streamParser.next();
 		} catch (Exception e) {
 			System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);

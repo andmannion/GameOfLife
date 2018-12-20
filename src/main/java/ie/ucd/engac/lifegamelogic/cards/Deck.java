@@ -6,7 +6,7 @@ public abstract class Deck<T> {
 	protected LinkedList<T> items;
 
 	public Deck() {
-		items = new LinkedList<T>();
+		items = new LinkedList<>();
 	}
 
 	public T popTopCard() {

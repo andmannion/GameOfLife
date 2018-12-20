@@ -25,13 +25,13 @@ public class Bank {
 
 	private void initialiseCardDecks() {
 		
-		actionCardDeck = new CardDeck<ActionCard>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
+		actionCardDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 		actionCardDeck.shuffle();
-		houseCardDeck = new CardDeck<HouseCard>(new DefaultHouseCardConfigHandler(GameConfig.house_card_deck_config_file_location));
+		houseCardDeck = new CardDeck<>(new DefaultHouseCardConfigHandler(GameConfig.house_card_deck_config_file_location));
 		houseCardDeck.shuffle();
-		careerCardDeck = new CardDeck<OccupationCard>(new DefaultOccupationCardConfigHandler(GameConfig.career_card_deck_config_file_location));
+		careerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.career_card_deck_config_file_location));
 		careerCardDeck.shuffle();
-		collegeCareerCardDeck = new CardDeck<OccupationCard>(new DefaultOccupationCardConfigHandler(GameConfig.college_career_card_deck_config_file_location));
+		collegeCareerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.college_career_card_deck_config_file_location));
 		collegeCareerCardDeck.shuffle();
 	}
 	
