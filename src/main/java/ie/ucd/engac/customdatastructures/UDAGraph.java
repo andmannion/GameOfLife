@@ -21,7 +21,7 @@ public class UDAGraph<V>{
 		private HashMap<V, ArrayList<Edge<V>>> neighbours;
 
 		public UDAGraph() {
-			neighbours = new HashMap<V, ArrayList<Edge<V>>>();
+			neighbours = new HashMap<>();
 		}
 		
 		public void add (V vertex) {
@@ -29,7 +29,7 @@ public class UDAGraph<V>{
 				return;
 			}
 			
-			neighbours.put(vertex, new ArrayList<Edge<V>>());
+			neighbours.put(vertex, new ArrayList<>());
 		}
 		
 		public int getNumberOfEdges() {
@@ -46,11 +46,11 @@ public class UDAGraph<V>{
 			this.add(from);
 			this.add(to);
 			
-			neighbours.get(from).add(new Edge<V>(to));
+			neighbours.get(from).add(new Edge<>(to));
 		}
 		
 		public ArrayList<V> outboundNeighbours(V vertex){
-			ArrayList<V> neighbourList = new ArrayList<V>();
+			ArrayList<V> neighbourList = new ArrayList<>();
 			
 			for(Edge<V> edge : neighbours.get(vertex)){
 				neighbourList.add(edge.vertex);

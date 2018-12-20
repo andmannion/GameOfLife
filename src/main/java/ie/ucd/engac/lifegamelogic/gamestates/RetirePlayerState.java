@@ -3,7 +3,10 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 public class RetirePlayerState extends GameState {
 

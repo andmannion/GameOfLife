@@ -2,14 +2,16 @@ package TestOnly;
 
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.LifeGame;
+import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
-import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 import java.io.InputStream;
 import java.util.Properties;

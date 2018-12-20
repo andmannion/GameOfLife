@@ -4,17 +4,21 @@ import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTileTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 class FamilyStateTest {
     private static final int NUM_PLAYERS = 2;
     private final String PRIOR_TILE_LOCATION = "aap";

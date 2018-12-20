@@ -74,22 +74,17 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 	\subsubsection*{Messages}
 	Twelve messages have been implemented mostly in pairs, which represent a message from the logic and the corresponding response from the UI. Where possible these messages are created using the same class and varying an enumerable message type, however some messages are of a variation on the format and require separate classes to represent them. The types of messages are denoted below along with their relationship structure.
 	\begin{table}[!ht]
-		\begin{flushleft} 
-			\begin{tabular}{l} 
-				StartupMessage\\
-				SpinRequest\\
-				SpinResponse\\
-				LargeDecisionRequest\\
-				LargeDecisionResponse\\
-				OptionDecisionRequest\\
-				OptionDecisionResponse\\
-				AckRequest\\
-				AckResponse\\
-				EndGameMessage\\
-				UIConfigMessage\\
-				SpinResult\\	
+		\begin{center} 
+			\begin{tabular}{ll} 
+				StartupMessage&UIConfigMessage\\
+				SpinRequest&SpinResponse\\
+				LargeDecisionRequest&LargeDecisionResponse\\
+				OptionDecisionRequest&OptionDecisionResponse\\
+				AckRequest&AckResponse\\
+				EndGameMessage&\\
+				SpinResult&\\	
 			\end{tabular}
-		\end{flushleft}
+		\end{center}
 	\end{table}
 	\begin{figure}[H]
 		\centering
@@ -115,8 +110,7 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 	
 	The way in which we managed this was as follows:
 	
-	When the player had spun the wheel at the start of their turn the logic then enters
-	\texttt{HandlePlayerMoveState}. Once in this state the logic establishes, depending on the tile landed on, what the next state must be. If the state is not complex we handle the turn interaction in \texttt{HandlePlayerMoveState} itself. However, if the state is more complicated, the state machine then transitions into a state corresponding to that tile's action, which takes over the handling of user input until the tile action sequence has been completed.
+	When the player had spun the wheel at the start of their turn the logic then enters \texttt{HandlePlayerMoveState}. Once in this state the logic establishes, depending on the tile landed on, what the next state must be. If the state is not complex we handle the turn interaction in \texttt{HandlePlayerMoveState} itself. However, if the state is more complicated, the state machine then transitions into a state corresponding to that tile's action, which takes over the handling of user input until the tile action sequence has been completed.
 	\begin{figure}[!h]
 		\centering
 		\includegraphics[scale=.4]{highlevel_state_diagram}
@@ -155,7 +149,7 @@ The messaging interface itself is quite simple. The \texttt{GameEngine} object c
 	The initialisation of each of the \texttt{CardDeck}s is handled using a similar approach to the \texttt{GameBoard} initialisation. The \texttt{JSON} parsing itself is handled by a \textit{Fa\c{c}ade} object, which outputs a list of the cards of each deck. This list can then be used to construct the internal \texttt{LinkedList} used to represent the Deck data structure in our implementation.
 	
 	\subsection*{Testing}
-	\textit{JUnit} was the unit and integration testing framework used for our software system. We created unit tests for some of the simpler classes, like the various Deck objects, and the \texttt{Bank} functionality.
+	\textit{JUnit 5} was the unit and integration testing framework used for our software system. We created unit tests for some of the simpler classes, like the various Deck objects, and the \texttt{Bank} functionality.
 	Integration tests (i.e. tests that test behaviour involving communication between multiple classes) for asserting the correct behaviour for each tile type were created. These integration tests are specific to the particular layout of the board that we have created ourselves.
 	
 	

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class UIBoard implements Drawable {
 
     private int KERNEL_SIZE = 11;

@@ -1,12 +1,8 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import org.junit.jupiter.api.Test;
-
-import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
@@ -14,7 +10,12 @@ import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+@SuppressWarnings("FieldCanBeLocal")
 class GetMarriedStateTest {
 	private final String PRIOR_TILE_LOCATION = "aa";
 	private static final int NUM_PLAYERS = 2;
@@ -84,8 +85,7 @@ class GetMarriedStateTest {
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
 		Spinnable spinner = new TestSpinner(1);
-		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
-		
-		return gameLogic;
+
+        return TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 	}
 }

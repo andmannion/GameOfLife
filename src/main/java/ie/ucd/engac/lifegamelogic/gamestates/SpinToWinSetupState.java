@@ -110,7 +110,7 @@ public class SpinToWinSetupState extends GameState {
 		int selectedNumber = Integer.parseInt(outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails());
 
 		if(!playerIndexChoiceMap.containsKey(relatedPlayerIndex)) {
-			playerIndexChoiceMap.put(relatedPlayerIndex, new ArrayList<Integer>());
+			playerIndexChoiceMap.put(relatedPlayerIndex, new ArrayList<>());
 			playerIndexChoiceMap.get(relatedPlayerIndex).add(selectedNumber);
 		}
 		else {

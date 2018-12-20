@@ -28,7 +28,7 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 
 		Gson gson = new GsonBuilder().registerTypeAdapterFactory(occupationCardAdapterFactory).create();
 
-		ArrayList<OccupationCard> occupationCards = new ArrayList<OccupationCard>();
+		ArrayList<OccupationCard> occupationCards = new ArrayList<>();
 
 		for (JsonElement occupationCardAsJsonObj : occupationCardsAsJsonArray) {
 			OccupationCard occupationCard = gson.fromJson(occupationCardAsJsonObj, OccupationCard.class);
@@ -45,7 +45,7 @@ public class DefaultOccupationCardConfigHandler implements CardConfigHandler<Occ
 		JsonElement jsonElement = null;
 
 		try {
-			jsonElement = (JsonElement) streamParser.next();
+			jsonElement = streamParser.next();
 		} catch (Exception e) {
 			System.err.println("Exception in GameBoard...initialiseParser(): \n" + e.toString());
 			System.exit(-1);

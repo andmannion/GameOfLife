@@ -27,6 +27,7 @@ public class GameEngine implements Runnable {
     private Graphics graphics;
     private Image backBuffer;
     private volatile boolean running;
+    @SuppressWarnings("FieldCanBeLocal")
     private Thread renderingThread;
 
     /**

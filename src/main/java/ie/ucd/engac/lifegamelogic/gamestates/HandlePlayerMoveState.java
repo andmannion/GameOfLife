@@ -10,7 +10,10 @@ import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardStopTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTileTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import ie.ucd.engac.messaging.LifeGameRequestMessage;
+import ie.ucd.engac.messaging.SpinResultMessage;
 
 import java.util.ArrayList;
 
