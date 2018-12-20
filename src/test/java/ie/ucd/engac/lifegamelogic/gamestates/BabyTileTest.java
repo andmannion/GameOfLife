@@ -10,6 +10,7 @@ import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -70,10 +71,15 @@ public class BabyTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         assertEquals(numberOfDependants+numDependantsToAdd, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
+        // Check preconditions
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
@@ -103,16 +109,25 @@ public class BabyTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.SpinRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //check that the correct number of kids has been added
         assertEquals(numberOfDependants+expectedDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
 
+        // Check preconditions
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());

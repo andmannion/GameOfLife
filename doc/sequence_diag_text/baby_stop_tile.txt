@@ -4,7 +4,7 @@ user->UI: click spin
 UI->logic: spin message [handleInput()]
 logic->logic: compute roll [SpinTheWheel()]
 logic->logic: land on baby stop title [tryToMove()]
-logic->UI: request a spin from user to determine dependants [setReponseMessage()]
+logic->UI: request a spin from user to determine dependants [setResponseMessage()]
 user->UI: click spin
 UI->logic: spin message [handleInput()]
 logic->logic: compute roll[SpinTheWheel()]

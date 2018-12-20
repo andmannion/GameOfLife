@@ -52,8 +52,13 @@ public class HolidayTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
+        // Check that nothing untoward has happened
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
@@ -64,5 +69,6 @@ public class HolidayTileTest {
         assertEquals(maritalStatus, gameLogic.getPlayerByIndex(0).getMaritalStatus());
         assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
         assertEquals(playerMoney, gameLogic.getPlayerByIndex(0).getCurrentMoney());
+        assertEquals(numberOfDependants, gameLogic.getPlayerByIndex(0).getNumberOfDependants());
     }
 }

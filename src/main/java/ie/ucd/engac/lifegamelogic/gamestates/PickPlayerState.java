@@ -1,6 +1,8 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
+import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCardTypes;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.PlayersPayActionCard;
 import ie.ucd.engac.messaging.*;
 
@@ -26,7 +28,8 @@ public class PickPlayerState extends GameState {
             }
         }
 
-        String eventMessage = "Pick a player to receive 20k from";
+        String eventMessage = ActionCardTypes.PlayersPay + " Action: Pick a player to receive " +
+                GameConfig.players_pay_amount/1000 + "K from";
 
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
         LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType, gameLogic.getCurrentShadowPlayer());
@@ -53,14 +56,9 @@ public class PickPlayerState extends GameState {
             }
             gameLogic.getCurrentPlayer().addToBalance(amount);
             gameLogic.subtractFromPlayersBalance(playerIndex,amount);
-            String eventMessage = "Action: Player " + gameLogic.getPlayerByIndex(playerIndex).getPlayerNumber() + "paid you "+ amount;
+            String eventMessage = ActionCardTypes.PlayersPay + " Action: Player " + gameLogic.getPlayerByIndex(playerIndex).getPlayerNumber() + " paid you " + amount + ".";
             nextState = new EndTurnState(eventMessage);
         }
         return nextState;
-    }
-
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // Must clear the sent message?
     }
 }

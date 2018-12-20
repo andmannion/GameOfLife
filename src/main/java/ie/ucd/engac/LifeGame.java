@@ -11,8 +11,8 @@ import java.util.Properties;
 
 public class LifeGame implements WindowListener{
 
-    private int panelWidth = 1280;
-    private int panelHeight = 720;
+    private int panelWidth;
+    private int panelHeight;
     private JFrame jFrame;
     private JPanel playPanel;
     private MainMenu mainMenu;
@@ -27,16 +27,17 @@ public class LifeGame implements WindowListener{
         InputStream inputStream;
         Properties properties = new Properties();
         try{
-            inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");//new FileInputStream("src/main/resources/config.properties");
+            inputStream = LifeGame.class.getClassLoader().getResourceAsStream("config.properties");
 
             properties.load(inputStream);
-            panelWidth = Integer.parseInt(properties.getProperty("PANWIDTH"));
-            panelHeight = Integer.parseInt(properties.getProperty("PANHEIGHT"));
+            new GameConfig(properties);
+            panelWidth = GameConfig.panelWidth;
+            panelHeight = GameConfig.panelHeight;
         }
         catch(Exception exception){
             System.err.println("config.properties not found.");
+            System.exit(-1);
         }
-        new GameConfig(properties);
         Dimension dimensions = new Dimension(panelWidth,panelHeight);
         constructUI();
         jFrame.addWindowListener(this);
@@ -45,8 +46,6 @@ public class LifeGame implements WindowListener{
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         jFrame.setIgnoreRepaint(true);
-
-
     } // end of Main (constructor)
 
     /**
@@ -56,10 +55,8 @@ public class LifeGame implements WindowListener{
         container = jFrame.getContentPane();
 
         mainMenu = new MainMenu(this);
-
         container.removeAll();
         container.add(mainMenu);
-
     } // end of constructUI
 
     /**
@@ -71,13 +68,14 @@ public class LifeGame implements WindowListener{
         playPanel = new JPanel();
         playPanel.setVisible(false);
         playPanel.setBackground(Color.white);
-        playPanel.setPreferredSize( new Dimension(panelWidth, panelHeight));
+        playPanel.setSize( new Dimension(container.getWidth(), container.getHeight()));
         playPanel.setLayout(null);
         JTextField textField = new JTextField("Error: Rendering error");
         playPanel.add(textField);
-        container.add(playPanel);
+        container.add(playPanel,BorderLayout.CENTER);
 
         gameEngine = new GameEngine(this,playPanel,numPlayers);
+
         mainMenu.setVisible(false);
         playPanel.setVisible(true);
         gameEngine.beginGame();
@@ -127,5 +125,7 @@ public class LifeGame implements WindowListener{
     public void windowClosed(WindowEvent window_event) {}
     @Override
     public void windowOpened(WindowEvent window_event) {}
+
+
 
 }

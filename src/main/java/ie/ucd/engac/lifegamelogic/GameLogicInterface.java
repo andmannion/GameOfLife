@@ -13,7 +13,6 @@ public class GameLogicInterface implements MessageReceiverAndResponder<LifeGameM
 
 	@Override
 	public LifeGameMessage receiveMessage(LifeGameMessage lifeGameMessage) {
-		LifeGameMessage gameLogicResponse = gameLogic.handleInput(lifeGameMessage);		
-		return gameLogicResponse;
+		return gameLogic.handleInput(lifeGameMessage);
 	}		 
 }

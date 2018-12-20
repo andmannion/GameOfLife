@@ -1,8 +1,6 @@
 package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
-import ie.ucd.engac.lifegamelogic.cards.Card;
-
-public abstract class ActionCard extends Card{
+public abstract class ActionCard {
 	protected ActionCardTypes actionCardType;
 	
 	public ActionCardTypes getActionCardType() {

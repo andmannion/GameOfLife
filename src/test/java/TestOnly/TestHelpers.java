@@ -2,13 +2,16 @@ package TestOnly;
 
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.LifeGame;
+import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
 import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
-import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.gamestates.PathChoiceState;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -20,7 +23,7 @@ public class TestHelpers {
         //setup object with non functional spinner
 
         importGameConfig();
-        GameLogic gameLogic = new GameLogic(new GameBoard(GameConfig.game_board_config_file_location), numberOfPlayers, new TestSpinner(0));
+        GameLogic gameLogic = new GameLogic(new GameBoard(new DefaultBoardConfigHandler(GameConfig.game_board_config_file_location)), numberOfPlayers, new TestSpinner(0));
 
         LifeGameMessage initialMessage;
         LifeGameMessage responseMessage;
@@ -57,6 +60,11 @@ public class TestHelpers {
             //send back a spin response
             spinMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(spinMessage);
+
+            assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+            spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            responseMessage = gameLogic.handleInput(spinMessage);
+
             assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
             ackMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);

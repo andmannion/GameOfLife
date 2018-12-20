@@ -16,8 +16,6 @@ import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.RepeatedTest;
 
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ActionTileTest {
@@ -29,6 +27,7 @@ public class ActionTileTest {
         String priorTile = "c";
         String actionTile = "d";
 
+        // Set up test
         Player player = gameLogic.getCurrentPlayer();
         player.setCurrentLocation(new BoardLocation(priorTile));
 
@@ -39,15 +38,20 @@ public class ActionTileTest {
         int numberOfActionCards = player.getNumberOfActionCards();
         int initMoney = player.getCurrentMoney();
 
-        //assert preconditions
+        // Assert preconditions
         assertEquals(0, numberOfActionCards);
 
         // Mock messages to logic, performing turn functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         LifeGameMessageTypes lifeGameMessageType = responseMessage.getLifeGameMessageType();
 
+        // Check the tile action
         assertTrue(lifeGameMessageType == LifeGameMessageTypes.AckRequest || lifeGameMessageType == LifeGameMessageTypes.LargeDecisionRequest || lifeGameMessageType == LifeGameMessageTypes.OptionDecisionRequest);
         switch (lifeGameMessageType){
             case AckRequest: //simple type
@@ -63,7 +67,6 @@ public class ActionTileTest {
                 CollegeCareerCard newCard = ((CollegeCareerCard)gameLogic.getPlayerByIndex(0).getOccupationCard());
 
                 assertNotSame(oldCard, newCard, "did not assign new career card");
-
                 break;
             case LargeDecisionRequest:
                 playersPayCardTest(gameLogic);
@@ -97,7 +100,7 @@ public class ActionTileTest {
     }
 
 
-    private void careerChangeCardTest(GameLogic gameLogic){ //TODO duplicate code from NightSchoolSetup/Graduation
+    private void careerChangeCardTest(GameLogic gameLogic){
         int firstCollegeCareerCardChoice = 0;
         // Just choose the first CollegeCareerCard
         LifeGameMessage messageToLogic = new DecisionResponseMessage(firstCollegeCareerCardChoice,LifeGameMessageTypes.OptionDecisionResponse);

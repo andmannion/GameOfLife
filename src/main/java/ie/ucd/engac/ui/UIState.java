@@ -7,9 +7,5 @@ public enum UIState {
     PostSpin,
     CardChoice,
     LargeChoice,
-    Spin2WinPicking,
-    Spin2WinRolling,
-    BabyAcquisition,
-    Wedding,
     EndGame
 }

@@ -1,9 +1,8 @@
 package ie.ucd.engac.lifegamelogic.cards.housecards;
 
-import ie.ucd.engac.lifegamelogic.cards.Card;
 import ie.ucd.engac.messaging.Chooseable;
 
-public class HouseCard extends Card implements Chooseable {
+public class HouseCard implements Chooseable {
 	private final HouseTypes houseType;				// Values are final as their value should not change after having been initialised to some value
 	
 	public HouseTypes getHouseType() {
@@ -22,7 +21,7 @@ public class HouseCard extends Card implements Chooseable {
 
     /**
      *
-     * @param bool true if an odd number was spun, false if even
+     * @param oddNumberWasSpun true if an odd number was spun, false if even
      * @return the sale price as an integer
      */
 	public int getSpinForSalePrice(boolean oddNumberWasSpun) {
@@ -50,7 +49,7 @@ public class HouseCard extends Card implements Chooseable {
 		String string = "";
 		string = string.concat("Type: " + houseType.toString() + "\n");
 		string = string.concat(" Cost: " + purchasePrice + "\n");
-		string = string.concat(" Sale (odd/even): " + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
+		string = string.concat(" Sale (odd/even):\n" + spinForSalePriceOddNum + "/" + spinForSalePriceEvenNum + " \n");
 		return string;
 	}
 }

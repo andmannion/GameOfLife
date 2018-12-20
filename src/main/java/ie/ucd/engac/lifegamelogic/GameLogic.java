@@ -10,8 +10,9 @@ import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles.GameBoardTile;
 import ie.ucd.engac.lifegamelogic.gamestates.GameSetupState;
 import ie.ucd.engac.lifegamelogic.gamestates.GameState;
+import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparator;
+import ie.ucd.engac.lifegamelogic.playerlogic.PlayerMoneyComparatorDescending;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.ShadowPlayer;
 
@@ -80,12 +81,14 @@ public class GameLogic {
      */
     public ShadowPlayer getShadowPlayer(int playerIndex){
 	    Player player = getPlayerByIndex(playerIndex);
+        if (player != null) {
+          int numLoans = player.getNumberOfLoans(this);
+          int loans = player.getTotalLoansOutstanding(this);
+          GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
 
-        int numLoans = player.getNumberOfLoans(this);
-        int loans = player.getTotalLoansOutstanding(this);
-        GameBoardTile gameBoardTile = gameBoard.getGameBoardTileFromID(player.getCurrentLocation());
-
-        return new ShadowPlayer(player,numLoans,loans,gameBoardTile);
+          return new ShadowPlayer(player, numLoans, loans, gameBoardTile);
+        }
+        return null;
     }
 
     /**
@@ -253,7 +256,7 @@ public class GameLogic {
      */
     public ArrayList<Player> getRankedRetiredPlayers(){
 	    ArrayList<Player> ranked = retiredPlayers;
-        ranked.sort(new PlayerMoneyComparator());
+        ranked.sort(new PlayerMoneyComparatorDescending());
         return ranked;
     }
 
@@ -343,6 +346,21 @@ public class GameLogic {
     }
 
     // Occupation card related
+    public OccupationCard getTopRelevantOccupationCard(CareerPathTypes careerPathType) {
+        OccupationCard topRelevantCard;
+        switch (careerPathType) {
+            case CollegeCareer:
+                topRelevantCard = getTopCollegeCareerCard();
+                break;
+            case StandardCareer:
+                topRelevantCard = getTopStandardCareerCard();
+                break;
+            default:
+                topRelevantCard = null;
+        }
+        return topRelevantCard;
+    }
+
     /**
      * gets the top standard career card from the deck
      */
@@ -369,8 +387,8 @@ public class GameLogic {
             bank.returnCollegeCareerCard(occupationCardToBeReturned);
         }
     }
-
     // Action card related
+
     /**
      * gets the top action card from the deck
      */

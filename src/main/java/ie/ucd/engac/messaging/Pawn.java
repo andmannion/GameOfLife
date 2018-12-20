@@ -4,11 +4,11 @@ import java.awt.*;
 
 public class Pawn {
 
-    private int playerNumber;
-    private int numDependants;
-    private double xLocation;
-    private double yLocation;
-    private Color colour;
+    protected int playerNumber;
+    protected int numDependants;
+    protected double xLocation;
+    protected double yLocation;
+    protected Color colour;
 
     public Pawn(double xLocation, double yLocation, Color colour, int playerNumber, int numDependants){
         this.xLocation = xLocation;
@@ -16,10 +16,6 @@ public class Pawn {
         this.colour = colour;
         this.playerNumber = playerNumber;
         this.numDependants = numDependants;
-    }
-
-    public int getPlayerNumber() {
-        return playerNumber;
     }
 
     public void setXLocation(double xLocation) {
@@ -38,8 +34,16 @@ public class Pawn {
         return yLocation;
     }
 
+    public void setNumDependants(int numDependants) {
+        this.numDependants = numDependants;
+    }
+
     public int getNumDependants() {
         return numDependants;
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     public Color getColour() {

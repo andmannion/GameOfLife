@@ -19,7 +19,7 @@ public class HouseTileDecisionState extends GameState {
             choices.add(new ChooseableString("Sell a house"));
         }
 
-        String eventMessage = "What action would you like to perform?";
+        String eventMessage = "HouseTile: What action would you like to perform?";
 
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
         LifeGameMessage replyMessage = new DecisionRequestMessage(choices,gameLogic.getCurrentPlayer().getPlayerNumber(), eventMessage, requestType, gameLogic.getCurrentShadowPlayer());
@@ -39,20 +39,16 @@ public class HouseTileDecisionState extends GameState {
             int choiceIndex = choiceMessage.getChoiceIndex();
 
             if (choiceIndex == 0){ //do nothing, turn ends
-                return new EndTurnState();
+                nextState = new EndTurnState();
             }
             else if (choiceIndex == 1){ //if they wish to buy
-                return new HouseChoiceState();
+                nextState = new HouseChoiceState();
             }
             else { //if they wish to sell
-                return new HouseSaleState();
+                nextState = new HouseSaleState();
             }
         }
-        return null;
+        return nextState;
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-        // Must clear the sent message?
-    }
 }

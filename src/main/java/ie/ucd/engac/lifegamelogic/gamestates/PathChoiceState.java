@@ -4,16 +4,16 @@ import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 
 public class PathChoiceState extends GameState {
 	public static final int STANDARD_CAREER_CHOICE_INDEX = 0;
 	public static final int COLLEGE_CAREER_CHOICE_INDEX = 1;
 
 	@Override
-	public void enter(GameLogic gameLogic) {
-
-	}
+	public void enter(GameLogic gameLogic) {}
 
 	@Override
 	public GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage) {
@@ -47,11 +47,6 @@ public class PathChoiceState extends GameState {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void exit(GameLogic gameLogic) {
-		// Must clear the sent message?
 	}
 
 	private OccupationCardTypes parsePathChoiceResponse(DecisionResponseMessage pathChoiceMessage) {

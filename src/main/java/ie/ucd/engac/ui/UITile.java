@@ -5,16 +5,27 @@ import ie.ucd.engac.messaging.Tile;
 import java.awt.*;
 
 public class UITile extends Tile implements Drawable{
-    private int dimension;
+    private Color tileColour;
 
-    UITile(Tile tile,double xLocation, double yLocation ,int dimension){
-        super(tile.getType(),xLocation,yLocation);
-        this.dimension = dimension;
+    UITile(Tile tile,double xLocation, double yLocation, double xDimension,double yDimension){
+        super(tile.getType(),tile.getTypeString(),xLocation,yLocation,xDimension,yDimension);
+        tileColour = UIColours.getTileColour(tile.getType());
     }
 
     @Override
     public void draw(Graphics graphics){
-        graphics.setColor(Color.CYAN);
-        graphics.fillRect((int) getXLocation(), (int)getYLocation(), dimension, dimension);
+        double xDimension = getXDimension();
+        double yDimension = getYDimension();
+        graphics.setColor(tileColour);
+        graphics.fillRoundRect((int) getXLocation(), (int)getYLocation(), (int)xDimension, (int)yDimension,(int)(0.25*xDimension),(int)(0.25*yDimension));
+        graphics.setColor(Color.black);
+        graphics.drawRoundRect((int) getXLocation(), (int)getYLocation(), (int)xDimension, (int)yDimension,(int)(0.25*yDimension),(int)(0.25*yDimension));
+
+        String typeString = getTypeString();
+        int tileXPos = (int)getXLocation() + ((int)xDimension - graphics.getFontMetrics().stringWidth(typeString))/2;
+        int tileYPos = (int)getYLocation() + ((int)yDimension + (int)(0.9*graphics.getFontMetrics().getHeight()))/2;
+        if (!typeString.equals("Action")) {
+            graphics.drawString(typeString, tileXPos, tileYPos);
+        }
     }
 }

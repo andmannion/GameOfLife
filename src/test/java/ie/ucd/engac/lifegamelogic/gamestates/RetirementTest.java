@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,7 +36,7 @@ class RetirementTest {
             ret = retirePlayer(gameLogic, i, max);
             endBalances.add(ret);
         }
-        Collections.sort(endBalances);
+        endBalances.sort(Collections.reverseOrder());
 
         //advance to end of game to get ranked players
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
@@ -78,6 +77,10 @@ class RetirementTest {
         // Mock messages to logic, performing move functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         int testCost;
         int testMoney = initMoney;
 
@@ -91,9 +94,12 @@ class RetirementTest {
             // Mock messages to logic, performing  functionality
             initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
             responseMessage = gameLogic.handleInput(initialMessage);
+            assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+            initialMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+            responseMessage = gameLogic.handleInput(initialMessage);
         }
         assertEquals(0,player.getNumberOfHouseCards());
-        //card should be sold by no so do the maths on the players money
+        //card should be sold by now so do the maths on the players money, adding the relevant bonuses
         testMoney += (NUM_PLAYERS-numRetiredAlready)*GameConfig.ret_bonus_remaining;
         testMoney += numActionCards*GameConfig.ret_bonus_action;
         testMoney += (numDependants-1)*GameConfig.ret_bonus_kids;

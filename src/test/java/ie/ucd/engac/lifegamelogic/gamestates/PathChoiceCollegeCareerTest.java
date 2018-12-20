@@ -1,21 +1,23 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
-import org.junit.jupiter.api.Test;
-
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+@SuppressWarnings("FieldCanBeLocal")
 class PathChoiceCollegeCareerTest {
 	private final int NUM_PLAYERS = 2;
 	@Test
@@ -26,21 +28,21 @@ class PathChoiceCollegeCareerTest {
 		
 		// Set up test
 		TestHelpers.importGameConfig();
-		GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
+		GameBoard gameBoard = new GameBoard(new DefaultBoardConfigHandler(GameConfig.game_board_config_file_location));
 		Spinnable testSpinner = new TestSpinner(1);
 		GameLogic gameLogic = new GameLogic(gameBoard, NUM_PLAYERS, testSpinner);
 		
 		// Assert preconditions
 		assertEquals(gameLogic.getNumberOfUninitialisedPlayers(), NUM_PLAYERS);
-		assertEquals(gameLogic.getPlayerByIndex(0).getOccupationCard(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentLocation(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getNumberOfActionCards(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCareerPath(), null);
-		assertEquals(gameLogic.getPlayerByIndex(0).getHouseCards().size(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getMaritalStatus(), MaritalStatus.Single);
-		assertEquals(gameLogic.getPlayerByIndex(0).getMovesRemaining(), 0);
-		assertEquals(gameLogic.getPlayerByIndex(0).getCurrentMoney(), GameConfig.starting_money);
+		assertNull(gameLogic.getPlayerByIndex(0).getOccupationCard());
+		assertNull(gameLogic.getPlayerByIndex(0).getCurrentLocation());
+		assertNull(gameLogic.getPlayerByIndex(0).getPendingBoardForkChoice());
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getNumberOfActionCards());
+		assertNull(gameLogic.getPlayerByIndex(0).getCareerPath());
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getHouseCards().size());
+		assertEquals(MaritalStatus.Single, gameLogic.getPlayerByIndex(0).getMaritalStatus());
+		assertEquals(0, gameLogic.getPlayerByIndex(0).getMovesRemaining());
+		assertEquals(GameConfig.starting_money, gameLogic.getPlayerByIndex(0).getCurrentMoney());
 		
 		// Mock messages to logic, performing pathChoiceState functionality
 		LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.StartupMessage);

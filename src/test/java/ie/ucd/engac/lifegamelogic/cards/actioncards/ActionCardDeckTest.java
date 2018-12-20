@@ -2,12 +2,17 @@ package ie.ucd.engac.lifegamelogic.cards.actioncards;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ActionCardDeckTest {
     @Test
@@ -16,7 +21,7 @@ class ActionCardDeckTest {
 
         TestHelpers.importGameConfig();
 
-        ActionCardDeck testActionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+        CardDeck<ActionCard> testActionCardDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 
         // Must be 55 cards in total in the default deck
         assertEquals(ACTION_DECK_DEFAULT_SIZE, testActionCardDeck.getNumberOfRemainingCards());
@@ -62,7 +67,7 @@ class ActionCardDeckTest {
     void TestRemoveAllCardsWithoutReplacement(){
         TestHelpers.importGameConfig();
 
-        ActionCardDeck testActionCardDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+        CardDeck<ActionCard> testActionCardDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 
         int numberOfCardsRemaining = testActionCardDeck.getNumberOfRemainingCards();
 
@@ -87,7 +92,7 @@ class ActionCardDeckTest {
     void TestShuffleDeck(){
         TestHelpers.importGameConfig();
 
-        ActionCardDeck actionCardTestDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+        CardDeck<ActionCard> actionCardTestDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
 
         // Make sure that no cards have been added or removed by the .shuffle() operation
         int numberOfCardsInDeckBeforeShuffle = actionCardTestDeck.getNumberOfRemainingCards();
@@ -101,7 +106,7 @@ class ActionCardDeckTest {
         */
         // Create another Deck to shuffle
 
-        ActionCardDeck secondActionCardTestDeck = new ActionCardDeck(GameConfig.action_card_deck_config_file_location);
+        CardDeck<ActionCard> secondActionCardTestDeck = new CardDeck<>(new DefaultActionCardConfigHandler(GameConfig.action_card_deck_config_file_location));
         secondActionCardTestDeck.shuffle();
 
         int initialNumberOfCards = actionCardTestDeck.getNumberOfRemainingCards();

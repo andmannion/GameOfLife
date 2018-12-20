@@ -1,12 +1,8 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
 import ie.ucd.engac.lifegamelogic.GameLogic;
-import org.junit.jupiter.api.Test;
-
-import TestOnly.TestHelpers;
 import ie.ucd.engac.lifegamelogic.Spinnable;
 import ie.ucd.engac.lifegamelogic.TestSpinner;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
@@ -14,7 +10,12 @@ import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.LifeGameMessageTypes;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+@SuppressWarnings("FieldCanBeLocal")
 class GetMarriedStateTest {
 	private final String PRIOR_TILE_LOCATION = "aa";
 	private static final int NUM_PLAYERS = 2;
@@ -35,13 +36,21 @@ class GetMarriedStateTest {
 		// Mock messages to logic, performing pathChoiceState functionality
         LifeGameMessage messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage messageFromLogic = gameLogic.handleInput(messageToLogic);
-        
+
+		assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+		LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+		messageFromLogic = gameLogic.handleInput(spinMessage);
+
         // Now the current player is on the GetMarriedTile - other players have to be queried to spin
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
         
         // Provide mock UI response
         messageToLogic = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         messageFromLogic = gameLogic.handleInput(messageToLogic);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, messageFromLogic.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        messageFromLogic = gameLogic.handleInput(spinMessage);
         
         // Assert the current player is still the same, and they are being asked to spin again
         assertEquals(LifeGameMessageTypes.SpinRequest, messageFromLogic.getLifeGameMessageType());
@@ -71,14 +80,12 @@ class GetMarriedStateTest {
         	int invalidBalanceDelta = currentBalance - playerUnderTestInitialBalance;        	
         	fail("Player's balance was changed by an invalid amount (" + invalidBalanceDelta + ") when they got married.");
         }
+
 	}
-	
-	// TODO: Test this functionality with more than one other player.
 	
 	private static GameLogic configureGetMarriedStateTestGameLogic() {
 		Spinnable spinner = new TestSpinner(1);
-		GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
-		
-		return gameLogic;
+
+        return TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
 	}
 }

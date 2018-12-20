@@ -1,7 +1,8 @@
 package ie.ucd.engac;
 
-import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.lifegamelogic.GameLogicInterface;
+import ie.ucd.engac.lifegamelogic.gameboard.DefaultBoardConfigHandler;
+import ie.ucd.engac.lifegamelogic.gameboard.GameBoard;
 import ie.ucd.engac.messaging.LifeGameMessage;
 import ie.ucd.engac.messaging.MessageReceiverAndResponder;
 import ie.ucd.engac.messaging.MessagingInterface;
@@ -11,8 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameEngine implements Runnable {
-    private int panelWidth = GameConfig.panelWidth; //TODO what is the best way to manage the window size?
-    private int panelHeight = GameConfig.panelHeight; //TODO make this work on computers that have window borders
+    private int panelWidth;
+    private int panelHeight;
 
     //objects relating to life game
     private LifeGame lifeGameParent;
@@ -26,6 +27,7 @@ public class GameEngine implements Runnable {
     private Graphics graphics;
     private Image backBuffer;
     private volatile boolean running;
+    @SuppressWarnings("FieldCanBeLocal")
     private Thread renderingThread;
 
     /**
@@ -35,10 +37,12 @@ public class GameEngine implements Runnable {
      * @param numPlayers    Number of players in the game.
      */
     GameEngine(LifeGame lifeGame, JPanel jPanel, int numPlayers){
-        this.renderTarget = jPanel;
+        renderTarget = jPanel;
         lifeGameParent = lifeGame;
+        panelWidth = jPanel.getWidth();
+        panelHeight = jPanel.getHeight();
 
-        GameBoard gameBoard = new GameBoard(GameConfig.game_board_config_file_location);
+        GameBoard gameBoard = new GameBoard(new DefaultBoardConfigHandler(GameConfig.game_board_config_file_location));
         
         MessageReceiverAndResponder<LifeGameMessage> messageReceiverAndResponder = new GameLogicInterface(gameBoard, numPlayers);
         MessagingInterface<LifeGameMessage> messagingInterface = new MessagingInterface<>(messageReceiverAndResponder);
@@ -62,7 +66,6 @@ public class GameEngine implements Runnable {
         renderingThread.start();
     } // end of beginGame()
 
-    // TODO: if these values are static and final, why are you using a getter method? - will they always be? (c)
     /**
      * Returns the panel height.
      * @return  integer height of the panel.

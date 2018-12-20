@@ -2,6 +2,7 @@ package ie.ucd.engac.lifegamelogic.cards.occupationcards;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.lifegamelogic.cards.CardDeck;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.careercards.CareerTypes;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
@@ -11,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OccupationCardDeckTest {
     @Test
@@ -20,7 +22,7 @@ class OccupationCardDeckTest {
 
         TestHelpers.importGameConfig();
 
-        OccupationCardDeck testCollegeCareerCardDeck = new OccupationCardDeck(GameConfig.college_career_card_deck_config_file_location);
+        CardDeck<OccupationCard> testCollegeCareerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.college_career_card_deck_config_file_location));
 
         // Must assert that the 12 unique CollegeCareerCards are present
         HashMap<CollegeCareerTypes, CollegeCareerCard> collegeCareerCardHashSet = new HashMap<>();
@@ -65,7 +67,7 @@ class OccupationCardDeckTest {
 
         TestHelpers.importGameConfig();
 
-        OccupationCardDeck testStandardCareerCardDeck = new OccupationCardDeck(GameConfig.career_card_deck_config_file_location);
+        CardDeck<OccupationCard> testStandardCareerCardDeck = new CardDeck<>(new DefaultOccupationCardConfigHandler(GameConfig.career_card_deck_config_file_location));
 
         // Must assert that the 8 unique CareerCards are present
         HashMap<CareerTypes, CareerCard> careerCardHashSet = new HashMap<>();

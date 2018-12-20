@@ -2,8 +2,8 @@ package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import TestOnly.TestHelpers;
 import ie.ucd.engac.GameConfig;
-import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

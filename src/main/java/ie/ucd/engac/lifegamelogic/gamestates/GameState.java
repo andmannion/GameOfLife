@@ -4,6 +4,7 @@ import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCardTypes;
 import ie.ucd.engac.lifegamelogic.gameboard.CareerPath;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
 import java.util.ArrayList;
@@ -12,21 +13,19 @@ public abstract class GameState {
 
     private ArrayList<Chooseable> pendingCardChoices;
 
-	public abstract void enter(GameLogic gameLogic);
+    public abstract void enter(GameLogic gameLogic);
 
 	public abstract GameState handleInput(GameLogic gameLogic, LifeGameMessage lifeGameMessage);
 
-	public abstract void exit(GameLogic gameLogic);
-
-    protected void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
+    private void storePendingChoiceCards(ArrayList<Chooseable> pendingCardChoices) {
         this.pendingCardChoices = pendingCardChoices;
     }
 
-    protected ArrayList<Chooseable> getPendingCardChoices(){
+    ArrayList<Chooseable> getPendingCardChoices(){
         return pendingCardChoices;
     }
 
-	protected LifeGameMessage setupChoiceAndMessage(int relatedPlayerIndex, Chooseable firstOption,
+	LifeGameMessage setupChoiceAndMessage(int relatedPlayerIndex, Chooseable firstOption,
 													Chooseable secondOption, String eventMessage,
 													ShadowPlayer shadowPlayer) {
         // Need to store both choices so that we can assign the chosen one to the
@@ -43,9 +42,8 @@ public abstract class GameState {
 		return new DecisionRequestMessage(validOptions, relatedPlayerIndex, eventMessage, requestType, shadowPlayer);
 	}
 
-	protected void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
+	void actOnOccupationCardChoice(GameLogic gameLogic, int choiceIndex){
 		// Need to assign the chosen card to the relevant player
-		//ArrayList<Card> pendingCardChoices = gameLogic.getPendingCardChoices(); //TODO remove
 		OccupationCard chosenCareerCard = (OccupationCard) getPendingCardChoices().get(choiceIndex);
 		gameLogic.getCurrentPlayer().setOccupationCard(chosenCareerCard);
 
@@ -64,4 +62,17 @@ public abstract class GameState {
 		LifeGameMessageTypes requestType = LifeGameMessageTypes.OptionDecisionRequest;
 		return new DecisionRequestMessage(validPathChoices, relatedPlayerNumber, eventMessage, requestType, shadowPlayer);
 	}
+
+	static GameState retirePlayer(GameLogic gameLogic, Player retiree) {
+        GameState nextState;
+        ShadowPlayer sp = gameLogic.getShadowPlayer(gameLogic.getCurrentPlayerIndex());
+        int retirementCash = gameLogic.retireCurrentPlayer();
+        String eventMessage = "Player " + retiree.getPlayerNumber() + " has retired with " + retirementCash;
+        if (gameLogic.getNumberOfPlayers() == 0) {
+            nextState = new GameOverState();            }
+        else {
+            nextState = new EndTurnState(eventMessage,sp);
+        }
+        return nextState;
+    }
 }

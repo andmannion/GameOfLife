@@ -1,11 +1,11 @@
 package ie.ucd.engac.lifegamelogic.playerlogic;
 
 import ie.ucd.engac.GameConfig;
+import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.actioncards.ActionCard;
 import ie.ucd.engac.lifegamelogic.cards.housecards.HouseCard;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
 import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
-import ie.ucd.engac.lifegamelogic.GameLogic;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class Player {
 		careerPathTaken = null;
 
 		maritalStatus = MaritalStatus.Single;
-		this.playerColour = Color.GREEN; //TODO make this not AWT
+		this.playerColour = Color.GREEN;
 		this.playerNumber = playerNumber;
 		numberOfDependants = 0;
 		currentMoney = GameConfig.starting_money;
@@ -64,7 +64,11 @@ public class Player {
         return playerColour;
     }
 
-    //Retirement related
+	public void setPlayerColour(Color playerColour) {
+		this.playerColour = playerColour;
+	}
+
+	//Retirement related
 
     /**
      * returns the bonus applicable to this player on retirement
@@ -78,7 +82,7 @@ public class Player {
             return retirementBonus + actionCardBonus + childrenBonus;
         }
         else{
-            throw  new RuntimeException("Tried retiring invalid number of players. "+ numberOfRetirees + " is not a valid number of retirees");//TODO uhh?
+            throw  new RuntimeException("Tried retiring invalid number of players. "+ numberOfRetirees + " is not a valid number of retirees");
         }
     }
 
@@ -194,7 +198,7 @@ public class Player {
      * @param gameLogic GameLogic object which is an interface to the loan provider
      * @return the total money outstanding
      */
-    public int getTotalLoansOutstanding(GameLogic gameLogic){ //TODO remove this method
+    public int getTotalLoansOutstanding(GameLogic gameLogic){
         return gameLogic.getTotalOutstandingLoans(playerNumber);
     }
 
@@ -291,7 +295,7 @@ public class Player {
 
     /**
      * sets the pending for choice
-     */ //TODO Andrew please write this javadoc
+     */
 	public void setPendingBoardForkChoice(BoardLocation pendingBoardForkChoice) {
 		this.pendingBoardForkChoice = pendingBoardForkChoice;
 	}

@@ -2,6 +2,8 @@ package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
 import ie.ucd.engac.lifegamelogic.cards.occupationcards.OccupationCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerCard;
+import ie.ucd.engac.lifegamelogic.cards.occupationcards.collegecareercards.CollegeCareerTypes;
 import ie.ucd.engac.messaging.Chooseable;
 import ie.ucd.engac.messaging.DecisionResponseMessage;
 import ie.ucd.engac.messaging.LifeGameMessage;
@@ -25,9 +27,10 @@ public class GraduationState extends GameState {
             (Chooseable) secondCollegeCareerCard,
             "Choose new college career card", gameLogic.getCurrentShadowPlayer());
 
-        // Need to store both choices so that we can assign the chosen one to the
-        // correct player,
-        // and push the unchosen one to the bottom of the correct deck.
+        /* Need to store both choices so that we can assign the chosen one to the
+           correct player,
+           and push the unchosen one to the bottom of the correct deck.
+        */
         gameLogic.setResponseMessage(replyMessage);
 	}
 
@@ -36,16 +39,14 @@ public class GraduationState extends GameState {
 		if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.OptionDecisionResponse) {
 		    int choiceIndex = ((DecisionResponseMessage) lifeGameMessage).getChoiceIndex();
 
-            //call static method in superclass to set/return card
+            // Call static method in superclass to set/return card
             actOnOccupationCardChoice(gameLogic, choiceIndex);
 
-			String graduationStateEndMessage = "You chose the " + gameLogic.getCurrentPlayer().getOccupationCard().getOccupationCardType() + " card."; //TODO many chained methods
+			CollegeCareerTypes collegeCareerType = ((CollegeCareerCard) gameLogic.getCurrentPlayer().getOccupationCard()).getCareerType();
+			String graduationStateEndMessage = "You chose the " + collegeCareerType + " card.";
 			
 			return new EndTurnState(graduationStateEndMessage);
 		}		
 		return null;
 	}
-
-	@Override
-	public void exit(GameLogic gameLogic) {}
 }

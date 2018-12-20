@@ -33,12 +33,12 @@ class PaydayTileTest {
         CareerPathTypes careerPath = gameLogic.getPlayerByIndex(0).getCareerPath();
         MaritalStatus maritalStatus = gameLogic.getPlayerByIndex(0).getMaritalStatus();
 
+        // Setup player
         Player player = gameLogic.getCurrentPlayer();
-
         int playerInitMoney = player.getCurrentMoney();
-
         player.setOccupationCard(occupationCard);
 
+        // Get player details
         int playerBonusNumber = occupationCard.getBonusNumber();
         int playerSalary = player.getOccupationCard().getSalary();
         player.setCurrentLocation(new BoardLocation(PRIOR_TILE_LOCATION));
@@ -46,9 +46,12 @@ class PaydayTileTest {
         // Mock messages to logic, performing turn functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
-
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
+        // Compute the expected value of the payday bonus
         int expectedBalance;
         if (playerBonusNumber == fixedSpinnerValue){
             expectedBalance = playerInitMoney+playerSalary+occupationCard.getBonusPaymentAmount();
@@ -57,8 +60,10 @@ class PaydayTileTest {
             expectedBalance = playerInitMoney+playerSalary;
         }
 
+        // Check the payday has been carried out correctly
         assertEquals(expectedBalance, player.getCurrentMoney());
 
+        // Check the preconditions are unchanged
         assertEquals(numberOfHouseCards, gameLogic.getPlayerByIndex(0).getNumberOfHouseCards());
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
         assertEquals(occupationCard, gameLogic.getPlayerByIndex(0).getOccupationCard());
@@ -95,6 +100,9 @@ class PaydayTileTest {
         // Mock messages to logic, performing turn functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 

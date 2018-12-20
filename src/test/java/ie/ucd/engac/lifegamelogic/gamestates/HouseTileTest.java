@@ -9,11 +9,13 @@ import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
 import ie.ucd.engac.lifegamelogic.playerlogic.CareerPathTypes;
 import ie.ucd.engac.lifegamelogic.playerlogic.MaritalStatus;
 import ie.ucd.engac.lifegamelogic.playerlogic.Player;
-import ie.ucd.engac.messaging.*;
+import ie.ucd.engac.messaging.DecisionResponseMessage;
+import ie.ucd.engac.messaging.LifeGameMessage;
+import ie.ucd.engac.messaging.LifeGameMessageTypes;
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class HouseTileTest {
     private final int NUM_PLAYERS = 2;
@@ -41,6 +43,10 @@ class HouseTileTest {
         // Mock messages to logic, performing move functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
@@ -89,6 +95,10 @@ class HouseTileTest {
         // Mock messages to logic, performing pathChoiceState functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
@@ -156,6 +166,10 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
@@ -204,7 +218,6 @@ class HouseTileTest {
     }
 
     @Test
-    //TODO many duplicate lines of code here
     void testHousePurchaseNoLoanAndSale(){
         // Set up test
         GameLogic gameLogic = TestHelpers.setupTestGenericPreconditions(NUM_PLAYERS, 1);
@@ -228,14 +241,16 @@ class HouseTileTest {
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         // Provide mock UI response
         int choiceIndex = 1; //buy a house
         initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
-
         responseMessage = gameLogic.handleInput(initialMessage);
-
         assertEquals(LifeGameMessageTypes.OptionDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //construct choice message and save the housecard for later comparison
@@ -243,7 +258,7 @@ class HouseTileTest {
         //chose a card
         initialMessage = new DecisionResponseMessage(cardChoiceIndex,LifeGameMessageTypes.OptionDecisionResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
-        //check we got back an edn turn message
+        //check we got back an end turn message
         assertEquals(LifeGameMessageTypes.AckRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         HouseCard playerHouseCard = player.getHouseCards().get(0);
@@ -253,6 +268,7 @@ class HouseTileTest {
         HouseCard houseCard = player.getHouseCards().get(0);
         int houseCost = houseCard.getPurchasePrice();
         assertEquals(playerInitMoney-houseCost, player.getCurrentMoney());
+        assertEquals(playerHouseCard.getHouseType().toString(),houseCard.getHouseType().toString(),"Wrong type of house.");
 
         //check that nothing else has changed
         assertEquals(0, gameLogic.getNumberOfUninitialisedPlayers());
@@ -275,14 +291,16 @@ class HouseTileTest {
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
 
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
+
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 
-        // Provide mock UI response
+        // Choose the house to sell.
         choiceIndex = 2; //sell a house
         initialMessage = new DecisionResponseMessage(choiceIndex, LifeGameMessageTypes.LargeDecisionResponse);
-
         responseMessage = gameLogic.handleInput(initialMessage);
-
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest, responseMessage.getLifeGameMessageType(),"Expected message not received");
 
         //need large decision request to choose which card. Turns out we only have one.
@@ -295,6 +313,10 @@ class HouseTileTest {
         // Mock messages to logic, performing  functionality
         initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         responseMessage = gameLogic.handleInput(initialMessage);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.AckRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
         //card should be sold so do the maths
@@ -338,6 +360,10 @@ class HouseTileTest {
         // Mock messages to logic, performing pathChoiceState functionality
         LifeGameMessage initialMessage = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
         LifeGameMessage responseMessage = gameLogic.handleInput(initialMessage);
+
+        assertEquals(LifeGameMessageTypes.SpinResult, responseMessage.getLifeGameMessageType(),"Expected message not received");
+        LifeGameMessage spinMessage = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
+        responseMessage = gameLogic.handleInput(spinMessage);
 
         assertEquals(LifeGameMessageTypes.LargeDecisionRequest,responseMessage.getLifeGameMessageType(),"Expected message not received");
 

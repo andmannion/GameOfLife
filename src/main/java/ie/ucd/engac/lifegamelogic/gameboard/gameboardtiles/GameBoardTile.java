@@ -1,9 +1,11 @@
 package ie.ucd.engac.lifegamelogic.gameboard.gameboardtiles;
 
 public abstract class GameBoardTile {
-	protected GameBoardTileTypes gameBoardTileType;
+	GameBoardTileTypes gameBoardTileType;
 	private double xLocation; //assigned in factory
 	private double yLocation; //assigned in factory
+    private double xDimension; //assigned in factory
+    private double yDimension; //assigned in factory
 	
 	public GameBoardTileTypes getGameBoardTileType() {
 		return gameBoardTileType;
@@ -15,5 +17,13 @@ public abstract class GameBoardTile {
 
     public double getYLocation() {
         return yLocation;
+    }
+
+    public double getXDimension() {
+        return xDimension;
+    }
+
+    public double getYDimension() {
+        return yDimension;
     }
 }

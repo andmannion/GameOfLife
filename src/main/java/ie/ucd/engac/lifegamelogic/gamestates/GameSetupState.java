@@ -1,6 +1,8 @@
 package ie.ucd.engac.lifegamelogic.gamestates;
 
 import ie.ucd.engac.lifegamelogic.GameLogic;
+import ie.ucd.engac.lifegamelogic.gameboard.BoardLocation;
+import ie.ucd.engac.lifegamelogic.playerlogic.Player;
 import ie.ucd.engac.messaging.*;
 
 import java.awt.*;
@@ -12,7 +14,7 @@ public class GameSetupState extends GameState {
 
     private ArrayList<Pawn> pawns;
     private HashSet<String> remainingColourChoices;
-    private HashMap<String,Color>  colourMap; //TODO AWT colours
+    private HashMap<String,Color>  colourMap;
     private ArrayList<Chooseable> outgoingChoices;
     private int initialPlayerIndex;
     private int awaitingInfoFromPlayerIndex;
@@ -20,8 +22,6 @@ public class GameSetupState extends GameState {
     @Override
     public void enter(GameLogic gameLogic) {
         // Must set the response message to a choice between possible colours
-
-
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GameSetupState extends GameState {
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.LargeDecisionResponse){
             // Check who this reply relates to
-            parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex).getPlayerNumber());
+            parsePlayerResponse((DecisionResponseMessage) lifeGameMessage, gameLogic);
             decideNextMessage(gameLogic);
         }
         else if(lifeGameMessage.getLifeGameMessageType() == LifeGameMessageTypes.AckResponse){
@@ -76,11 +76,6 @@ public class GameSetupState extends GameState {
         }
     }
 
-    @Override
-    public void exit(GameLogic gameLogic) {
-
-    }
-
     private LifeGameRequestMessage createColourChoiceMessage(int playerNumber){
         LifeGameMessageTypes requestType = LifeGameMessageTypes.LargeDecisionRequest;
         return new DecisionRequestMessage(outgoingChoices,
@@ -88,13 +83,18 @@ public class GameSetupState extends GameState {
 
     }
 
-    private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, int relatedPlayerNumber) {
+    private void parsePlayerResponse(DecisionResponseMessage lifeGameMessage, GameLogic gameLogic) {
         // Must set what the player has chosen, and remove what they have chosen from the allowable remaining
         // choices
         String selectedColourName = outgoingChoices.get(lifeGameMessage.getChoiceIndex()).displayChoiceDetails();
         Color colour = colourMap.get(selectedColourName);
+        Player relatedPlayer =  gameLogic.getPlayerByIndex(awaitingInfoFromPlayerIndex);
+        int relatedPlayerNumber = relatedPlayer.getPlayerNumber();
         if(colour != null) {
-            pawns.add(new Pawn(0.0, 0.0, colour, relatedPlayerNumber, 0));
+            relatedPlayer.setPlayerColour(colour);
+            double initX = gameLogic.getGameBoard().getGameBoardTileFromID(new BoardLocation("a")).getXLocation();
+            double initY = gameLogic.getGameBoard().getGameBoardTileFromID(new BoardLocation("a")).getYLocation();
+            pawns.add(new Pawn(initX, initY, colour, relatedPlayerNumber, 0));
 
             // Remove the selected number from the set of allowable numbers
             remainingColourChoices.remove(selectedColourName);
@@ -123,7 +123,7 @@ public class GameSetupState extends GameState {
         colourMap.put("Pink",Color.PINK);
         remainingColourChoices.add("Pink");
 
-        colourMap.put("Blue",Color.BLUE);
+        colourMap.put("Blue",Color.CYAN);
         remainingColourChoices.add("Blue");
 
         colourMap.put("Green",Color.GREEN);
@@ -132,5 +132,4 @@ public class GameSetupState extends GameState {
         colourMap.put("Yellow",Color.YELLOW);
         remainingColourChoices.add("Yellow");
     }
-
 }

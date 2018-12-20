@@ -7,10 +7,9 @@ import java.awt.*;
 public class UIHUD implements Drawable {
 
     private ShadowPlayer sPlayer;
-
     private GameUI gameUI;
-
     private Rectangle rectangle;
+    private int spinResult;
 
     private final static int PLAYER_LOC = 0;
     private final static int BANK_LOC   = 1;
@@ -21,43 +20,45 @@ public class UIHUD implements Drawable {
     private final static int ACTION_LOC = 6;
 
 
-    private final int panelHeight;
-    private final int panelWidth;
+    private int firstStringX;
+    private int firstStringY;
+    private int stringLengthY;
 
-    private int boxStartX;
-    private int boxStartY;// = 504;
-    private int boxLengthX;// = 1280;
-    private int boxLengthY;// = 216;
+    private int cropAvoidance;
 
-    private int firstStringX;// = 0;
-    private int firstStringY;// = 520;
-    private int stringLengthX;// = 100;
-    private int stringLengthY;// = 30;
-
-    private int HOUSETEXTSKIP = 15;
-
-    UIHUD(GameUI gameUI){
+    UIHUD(GameUI gameUI, int hudStartY){
         this.gameUI = gameUI;
 
-        panelHeight = gameUI.getPanelHeight();
-        panelWidth = gameUI.getPanelWidth();
+        int panelHeight = gameUI.getPanelHeight();
+        int panelWidth = gameUI.getPanelWidth();
 
-        boxStartY = Math.round(((0.7f)*panelHeight));
-        boxLengthY = panelHeight-boxStartY;
-        boxStartX = 0;
-        boxLengthX = panelWidth;
+        int boxLengthY = panelHeight - hudStartY;
+        int boxStartX = 0;
 
-        firstStringX = 0;
-        firstStringY = boxStartY+Math.round(0.08f*boxLengthY);
-        stringLengthX = Math.round(0.1f*boxLengthX);
-        stringLengthY = Math.round(0.125f*boxLengthY);
+        firstStringX = 5; //gap
+        firstStringY = hudStartY +Math.round(0.08f* boxLengthY);
+        int stringLengthX = Math.round(0.1f * panelWidth);
+        stringLengthY = Math.round(0.125f* boxLengthY);
+        cropAvoidance = panelHeight/10;
 
-        rectangle = new Rectangle(boxStartX, boxStartY, boxLengthX, boxLengthY);
+        rectangle = new Rectangle(boxStartX, hudStartY, panelWidth, boxLengthY);
+
+        int spinResultX = panelWidth - 3 * cropAvoidance;
     }
+
+    private int getStringWidth(String string,Graphics graphics){
+        return graphics.getFontMetrics().stringWidth(string); //centring
+    }
+
+    void setSpinResult(int spinResult) {
+        this.spinResult = spinResult;
+    }
+
 
     void updateFields(ShadowPlayer shadowPlayer){
         this.sPlayer = shadowPlayer;
     }
+
     public void draw(Graphics graphics){
         switch(gameUI.getUIState()){
             case Init:
@@ -65,18 +66,7 @@ public class UIHUD implements Drawable {
             case WaitingForSpin: case PostSpin:
                 if(sPlayer != null){
                     try{
-                        graphics.setColor(Color.darkGray);
-                        graphics.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
-                        graphics.setColor(Color.black);                                     //TODO this colour "string" is horrid
-                        graphics.drawString("Player: " + sPlayer.playerNumToString() + " Colour: " + sPlayer.playerColourToString(),    firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
-                        graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
-                        graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
-                        graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
-                        //TODO house cards need to respect border & wrap around?
-                        graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
-                        graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
-                        graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
-                        graphics.drawString("Current Tile: " + sPlayer.currentTileToString(),firstStringX+400,firstStringY+stringLengthY*ACTION_LOC);
+                        drawHUD(graphics);
                     }
                     catch (Exception e){
                         System.err.println("Exception in UIHUD.draw() " + e.toString());
@@ -85,12 +75,60 @@ public class UIHUD implements Drawable {
                 break;
             case CardChoice:
             case LargeChoice:
-                if (sPlayer != null) {
-                    graphics.drawString("Current Tile: " + sPlayer.currentTileToString(), firstStringX + 400, firstStringY + stringLengthY * ACTION_LOC);
+                if(sPlayer != null){
+                    try{
+                        drawHUD(graphics);
+                    }
+                    catch (Exception e){
+                        System.err.println("Exception in UIHUD.draw() " + e.toString());
+                    }
                 }
+            case WaitingForAck:
+                if(sPlayer != null){
+                    try{
+                        drawHUD(graphics);
+                    }
+                    catch (Exception e){
+                        System.err.println("Exception in UIHUD.draw() " + e.toString());
+                    }
+                }
+            case EndGame:
+                break;
             default:
                 break;
         }
+    }
+
+    private void drawHUD(Graphics graphics) {
+        graphics.setColor(UIColours.HUD_AREA_COLOUR);
+        graphics.fillRoundRect(rectangle.x-cropAvoidance,rectangle.y,(rectangle.width/2)+cropAvoidance,rectangle.height+cropAvoidance,rectangle.height/4, rectangle.height/4);
+        graphics.setColor(Color.black);
+        graphics.drawRoundRect(rectangle.x-cropAvoidance,rectangle.y,(rectangle.width/2)+cropAvoidance,rectangle.height+cropAvoidance,rectangle.height/4, rectangle.height/4);
+        graphics.setColor(sPlayer.getPlayerColour());
+        String string = "Player " + sPlayer.playerNumToString();
+        graphics.drawString(string,firstStringX, firstStringY+stringLengthY*PLAYER_LOC);
+        graphics.setColor(Color.black);
+        graphics.drawString(" " +  sPlayer.currentTileToString(),firstStringX+(getStringWidth(string,graphics)), firstStringY+stringLengthY*PLAYER_LOC);
+        //+ "" + sPlayer.currentTileToString()
+        graphics.drawString("Bank Balance: "+ sPlayer.bankBalToString(),        firstStringX, firstStringY+stringLengthY*BANK_LOC);
+        graphics.drawString("Number of loans: " + sPlayer.numLoansToString(),   firstStringX, firstStringY+stringLengthY*LOANS_LOC);
+        graphics.drawString("Career Card: " + sPlayer.careerCardToString(),     firstStringX, firstStringY+stringLengthY*DEPEND_LOC);
+        graphics.drawString("House Cards: " + sPlayer.houseCardsToString(),     firstStringX, firstStringY+stringLengthY*CAREER_LOC);
+        graphics.drawString("Dependants: "+ sPlayer.dependantsToString(),       firstStringX, firstStringY+stringLengthY*HOUSE_LOC);
+        graphics.drawString("Action Cards: " + sPlayer.actionCardsToString(),   firstStringX, firstStringY+stringLengthY*ACTION_LOC);
+
+        drawSpinResult(graphics,(rectangle.width/2)+cropAvoidance,firstStringY+stringLengthY*ACTION_LOC);
+    }
+
+    private void drawSpinResult(Graphics graphics,int endX, int startY) {
+        Font currentFont = graphics.getFont();
+        Font newFont = currentFont.deriveFont(currentFont.getSize() * 2.5F);
+        graphics.setFont(newFont); //want to use a bigger font
+        graphics.setColor(Color.black);
+        String string = "Last spin: "+ spinResult;
+        int text_width = graphics.getFontMetrics().stringWidth(string); //centering
+        graphics.drawString(string,endX-2*text_width,startY);
+        graphics.setFont(currentFont); //reset font
     }
 }
 

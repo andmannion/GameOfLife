@@ -42,6 +42,7 @@ public class GameUI implements Drawable {
     // ...
     private int panelHeight;
     private int panelWidth;
+    private int hudStartY;
 
     /**
      * Constructor for GameUI.
@@ -58,17 +59,19 @@ public class GameUI implements Drawable {
         panelHeight = gameEngine.getPanelHeight();
         panelWidth = gameEngine.getPanelWidth();
 
+        hudStartY = Math.round(((0.7f)*panelHeight));
+
         uiActionListener = new UIActionListener();
 
-        uiBoard = new UIBoard(this);
-        uiCardChoice = new UICardChoice(this);
-        uiHUD = new UIHUD(this);
+        uiHUD = new UIHUD(this, hudStartY);
+        uiBoard = new UIBoard(this, hudStartY, panelWidth, panelHeight);
+        uiCardChoice = new UICardChoice(this, hudStartY);
         uiWinner = new UIWinner(this);
-        uiEventMessage = new UIEventMessage();
+        uiEventMessage = new UIEventMessage(panelWidth);
         uiInput = new UIInput(this,renderTarget);
 
         drawables = new ArrayList<>();
-        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput));
+        drawables.addAll(Arrays.asList(uiBoard, uiCardChoice, uiHUD, uiWinner, uiEventMessage,uiInput)); //
 
     }
 
@@ -142,14 +145,16 @@ public class GameUI implements Drawable {
         uiBoard.setLayout(tiles);
 
         for(Pawn pawn:pawns){
-            pawnMap.put(pawn.getPlayerNumber(), new UIPawn(pawn));
+            UIPawn uiPawn = new UIPawn(pawn,panelWidth/128);
+            uiPawn.setScalingFactors(panelWidth,hudStartY);
+            pawnMap.put(pawn.getPlayerNumber(), uiPawn);
         }
         uiBoard.setPawnMap(pawnMap);
     }
 
     private void handleShadowPlayer(ShadowPlayer shadowPlayer){
         if(shadowPlayer != null) {
-            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), (int) shadowPlayer.getXLocation(), (int) shadowPlayer.getYLocation());
+            uiBoard.updatePawns(shadowPlayer.getPlayerNumber(), shadowPlayer.getXLocation(), shadowPlayer.getYLocation(), shadowPlayer.getNumDependants());
             uiHUD.updateFields(shadowPlayer);
         }
     }
@@ -203,6 +208,10 @@ public class GameUI implements Drawable {
      */
     private void sendSpinResponseMessage(){
         LifeGameMessage message = new LifeGameMessage(LifeGameMessageTypes.SpinResponse);
+        lastResponse = messagingInterface.sendMessageAcceptResponse(message);
+        SpinResultMessage spinResultMessage = (SpinResultMessage) lastResponse;
+        uiHUD.setSpinResult(spinResultMessage.getSpinResult());
+        message = new LifeGameMessage(LifeGameMessageTypes.AckResponse);
         lastResponse = messagingInterface.sendMessageAcceptResponse(message);
         invertWasStateUpdatedD();
     }

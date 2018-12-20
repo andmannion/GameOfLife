@@ -57,8 +57,6 @@ public class BankLoanBook {
 	}
 	
 	void repayAllLoans(int borrowerID) {
-		if(borrowerToLoansMap.containsKey(borrowerID)) {
-			borrowerToLoansMap.remove(borrowerID);
-		}
+		borrowerToLoansMap.remove(borrowerID);
 	}
 }
