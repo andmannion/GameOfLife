@@ -7,6 +7,7 @@ Conor Dooley & Andrew Mannion
 /doc/work.xlsx contains a breakdown of work completed, imported from our GitHub issues.  
 /src/test/ contains tests as you would imagine.  
 /src/main/ has the game code.  
-Maven is used in order to sort out dependancies. 
+/utils/ has a utility program used to add the coordinates to the board config file.  
+Maven is used in order to sort out dependancies.   
 The game runs in a 1280 x 720 window, this size is set in the config file.  
 
