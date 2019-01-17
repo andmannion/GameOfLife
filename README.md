@@ -1,6 +1,6 @@
 # Game of Life
 Software Engineering 2018 Project.
-Conor Dooley & Andrew Mannion
+Conor Dooley (14321611) & Andrew Mannion (14448588)
 
 # Things of note
 /doc/ contains information about the design of the game, in particular the PDF should be looked at for information about our chosen architecture.  
