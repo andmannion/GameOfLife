@@ -1,5 +1,5 @@
 # Game of Life
-Software Engineering 2018 Project.
+Software Engineering 2018 Project.\n
 Conor Dooley (14321611) & Andrew Mannion (14448588)
 
 # Things of note
