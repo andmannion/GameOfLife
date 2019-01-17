@@ -1,5 +1,8 @@
 # Game of Life
-Software Engineering 2018 Project.\n
+UCD COMP41670 Software Engineering 2018 Semester-long Project.
+
+Final mark: 98%
+
 Conor Dooley (14321611) & Andrew Mannion (14448588)
 
 # Things of note
@@ -10,4 +13,3 @@ Conor Dooley (14321611) & Andrew Mannion (14448588)
 /utils/ has a utility program used to add the coordinates to the board config file.  
 Maven is used in order to sort out dependancies.   
 The game runs in a 1280 x 720 window, this size is set in the config file.  
-
