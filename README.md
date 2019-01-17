@@ -1,9 +1,9 @@
 # Game of Life
-UCD COMP41670 Software Engineering 2018 Semester-long Project.
+UCD COMP41670 Software Engineering 2018 Semester-long Project
 
 Final mark: 98%
 
-Conor Dooley (14321611) & Andrew Mannion (14448588)
+Conor Dooley & Andrew Mannion
 
 # Things of note
 /doc/ contains information about the design of the game, in particular the PDF should be looked at for information about our chosen architecture.  
